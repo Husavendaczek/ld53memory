@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/memory/image_mapper.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:memoryfun/src/memory/memory_bloc.dart';
@@ -45,6 +46,31 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
       body: ref.watch(MemoryBloc.provider).maybeWhen(
             initialized: (memorySet) => _gridView(memorySet),
             matchResult: (memorySet) => _gridView(memorySet),
+            nextLevel: (nextLevel) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('You delivered everything!'),
+                ButtonBar(
+                  alignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () =>
+                          ref.read(appRouterProvider).push(const StartRoute()),
+                      child: const Text('Menu'),
+                    ),
+                    TextButton(
+                      onPressed: () => ref.read(appRouterProvider).push(
+                            MemoryRoute(
+                              gameSize: nextLevel.gameSize,
+                              themeSet: nextLevel.themeSet,
+                            ),
+                          ),
+                      child: const Text('Next Level'),
+                    ),
+                  ],
+                )
+              ],
+            ),
             orElse: () => const Text('loading'),
           ),
     );

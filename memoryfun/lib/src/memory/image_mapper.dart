@@ -28,6 +28,16 @@ class ImageMapper {
             return Assets.food.foodBurger;
         }
       case ThemeSet.mail:
+        switch (pairValue) {
+          case 0:
+            return Assets.mail.mailBigLetter;
+          case 1:
+            return Assets.mail.mailBigPackage;
+          case 2:
+            return Assets.mail.mailLetter;
+          case 3:
+            return Assets.mail.mailPackage;
+        }
         return Assets.food.foodBurger;
       default:
         return Assets.food.foodBurger;
@@ -39,7 +49,7 @@ class ImageMapper {
       case ThemeSet.food:
         return Assets.food.background;
       case ThemeSet.mail:
-        return Assets.food.background;
+        return Assets.mail.background;
       default:
         return Assets.food.background;
     }

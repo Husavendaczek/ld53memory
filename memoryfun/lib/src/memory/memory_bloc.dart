@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:memoryfun/gen/assets.gen.dart';
+import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/memory/image_mapper.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:memoryfun/src/memory/memory_tile.dart';
@@ -26,6 +27,7 @@ class MemoryState with _$MemoryState {
   const factory MemoryState.loadingResult() = _LoadingResult;
   const factory MemoryState.matchResult(List<MemoryTile> memorySet) =
       _MatchResult;
+  const factory MemoryState.nextLevel(LevelInfo nextLevel) = _NextLevel;
   const factory MemoryState.winGame() = _WinGame;
   const factory MemoryState.looseGame() = _looseGame;
 }
@@ -37,10 +39,12 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
 
     return MemoryBloc(
       imageMapper: ref.watch(ImageMapper.provider),
+      appRouter: ref.watch(appRouterProvider),
     );
   });
 
   final ImageMapper imageMapper;
+  final AppRouter appRouter;
   List<MemoryTile> memoryTiles = [];
   int matchesWon = 0;
   int matchesLeft = 100;
@@ -50,7 +54,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
       themeSet: ThemeSet.food,
     ),
     LevelInfo(
-      gameSize: 16,
+      gameSize: 8,
       themeSet: ThemeSet.mail,
     ),
     LevelInfo(
@@ -68,6 +72,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
 
   MemoryBloc({
     required this.imageMapper,
+    required this.appRouter,
   }) : super(const MemoryState.initial()) {
     on<_InitGame>(_initGame);
     on<_HandleTap>(_handleTap);
@@ -98,7 +103,11 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
       var tile = MemoryTile(
         index: i,
         pairValue: value,
-        image: Assets.food.background,
+        image: imageMapper.map(
+          currentLevel.themeSet,
+          value,
+          false,
+        ),
         visible: false,
       );
 
@@ -139,6 +148,23 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
 
           matchesWon++;
           matchesLeft = matchesLeft - matchesWon;
+          if (matchesLeft == 0) {
+            var level = levels
+                .indexWhere((lvl) => lvl.themeSet == currentLevel.themeSet);
+            if (level == levels.length) {
+              appRouter.push(const WonRoute());
+              return;
+            }
+            firstIndex = null;
+            firstPairValue = null;
+            hideTiles = [];
+            memoryTiles = [];
+            matchesWon = 0;
+            currentLevel = levels[level + 1];
+
+            emit(MemoryState.nextLevel(levels[level + 1]));
+            return;
+          }
           emit(MemoryState.matchResult(memoryTiles));
           return;
         } else {
