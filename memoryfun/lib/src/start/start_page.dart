@@ -11,15 +11,18 @@ class StartPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: Column(
-        children: [
-          const Text('My awesome memory'),
-          TextButton(
-              onPressed: () => ref.read(appRouterProvider).push(
-                    MemoryRoute(gameSize: 12, themeSet: ThemeSet.food),
-                  ),
-              child: const Text('Start game'))
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('My awesome memory'),
+            TextButton(
+                onPressed: () => ref.read(appRouterProvider).push(
+                      MemoryRoute(gameSize: 12, themeSet: ThemeSet.food),
+                    ),
+                child: const Text('Start game'))
+          ],
+        ),
       ),
     );
   }
