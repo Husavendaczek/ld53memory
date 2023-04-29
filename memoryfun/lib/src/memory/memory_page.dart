@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/memory/image_mapper.dart';
+import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:memoryfun/src/memory/memory_bloc.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
 import 'package:riverbloc/riverbloc.dart';
@@ -10,7 +11,14 @@ import 'memory_tile.dart';
 
 @RoutePage()
 class MemoryPage extends ConsumerStatefulWidget {
-  const MemoryPage({super.key});
+  final int gameSize;
+  final ThemeSet themeSet;
+
+  const MemoryPage({
+    required this.gameSize,
+    required this.themeSet,
+    super.key,
+  });
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _MemoryPageState();
@@ -22,7 +30,12 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
     super.initState();
 
     ref.read(MemoryBloc.provider.bloc).add(
-          const MemoryEvent.initGame(12, ThemeSet.food),
+          MemoryEvent.initGame(
+            LevelInfo(
+              gameSize: widget.gameSize,
+              themeSet: widget.themeSet,
+            ),
+          ),
         );
   }
 
@@ -39,7 +52,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
 
   Widget _gridView(List<MemoryTile> memorySet) => Column(
         children: [
-          Text('Delivery Memory'),
+          const Text('Delivery Memory'),
           Expanded(
             child: GridView.count(
               crossAxisCount: 6,
@@ -52,9 +65,14 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
           ),
           TextButton(
             onPressed: () => ref.read(MemoryBloc.provider.bloc).add(
-                  MemoryEvent.initGame(12, ThemeSet.food),
+                  MemoryEvent.initGame(
+                    LevelInfo(
+                      gameSize: widget.gameSize,
+                      themeSet: widget.themeSet,
+                    ),
+                  ),
                 ),
-            child: Text('Restart'),
+            child: const Text('Restart game'),
           ),
         ],
       );

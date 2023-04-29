@@ -1,1 +1,1 @@
-enum ThemeSet { food, mail }
+enum ThemeSet { food, mail, babies }
