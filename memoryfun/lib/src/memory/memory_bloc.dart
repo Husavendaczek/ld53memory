@@ -147,7 +147,8 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
           firstPairValue = null;
 
           matchesWon++;
-          matchesLeft = matchesLeft - matchesWon;
+          matchesLeft = matchesLeft - 1;
+
           if (matchesLeft == 0) {
             var level = levels
                 .indexWhere((lvl) => lvl.themeSet == currentLevel.themeSet);
