@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoryfun/src/memory/memory_page.dart';
 
 import '../start/start_page.dart';
 
@@ -12,6 +13,7 @@ class AppRouter extends _$AppRouter {
         //HomeScreen is generated as HomeRoute because
         //of the replaceInRouteName property
         AutoRoute(page: StartRoute.page, initial: true),
+        AutoRoute(page: MemoryRoute.page)
       ];
 }
 
