@@ -1,0 +1,1 @@
+enum ThemeSet { food, mail }
