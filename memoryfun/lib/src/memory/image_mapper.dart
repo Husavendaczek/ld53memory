@@ -37,8 +37,30 @@ class ImageMapper {
             return Assets.mail.mailLetter;
           case 3:
             return Assets.mail.mailPackage;
+          default:
+            return Assets.mail.mailLetter;
         }
-        return Assets.food.foodBurger;
+      case ThemeSet.babies:
+        switch (pairValue) {
+          case 0:
+            return Assets.babies.babiesOne;
+          case 1:
+            return Assets.babies.babiesTwo;
+          case 2:
+            return Assets.babies.babiesThree;
+          case 3:
+            return Assets.babies.babiesFour;
+          case 4:
+            return Assets.babies.babiesFive;
+          case 5:
+            return Assets.babies.babiesSix;
+          case 6:
+            return Assets.babies.babiesSeven;
+          case 7:
+            return Assets.babies.babiesEight;
+          default:
+            return Assets.babies.babiesEight;
+        }
       default:
         return Assets.food.foodBurger;
     }
@@ -50,6 +72,8 @@ class ImageMapper {
         return Assets.food.background;
       case ThemeSet.mail:
         return Assets.mail.background;
+      case ThemeSet.babies:
+        return Assets.babies.background;
       default:
         return Assets.food.background;
     }

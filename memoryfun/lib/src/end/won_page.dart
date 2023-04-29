@@ -9,11 +9,13 @@ class WonPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Text('Congratulations! You have won! Thanks for playing my game.')
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text('Congratulations! You have won! Thanks for playing my game.')
+          ],
+        ),
       ),
     );
   }

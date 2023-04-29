@@ -152,7 +152,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
           if (matchesLeft == 0) {
             var level = levels
                 .indexWhere((lvl) => lvl.themeSet == currentLevel.themeSet);
-            if (level == levels.length) {
+            if (level == levels.length - 1) {
               appRouter.push(const WonRoute());
               return;
             }
