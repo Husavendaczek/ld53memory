@@ -22,7 +22,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
     super.initState();
 
     ref.read(MemoryBloc.provider.bloc).add(
-          const MemoryEvent.initGame(4, ThemeSet.food),
+          const MemoryEvent.initGame(12, ThemeSet.food),
         );
   }
 
@@ -38,7 +38,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
   }
 
   GridView _gridView(List<MemoryTile> memorySet) => GridView.count(
-        crossAxisCount: 4,
+        crossAxisCount: 6,
         mainAxisSpacing: 8,
         crossAxisSpacing: 8,
         childAspectRatio: 1,
