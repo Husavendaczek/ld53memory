@@ -57,6 +57,11 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
   Future _initGame(_InitGame event, Emitter<MemoryState> emit) async {
     emit(const MemoryState.loading());
 
+    firstIndex = null;
+    firstPairValue = null;
+    hideTiles = [];
+    memoryTiles = [];
+
     themeSet = event.themeSet;
     var pairValues = [];
     for (int i = 0; i < event.gameSize / 2; i++) {
@@ -75,7 +80,6 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
         image: Assets.food.background,
         visible: false,
       );
-      print(value);
 
       memoryTiles.add(tile);
     }

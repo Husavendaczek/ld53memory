@@ -37,13 +37,26 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
     );
   }
 
-  GridView _gridView(List<MemoryTile> memorySet) => GridView.count(
-        crossAxisCount: 6,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        childAspectRatio: 1,
-        padding: const EdgeInsets.all(8),
-        children: _tiles(memorySet),
+  Widget _gridView(List<MemoryTile> memorySet) => Column(
+        children: [
+          Text('Delivery Memory'),
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 6,
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              childAspectRatio: 1,
+              padding: const EdgeInsets.all(8),
+              children: _tiles(memorySet),
+            ),
+          ),
+          TextButton(
+            onPressed: () => ref.read(MemoryBloc.provider.bloc).add(
+                  MemoryEvent.initGame(12, ThemeSet.food),
+                ),
+            child: Text('Restart'),
+          ),
+        ],
       );
 
   List<Widget> _tiles(List<MemoryTile> memorySet) {
@@ -54,8 +67,6 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
         clipBehavior: Clip.antiAlias,
         child: tile.image!.image(fit: BoxFit.cover, width: 200, height: 200),
       );
-
-      print('visible: ' + tile.visible.toString());
 
       tiles.add(InkWell(
         onTap: () => tile.visible
