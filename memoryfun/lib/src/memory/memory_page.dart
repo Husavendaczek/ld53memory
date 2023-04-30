@@ -92,6 +92,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
             ),
             Flexible(
               child: GridView.count(
+                shrinkWrap: true,
                 crossAxisCount: 6,
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 8,
@@ -100,27 +101,31 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
                 children: _tiles(memorySet),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () => ref
-                      .read(appRouterProvider)
-                      .push(const LevelOverviewRoute()),
-                  child: const MyButton(text: 'Level overview', fontSize: 18.0),
-                ),
-                TextButton(
-                  onPressed: () => ref.read(MemoryBloc.provider.bloc).add(
-                        MemoryEvent.initGame(
-                          LevelInfo(
-                            gameSize: widget.gameSize,
-                            themeSet: widget.themeSet,
+            Padding(
+              padding: const EdgeInsets.only(top: 48.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () => ref
+                        .read(appRouterProvider)
+                        .push(const LevelOverviewRoute()),
+                    child:
+                        const MyButton(text: 'Level overview', fontSize: 18.0),
+                  ),
+                  TextButton(
+                    onPressed: () => ref.read(MemoryBloc.provider.bloc).add(
+                          MemoryEvent.initGame(
+                            LevelInfo(
+                              gameSize: widget.gameSize,
+                              themeSet: widget.themeSet,
+                            ),
                           ),
                         ),
-                      ),
-                  child: const MyButton(text: 'Restart game', fontSize: 18.0),
-                ),
-              ],
+                    child: const MyButton(text: 'Restart game', fontSize: 18.0),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -133,7 +138,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
         child: Material(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           clipBehavior: Clip.antiAlias,
-          child: tile.image!.image(fit: BoxFit.cover, width: 200, height: 200),
+          child: tile.image!.image(fit: BoxFit.cover),
         ),
       );
 
@@ -149,8 +154,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
           clipBehavior: Clip.antiAlias,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child:
-                tile.image!.image(fit: BoxFit.cover, width: 200, height: 200),
+            child: tile.image!.image(fit: BoxFit.cover),
           ),
         );
       }
