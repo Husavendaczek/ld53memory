@@ -29,7 +29,7 @@ class StartPage extends ConsumerWidget {
                     MemoryRoute(gameSize: 12, themeSet: ThemeSet.food),
                   ),
               child: const MyButton(text: 'Start game', fontSize: 18.0),
-            )
+            ),
           ],
         ),
       ),

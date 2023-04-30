@@ -11,7 +11,7 @@ class SoundPlayer {
 
   static final provider = Provider<SoundPlayer>(
     (ref) => SoundPlayer(
-      musicPlayer: AudioPlayer(),
+      musicPlayer: AudioPlayer(playerId: 'musicPlayer'),
     ),
   );
 
