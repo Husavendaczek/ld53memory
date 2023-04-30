@@ -31,7 +31,6 @@ class LevelOverviewPage extends ConsumerWidget {
               children: [
                 InkWell(
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  hoverColor: Colors.red,
                   onTap: () => ref.read(appRouterProvider).push(
                         MemoryRoute(gameSize: 12, themeSet: ThemeSet.food),
                       ),

@@ -91,14 +91,17 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
               ),
             ),
             Flexible(
-              child: GridView.count(
-                shrinkWrap: true,
-                crossAxisCount: 6, //TODO for apk set to 3
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-                childAspectRatio: 1,
-                padding: const EdgeInsets.all(8),
-                children: _tiles(memorySet),
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 1600),
+                child: GridView.count(
+                  shrinkWrap: true,
+                  crossAxisCount: 6, //TODO for apk set to 3
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
+                  childAspectRatio: 1,
+                  padding: const EdgeInsets.all(8),
+                  children: _tiles(memorySet),
+                ),
               ),
             ),
             Padding(
