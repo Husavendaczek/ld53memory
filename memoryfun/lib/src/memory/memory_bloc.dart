@@ -128,6 +128,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     if (hideTiles.isNotEmpty) {
       for (var hideTileIndex in hideTiles) {
         _setTileVisibility(hideTileIndex, event.pairValue, false);
+        memoryTiles[hideTileIndex].hasError = false;
       }
 
       hideTiles = [];
@@ -171,6 +172,8 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
         } else {
           memoryTiles[index].visible = false;
           memoryTiles[oldIndex].visible = false;
+          memoryTiles[index].hasError = true;
+          memoryTiles[oldIndex].hasError = true;
 
           hideTiles.add(index);
           hideTiles.add(oldIndex);

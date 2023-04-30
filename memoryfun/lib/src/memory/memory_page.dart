@@ -106,11 +106,31 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
   List<Widget> _tiles(List<MemoryTile> memorySet) {
     List<Widget> tiles = [];
     for (var tile in memorySet) {
-      final initTile = Material(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-        clipBehavior: Clip.antiAlias,
-        child: tile.image!.image(fit: BoxFit.cover, width: 200, height: 200),
+      var initTile = Container(
+        child: Material(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          clipBehavior: Clip.antiAlias,
+          child: tile.image!.image(fit: BoxFit.cover, width: 200, height: 200),
+        ),
       );
+
+      if (tile.hasError) {
+        initTile = Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.red,
+              width: 2,
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child:
+                tile.image!.image(fit: BoxFit.cover, width: 200, height: 200),
+          ),
+        );
+      }
 
       tiles.add(InkWell(
         onTap: () => tile.visible

@@ -6,11 +6,13 @@ class MemoryTile {
   final int pairValue;
   AssetGenImage? image;
   bool visible;
+  bool hasError;
 
   MemoryTile({
     required this.index,
     required this.pairValue,
     this.image,
     this.visible = false,
+    this.hasError = false,
   });
 }
