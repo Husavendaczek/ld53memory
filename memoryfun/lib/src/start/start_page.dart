@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoryfun/gen/assets.gen.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
 
@@ -17,12 +18,9 @@ class StartPage extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 32.0),
-              child: Text(
-                'My awesome memory',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 32.0),
+              child: Assets.other.thumbnail.image(),
             ),
             TextButton(
               onPressed: () => ref.read(appRouterProvider).push(
