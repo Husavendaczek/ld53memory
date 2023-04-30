@@ -86,6 +86,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
 
   Future _initGame(_InitGame event, Emitter<MemoryState> emit) async {
     emit(const MemoryState.loading());
+    soundPlayer.playMusic(event.levelInfo.themeSet);
 
     firstIndex = null;
     firstPairValue = null;

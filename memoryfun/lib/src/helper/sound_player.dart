@@ -2,9 +2,18 @@ import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoryfun/src/memory/theme_set.dart';
 
 class SoundPlayer {
-  static final provider = Provider<SoundPlayer>((ref) => SoundPlayer());
+  final AudioPlayer musicPlayer;
+
+  const SoundPlayer({required this.musicPlayer});
+
+  static final provider = Provider<SoundPlayer>(
+    (ref) => SoundPlayer(
+      musicPlayer: AudioPlayer(),
+    ),
+  );
 
   void playTap() {
     var sounds = [
@@ -62,5 +71,24 @@ class SoundPlayer {
   void _playSilentRandomSound(List<String> sounds) {
     var randomIndex = Random().nextInt(sounds.length);
     AudioPlayer().play(AssetSource(sounds[randomIndex]), volume: 0.6);
+  }
+
+  void playMusic(ThemeSet themeSet) {
+    musicPlayer.setVolume(0.5);
+
+    musicPlayer.stop();
+    switch (themeSet) {
+      case ThemeSet.food:
+        musicPlayer.play(AssetSource('sounds/song2.mp3'));
+        break;
+      case ThemeSet.mail:
+        musicPlayer.play(AssetSource('sounds/postsong.mp3'));
+        break;
+      case ThemeSet.babies:
+        musicPlayer.play(AssetSource('sounds/allemeineentchen.mp3'));
+        break;
+      default:
+        musicPlayer.play(AssetSource('sounds/allemeineentchen.mp3'));
+    }
   }
 }
