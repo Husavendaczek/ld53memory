@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:memoryfun/gen/assets.gen.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
+import 'package:memoryfun/src/helper/sound_player.dart';
 import 'package:memoryfun/src/memory/image_mapper.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:memoryfun/src/memory/memory_tile.dart';
@@ -40,11 +42,14 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     return MemoryBloc(
       imageMapper: ref.watch(ImageMapper.provider),
       appRouter: ref.watch(appRouterProvider),
+      soundPlayer: ref.watch(SoundPlayer.provider),
     );
   });
 
   final ImageMapper imageMapper;
   final AppRouter appRouter;
+  final SoundPlayer soundPlayer;
+
   List<MemoryTile> memoryTiles = [];
   int matchesWon = 0;
   int matchesLeft = 100;
@@ -73,6 +78,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
   MemoryBloc({
     required this.imageMapper,
     required this.appRouter,
+    required this.soundPlayer,
   }) : super(const MemoryState.initial()) {
     on<_InitGame>(_initGame);
     on<_HandleTap>(_handleTap);
@@ -122,6 +128,8 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     Emitter<MemoryState> emit,
   ) async {
     emit(const MemoryState.loadingResult());
+    soundPlayer.playTap();
+
     var index = memoryTiles.indexWhere((tile) => tile.index == event.tileIndex);
     var oldIndex = memoryTiles.indexWhere((tile) => tile.index == firstIndex);
 
@@ -141,52 +149,66 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
         return;
       } else {
         if (firstPairValue == event.pairValue) {
-          memoryTiles[index].visible = true;
-          memoryTiles[oldIndex].visible = true;
-
-          firstIndex = null;
-          firstPairValue = null;
-
-          matchesWon++;
-          matchesLeft = matchesLeft - 1;
-
-          if (matchesLeft == 0) {
-            var level = levels
-                .indexWhere((lvl) => lvl.themeSet == currentLevel.themeSet);
-            if (level == levels.length - 1) {
-              appRouter.push(const WonRoute());
-              return;
-            }
-            firstIndex = null;
-            firstPairValue = null;
-            hideTiles = [];
-            memoryTiles = [];
-            matchesWon = 0;
-            currentLevel = levels[level + 1];
-
-            emit(MemoryState.nextLevel(levels[level + 1]));
-            return;
-          }
-          emit(MemoryState.matchResult(memoryTiles));
-          return;
+          _handleCorrectMatch(index, oldIndex);
         } else {
-          memoryTiles[index].visible = false;
-          memoryTiles[oldIndex].visible = false;
-          memoryTiles[index].hasError = true;
-          memoryTiles[oldIndex].hasError = true;
-
-          hideTiles.add(index);
-          hideTiles.add(oldIndex);
-
-          firstIndex = null;
-          firstPairValue = null;
-          emit(MemoryState.matchResult(memoryTiles));
+          _handleWrongMatch(index, oldIndex);
         }
       }
     } else {
       firstIndex = event.tileIndex;
       firstPairValue = event.pairValue;
+      emit(MemoryState.matchResult(memoryTiles));
     }
+  }
+
+  void _handleCorrectMatch(int index, int oldIndex) {
+    memoryTiles[index].visible = true;
+    memoryTiles[oldIndex].visible = true;
+
+    firstIndex = null;
+    firstPairValue = null;
+
+    matchesWon++;
+    matchesLeft = matchesLeft - 1;
+
+    if (matchesLeft == 0) {
+      var level =
+          levels.indexWhere((lvl) => lvl.themeSet == currentLevel.themeSet);
+      if (level == levels.length - 1) {
+        soundPlayer.playWinGame();
+
+        appRouter.push(const WonRoute());
+      } else {
+        soundPlayer.playWinLevel();
+
+        firstIndex = null;
+        firstPairValue = null;
+        hideTiles = [];
+        memoryTiles = [];
+        matchesWon = 0;
+        currentLevel = levels[level + 1];
+
+        emit(MemoryState.nextLevel(levels[level + 1]));
+      }
+    } else {
+      soundPlayer.playCorrectMatch();
+      emit(MemoryState.matchResult(memoryTiles));
+    }
+  }
+
+  void _handleWrongMatch(int index, int oldIndex) {
+    soundPlayer.playWrongMatch();
+
+    memoryTiles[index].visible = false;
+    memoryTiles[oldIndex].visible = false;
+    memoryTiles[index].hasError = true;
+    memoryTiles[oldIndex].hasError = true;
+
+    hideTiles.add(index);
+    hideTiles.add(oldIndex);
+
+    firstIndex = null;
+    firstPairValue = null;
     emit(MemoryState.matchResult(memoryTiles));
   }
 
