@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/memory/memory_page.dart';
 import 'package:memoryfun/src/end/won_page.dart';
+import 'package:memoryfun/src/level_overview/level_overview_page.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class AppRouter extends _$AppRouter {
         //HomeScreen is generated as HomeRoute because
         //of the replaceInRouteName property
         AutoRoute(page: StartRoute.page, initial: true),
+        AutoRoute(page: LevelOverviewRoute.page),
         AutoRoute(page: MemoryRoute.page),
         AutoRoute(page: WonRoute.page),
       ];

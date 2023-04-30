@@ -18,9 +18,11 @@ class StartPage extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 32.0),
-              child: Assets.other.thumbnail.image(),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 32.0),
+                child: Assets.other.thumbnail.image(),
+              ),
             ),
             TextButton(
               onPressed: () => ref.read(appRouterProvider).push(

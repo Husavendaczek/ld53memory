@@ -55,9 +55,10 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
                   alignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
-                      onPressed: () =>
-                          ref.read(appRouterProvider).push(const StartRoute()),
-                      child: const Text('Menu'),
+                      onPressed: () => ref
+                          .read(appRouterProvider)
+                          .push(const LevelOverviewRoute()),
+                      child: const Text('Level overview'),
                     ),
                     TextButton(
                       onPressed: () => ref.read(appRouterProvider).push(
@@ -77,48 +78,52 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
     );
   }
 
-  Widget _gridView(List<MemoryTile> memorySet) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(bottom: 32.0),
-            child: Text(
-              'Delivery Memory',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Expanded(
-            child: GridView.count(
-              crossAxisCount: 6,
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
-              childAspectRatio: 1,
-              padding: const EdgeInsets.all(8),
-              children: _tiles(memorySet),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(
-                onPressed: () =>
-                    ref.read(appRouterProvider).push(const StartRoute()),
-                child: const MyButton(text: 'Menu', fontSize: 18.0),
+  Widget _gridView(List<MemoryTile> memorySet) => Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 32.0),
+              child: Text(
+                'Memory fun',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
-              TextButton(
-                onPressed: () => ref.read(MemoryBloc.provider.bloc).add(
-                      MemoryEvent.initGame(
-                        LevelInfo(
-                          gameSize: widget.gameSize,
-                          themeSet: widget.themeSet,
+            ),
+            Flexible(
+              child: GridView.count(
+                crossAxisCount: 6,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                childAspectRatio: 1,
+                padding: const EdgeInsets.all(8),
+                children: _tiles(memorySet),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () => ref
+                      .read(appRouterProvider)
+                      .push(const LevelOverviewRoute()),
+                  child: const MyButton(text: 'Level overview', fontSize: 18.0),
+                ),
+                TextButton(
+                  onPressed: () => ref.read(MemoryBloc.provider.bloc).add(
+                        MemoryEvent.initGame(
+                          LevelInfo(
+                            gameSize: widget.gameSize,
+                            themeSet: widget.themeSet,
+                          ),
                         ),
                       ),
-                    ),
-                child: const MyButton(text: 'Restart game', fontSize: 18.0),
-              ),
-            ],
-          ),
-        ],
+                  child: const MyButton(text: 'Restart game', fontSize: 18.0),
+                ),
+              ],
+            ),
+          ],
+        ),
       );
 
   List<Widget> _tiles(List<MemoryTile> memorySet) {
