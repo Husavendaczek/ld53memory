@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoryfun/src/components/my_button.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/memory/image_mapper.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
@@ -77,8 +78,15 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
   }
 
   Widget _gridView(List<MemoryTile> memorySet) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('Delivery Memory'),
+          const Padding(
+            padding: EdgeInsets.only(bottom: 32.0),
+            child: Text(
+              'Delivery Memory',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+          ),
           Expanded(
             child: GridView.count(
               crossAxisCount: 6,
@@ -89,16 +97,26 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
               children: _tiles(memorySet),
             ),
           ),
-          TextButton(
-            onPressed: () => ref.read(MemoryBloc.provider.bloc).add(
-                  MemoryEvent.initGame(
-                    LevelInfo(
-                      gameSize: widget.gameSize,
-                      themeSet: widget.themeSet,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () =>
+                    ref.read(appRouterProvider).push(const StartRoute()),
+                child: const MyButton(text: 'Menu', fontSize: 18.0),
+              ),
+              TextButton(
+                onPressed: () => ref.read(MemoryBloc.provider.bloc).add(
+                      MemoryEvent.initGame(
+                        LevelInfo(
+                          gameSize: widget.gameSize,
+                          themeSet: widget.themeSet,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-            child: const Text('Restart game'),
+                child: const MyButton(text: 'Restart game', fontSize: 18.0),
+              ),
+            ],
           ),
         ],
       );
@@ -121,7 +139,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
               color: Colors.red,
               width: 2,
             ),
-            borderRadius: BorderRadius.all(Radius.circular(8)),
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
           ),
           clipBehavior: Clip.antiAlias,
           child: Padding(
