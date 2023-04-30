@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/components/my_button.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
@@ -45,40 +46,70 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ref.watch(MemoryBloc.provider).maybeWhen(
-            initialized: (memorySet) => _gridView(memorySet),
-            matchResult: (memorySet) => _gridView(memorySet),
-            nextLevel: (nextLevel) => Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('You delivered everything!'),
-                ButtonBar(
-                  alignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      onPressed: () => ref
-                          .read(appRouterProvider)
-                          .push(const LevelOverviewRoute()),
-                      child: const Text('Level overview'),
+            initialized: (memorySet) => _gridView(memorySet, true),
+            matchResult: (memorySet) => _gridView(memorySet, false),
+            nextLevel: (nextLevel) => Container(
+              color: Colors.black,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 32.0),
+                    child: const Text(
+                      'You delivered everything!',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                        .animate(
+                      onPlay: (controller) => controller.repeat(),
+                    )
+                        .shimmer(
+                      duration: 700.ms,
+                      colors: [
+                        Colors.yellow,
+                        Colors.orange,
+                        Colors.red,
+                        Colors.purple,
+                        Colors.blue,
+                        Colors.green,
+                        Colors.blue,
+                        Colors.purple,
+                        Colors.red,
+                      ],
                     ),
-                    TextButton(
-                      onPressed: () => ref.read(appRouterProvider).push(
-                            MemoryRoute(
-                              gameSize: nextLevel.gameSize,
-                              themeSet: nextLevel.themeSet,
+                  ),
+                  ButtonBar(
+                    alignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        onPressed: () => ref
+                            .read(appRouterProvider)
+                            .push(const LevelOverviewRoute()),
+                        child: const MyButton(
+                            text: 'Level overview', fontSize: 16),
+                      ),
+                      TextButton(
+                        onPressed: () => ref.read(appRouterProvider).push(
+                              MemoryRoute(
+                                gameSize: nextLevel.gameSize,
+                                themeSet: nextLevel.themeSet,
+                              ),
                             ),
-                          ),
-                      child: const Text('Next Level'),
-                    ),
-                  ],
-                )
-              ],
+                        child: const MyButton(text: 'Next Level', fontSize: 16),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
             orElse: () => const Text('loading'),
           ),
     );
   }
 
-  Widget _gridView(List<MemoryTile> memorySet) => Center(
+  Widget _gridView(List<MemoryTile> memorySet, bool fadeIn) => Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -100,7 +131,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
                   crossAxisSpacing: 8,
                   childAspectRatio: 1,
                   padding: const EdgeInsets.all(8),
-                  children: _tiles(memorySet),
+                  children: _tiles(memorySet, fadeIn),
                 ),
               ),
             ),
@@ -134,7 +165,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
         ),
       );
 
-  List<Widget> _tiles(List<MemoryTile> memorySet) {
+  List<Widget> _tiles(List<MemoryTile> memorySet, bool fadeIn) {
     List<Widget> tiles = [];
     for (var tile in memorySet) {
       var initTile = Container(
@@ -162,14 +193,22 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
         );
       }
 
-      tiles.add(InkWell(
-        onTap: () => tile.visible
-            ? {}
-            : ref
-                .read(MemoryBloc.provider.bloc)
-                .add(MemoryEvent.handleTap(tile.index, tile.pairValue)),
-        child: initTile,
-      ));
+      tiles.add(
+        InkWell(
+          onTap: () => tile.visible
+              ? {}
+              : ref
+                  .read(MemoryBloc.provider.bloc)
+                  .add(MemoryEvent.handleTap(tile.index, tile.pairValue)),
+          child: initTile,
+        )
+            .animate()
+            .fadeIn(
+              duration: 600.ms,
+              curve: Curves.easeIn,
+            )
+            .blurXY(begin: 1, end: 0, duration: 600.ms, delay: 300.ms),
+      );
     }
 
     return tiles;

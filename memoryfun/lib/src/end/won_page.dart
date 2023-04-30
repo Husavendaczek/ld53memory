@@ -83,11 +83,13 @@ class WonPage extends ConsumerWidget {
                     onPlay: (controller) => controller.repeat(),
                   )
                   .custom(
-                      duration: 300.ms,
-                      builder: (context, value, child) => _myText(
-                          const Color.fromARGB(255, 255, 223, 234),
-                          Colors.purple,
-                          value)),
+                    duration: 300.ms,
+                    builder: (context, value, child) => _myText(
+                      const Color.fromARGB(255, 255, 223, 234),
+                      Colors.purple,
+                      value,
+                    ),
+                  ),
             ),
             const Text(
               'Thanks for playing my game.',
