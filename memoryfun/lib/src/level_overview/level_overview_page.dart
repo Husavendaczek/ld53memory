@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/gen/assets.gen.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
@@ -41,7 +42,10 @@ class LevelOverviewPage extends ConsumerWidget {
                     clipBehavior: Clip.antiAlias,
                     child: Assets.food.foodPizza.image(),
                   ),
-                ),
+                ).animate().fadeIn(
+                      duration: 600.ms,
+                      curve: Curves.easeIn,
+                    ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: InkWell(
@@ -56,7 +60,10 @@ class LevelOverviewPage extends ConsumerWidget {
                       clipBehavior: Clip.antiAlias,
                       child: Assets.mail.mailLetter.image(),
                     ),
-                  ),
+                  ).animate().fadeIn(
+                        duration: 600.ms,
+                        curve: Curves.easeIn,
+                      ),
                 ),
                 InkWell(
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
@@ -70,7 +77,10 @@ class LevelOverviewPage extends ConsumerWidget {
                     clipBehavior: Clip.antiAlias,
                     child: Assets.babies.babiesOne.image(),
                   ),
-                ),
+                ).animate().fadeIn(
+                      duration: 600.ms,
+                      curve: Curves.easeIn,
+                    ),
               ],
             ),
           ],

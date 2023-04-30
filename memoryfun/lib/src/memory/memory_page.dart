@@ -174,7 +174,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
           clipBehavior: Clip.antiAlias,
           child: tile.image!.image(fit: BoxFit.cover),
         ),
-      );
+      ).animate();
 
       if (tile.hasError) {
         initTile = Container(
@@ -190,7 +190,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
             padding: const EdgeInsets.all(8.0),
             child: tile.image!.image(fit: BoxFit.cover),
           ),
-        );
+        ).animate().shake();
       }
 
       tiles.add(
