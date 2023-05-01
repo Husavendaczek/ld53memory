@@ -82,22 +82,25 @@ class LevelOverviewPage extends ConsumerWidget {
                       duration: 600.ms,
                       curve: Curves.easeIn,
                     ),
-                InkWell(
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  onTap: () => ref.read(appRouterProvider).push(
-                        MemoryRoute(gameSize: 16, themeSet: ThemeSet.babies),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: InkWell(
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    onTap: () => ref.read(appRouterProvider).push(
+                          MemoryRoute(gameSize: 16, themeSet: ThemeSet.babies),
+                        ),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
                       ),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      clipBehavior: Clip.antiAlias,
+                      child: Assets.babies.babiesOne.image(),
                     ),
-                    clipBehavior: Clip.antiAlias,
-                    child: Assets.babies.babiesOne.image(),
-                  ),
-                ).animate().fadeIn(
-                      duration: 600.ms,
-                      curve: Curves.easeIn,
-                    ),
+                  ).animate().fadeIn(
+                        duration: 600.ms,
+                        curve: Curves.easeIn,
+                      ),
+                ),
               ],
             ),
           ],
