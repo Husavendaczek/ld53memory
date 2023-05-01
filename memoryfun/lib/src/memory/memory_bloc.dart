@@ -16,8 +16,8 @@ part 'memory_bloc.freezed.dart';
 @freezed
 class MemoryEvent with _$MemoryEvent {
   const factory MemoryEvent.initGame(LevelInfo levelInfo) = _InitGame;
-  const factory MemoryEvent.handleTap(int tileIndex, int pairValue) =
-      _HandleTap;
+  const factory MemoryEvent.handleTap(
+      int tileIndex, int pairValue, bool isDeliverer) = _HandleTap;
 }
 
 @freezed
@@ -64,6 +64,10 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     ),
     LevelInfo(
       gameSize: 16,
+      themeSet: ThemeSet.babiesComplex,
+    ),
+    LevelInfo(
+      gameSize: 16,
       themeSet: ThemeSet.babies,
     )
   ];
@@ -99,10 +103,15 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     var pairValues = [];
     for (int i = 0; i < matchesLeft; i++) {
       pairValues.add(i);
-      pairValues.add(i);
     }
 
     for (int i = 0; i < event.levelInfo.gameSize; i++) {
+      if (i == matchesLeft) {
+        for (int i = 0; i < matchesLeft; i++) {
+          pairValues.add(i);
+        }
+      }
+
       var randomIndex = Random().nextInt(pairValues.length);
       var value = pairValues[randomIndex];
       pairValues.removeAt(randomIndex);
@@ -110,13 +119,10 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
       var tile = MemoryTile(
         index: i,
         pairValue: value,
-        image: imageMapper.map(
-          currentLevel.themeSet,
-          value,
-          false,
-        ),
+        isDeliveryPerson: i < matchesLeft,
         visible: false,
       );
+      tile.image = imageMapper.map(tile, currentLevel.themeSet);
 
       memoryTiles.add(tile);
     }
@@ -136,14 +142,25 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
 
     if (hideTiles.isNotEmpty) {
       for (var hideTileIndex in hideTiles) {
-        _setTileVisibility(hideTileIndex, event.pairValue, false);
+        _setTileVisibility(
+            hideTileIndex,
+            MemoryTile(
+                index: index,
+                pairValue: event.pairValue,
+                isDeliveryPerson: event.isDeliverer,
+                visible: false));
         memoryTiles[hideTileIndex].hasError = false;
       }
 
       hideTiles = [];
     }
-
-    _setTileVisibility(index, event.pairValue, true);
+    _setTileVisibility(
+        index,
+        MemoryTile(
+            index: index,
+            pairValue: event.pairValue,
+            isDeliveryPerson: event.isDeliverer,
+            visible: true));
 
     if (firstIndex != null) {
       if (firstIndex == event.tileIndex) {
@@ -213,11 +230,10 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     emit(MemoryState.matchResult(memoryTiles));
   }
 
-  void _setTileVisibility(int index, int pairValue, bool visible) {
+  void _setTileVisibility(int index, MemoryTile memoryTile) {
     memoryTiles[index].image = imageMapper.map(
+      memoryTile,
       currentLevel.themeSet,
-      pairValue,
-      visible,
     );
   }
 }

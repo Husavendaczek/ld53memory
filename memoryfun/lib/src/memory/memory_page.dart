@@ -104,7 +104,23 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
                 ],
               ),
             ),
-            orElse: () => const Text('loading'),
+            orElse: () => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('loading'),
+                TextButton(
+                  onPressed: () => ref.read(MemoryBloc.provider.bloc).add(
+                        MemoryEvent.initGame(
+                          LevelInfo(
+                            gameSize: widget.gameSize,
+                            themeSet: widget.themeSet,
+                          ),
+                        ),
+                      ),
+                  child: const MyButton(text: 'Restart game', fontSize: 18.0),
+                ),
+              ],
+            ),
           ),
     );
   }
@@ -197,9 +213,8 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
         InkWell(
           onTap: () => tile.visible
               ? {}
-              : ref
-                  .read(MemoryBloc.provider.bloc)
-                  .add(MemoryEvent.handleTap(tile.index, tile.pairValue)),
+              : ref.read(MemoryBloc.provider.bloc).add(MemoryEvent.handleTap(
+                  tile.index, tile.pairValue, tile.isDeliveryPerson)),
           child: initTile,
         )
             .animate()

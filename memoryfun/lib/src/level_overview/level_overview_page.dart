@@ -68,6 +68,23 @@ class LevelOverviewPage extends ConsumerWidget {
                 InkWell(
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                   onTap: () => ref.read(appRouterProvider).push(
+                        MemoryRoute(
+                            gameSize: 16, themeSet: ThemeSet.babiesComplex),
+                      ),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    child: Assets.babies.babiesHouseTwo.image(),
+                  ),
+                ).animate().fadeIn(
+                      duration: 600.ms,
+                      curve: Curves.easeIn,
+                    ),
+                InkWell(
+                  borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  onTap: () => ref.read(appRouterProvider).push(
                         MemoryRoute(gameSize: 16, themeSet: ThemeSet.babies),
                       ),
                   child: Container(
