@@ -164,6 +164,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
 
     if (firstIndex != null) {
       if (firstIndex == event.tileIndex) {
+        emit(MemoryState.matchResult(memoryTiles));
         return;
       } else {
         if (firstPairValue == event.pairValue) {
