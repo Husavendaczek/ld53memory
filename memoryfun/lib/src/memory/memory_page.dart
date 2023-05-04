@@ -2,13 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/level_overview/level_done.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:memoryfun/src/different_image/memory_bloc.dart';
 
 import '../components/my_button.dart';
-import '../components/nav_buttons.dart';
+import 'memory_grid_view.dart';
 import 'memory_tile.dart';
 
 @RoutePage()
@@ -58,39 +57,11 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
     );
   }
 
-  Widget _gridView(List<MemoryTile> memorySet, bool fadeIn) => Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 32.0),
-              child: Text(
-                'Memory fun',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
+  Widget _gridView(List<MemoryTile> memorySet, bool fadeIn) => MemoryGridView(
+        tiles: _tiles(memorySet, fadeIn),
+        onRestart: () => ref.read(MemoryBloc.provider.bloc).add(
+              MemoryEvent.initGame(widget.levelInfo),
             ),
-            Flexible(
-              child: Container(
-                constraints: const BoxConstraints(maxWidth: 1600),
-                child: GridView.count(
-                  shrinkWrap: true,
-                  crossAxisCount: 6, //TODO for apk set to 3
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
-                  childAspectRatio: 1,
-                  padding: const EdgeInsets.all(8),
-                  children: _tiles(memorySet, fadeIn),
-                ),
-              ),
-            ),
-            NavButtons(
-              onRestart: () => ref.read(MemoryBloc.provider.bloc).add(
-                    MemoryEvent.initGame(widget.levelInfo),
-                  ),
-            ),
-          ],
-        ),
       );
 
   List<Widget> _tiles(List<MemoryTile> memorySet, bool fadeIn) {

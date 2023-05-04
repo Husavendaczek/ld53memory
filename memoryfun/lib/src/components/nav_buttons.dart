@@ -6,6 +6,7 @@ import '../helper/app_router.dart';
 
 class NavButtons extends ConsumerWidget {
   final Function() onRestart;
+
   const NavButtons({
     required this.onRestart,
     super.key,
