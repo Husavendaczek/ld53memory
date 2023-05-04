@@ -108,7 +108,8 @@ class WonPage extends ConsumerWidget {
                             gameType: GameType.sameImage),
                       ),
                     ),
-                child: const MyButton(text: 'Play again', fontSize: 18.0),
+                child:
+                    const NormalButtonStyle(text: 'Play again', fontSize: 18.0),
               ),
             )
           ],

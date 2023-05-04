@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MyButton extends ConsumerWidget {
+class NormalButtonStyle extends ConsumerWidget {
   final String text;
   final double fontSize;
 
-  const MyButton({
+  const NormalButtonStyle({
     required this.text,
     required this.fontSize,
     super.key,

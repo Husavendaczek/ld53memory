@@ -2,10 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/components/my_button.dart';
+import 'package:memoryfun/src/components/nav_buttons.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 
+import '../components/my_button.dart';
 import '../level_overview/level_done.dart';
 import 'simple_memory_bloc.dart';
 import 'simple_memory_tile.dart';
@@ -49,7 +50,8 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
                   onPressed: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
                         SimpleMemoryEvent.initGame(widget.levelInfo),
                       ),
-                  child: const MyButton(text: 'Restart game', fontSize: 18.0),
+                  child: const NormalButtonStyle(
+                      text: 'Restart game', fontSize: 18.0),
                 ),
               ],
             ),
@@ -83,27 +85,10 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 48.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: () => ref
-                        .read(appRouterProvider)
-                        .push(const LevelOverviewRoute()),
-                    child:
-                        const MyButton(text: 'Level overview', fontSize: 18.0),
+            NavButtons(
+              onRestart: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
+                    SimpleMemoryEvent.initGame(widget.levelInfo),
                   ),
-                  TextButton(
-                    onPressed: () =>
-                        ref.read(SimpleMemoryBloc.provider.bloc).add(
-                              SimpleMemoryEvent.initGame(widget.levelInfo),
-                            ),
-                    child: const MyButton(text: 'Restart game', fontSize: 18.0),
-                  ),
-                ],
-              ),
             ),
           ],
         ),

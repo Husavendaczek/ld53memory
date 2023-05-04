@@ -57,7 +57,8 @@ class LevelDone extends ConsumerWidget {
                 onPressed: () => ref
                     .read(appRouterProvider)
                     .push(const LevelOverviewRoute()),
-                child: const MyButton(text: 'Level overview', fontSize: 16),
+                child: const NormalButtonStyle(
+                    text: 'Level overview', fontSize: 16),
               ),
               TextButton(
                 onPressed: () {
@@ -76,7 +77,8 @@ class LevelDone extends ConsumerWidget {
                         route,
                       );
                 },
-                child: const MyButton(text: 'Next Level', fontSize: 16),
+                child:
+                    const NormalButtonStyle(text: 'Next Level', fontSize: 16),
               ),
             ],
           )

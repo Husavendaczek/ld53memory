@@ -36,7 +36,8 @@ class StartPage extends ConsumerWidget {
                       ),
                     ),
                   ),
-              child: const MyButton(text: 'Start game', fontSize: 18.0),
+              child:
+                  const NormalButtonStyle(text: 'Start game', fontSize: 18.0),
             ),
           ],
         ),

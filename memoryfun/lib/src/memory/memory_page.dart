@@ -2,12 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/components/my_button.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/level_overview/level_done.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:memoryfun/src/different_image/memory_bloc.dart';
 
+import '../components/my_button.dart';
+import '../components/nav_buttons.dart';
 import 'memory_tile.dart';
 
 @RoutePage()
@@ -48,7 +49,8 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
                   onPressed: () => ref.read(MemoryBloc.provider.bloc).add(
                         MemoryEvent.initGame(widget.levelInfo),
                       ),
-                  child: const MyButton(text: 'Restart game', fontSize: 18.0),
+                  child: const NormalButtonStyle(
+                      text: 'Restart game', fontSize: 18.0),
                 ),
               ],
             ),
@@ -82,26 +84,10 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 48.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: () => ref
-                        .read(appRouterProvider)
-                        .push(const LevelOverviewRoute()),
-                    child:
-                        const MyButton(text: 'Level overview', fontSize: 18.0),
+            NavButtons(
+              onRestart: () => ref.read(MemoryBloc.provider.bloc).add(
+                    MemoryEvent.initGame(widget.levelInfo),
                   ),
-                  TextButton(
-                    onPressed: () => ref.read(MemoryBloc.provider.bloc).add(
-                          MemoryEvent.initGame(widget.levelInfo),
-                        ),
-                    child: const MyButton(text: 'Restart game', fontSize: 18.0),
-                  ),
-                ],
-              ),
             ),
           ],
         ),
