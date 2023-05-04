@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
+import 'package:memoryfun/src/memory/memory_tile_component.dart';
 
 import '../components/my_button.dart';
 import '../level_overview/level_done.dart';
@@ -69,46 +70,15 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
   List<Widget> _tiles(List<SimpleMemoryTile> memorySet, bool fadeIn) {
     List<Widget> tiles = [];
     for (var tile in memorySet) {
-      var initTile = Container(
-        child: Material(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          clipBehavior: Clip.antiAlias,
-          child: tile.image!.image(fit: BoxFit.cover),
-        ),
-      ).animate();
-
-      if (tile.hasError) {
-        initTile = Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.red,
-              width: 2,
-            ),
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: tile.image!.image(fit: BoxFit.cover),
-          ),
-        ).animate().shake();
-      }
-
       tiles.add(
-        InkWell(
-          onTap: () => tile.visible
-              ? {}
-              : ref.read(SimpleMemoryBloc.provider.bloc).add(
-                    SimpleMemoryEvent.handleTap(tile.index, tile.pairValue),
-                  ),
-          child: initTile,
-        )
-            .animate()
-            .fadeIn(
-              duration: 600.ms,
-              curve: Curves.easeIn,
-            )
-            .blurXY(begin: 1, end: 0, duration: 600.ms, delay: 300.ms),
+        MemoryTileComponent(
+          visible: tile.visible,
+          hasError: tile.hasError,
+          image: tile.image!,
+          onTap: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
+                SimpleMemoryEvent.handleTap(tile.index, tile.pairValue),
+              ),
+        ),
       );
     }
 

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/level_overview/level_done.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:memoryfun/src/different_image/memory_bloc.dart';
+import 'package:memoryfun/src/memory/memory_tile_component.dart';
 
 import '../components/my_button.dart';
 import 'memory_grid_view.dart';
@@ -67,45 +68,19 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
   List<Widget> _tiles(List<MemoryTile> memorySet, bool fadeIn) {
     List<Widget> tiles = [];
     for (var tile in memorySet) {
-      var initTile = Container(
-        child: Material(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          clipBehavior: Clip.antiAlias,
-          child: tile.image!.image(fit: BoxFit.cover),
-        ),
-      ).animate();
-
-      if (tile.hasError) {
-        initTile = Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.red,
-              width: 2,
-            ),
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: tile.image!.image(fit: BoxFit.cover),
-          ),
-        ).animate().shake();
-      }
-
       tiles.add(
-        InkWell(
-          onTap: () => tile.visible
-              ? {}
-              : ref.read(MemoryBloc.provider.bloc).add(MemoryEvent.handleTap(
-                  tile.index, tile.pairValue, tile.isDeliveryPerson)),
-          child: initTile,
-        )
-            .animate()
-            .fadeIn(
-              duration: 600.ms,
-              curve: Curves.easeIn,
-            )
-            .blurXY(begin: 1, end: 0, duration: 600.ms, delay: 300.ms),
+        MemoryTileComponent(
+          visible: tile.visible,
+          hasError: tile.hasError,
+          image: tile.image!,
+          onTap: () => ref.read(MemoryBloc.provider.bloc).add(
+                MemoryEvent.handleTap(
+                  tile.index,
+                  tile.pairValue,
+                  tile.isDeliveryPerson,
+                ),
+              ),
+        ),
       );
     }
 

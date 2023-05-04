@@ -1,0 +1,59 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../gen/assets.gen.dart';
+
+class MemoryTileComponent extends ConsumerWidget {
+  final bool visible;
+  final bool hasError;
+  final AssetGenImage image;
+  final Function() onTap;
+
+  const MemoryTileComponent({
+    required this.visible,
+    required this.hasError,
+    required this.image,
+    required this.onTap,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    var initTile = Container(
+      child: Material(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        clipBehavior: Clip.antiAlias,
+        child: image.image(fit: BoxFit.cover),
+      ),
+    ).animate();
+
+    if (hasError) {
+      initTile = Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.red,
+            width: 2,
+          ),
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: image.image(fit: BoxFit.cover),
+        ),
+      ).animate().shake();
+    }
+
+    return InkWell(
+      onTap: () => visible ? {} : onTap(),
+      child: initTile,
+    )
+        .animate()
+        .fadeIn(
+          duration: 600.ms,
+          curve: Curves.easeIn,
+        )
+        .blurXY(begin: 1, end: 0, duration: 600.ms, delay: 300.ms);
+  }
+}
