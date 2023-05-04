@@ -1,45 +1,45 @@
 import 'dart:math';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:memoryfun/gen/assets.gen.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/helper/sound_player.dart';
 import 'package:memoryfun/src/memory/image_mapper.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
-import 'package:memoryfun/src/memory/memory_tile.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
 import 'package:riverbloc/riverbloc.dart';
 
-part 'memory_bloc.freezed.dart';
+import '../level_overview/levels.dart';
+import 'simple_memory_tile.dart';
+
+part 'simple_memory_bloc.freezed.dart';
 
 @freezed
-class MemoryEvent with _$MemoryEvent {
-  const factory MemoryEvent.initGame(LevelInfo levelInfo) = _InitGame;
-  const factory MemoryEvent.handleTap(
-      int tileIndex, int pairValue, bool isDeliverer) = _HandleTap;
+class SimpleMemoryEvent with _$SimpleMemoryEvent {
+  const factory SimpleMemoryEvent.initGame(LevelInfo levelInfo) = _InitGame;
+  const factory SimpleMemoryEvent.handleTap(int tileIndex, int pairValue) =
+      _HandleTap;
 }
 
 @freezed
-class MemoryState with _$MemoryState {
-  const factory MemoryState.initial() = _Initial;
-  const factory MemoryState.loading() = _Loading;
-  const factory MemoryState.initialized(List<MemoryTile> memorySet) =
-      _Initialized;
-  const factory MemoryState.loadingResult() = _LoadingResult;
-  const factory MemoryState.matchResult(List<MemoryTile> memorySet) =
-      _MatchResult;
-  const factory MemoryState.nextLevel(LevelInfo nextLevel) = _NextLevel;
-  const factory MemoryState.winGame() = _WinGame;
-  const factory MemoryState.looseGame() = _looseGame;
+class SimpleMemoryState with _$SimpleMemoryState {
+  const factory SimpleMemoryState.initial() = _Initial;
+  const factory SimpleMemoryState.loading() = _Loading;
+  const factory SimpleMemoryState.initialized(
+      List<SimpleMemoryTile> memorySet) = _Initialized;
+  const factory SimpleMemoryState.loadingResult() = _LoadingResult;
+  const factory SimpleMemoryState.matchResult(
+      List<SimpleMemoryTile> memorySet) = _MatchResult;
+  const factory SimpleMemoryState.nextLevel(LevelInfo nextLevel) = _NextLevel;
+  const factory SimpleMemoryState.winGame() = _WinGame;
+  const factory SimpleMemoryState.looseGame() = _looseGame;
 }
 
-class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
+class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
   static final provider =
-      BlocProvider.autoDispose<MemoryBloc, MemoryState>((ref) {
+      BlocProvider.autoDispose<SimpleMemoryBloc, SimpleMemoryState>((ref) {
     ref.onDispose(() => ref.bloc.close());
 
-    return MemoryBloc(
+    return SimpleMemoryBloc(
       imageMapper: ref.watch(ImageMapper.provider),
       appRouter: ref.watch(appRouterProvider),
       soundPlayer: ref.watch(SoundPlayer.provider),
@@ -50,27 +50,9 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
   final AppRouter appRouter;
   final SoundPlayer soundPlayer;
 
-  List<MemoryTile> memoryTiles = [];
+  List<SimpleMemoryTile> memoryTiles = [];
   int matchesWon = 0;
   int matchesLeft = 100;
-  List<LevelInfo> levels = const [
-    LevelInfo(
-      gameSize: 12,
-      themeSet: ThemeSet.food,
-    ),
-    LevelInfo(
-      gameSize: 8,
-      themeSet: ThemeSet.mail,
-    ),
-    LevelInfo(
-      gameSize: 16,
-      themeSet: ThemeSet.babiesComplex,
-    ),
-    LevelInfo(
-      gameSize: 16,
-      themeSet: ThemeSet.babies,
-    )
-  ];
   LevelInfo currentLevel = const LevelInfo(
     gameSize: 12,
     themeSet: ThemeSet.food,
@@ -79,62 +61,60 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
   int? firstPairValue;
   List<int> hideTiles = [];
 
-  MemoryBloc({
+  SimpleMemoryBloc({
     required this.imageMapper,
     required this.appRouter,
     required this.soundPlayer,
-  }) : super(const MemoryState.initial()) {
+  }) : super(const SimpleMemoryState.initial()) {
     on<_InitGame>(_initGame);
     on<_HandleTap>(_handleTap);
   }
 
-  Future _initGame(_InitGame event, Emitter<MemoryState> emit) async {
-    emit(const MemoryState.loading());
+  Future _initGame(_InitGame event, Emitter<SimpleMemoryState> emit) async {
+    emit(const SimpleMemoryState.loading());
     soundPlayer.playMusic(event.levelInfo.themeSet);
 
+    _resetGame();
+    matchesLeft = event.levelInfo.getMatches();
+    currentLevel = event.levelInfo;
+
+    var pairValues = [];
+    for (int i = 0; i < matchesLeft; i++) {
+      pairValues.add(i);
+      pairValues.add(i);
+    }
+
+    for (int i = 0; i < event.levelInfo.gameSize; i++) {
+      var randomIndex = Random().nextInt(pairValues.length);
+      var value = pairValues[randomIndex];
+      pairValues.removeAt(randomIndex);
+
+      var tile = SimpleMemoryTile(
+        index: i,
+        pairValue: value,
+        visible: false,
+      );
+      tile.image = imageMapper.mapSimple(tile, currentLevel.themeSet);
+
+      memoryTiles.add(tile);
+    }
+
+    emit(SimpleMemoryState.initialized(memoryTiles));
+  }
+
+  void _resetGame() {
     firstIndex = null;
     firstPairValue = null;
     hideTiles = [];
     memoryTiles = [];
     matchesWon = 0;
-    matchesLeft = event.levelInfo.getMatches();
-
-    currentLevel = event.levelInfo;
-    var pairValues = [];
-    for (int i = 0; i < matchesLeft; i++) {
-      pairValues.add(i);
-    }
-
-    for (int i = 0; i < event.levelInfo.gameSize; i++) {
-      if (i == matchesLeft) {
-        for (int i = 0; i < matchesLeft; i++) {
-          pairValues.add(i);
-        }
-      }
-
-      var randomIndex = Random().nextInt(pairValues.length);
-      var value = pairValues[randomIndex];
-      pairValues.removeAt(randomIndex);
-
-      var tile = MemoryTile(
-        index: i,
-        pairValue: value,
-        isDeliveryPerson: i < matchesLeft,
-        visible: false,
-      );
-      tile.image = imageMapper.map(tile, currentLevel.themeSet);
-
-      memoryTiles.add(tile);
-    }
-
-    emit(MemoryState.initialized(memoryTiles));
   }
 
   Future _handleTap(
     _HandleTap event,
-    Emitter<MemoryState> emit,
+    Emitter<SimpleMemoryState> emit,
   ) async {
-    emit(const MemoryState.loadingResult());
+    emit(const SimpleMemoryState.loadingResult());
     soundPlayer.playTap();
 
     var index = memoryTiles.indexWhere((tile) => tile.index == event.tileIndex);
@@ -144,11 +124,8 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
       for (var hideTileIndex in hideTiles) {
         _setTileVisibility(
             hideTileIndex,
-            MemoryTile(
-                index: index,
-                pairValue: event.pairValue,
-                isDeliveryPerson: event.isDeliverer,
-                visible: false));
+            SimpleMemoryTile(
+                index: index, pairValue: event.pairValue, visible: false));
         memoryTiles[hideTileIndex].hasError = false;
       }
 
@@ -156,15 +133,12 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     }
     _setTileVisibility(
         index,
-        MemoryTile(
-            index: index,
-            pairValue: event.pairValue,
-            isDeliveryPerson: event.isDeliverer,
-            visible: true));
+        SimpleMemoryTile(
+            index: index, pairValue: event.pairValue, visible: true));
 
     if (firstIndex != null) {
       if (firstIndex == event.tileIndex) {
-        emit(MemoryState.matchResult(memoryTiles));
+        emit(SimpleMemoryState.matchResult(memoryTiles));
         return;
       } else {
         if (firstPairValue == event.pairValue) {
@@ -176,7 +150,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     } else {
       firstIndex = event.tileIndex;
       firstPairValue = event.pairValue;
-      emit(MemoryState.matchResult(memoryTiles));
+      emit(SimpleMemoryState.matchResult(memoryTiles));
     }
   }
 
@@ -207,11 +181,11 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
         matchesWon = 0;
         currentLevel = levels[level + 1];
 
-        emit(MemoryState.nextLevel(levels[level + 1]));
+        emit(SimpleMemoryState.nextLevel(levels[level + 1]));
       }
     } else {
       soundPlayer.playCorrectMatch();
-      emit(MemoryState.matchResult(memoryTiles));
+      emit(SimpleMemoryState.matchResult(memoryTiles));
     }
   }
 
@@ -228,11 +202,11 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
 
     firstIndex = null;
     firstPairValue = null;
-    emit(MemoryState.matchResult(memoryTiles));
+    emit(SimpleMemoryState.matchResult(memoryTiles));
   }
 
-  void _setTileVisibility(int index, MemoryTile memoryTile) {
-    memoryTiles[index].image = imageMapper.map(
+  void _setTileVisibility(int index, SimpleMemoryTile memoryTile) {
+    memoryTiles[index].image = imageMapper.mapSimple(
       memoryTile,
       currentLevel.themeSet,
     );

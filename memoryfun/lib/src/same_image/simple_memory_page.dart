@@ -5,33 +5,34 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/components/my_button.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
-import 'package:memoryfun/src/different_image/memory_bloc.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
 
-import 'memory_tile.dart';
+import 'simple_memory_bloc.dart';
+import 'simple_memory_tile.dart';
 
 @RoutePage()
-class MemoryPage extends ConsumerStatefulWidget {
+class SimpleMemoryPage extends ConsumerStatefulWidget {
   final int gameSize;
   final ThemeSet themeSet;
 
-  const MemoryPage({
+  const SimpleMemoryPage({
     required this.gameSize,
     required this.themeSet,
     super.key,
   });
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _MemoryPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _SimpleMemoryPageState();
 }
 
-class _MemoryPageState extends ConsumerState<MemoryPage> {
+class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
   @override
   void initState() {
     super.initState();
 
-    ref.read(MemoryBloc.provider.bloc).add(
-          MemoryEvent.initGame(
+    ref.read(SimpleMemoryBloc.provider.bloc).add(
+          SimpleMemoryEvent.initGame(
             LevelInfo(
               gameSize: widget.gameSize,
               themeSet: widget.themeSet,
@@ -43,7 +44,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ref.watch(MemoryBloc.provider).maybeWhen(
+      body: ref.watch(SimpleMemoryBloc.provider).maybeWhen(
             initialized: (memorySet) => _gridView(memorySet, true),
             matchResult: (memorySet) => _gridView(memorySet, false),
             nextLevel: (nextLevel) => Container(
@@ -107,8 +108,8 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
               children: [
                 const Text('loading'),
                 TextButton(
-                  onPressed: () => ref.read(MemoryBloc.provider.bloc).add(
-                        MemoryEvent.initGame(
+                  onPressed: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
+                        SimpleMemoryEvent.initGame(
                           LevelInfo(
                             gameSize: widget.gameSize,
                             themeSet: widget.themeSet,
@@ -123,7 +124,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
     );
   }
 
-  Widget _gridView(List<MemoryTile> memorySet, bool fadeIn) => Center(
+  Widget _gridView(List<SimpleMemoryTile> memorySet, bool fadeIn) => Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -162,14 +163,15 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
                         const MyButton(text: 'Level overview', fontSize: 18.0),
                   ),
                   TextButton(
-                    onPressed: () => ref.read(MemoryBloc.provider.bloc).add(
-                          MemoryEvent.initGame(
-                            LevelInfo(
-                              gameSize: widget.gameSize,
-                              themeSet: widget.themeSet,
+                    onPressed: () =>
+                        ref.read(SimpleMemoryBloc.provider.bloc).add(
+                              SimpleMemoryEvent.initGame(
+                                LevelInfo(
+                                  gameSize: widget.gameSize,
+                                  themeSet: widget.themeSet,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
                     child: const MyButton(text: 'Restart game', fontSize: 18.0),
                   ),
                 ],
@@ -179,7 +181,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
         ),
       );
 
-  List<Widget> _tiles(List<MemoryTile> memorySet, bool fadeIn) {
+  List<Widget> _tiles(List<SimpleMemoryTile> memorySet, bool fadeIn) {
     List<Widget> tiles = [];
     for (var tile in memorySet) {
       var initTile = Container(
@@ -211,8 +213,9 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
         InkWell(
           onTap: () => tile.visible
               ? {}
-              : ref.read(MemoryBloc.provider.bloc).add(MemoryEvent.handleTap(
-                  tile.index, tile.pairValue, tile.isDeliveryPerson)),
+              : ref.read(SimpleMemoryBloc.provider.bloc).add(
+                    SimpleMemoryEvent.handleTap(tile.index, tile.pairValue),
+                  ),
           child: initTile,
         )
             .animate()

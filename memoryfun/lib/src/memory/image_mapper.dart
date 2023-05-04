@@ -2,17 +2,28 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/gen/assets.gen.dart';
 import 'package:memoryfun/src/memory/memory_tile.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
+import 'package:memoryfun/src/same_image/simple_memory_tile.dart';
 
 class ImageMapper {
   static final provider = Provider<ImageMapper>((ref) => ImageMapper());
 
-  AssetGenImage map(MemoryTile memoryTile, ThemeSet themeSet) {
-    if (memoryTile.visible != true) {
+  AssetGenImage mapSimple(SimpleMemoryTile memoryTile, ThemeSet themeSet) {
+    return _map(memoryTile.visible, memoryTile.pairValue, false, themeSet);
+  }
+
+  AssetGenImage mapDifferentImage(MemoryTile memoryTile, ThemeSet themeSet) {
+    return _map(memoryTile.visible, memoryTile.pairValue,
+        memoryTile.isDeliveryPerson, themeSet);
+  }
+
+  AssetGenImage _map(
+      bool visible, int pairValue, bool isDeliveryPerson, ThemeSet themeSet) {
+    if (visible != true) {
       return _backgroundImage(themeSet);
     }
     switch (themeSet) {
       case ThemeSet.food:
-        switch (memoryTile.pairValue) {
+        switch (pairValue) {
           case 0:
             return Assets.food.foodBowl;
           case 1:
@@ -29,7 +40,7 @@ class ImageMapper {
             return Assets.food.foodBurger;
         }
       case ThemeSet.mail:
-        switch (memoryTile.pairValue) {
+        switch (pairValue) {
           case 0:
             return Assets.mail.mailBigLetter;
           case 1:
@@ -42,7 +53,7 @@ class ImageMapper {
             return Assets.mail.mailLetter;
         }
       case ThemeSet.babies:
-        switch (memoryTile.pairValue) {
+        switch (pairValue) {
           case 0:
             return Assets.babies.babiesOne;
           case 1:
@@ -63,8 +74,8 @@ class ImageMapper {
             return Assets.babies.babiesEight;
         }
       case ThemeSet.babiesComplex:
-        if (memoryTile.isDeliveryPerson) {
-          switch (memoryTile.pairValue) {
+        if (isDeliveryPerson) {
+          switch (pairValue) {
             case 0:
               return Assets.babies.babiesOne;
             case 1:
@@ -85,7 +96,7 @@ class ImageMapper {
               return Assets.babies.babiesEight;
           }
         } else {
-          switch (memoryTile.pairValue) {
+          switch (pairValue) {
             case 0:
               return Assets.babies.babiesHouseOne;
             case 1:
