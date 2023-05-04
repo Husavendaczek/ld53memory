@@ -4,8 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/gen/assets.gen.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
-
-import '../memory/theme_set.dart';
+import 'package:memoryfun/src/level_overview/levels.dart';
 
 @RoutePage()
 class LevelOverviewPage extends ConsumerWidget {
@@ -33,7 +32,9 @@ class LevelOverviewPage extends ConsumerWidget {
                 InkWell(
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                   onTap: () => ref.read(appRouterProvider).push(
-                        MemoryRoute(gameSize: 12, themeSet: ThemeSet.food),
+                        SimpleMemoryRoute(
+                          levelInfo: levels[0],
+                        ),
                       ),
                   child: Container(
                     decoration: const BoxDecoration(
@@ -51,7 +52,9 @@ class LevelOverviewPage extends ConsumerWidget {
                   child: InkWell(
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                     onTap: () => ref.read(appRouterProvider).push(
-                          MemoryRoute(gameSize: 8, themeSet: ThemeSet.mail),
+                          SimpleMemoryRoute(
+                            levelInfo: levels[1],
+                          ),
                         ),
                     child: Container(
                       decoration: const BoxDecoration(
@@ -69,7 +72,8 @@ class LevelOverviewPage extends ConsumerWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                   onTap: () => ref.read(appRouterProvider).push(
                         MemoryRoute(
-                            gameSize: 16, themeSet: ThemeSet.babiesComplex),
+                          levelInfo: levels[2],
+                        ),
                       ),
                   child: Container(
                     decoration: const BoxDecoration(
@@ -87,7 +91,9 @@ class LevelOverviewPage extends ConsumerWidget {
                   child: InkWell(
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                     onTap: () => ref.read(appRouterProvider).push(
-                          MemoryRoute(gameSize: 16, themeSet: ThemeSet.babies),
+                          SimpleMemoryRoute(
+                            levelInfo: levels[3],
+                          ),
                         ),
                     child: Container(
                       decoration: const BoxDecoration(

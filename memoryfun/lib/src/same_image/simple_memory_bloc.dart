@@ -9,6 +9,7 @@ import 'package:memoryfun/src/memory/theme_set.dart';
 import 'package:riverbloc/riverbloc.dart';
 
 import '../level_overview/levels.dart';
+import '../memory/game_type.dart';
 import 'simple_memory_tile.dart';
 
 part 'simple_memory_bloc.freezed.dart';
@@ -56,6 +57,7 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
   LevelInfo currentLevel = const LevelInfo(
     gameSize: 12,
     themeSet: ThemeSet.food,
+    gameType: GameType.sameImage,
   );
   int? firstIndex;
   int? firstPairValue;

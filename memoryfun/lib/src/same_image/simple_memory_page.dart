@@ -5,19 +5,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/components/my_button.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
-import 'package:memoryfun/src/memory/theme_set.dart';
 
+import '../level_overview/level_done.dart';
 import 'simple_memory_bloc.dart';
 import 'simple_memory_tile.dart';
 
 @RoutePage()
 class SimpleMemoryPage extends ConsumerStatefulWidget {
-  final int gameSize;
-  final ThemeSet themeSet;
+  final LevelInfo levelInfo;
 
   const SimpleMemoryPage({
-    required this.gameSize,
-    required this.themeSet,
+    required this.levelInfo,
     super.key,
   });
 
@@ -32,12 +30,7 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
     super.initState();
 
     ref.read(SimpleMemoryBloc.provider.bloc).add(
-          SimpleMemoryEvent.initGame(
-            LevelInfo(
-              gameSize: widget.gameSize,
-              themeSet: widget.themeSet,
-            ),
-          ),
+          SimpleMemoryEvent.initGame(widget.levelInfo),
         );
   }
 
@@ -47,74 +40,14 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
       body: ref.watch(SimpleMemoryBloc.provider).maybeWhen(
             initialized: (memorySet) => _gridView(memorySet, true),
             matchResult: (memorySet) => _gridView(memorySet, false),
-            nextLevel: (nextLevel) => Container(
-              color: Colors.black,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 32.0),
-                    child: const Text(
-                      'You delivered everything!',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
-                        .animate(
-                      onPlay: (controller) => controller.repeat(),
-                    )
-                        .shimmer(
-                      duration: 700.ms,
-                      colors: [
-                        Colors.yellow,
-                        Colors.orange,
-                        Colors.red,
-                        Colors.purple,
-                        Colors.blue,
-                        Colors.green,
-                        Colors.blue,
-                        Colors.purple,
-                        Colors.red,
-                      ],
-                    ),
-                  ),
-                  ButtonBar(
-                    alignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        onPressed: () => ref
-                            .read(appRouterProvider)
-                            .push(const LevelOverviewRoute()),
-                        child: const MyButton(
-                            text: 'Level overview', fontSize: 16),
-                      ),
-                      TextButton(
-                        onPressed: () => ref.read(appRouterProvider).push(
-                              MemoryRoute(
-                                gameSize: nextLevel.gameSize,
-                                themeSet: nextLevel.themeSet,
-                              ),
-                            ),
-                        child: const MyButton(text: 'Next Level', fontSize: 16),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
+            nextLevel: (nextLevel) => LevelDone(nextLevel: nextLevel),
             orElse: () => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text('loading'),
                 TextButton(
                   onPressed: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
-                        SimpleMemoryEvent.initGame(
-                          LevelInfo(
-                            gameSize: widget.gameSize,
-                            themeSet: widget.themeSet,
-                          ),
-                        ),
+                        SimpleMemoryEvent.initGame(widget.levelInfo),
                       ),
                   child: const MyButton(text: 'Restart game', fontSize: 18.0),
                 ),
@@ -165,12 +98,7 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
                   TextButton(
                     onPressed: () =>
                         ref.read(SimpleMemoryBloc.provider.bloc).add(
-                              SimpleMemoryEvent.initGame(
-                                LevelInfo(
-                                  gameSize: widget.gameSize,
-                                  themeSet: widget.themeSet,
-                                ),
-                              ),
+                              SimpleMemoryEvent.initGame(widget.levelInfo),
                             ),
                     child: const MyButton(text: 'Restart game', fontSize: 18.0),
                   ),

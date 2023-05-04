@@ -2,9 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoryfun/src/memory/game_type.dart';
 
 import '../components/my_button.dart';
 import '../helper/app_router.dart';
+import '../memory/level_info.dart';
 import '../memory/theme_set.dart';
 
 @RoutePage()
@@ -99,7 +101,12 @@ class WonPage extends ConsumerWidget {
               padding: const EdgeInsets.only(top: 48.0),
               child: TextButton(
                 onPressed: () => ref.read(appRouterProvider).push(
-                      MemoryRoute(gameSize: 12, themeSet: ThemeSet.food),
+                      SimpleMemoryRoute(
+                        levelInfo: const LevelInfo(
+                            gameSize: 12,
+                            themeSet: ThemeSet.food,
+                            gameType: GameType.sameImage),
+                      ),
                     ),
                 child: const MyButton(text: 'Play again', fontSize: 18.0),
               ),

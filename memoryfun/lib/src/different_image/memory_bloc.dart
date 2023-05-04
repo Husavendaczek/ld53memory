@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/helper/sound_player.dart';
+import 'package:memoryfun/src/memory/game_type.dart';
 import 'package:memoryfun/src/memory/image_mapper.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:memoryfun/src/memory/memory_tile.dart';
@@ -56,6 +57,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
   LevelInfo currentLevel = const LevelInfo(
     gameSize: 12,
     themeSet: ThemeSet.food,
+    gameType: GameType.sameImage,
   );
   int? firstIndex;
   int? firstPairValue;
