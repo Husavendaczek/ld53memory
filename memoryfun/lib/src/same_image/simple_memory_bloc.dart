@@ -119,8 +119,7 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
     emit(const SimpleMemoryState.loadingResult());
     soundPlayer.playTap();
 
-    var index = memoryTiles.indexWhere((tile) => tile.index == event.tileIndex);
-    var oldIndex = memoryTiles.indexWhere((tile) => tile.index == firstIndex);
+    var index = event.tileIndex;
 
     if (hideTiles.isNotEmpty) {
       for (var hideTileIndex in hideTiles) {
@@ -144,9 +143,9 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
         return;
       } else {
         if (firstPairValue == event.pairValue) {
-          _handleCorrectMatch(index, oldIndex);
+          _handleCorrectMatch(index, firstIndex!);
         } else {
-          _handleWrongMatch(index, oldIndex);
+          _handleWrongMatch(index, firstIndex!);
         }
       }
     } else {

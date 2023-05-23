@@ -13,7 +13,7 @@ class ImageMapper {
 
   AssetGenImage mapDifferentImage(MemoryTile memoryTile, ThemeSet themeSet) {
     return _map(memoryTile.visible, memoryTile.pairValue,
-        memoryTile.isDeliveryPerson, themeSet);
+        memoryTile.isLowerPart, themeSet);
   }
 
   AssetGenImage _map(
