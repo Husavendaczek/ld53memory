@@ -77,14 +77,12 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
           visible: tile.visible,
           hasError: tile.hasError,
           image: tile.image!,
-          //TODO disable tap for upper or lower tiles when already tapped in this region
-          onTap: () => ref.read(MemoryBloc.provider.bloc).add(
-                MemoryEvent.handleTap(
-                  tile.index,
-                  tile.pairValue,
-                  tile.isLowerPart,
-                ),
-              ),
+//TODO disable tap for upper or lower tiles when already tapped in this region
+          onTap: () {
+            ref.read(MemoryBloc.provider.bloc).add(
+                  MemoryEvent.handleTap(tile),
+                );
+          },
         ),
       );
     }

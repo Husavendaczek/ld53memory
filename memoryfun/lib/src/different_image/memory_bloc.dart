@@ -8,6 +8,7 @@ import 'package:memoryfun/src/memory/image_mapper.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:memoryfun/src/memory/memory_tile.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
+import 'package:memoryfun/src/split_memory/tile_to_hide.dart';
 import 'package:riverbloc/riverbloc.dart';
 
 import '../level_overview/levels.dart';
@@ -18,8 +19,7 @@ part 'memory_bloc.freezed.dart';
 @freezed
 class MemoryEvent with _$MemoryEvent {
   const factory MemoryEvent.initGame(LevelInfo levelInfo) = _InitGame;
-  const factory MemoryEvent.handleTap(
-      int tileIndex, int pairValue, bool isDeliverer) = _HandleTap;
+  const factory MemoryEvent.handleTap(MemoryTile memoryTile) = _HandleTap;
 }
 
 @freezed
@@ -64,7 +64,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
   );
   int? firstIndex;
   int? firstPairValue;
-  Map<int, bool> hideTiles = {};
+  List<TileToHide> hideTiles = [];
 
   MemoryBloc({
     required this.imageMapper,
@@ -122,48 +122,11 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
   void _resetGame() {
     firstIndex = null;
     firstPairValue = null;
-    hideTiles = {};
+    hideTiles = [];
     splitMemorySet = SplitMemorySet(
       upperTiles: [],
       lowerTiles: [],
     );
-  }
-
-  int _currentIndex(int tileIndex, bool isDeliverer) {
-    var index = 0;
-    if (isDeliverer) {
-      index = splitMemorySet.lowerTiles
-          .indexWhere((tile) => tile.index == tileIndex);
-    } else {
-      index = splitMemorySet.upperTiles
-          .indexWhere((tile) => tile.index == tileIndex);
-    }
-
-    return index;
-  }
-
-  void _hidePreviousTiles(int pairValue) {
-    if (hideTiles.isNotEmpty) {
-      for (var hideTileIndex in hideTiles.keys) {
-        print('hide tile index $hideTileIndex');
-        var isLowerPart = hideTiles[hideTileIndex];
-        print('bool is $isLowerPart');
-        _setTileImage(
-          isLowerPart!,
-          hideTileIndex,
-          MemoryTile(
-            index: hideTileIndex,
-            pairValue: pairValue,
-            isLowerPart: isLowerPart,
-            visible: false,
-          ),
-        );
-
-        _setError(isLowerPart, false, hideTileIndex);
-      }
-
-      hideTiles = {};
-    }
   }
 
   Future _handleTap(
@@ -173,62 +136,87 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     emit(const MemoryState.loadingResult());
     soundPlayer.playTap();
 
-    var currentIndex = _currentIndex(
-      event.tileIndex,
-      event.isDeliverer,
-    );
-    print('--------------------------------------');
-    print('current index: $currentIndex');
-    print('is deliverer: ${event.isDeliverer}');
-    print('first index: $firstIndex');
+    var currentIndex = _currentIndex(event.memoryTile);
 
-    _hidePreviousTiles(event.pairValue);
+    _hidePreviousTiles(event.memoryTile.pairValue);
     _setTileImage(
-      event.isDeliverer,
       currentIndex,
       MemoryTile(
         index: currentIndex,
-        pairValue: event.pairValue,
-        isLowerPart: event.isDeliverer,
+        pairValue: event.memoryTile.pairValue,
+        isLowerPart: event.memoryTile.isLowerPart,
         visible: true,
       ),
+      event.memoryTile.isLowerPart,
     );
 
     if (firstIndex != null) {
-      _handleSecondTap(currentIndex, event.pairValue, event.isDeliverer);
+      _handleSecondTap(currentIndex, event.memoryTile);
     } else {
-      _handleFirstTap(currentIndex, event.pairValue);
+      _handleFirstTap(currentIndex, event.memoryTile.pairValue);
+    }
+  }
+
+  int _currentIndex(MemoryTile memoryTile) {
+    var index = 0;
+    if (memoryTile.isLowerPart) {
+      index = splitMemorySet.lowerTiles
+          .indexWhere((tile) => tile.index == memoryTile.index);
+    } else {
+      index = splitMemorySet.upperTiles
+          .indexWhere((tile) => tile.index == memoryTile.index);
+    }
+
+    return index;
+  }
+
+  void _hidePreviousTiles(int pairValue) {
+    if (hideTiles.isNotEmpty) {
+      for (var hideTile in hideTiles) {
+        var isLowerPart = hideTile.isLowerPart;
+        _setTileImage(
+          hideTile.index,
+          MemoryTile(
+            index: hideTile.index,
+            pairValue: pairValue,
+            isLowerPart: isLowerPart,
+            visible: false,
+          ),
+          isLowerPart,
+        );
+
+        _setError(hideTile.index, isLowerPart, false);
+      }
+
+      hideTiles = [];
     }
   }
 
   void _handleFirstTap(int currentIndex, int pairValue) {
-    print('first index was null and is now set to');
     firstIndex = currentIndex;
     firstPairValue = pairValue;
     print(firstIndex);
     emit(MemoryState.matchResult(splitMemorySet));
   }
 
-  void _handleSecondTap(int currentIndex, int pairValue, bool isLowerPart) {
-    if (firstPairValue == pairValue) {
-      print('is correct match');
+  void _handleSecondTap(int currentIndex, MemoryTile memoryTile) {
+    if (firstPairValue == memoryTile.pairValue) {
       _handleCorrectMatch(
         currentIndex,
-        isLowerPart,
+        memoryTile.isLowerPart,
       );
     } else {
-      print('wrong match');
       _handleWrongMatch(
         currentIndex,
-        isLowerPart,
+        memoryTile.isLowerPart,
       );
     }
   }
 
-  void _handleCorrectMatch(int index, bool isDeliverer) {
+  void _handleCorrectMatch(int currentIndex, bool isLowerPart) {
     _setVisibility(
-      index,
-      isDeliverer,
+      currentIndex,
+      isLowerPart,
       true,
     );
 
@@ -247,7 +235,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
       } else {
         soundPlayer.playWinLevel();
 
-        hideTiles = {};
+        hideTiles = [];
         splitMemorySet = SplitMemorySet(upperTiles: [], lowerTiles: []);
         currentLevel = levels[level + 1];
 
@@ -259,31 +247,28 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     }
   }
 
-  void _handleWrongMatch(int index, bool isDeliverer) {
+  void _handleWrongMatch(int currentIndex, bool isLowerPart) {
     soundPlayer.playWrongMatch();
 
     _setVisibility(
-      index,
-      isDeliverer,
+      currentIndex,
+      isLowerPart,
       false,
     );
 
-    _setError(isDeliverer, true, index);
-    _setError(!isDeliverer, true, firstIndex!);
+    _setError(currentIndex, isLowerPart, true);
+    _setError(firstIndex!, !isLowerPart, true);
 
-    var tilesToHide = <int, bool>{
-      index: isDeliverer,
-      firstIndex!: !isDeliverer
-    };
-    hideTiles.addEntries(tilesToHide.entries);
+    hideTiles.add(TileToHide(index: currentIndex, isLowerPart: isLowerPart));
+    hideTiles.add(TileToHide(index: firstIndex!, isLowerPart: !isLowerPart));
 
     firstIndex = null;
     firstPairValue = null;
     emit(MemoryState.matchResult(splitMemorySet));
   }
 
-  void _setVisibility(int currentIndex, bool isDeliverer, bool visible) {
-    if (isDeliverer) {
+  void _setVisibility(int currentIndex, bool isLowerPart, bool visible) {
+    if (isLowerPart) {
       splitMemorySet.lowerTiles[currentIndex].visible = visible;
       if (firstIndex != null) {
         splitMemorySet.lowerTiles[firstIndex!].visible = visible;
@@ -296,21 +281,21 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     }
   }
 
-  void _setError(bool isDeliverer, bool hasError, int index) {
-    if (isDeliverer) {
+  void _setError(int index, bool isLowerPart, bool hasError) {
+    if (isLowerPart) {
       splitMemorySet.lowerTiles[index].hasError = hasError;
     } else {
       splitMemorySet.upperTiles[index].hasError = hasError;
     }
   }
 
-  void _setTileImage(bool isDeliverer, int index, MemoryTile memoryTile) {
+  void _setTileImage(int index, MemoryTile memoryTile, bool isLowerPart) {
     var image = imageMapper.mapDifferentImage(
       memoryTile,
       currentLevel.themeSet,
     );
 
-    if (isDeliverer) {
+    if (isLowerPart) {
       splitMemorySet.lowerTiles[index].image = image;
     } else {
       splitMemorySet.upperTiles[index].image = image;
