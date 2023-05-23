@@ -147,13 +147,16 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
         isLowerPart: event.memoryTile.isLowerPart,
         visible: true,
       ),
-      event.memoryTile.isLowerPart,
     );
 
     if (firstIndex != null) {
       _handleSecondTap(currentIndex, event.memoryTile);
     } else {
-      _handleFirstTap(currentIndex, event.memoryTile.pairValue);
+      _handleFirstTap(
+        currentIndex,
+        event.memoryTile.pairValue,
+        event.memoryTile.isLowerPart,
+      );
     }
   }
 
@@ -174,17 +177,8 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     if (hideTiles.isNotEmpty) {
       for (var hideTile in hideTiles) {
         var isLowerPart = hideTile.isLowerPart;
-        _setTileImage(
-          hideTile.index,
-          MemoryTile(
-            index: hideTile.index,
-            pairValue: pairValue,
-            isLowerPart: isLowerPart,
-            visible: false,
-          ),
-          isLowerPart,
-        );
 
+        _setHideImage(hideTile.index, isLowerPart);
         _setError(hideTile.index, isLowerPart, false);
       }
 
@@ -192,10 +186,10 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     }
   }
 
-  void _handleFirstTap(int currentIndex, int pairValue) {
+  void _handleFirstTap(int currentIndex, int pairValue, bool isLowerPart) {
     firstIndex = currentIndex;
     firstPairValue = pairValue;
-    print(firstIndex);
+    _setVisibility(currentIndex, isLowerPart, true);
     emit(MemoryState.matchResult(splitMemorySet));
   }
 
@@ -255,6 +249,11 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
       isLowerPart,
       false,
     );
+    _setVisibility(
+      firstIndex!,
+      !isLowerPart,
+      false,
+    );
 
     _setError(currentIndex, isLowerPart, true);
     _setError(firstIndex!, !isLowerPart, true);
@@ -289,11 +288,21 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     }
   }
 
-  void _setTileImage(int index, MemoryTile memoryTile, bool isLowerPart) {
+  void _setTileImage(int index, MemoryTile memoryTile) {
     var image = imageMapper.mapDifferentImage(
       memoryTile,
       currentLevel.themeSet,
     );
+
+    if (memoryTile.isLowerPart) {
+      splitMemorySet.lowerTiles[index].image = image;
+    } else {
+      splitMemorySet.upperTiles[index].image = image;
+    }
+  }
+
+  void _setHideImage(int index, bool isLowerPart) {
+    var image = imageMapper.hideDifferentImage(currentLevel.themeSet);
 
     if (isLowerPart) {
       splitMemorySet.lowerTiles[index].image = image;

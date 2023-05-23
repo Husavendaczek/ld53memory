@@ -16,6 +16,10 @@ class ImageMapper {
         memoryTile.isLowerPart, themeSet);
   }
 
+  AssetGenImage hideDifferentImage(ThemeSet themeSet) {
+    return _backgroundImage(themeSet);
+  }
+
   AssetGenImage _map(
       bool visible, int pairValue, bool isDeliveryPerson, ThemeSet themeSet) {
     if (visible != true) {
