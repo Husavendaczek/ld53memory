@@ -112,6 +112,24 @@ class LevelOverviewPage extends ConsumerWidget {
       ).animate().fadeIn(
             duration: 600.ms,
             curve: Curves.easeIn,
+          ),
+      InkWell(
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+        onTap: () => ref.read(appRouterProvider).push(
+              SimpleMemoryRoute(
+                levelInfo: levels[4],
+              ),
+            ),
+        child: Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: Assets.jungle.tiger.image(),
+        ),
+      ).animate().fadeIn(
+            duration: 600.ms,
+            curve: Curves.easeIn,
           )
     ];
   }

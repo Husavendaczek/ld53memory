@@ -121,7 +121,25 @@ class ImageMapper {
               return Assets.babies.babiesHouseEight;
           }
         }
-
+      case ThemeSet.jungle:
+        switch (pairValue) {
+          case 0:
+            return Assets.jungle.bigLeaf;
+          case 1:
+            return Assets.jungle.butterfly;
+          case 2:
+            return Assets.jungle.monstera;
+          case 3:
+            return Assets.jungle.spider;
+          case 4:
+            return Assets.jungle.spikyLeaf;
+          case 5:
+            return Assets.jungle.tiger;
+          case 6:
+            return Assets.jungle.tigerSide;
+          default:
+            return Assets.jungle.bigLeaf;
+        }
       default:
         return Assets.food.foodBurger;
     }
@@ -137,6 +155,8 @@ class ImageMapper {
         return Assets.babies.background;
       case ThemeSet.babiesComplex:
         return Assets.babies.background;
+      case ThemeSet.jungle:
+        return Assets.jungle.background;
       default:
         return Assets.food.background;
     }

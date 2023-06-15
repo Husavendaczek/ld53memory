@@ -267,6 +267,8 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
   }
 
   void _setVisibility(int currentIndex, bool isLowerPart, bool visible) {
+    print(
+        'set tile $currentIndex in isLowerPart: $isLowerPart to visible: $visible');
     if (isLowerPart) {
       splitMemorySet.lowerTiles[currentIndex].visible = visible;
       if (firstIndex != null) {

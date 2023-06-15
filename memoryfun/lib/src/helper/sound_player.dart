@@ -87,6 +87,9 @@ class SoundPlayer {
       case ThemeSet.babies:
         musicPlayer.play(AssetSource('sounds/allemeineentchen.mp3'));
         break;
+      case ThemeSet.jungle:
+        musicPlayer.play(AssetSource('sounds/postsong.mp3'));
+        break;
       default:
         musicPlayer.play(AssetSource('sounds/allemeineentchen.mp3'));
     }
