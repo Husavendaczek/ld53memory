@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:memoryfun/src/memory/memory_tile_component.dart';
 
+import '../components/memo_app_bar.dart';
 import '../components/my_button.dart';
 import '../level_overview/level_done.dart';
 import '../memory/memory_grid_view.dart';
@@ -38,6 +39,11 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: MemoAppBar(
+        onRestart: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
+              SimpleMemoryEvent.initGame(widget.levelInfo),
+            ),
+      ),
       body: ref.watch(SimpleMemoryBloc.provider).maybeWhen(
             initialized: (memorySet) => _gridView(memorySet, true),
             matchResult: (memorySet) => _gridView(memorySet, false),
@@ -62,9 +68,6 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
   Widget _gridView(List<SimpleMemoryTile> memorySet, bool fadeIn) =>
       MemoryGridView(
         tiles: _tiles(memorySet, fadeIn),
-        onRestart: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
-              SimpleMemoryEvent.initGame(widget.levelInfo),
-            ),
       );
 
   List<Widget> _tiles(List<SimpleMemoryTile> memorySet, bool fadeIn) {
