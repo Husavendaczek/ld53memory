@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.memoryfun">
+    package="com.husavendaczek.memoryfun">
    <application
         android:label="memoryfun"
         android:name="${applicationName}"

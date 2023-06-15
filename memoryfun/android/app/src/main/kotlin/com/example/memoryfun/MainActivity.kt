@@ -1,4 +1,4 @@
-package com.example.memoryfun
+package com.husavendaczek.memoryfun
 
 import io.flutter.embedding.android.FlutterActivity
 
