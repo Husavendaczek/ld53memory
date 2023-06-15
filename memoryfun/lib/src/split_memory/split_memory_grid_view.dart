@@ -22,12 +22,8 @@ class SplitMemoryGridView extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 32.0),
-            child: Text(
-              'Memory fun',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
+          NavButtons(
+            onRestart: onRestart,
           ),
           GridView.count(
             shrinkWrap: true,
@@ -39,9 +35,6 @@ class SplitMemoryGridView extends ConsumerWidget {
             children: upperTiles,
           ),
           lowerGrid(),
-          NavButtons(
-            onRestart: onRestart,
-          ),
         ],
       ),
     );
