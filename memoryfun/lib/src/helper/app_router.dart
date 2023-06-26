@@ -15,8 +15,6 @@ part 'app_router.gr.dart';
 class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
-        //HomeScreen is generated as HomeRoute because
-        //of the replaceInRouteName property
         AutoRoute(page: StartRoute.page, initial: true),
         AutoRoute(page: LevelOverviewRoute.page),
         AutoRoute(page: MemoryRoute.page),

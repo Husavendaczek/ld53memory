@@ -51,14 +51,14 @@ class LevelOverviewPage extends ConsumerWidget {
   Widget _thumbnail(WidgetRef ref, ThemeSet themeSet) {
     return InkWell(
       borderRadius: const BorderRadius.all(Radius.circular(8)),
-      onTap: themeSet != ThemeSet.babies
+      onTap: (themeSet == ThemeSet.babies || themeSet == ThemeSet.farmComplex)
           ? () => ref.read(appRouterProvider).push(
-                SimpleMemoryRoute(
+                MemoryRoute(
                   levelInfo: levels[themeSet.index],
                 ),
               )
           : () => ref.read(appRouterProvider).push(
-                MemoryRoute(
+                SimpleMemoryRoute(
                   levelInfo: levels[themeSet.index],
                 ),
               ),

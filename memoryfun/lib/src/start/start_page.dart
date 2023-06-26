@@ -27,15 +27,8 @@ class StartPage extends ConsumerWidget {
               ),
             ),
             TextButton(
-              onPressed: () => ref.read(appRouterProvider).push(
-                    SimpleMemoryRoute(
-                      levelInfo: const LevelInfo(
-                        gameSize: 12,
-                        themeSet: ThemeSet.food,
-                        gameType: GameType.sameImage,
-                      ),
-                    ),
-                  ),
+              onPressed: () =>
+                  ref.read(appRouterProvider).push(const LevelOverviewRoute()),
               child:
                   const NormalButtonStyle(text: 'Start game', fontSize: 18.0),
             ),

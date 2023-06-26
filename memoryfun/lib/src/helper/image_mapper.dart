@@ -18,14 +18,14 @@ class ImageMapper {
         memoryTile.isLowerPart, themeSet);
   }
 
-  AssetImage hideComplexImage(ThemeSet themeSet) {
-    return _backgroundImage(themeSet);
+  AssetImage hideComplexImage(ThemeSet themeSet, bool isLowerPart) {
+    return _backgroundImage(themeSet, isLowerPart);
   }
 
   AssetImage _map(
       bool visible, int pairValue, bool isLowerPart, ThemeSet themeSet) {
     if (visible != true) {
-      return _backgroundImage(themeSet);
+      return _backgroundImage(themeSet, isLowerPart);
     }
 
     if (isLowerPart) {
@@ -35,7 +35,10 @@ class ImageMapper {
     return AssetImage('${themeSet.name}/${themeSet.name}_$pairValue.png');
   }
 
-  AssetImage _backgroundImage(ThemeSet themeSet) {
+  AssetImage _backgroundImage(ThemeSet themeSet, bool isLowerPart) {
+    if (isLowerPart) {
+      return AssetImage('${themeSet.name}/${themeSet.name}_l_background.png');
+    }
     return AssetImage('${themeSet.name}/${themeSet.name}_background.png');
   }
 }

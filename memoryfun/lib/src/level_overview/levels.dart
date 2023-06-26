@@ -29,4 +29,19 @@ List<LevelInfo> levels = const [
     themeSet: ThemeSet.jungle,
     gameType: GameType.sameImage,
   ),
+  LevelInfo(
+    gameSize: 12,
+    themeSet: ThemeSet.farm,
+    gameType: GameType.sameImage,
+  ),
+  LevelInfo(
+    gameSize: 10,
+    themeSet: ThemeSet.farmMud,
+    gameType: GameType.sameImage,
+  ),
+  LevelInfo(
+    gameSize: 8,
+    themeSet: ThemeSet.farmComplex,
+    gameType: GameType.differentImage,
+  ),
 ];

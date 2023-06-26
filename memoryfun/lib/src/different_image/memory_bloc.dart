@@ -304,7 +304,8 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
   }
 
   void _setHideImage(int index, bool isLowerPart) {
-    var image = imageMapper.hideComplexImage(currentLevel.themeSet);
+    var image =
+        imageMapper.hideComplexImage(currentLevel.themeSet, isLowerPart);
 
     if (isLowerPart) {
       splitMemorySet.lowerTiles[index].image = image;
