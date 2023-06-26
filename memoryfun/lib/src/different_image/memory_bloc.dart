@@ -32,8 +32,6 @@ class MemoryState with _$MemoryState {
   const factory MemoryState.matchResult(SplitMemorySet memorySet) =
       _MatchResult;
   const factory MemoryState.nextLevel(LevelInfo nextLevel) = _NextLevel;
-  const factory MemoryState.winGame() = _WinGame;
-  const factory MemoryState.looseGame() = _looseGame;
 }
 
 class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {

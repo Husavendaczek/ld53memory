@@ -6,5 +6,6 @@ enum ThemeSet {
   jungle,
   farm,
   farmMud,
-  farmComplex
+  farmComplex,
+  club,
 }

@@ -31,8 +31,6 @@ class SimpleMemoryState with _$SimpleMemoryState {
   const factory SimpleMemoryState.matchResult(
       List<SimpleMemoryTile> memorySet) = _MatchResult;
   const factory SimpleMemoryState.nextLevel(LevelInfo nextLevel) = _NextLevel;
-  const factory SimpleMemoryState.winGame() = _WinGame;
-  const factory SimpleMemoryState.looseGame() = _looseGame;
 }
 
 class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {

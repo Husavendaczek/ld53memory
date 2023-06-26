@@ -52,16 +52,24 @@ class LevelOverviewPage extends ConsumerWidget {
     return InkWell(
       borderRadius: const BorderRadius.all(Radius.circular(8)),
       onTap: (themeSet == ThemeSet.babies || themeSet == ThemeSet.farmComplex)
-          ? () => ref.read(appRouterProvider).push(
-                MemoryRoute(
-                  levelInfo: levels[themeSet.index],
-                ),
-              )
-          : () => ref.read(appRouterProvider).push(
-                SimpleMemoryRoute(
-                  levelInfo: levels[themeSet.index],
-                ),
-              ),
+          ? () {
+              ref.read(appRouterProvider).push(
+                    MemoryRoute(
+                      levelInfo: levels[themeSet.index],
+                    ),
+                  );
+            }
+          : (themeSet == ThemeSet.club)
+              ? () => ref.read(appRouterProvider).push(
+                    AnimatedImageMemoryRoute(
+                      levelInfo: levels[themeSet.index],
+                    ),
+                  )
+              : () => ref.read(appRouterProvider).push(
+                    SimpleMemoryRoute(
+                      levelInfo: levels[themeSet.index],
+                    ),
+                  ),
       child: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(8)),

@@ -44,4 +44,9 @@ List<LevelInfo> levels = const [
     themeSet: ThemeSet.farmComplex,
     gameType: GameType.differentImage,
   ),
+  LevelInfo(
+    gameSize: 2,
+    themeSet: ThemeSet.club,
+    gameType: GameType.sameImage,
+  ),
 ];

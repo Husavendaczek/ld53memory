@@ -20,23 +20,17 @@ class MemoryTileComponent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ignore: avoid_unnecessary_containers
-    var initTile = Container(
-      child: Material(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        clipBehavior: Clip.antiAlias,
-        child: Image(image: image, fit: BoxFit.cover),
-      ),
+    var initTile = Material(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      clipBehavior: Clip.antiAlias,
+      child: Image(image: image, fit: BoxFit.cover),
     ).animate();
 
     if (isCorrect) {
-      // ignore: avoid_unnecessary_containers
-      initTile = Container(
-        child: Material(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          clipBehavior: Clip.antiAlias,
-          child: Image(image: image, fit: BoxFit.cover),
-        ),
+      initTile = Material(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        clipBehavior: Clip.antiAlias,
+        child: Image(image: image, fit: BoxFit.cover),
       ).animate().shimmer();
     }
 
