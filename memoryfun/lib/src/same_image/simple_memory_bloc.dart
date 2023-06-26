@@ -158,6 +158,8 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
   void _handleCorrectMatch(int index, int oldIndex) {
     memoryTiles[index].visible = true;
     memoryTiles[oldIndex].visible = true;
+    memoryTiles[index].isCorrect = true;
+    memoryTiles[oldIndex].isCorrect = true;
 
     firstIndex = null;
     firstPairValue = null;

@@ -76,6 +76,7 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
         MemoryTileComponent(
           visible: tile.visible,
           hasError: tile.hasError,
+          isCorrect: tile.isCorrect,
           image: tile.image!,
           onTap: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
                 SimpleMemoryEvent.handleTap(tile.index, tile.pairValue),

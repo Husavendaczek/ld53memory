@@ -79,6 +79,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
         MemoryTileComponent(
           visible: tile.visible,
           hasError: tile.hasError,
+          isCorrect: tile.isCorrect,
           image: tile.image!,
 //TODO disable tap for upper or lower tiles when already tapped in this region
           onTap: () {

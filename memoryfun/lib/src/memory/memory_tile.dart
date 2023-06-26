@@ -7,6 +7,7 @@ class MemoryTile {
   AssetImage? image;
   bool visible;
   bool hasError;
+  bool isCorrect;
 
   MemoryTile({
     required this.index,
@@ -15,5 +16,6 @@ class MemoryTile {
     this.image,
     this.visible = false,
     this.hasError = false,
+    this.isCorrect = false,
   });
 }

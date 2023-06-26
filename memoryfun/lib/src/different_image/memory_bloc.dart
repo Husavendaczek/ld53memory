@@ -214,6 +214,9 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
       true,
     );
 
+    _setCorrect(currentIndex, isLowerPart, true);
+    _setCorrect(firstIndex!, !isLowerPart, true);
+
     firstIndex = null;
     firstPairValue = null;
 
@@ -287,6 +290,14 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
       splitMemorySet.lowerTiles[index].hasError = hasError;
     } else {
       splitMemorySet.upperTiles[index].hasError = hasError;
+    }
+  }
+
+  void _setCorrect(int index, bool isLowerPart, bool isCorrect) {
+    if (isLowerPart) {
+      splitMemorySet.lowerTiles[index].isCorrect = isCorrect;
+    } else {
+      splitMemorySet.upperTiles[index].isCorrect = isCorrect;
     }
   }
 

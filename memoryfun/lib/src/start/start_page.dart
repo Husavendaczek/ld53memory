@@ -3,11 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/gen/assets.gen.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
-import 'package:memoryfun/src/memory/game_type.dart';
-import 'package:memoryfun/src/memory/theme_set.dart';
 
 import '../components/my_button.dart';
-import '../memory/level_info.dart';
 
 @RoutePage()
 class StartPage extends ConsumerWidget {
