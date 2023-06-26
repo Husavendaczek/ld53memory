@@ -1,9 +1,9 @@
-import 'package:memoryfun/gen/assets.gen.dart';
+import 'package:flutter/material.dart';
 
 class SimpleMemoryTile {
   final int index;
   final int pairValue;
-  AssetGenImage? image;
+  AssetImage? image;
   bool visible;
   bool hasError;
 

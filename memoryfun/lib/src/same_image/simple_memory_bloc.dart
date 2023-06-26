@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
+import 'package:memoryfun/src/helper/image_mapper.dart';
 import 'package:memoryfun/src/helper/sound_player.dart';
-import 'package:memoryfun/src/memory/image_mapper.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
 import 'package:riverbloc/riverbloc.dart';
@@ -96,7 +96,7 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
         pairValue: value,
         visible: false,
       );
-      tile.image = imageMapper.mapSimple(tile, currentLevel.themeSet);
+      tile.image = imageMapper.getImage(tile, currentLevel.themeSet);
 
       memoryTiles.add(tile);
     }
@@ -207,7 +207,7 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
   }
 
   void _setTileVisibility(int index, SimpleMemoryTile memoryTile) {
-    memoryTiles[index].image = imageMapper.mapSimple(
+    memoryTiles[index].image = imageMapper.getImage(
       memoryTile,
       currentLevel.themeSet,
     );

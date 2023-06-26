@@ -1,10 +1,10 @@
-import 'package:memoryfun/gen/assets.gen.dart';
+import 'package:flutter/material.dart';
 
 class MemoryTile {
   final int index;
   final int pairValue;
   final bool isLowerPart;
-  AssetGenImage? image;
+  AssetImage? image;
   bool visible;
   bool hasError;
 

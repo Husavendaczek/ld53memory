@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
+import 'package:memoryfun/src/helper/image_mapper.dart';
 import 'package:memoryfun/src/helper/sound_player.dart';
 import 'package:memoryfun/src/memory/game_type.dart';
-import 'package:memoryfun/src/memory/image_mapper.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:memoryfun/src/memory/memory_tile.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
@@ -107,7 +107,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
         isLowerPart: i < matchesLeft,
         visible: false,
       );
-      tile.image = imageMapper.mapDifferentImage(tile, currentLevel.themeSet);
+      tile.image = imageMapper.getComplexImage(tile, currentLevel.themeSet);
 
       if (tile.isLowerPart) {
         splitMemorySet.lowerTiles.add(tile);
@@ -291,7 +291,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
   }
 
   void _setTileImage(int index, MemoryTile memoryTile) {
-    var image = imageMapper.mapDifferentImage(
+    var image = imageMapper.getComplexImage(
       memoryTile,
       currentLevel.themeSet,
     );
@@ -304,7 +304,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
   }
 
   void _setHideImage(int index, bool isLowerPart) {
-    var image = imageMapper.hideDifferentImage(currentLevel.themeSet);
+    var image = imageMapper.hideComplexImage(currentLevel.themeSet);
 
     if (isLowerPart) {
       splitMemorySet.lowerTiles[index].image = image;

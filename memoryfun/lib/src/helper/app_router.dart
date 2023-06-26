@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/memory/game_type.dart';
 import 'package:memoryfun/src/memory/memory_page.dart';
 import 'package:memoryfun/src/same_image/simple_memory_page.dart';
 import 'package:memoryfun/src/end/won_page.dart';

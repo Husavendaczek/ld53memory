@@ -53,7 +53,7 @@ class LevelOverviewPage extends ConsumerWidget {
             borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
           clipBehavior: Clip.antiAlias,
-          child: Assets.food.foodPizza.image(),
+          child: const Image(image: AssetImage('food/food_3.png')),
         ),
       ).animate().fadeIn(
             duration: 600.ms,
@@ -71,7 +71,7 @@ class LevelOverviewPage extends ConsumerWidget {
             borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
           clipBehavior: Clip.antiAlias,
-          child: Assets.mail.mailLetter.image(),
+          child: const Image(image: AssetImage('mail/mail_2.png')),
         ),
       ).animate().fadeIn(
             duration: 600.ms,
@@ -89,7 +89,8 @@ class LevelOverviewPage extends ConsumerWidget {
             borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
           clipBehavior: Clip.antiAlias,
-          child: Assets.babies.babiesHouseTwo.image(),
+          child: const Image(
+              image: AssetImage('babiesComplex/babiesComplex_3.png')),
         ),
       ).animate().fadeIn(
             duration: 600.ms,
@@ -107,7 +108,7 @@ class LevelOverviewPage extends ConsumerWidget {
             borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
           clipBehavior: Clip.antiAlias,
-          child: Assets.babies.babiesOne.image(),
+          child: const Image(image: AssetImage('babies/babies_2.png')),
         ),
       ).animate().fadeIn(
             duration: 600.ms,
@@ -125,7 +126,7 @@ class LevelOverviewPage extends ConsumerWidget {
             borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
           clipBehavior: Clip.antiAlias,
-          child: Assets.jungle.tiger.image(),
+          child: const Image(image: AssetImage('jungle/jungle_6.png')),
         ),
       ).animate().fadeIn(
             duration: 600.ms,

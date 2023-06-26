@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../gen/assets.gen.dart';
-
 class MemoryTileComponent extends ConsumerWidget {
   final bool visible;
   final bool hasError;
-  final AssetGenImage image;
+  final AssetImage image;
   final Function() onTap;
 
   const MemoryTileComponent({
@@ -24,7 +22,7 @@ class MemoryTileComponent extends ConsumerWidget {
       child: Material(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         clipBehavior: Clip.antiAlias,
-        child: image.image(fit: BoxFit.cover),
+        child: Image(image: image, fit: BoxFit.cover),
       ),
     ).animate();
 
@@ -40,7 +38,7 @@ class MemoryTileComponent extends ConsumerWidget {
         clipBehavior: Clip.antiAlias,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: image.image(fit: BoxFit.cover),
+          child: Image(image: image, fit: BoxFit.cover),
         ),
       ).animate().shake();
     }
