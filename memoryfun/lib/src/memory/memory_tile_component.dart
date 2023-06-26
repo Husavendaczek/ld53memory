@@ -18,6 +18,7 @@ class MemoryTileComponent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // ignore: avoid_unnecessary_containers
     var initTile = Container(
       child: Material(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
