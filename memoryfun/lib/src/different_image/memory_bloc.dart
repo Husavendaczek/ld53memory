@@ -62,8 +62,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     themeSet: ThemeSet.food,
     gameType: GameType.sameImage,
   );
-  int? firstIndex;
-  int? firstPairValue;
+  MemoryTile? firstMemoryTile;
   List<TileToHide> hideTiles = [];
 
   MemoryBloc({
@@ -120,8 +119,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
   }
 
   void _resetGame() {
-    firstIndex = null;
-    firstPairValue = null;
+    firstMemoryTile = null;
     hideTiles = [];
     splitMemorySet = SplitMemorySet(
       upperTiles: [],
@@ -129,16 +127,26 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     );
   }
 
+  bool _prohibitTapInSameArea(MemoryTile currentMemoryTile) {
+    if (firstMemoryTile == null) return false;
+
+    return firstMemoryTile!.isLowerPart == currentMemoryTile.isLowerPart;
+  }
+
   Future _handleTap(
     _HandleTap event,
     Emitter<MemoryState> emit,
   ) async {
     emit(const MemoryState.loadingResult());
+    if (_prohibitTapInSameArea(event.memoryTile)) {
+      return emit(MemoryState.initialized(splitMemorySet));
+    }
+
     soundPlayer.playTap();
 
     var currentIndex = _currentIndex(event.memoryTile);
 
-    _hidePreviousTiles(event.memoryTile.pairValue);
+    _hidePreviousTiles();
     _setTileImage(
       currentIndex,
       MemoryTile(
@@ -149,13 +157,17 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
       ),
     );
 
-    if (firstIndex != null) {
-      _handleSecondTap(currentIndex, event.memoryTile);
-    } else {
+    if (firstMemoryTile == null) {
       _handleFirstTap(
         currentIndex,
         event.memoryTile.pairValue,
         event.memoryTile.isLowerPart,
+      );
+      return emit(MemoryState.matchResult(splitMemorySet));
+    } else {
+      _handleSecondTap(
+        currentIndex,
+        event.memoryTile,
       );
     }
   }
@@ -173,7 +185,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     return index;
   }
 
-  void _hidePreviousTiles(int pairValue) {
+  void _hidePreviousTiles() {
     if (hideTiles.isNotEmpty) {
       for (var hideTile in hideTiles) {
         var isLowerPart = hideTile.isLowerPart;
@@ -187,14 +199,17 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
   }
 
   void _handleFirstTap(int currentIndex, int pairValue, bool isLowerPart) {
-    firstIndex = currentIndex;
-    firstPairValue = pairValue;
+    firstMemoryTile = MemoryTile(
+      index: currentIndex,
+      pairValue: pairValue,
+      isLowerPart: isLowerPart,
+    );
+
     _setVisibility(currentIndex, isLowerPart, true);
-    emit(MemoryState.matchResult(splitMemorySet));
   }
 
   void _handleSecondTap(int currentIndex, MemoryTile memoryTile) {
-    if (firstPairValue == memoryTile.pairValue) {
+    if (firstMemoryTile!.pairValue == memoryTile.pairValue) {
       _handleCorrectMatch(
         currentIndex,
         memoryTile.isLowerPart,
@@ -214,11 +229,10 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
       true,
     );
 
-    _setCorrect(currentIndex, isLowerPart, true);
-    _setCorrect(firstIndex!, !isLowerPart, true);
+    _setCorrect(currentIndex, isLowerPart);
+    _setCorrect(firstMemoryTile!.index, firstMemoryTile!.isLowerPart);
 
-    firstIndex = null;
-    firstPairValue = null;
+    firstMemoryTile = null;
 
     matchesLeft = matchesLeft - 1;
 
@@ -253,34 +267,33 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
       false,
     );
     _setVisibility(
-      firstIndex!,
-      !isLowerPart,
+      firstMemoryTile!.index,
+      firstMemoryTile!.isLowerPart,
       false,
     );
 
     _setError(currentIndex, isLowerPart, true);
-    _setError(firstIndex!, !isLowerPart, true);
+    _setError(firstMemoryTile!.index, firstMemoryTile!.isLowerPart, true);
 
     hideTiles.add(TileToHide(index: currentIndex, isLowerPart: isLowerPart));
-    hideTiles.add(TileToHide(index: firstIndex!, isLowerPart: !isLowerPart));
+    hideTiles.add(TileToHide(
+        index: firstMemoryTile!.index,
+        isLowerPart: firstMemoryTile!.isLowerPart));
 
-    firstIndex = null;
-    firstPairValue = null;
+    firstMemoryTile = null;
     emit(MemoryState.matchResult(splitMemorySet));
   }
 
   void _setVisibility(int currentIndex, bool isLowerPart, bool visible) {
-    print(
-        'set tile $currentIndex in isLowerPart: $isLowerPart to visible: $visible');
     if (isLowerPart) {
       splitMemorySet.lowerTiles[currentIndex].visible = visible;
-      if (firstIndex != null) {
-        splitMemorySet.lowerTiles[firstIndex!].visible = visible;
+      if (firstMemoryTile != null) {
+        splitMemorySet.lowerTiles[firstMemoryTile!.index].visible = visible;
       }
     } else {
       splitMemorySet.upperTiles[currentIndex].visible = visible;
-      if (firstIndex != null) {
-        splitMemorySet.upperTiles[firstIndex!].visible = visible;
+      if (firstMemoryTile != null) {
+        splitMemorySet.upperTiles[firstMemoryTile!.index].visible = visible;
       }
     }
   }
@@ -293,11 +306,13 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     }
   }
 
-  void _setCorrect(int index, bool isLowerPart, bool isCorrect) {
+  void _setCorrect(int index, bool isLowerPart) {
     if (isLowerPart) {
-      splitMemorySet.lowerTiles[index].isCorrect = isCorrect;
+      splitMemorySet.lowerTiles[index].isCorrect = true;
+      splitMemorySet.lowerTiles[index].hasError = false;
     } else {
-      splitMemorySet.upperTiles[index].isCorrect = isCorrect;
+      splitMemorySet.upperTiles[index].isCorrect = true;
+      splitMemorySet.upperTiles[index].hasError = false;
     }
   }
 

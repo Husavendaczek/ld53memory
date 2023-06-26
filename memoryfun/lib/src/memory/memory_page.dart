@@ -81,13 +81,9 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
           hasError: tile.hasError,
           isCorrect: tile.isCorrect,
           image: tile.image!,
-//TODO disable tap for upper or lower tiles when already tapped in this region
-          onTap: () {
-            print('tap on ${tile.index} in ${tile.isLowerPart}');
-            ref.read(MemoryBloc.provider.bloc).add(
-                  MemoryEvent.handleTap(tile),
-                );
-          },
+          onTap: () => ref.read(MemoryBloc.provider.bloc).add(
+                MemoryEvent.handleTap(tile),
+              ),
         ),
       );
     }

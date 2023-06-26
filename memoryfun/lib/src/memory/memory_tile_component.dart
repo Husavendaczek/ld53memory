@@ -30,6 +30,7 @@ class MemoryTileComponent extends ConsumerWidget {
     ).animate();
 
     if (isCorrect) {
+      // ignore: avoid_unnecessary_containers
       initTile = Container(
         child: Material(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -57,7 +58,7 @@ class MemoryTileComponent extends ConsumerWidget {
     }
 
     return InkWell(
-      onTap: () => visible ? {} : onTap(),
+      onTap: () => visible && isCorrect ? {} : onTap(),
       child: initTile,
     )
         .animate()
