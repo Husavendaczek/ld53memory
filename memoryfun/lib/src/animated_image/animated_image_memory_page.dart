@@ -1,14 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:memoryfun/src/animated_image/animated_memory_tile.dart';
 import '../components/memo_app_bar.dart';
 import '../components/my_button.dart';
 import '../level_overview/level_done.dart';
 import '../memory/level_info.dart';
 import '../memory/memory_grid_view.dart';
-import '../same_image/simple_memory_bloc.dart';
 import '../same_image/simple_memory_tile.dart';
+import 'animated_memory_bloc.dart';
 import 'animated_memory_tile_component.dart';
 
 @RoutePage()
@@ -31,8 +31,8 @@ class _AnimatedImageMemoryPageState
   void initState() {
     super.initState();
 
-    ref.read(SimpleMemoryBloc.provider.bloc).add(
-          SimpleMemoryEvent.initGame(widget.levelInfo),
+    ref.read(AnimatedMemoryBloc.provider.bloc).add(
+          AnimatedMemoryEvent.initGame(widget.levelInfo),
         );
   }
 
@@ -40,11 +40,11 @@ class _AnimatedImageMemoryPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MemoAppBar(
-        onRestart: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
-              SimpleMemoryEvent.initGame(widget.levelInfo),
+        onRestart: () => ref.read(AnimatedMemoryBloc.provider.bloc).add(
+              AnimatedMemoryEvent.initGame(widget.levelInfo),
             ),
       ),
-      body: ref.watch(SimpleMemoryBloc.provider).maybeWhen(
+      body: ref.watch(AnimatedMemoryBloc.provider).maybeWhen(
             initialized: (memorySet) => _gridView(memorySet, true),
             matchResult: (memorySet) => _gridView(memorySet, false),
             nextLevel: (nextLevel) => LevelDone(nextLevel: nextLevel),
@@ -53,9 +53,10 @@ class _AnimatedImageMemoryPageState
               children: [
                 const Text('loading'),
                 TextButton(
-                  onPressed: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
-                        SimpleMemoryEvent.initGame(widget.levelInfo),
-                      ),
+                  onPressed: () =>
+                      ref.read(AnimatedMemoryBloc.provider.bloc).add(
+                            AnimatedMemoryEvent.initGame(widget.levelInfo),
+                          ),
                   child: const NormalButtonStyle(
                       text: 'Restart game', fontSize: 18.0),
                 ),
@@ -65,12 +66,12 @@ class _AnimatedImageMemoryPageState
     );
   }
 
-  Widget _gridView(List<SimpleMemoryTile> memorySet, bool fadeIn) =>
+  Widget _gridView(List<AnimatedMemoryTile> memorySet, bool fadeIn) =>
       MemoryGridView(
         tiles: _tiles(memorySet, fadeIn),
       );
 
-  List<Widget> _tiles(List<SimpleMemoryTile> memorySet, bool fadeIn) {
+  List<Widget> _tiles(List<AnimatedMemoryTile> memorySet, bool fadeIn) {
     List<Widget> tiles = [];
     for (var tile in memorySet) {
       tiles.add(
@@ -78,18 +79,10 @@ class _AnimatedImageMemoryPageState
           visible: tile.visible,
           hasError: tile.hasError,
           isCorrect: tile.isCorrect,
-          images: [
-            tile.image!,
-            const AssetImage('club/club_0_anim_0.png'),
-            const AssetImage('club/club_0_anim_1.png'),
-            const AssetImage('club/club_0_anim_2.png'),
-            const AssetImage('club/club_0_anim_3.png'),
-            const AssetImage('club/club_0_anim_4.png'),
-            const AssetImage('club/club_0_anim_5.png'),
-            const AssetImage('club/club_0_anim_6.png'),
-          ],
-          onTap: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
-                SimpleMemoryEvent.handleTap(tile.index, tile.pairValue),
+          image: tile.image!,
+          animatedImages: tile.animationImages,
+          onTap: () => ref.read(AnimatedMemoryBloc.provider.bloc).add(
+                AnimatedMemoryEvent.handleTap(tile.index, tile.pairValue),
               ),
         ),
       );

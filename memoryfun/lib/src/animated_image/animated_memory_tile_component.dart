@@ -6,14 +6,16 @@ class AnimatedMemoryTileComponent extends ConsumerStatefulWidget {
   final bool visible;
   final bool hasError;
   final bool isCorrect;
-  final List<AssetImage> images;
+  final AssetImage image;
+  final List<AssetImage> animatedImages;
   final Function() onTap;
 
   const AnimatedMemoryTileComponent({
     required this.visible,
     required this.hasError,
     required this.isCorrect,
-    required this.images,
+    required this.image,
+    required this.animatedImages,
     required this.onTap,
     super.key,
   });
@@ -28,12 +30,12 @@ class _AnimatedMemoryTileComponentState
   @override
   Widget build(BuildContext context) {
     var initTile = Container(
-      child: _getImage(0),
+      child: _getImage(),
     ).animate();
 
     if (widget.isCorrect) {
       initTile = Container(
-        child: _getImage(0),
+        child: _getImage(),
       )
           .animate()
           // TODO check if shimmer can work .shimmer(
@@ -41,32 +43,32 @@ class _AnimatedMemoryTileComponentState
           // )
           .swap(
             duration: 180.ms,
-            builder: (context, otherWidget) => _getImage(1),
+            builder: (context, otherWidget) => _getAnimatedImage(1),
           )
           .then()
           .swap(
             duration: 180.ms,
-            builder: (context, otherWidget) => _getImage(2),
+            builder: (context, otherWidget) => _getAnimatedImage(2),
           )
           .then()
           .swap(
             duration: 180.ms,
-            builder: (context, otherWidget) => _getImage(3),
+            builder: (context, otherWidget) => _getAnimatedImage(3),
           )
           .then()
           .swap(
             duration: 180.ms,
-            builder: (context, otherWidget) => _getImage(4),
+            builder: (context, otherWidget) => _getAnimatedImage(4),
           )
           .then()
           .swap(
             duration: 180.ms,
-            builder: (context, otherWidget) => _getImage(5),
+            builder: (context, otherWidget) => _getAnimatedImage(5),
           )
           .then()
           .swap(
             duration: 180.ms,
-            builder: (context, otherWidget) => _getImage(6),
+            builder: (context, otherWidget) => _getAnimatedImage(6),
           );
     }
 
@@ -82,7 +84,7 @@ class _AnimatedMemoryTileComponentState
         clipBehavior: Clip.antiAlias,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image(image: widget.images.first, fit: BoxFit.cover),
+          child: Image(image: widget.animatedImages.first, fit: BoxFit.cover),
         ),
       ).animate().shake();
     }
@@ -99,11 +101,20 @@ class _AnimatedMemoryTileComponentState
         .blurXY(begin: 1, end: 0, duration: 600.ms, delay: 300.ms);
   }
 
-  Material _getImage(int index) => Material(
+  Material _getImage() => Material(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         clipBehavior: Clip.antiAlias,
         child: Image(
-          image: widget.images[index],
+          image: widget.image,
+          fit: BoxFit.cover,
+        ),
+      );
+
+  Material _getAnimatedImage(int index) => Material(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        clipBehavior: Clip.antiAlias,
+        child: Image(
+          image: widget.animatedImages[index],
           fit: BoxFit.cover,
         ),
       );
