@@ -45,7 +45,7 @@ List<LevelInfo> levels = const [
     gameType: GameType.differentImage,
   ),
   LevelInfo(
-    gameSize: 2,
+    gameSize: 8,
     themeSet: ThemeSet.club,
     gameType: GameType.sameImage,
   ),
