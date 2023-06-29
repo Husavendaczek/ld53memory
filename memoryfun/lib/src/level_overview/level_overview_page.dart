@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/level_overview/levels.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
+import 'package:memoryfun/src/start/app_colors.dart';
 
 @RoutePage()
 class LevelOverviewPage extends ConsumerWidget {
@@ -17,11 +18,15 @@ class LevelOverviewPage extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 28.0),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 28.0),
               child: Text(
                 'Memory FUN',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textColor,
+                ),
               ),
             ),
             GridView.count(

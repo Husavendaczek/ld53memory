@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/memory/game_type.dart';
+import 'package:memoryfun/src/start/app_colors.dart';
 
 import '../components/my_button.dart';
 import '../helper/app_router.dart';
@@ -22,7 +23,10 @@ class WonPage extends ConsumerWidget {
           children: [
             const Text(
               'CONGRATULATIONS!',
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+              ),
             )
                 .animate(
                   onPlay: (controller) => controller.repeat(),
@@ -93,9 +97,12 @@ class WonPage extends ConsumerWidget {
                     ),
                   ),
             ),
-            const Text(
+            Text(
               'Thanks for playing my game.',
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(
+                fontSize: 16,
+                color: AppColors.textColor,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 48.0),

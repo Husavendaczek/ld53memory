@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/memory/game_type.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
+import 'package:memoryfun/src/start/app_colors.dart';
 
 import '../components/my_button.dart';
 import '../helper/app_router.dart';
@@ -19,7 +20,7 @@ class LevelDone extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      color: Colors.black,
+      color: AppColors.textColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

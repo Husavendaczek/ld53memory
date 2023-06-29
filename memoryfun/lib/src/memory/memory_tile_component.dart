@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoryfun/src/start/app_colors.dart';
 
 class MemoryTileComponent extends ConsumerWidget {
   final bool visible;
@@ -38,7 +39,7 @@ class MemoryTileComponent extends ConsumerWidget {
       initTile = Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: Colors.red,
+            color: AppColors.errorColor,
             width: 2,
           ),
           borderRadius: const BorderRadius.all(Radius.circular(8)),
