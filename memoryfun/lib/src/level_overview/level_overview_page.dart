@@ -6,6 +6,7 @@ import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/level_overview/levels.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
 import 'package:memoryfun/src/start/app_colors.dart';
+import 'package:memoryfun/src/start/env.dart';
 
 @RoutePage()
 class LevelOverviewPage extends ConsumerWidget {
@@ -81,8 +82,8 @@ class LevelOverviewPage extends ConsumerWidget {
         ),
         clipBehavior: Clip.antiAlias,
         child: Image(
-            image:
-                AssetImage('${themeSet.name}/${themeSet.name}_thumbnail.png')),
+            image: AssetImage(
+                'assets/$COLOR_MODE/${themeSet.name}/${themeSet.name}_thumbnail.png')),
       ),
     ).animate().fadeIn(
           duration: 600.ms,

@@ -34,9 +34,18 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/food/
-    - assets/mail/
-    - assets/babies/
     - assets/sounds/
-    - assets/other/
-    - assets/jungle/
+    - assets/color/
+    - assets/color/food/
+    - assets/color/mail/
+    - assets/color/babies/
+    - assets/color/babiesComplex/
+    - assets/color/other/
+    - assets/color/jungle/
+    - assets/color/club/
+    - assets/color/farm/
+    - assets/color/farmComplex/
+    - assets/color/farmMud/
+    - assets/mono/
+    - assets/mono/food/
+    - assets/mono/other/

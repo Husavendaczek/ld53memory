@@ -12,6 +12,7 @@ import '../memory/game_type.dart';
 import '../memory/level_info.dart';
 import '../memory/theme_set.dart';
 import '../same_image/simple_memory_tile.dart';
+import '../start/env.dart';
 import 'animated_memory_tile.dart';
 
 part 'animated_memory_bloc.freezed.dart';
@@ -94,7 +95,7 @@ class AnimatedMemoryBloc
       List<AssetImage> animatedImages = [];
       for (int j = 0; j < 7; j++) {
         animatedImages.add(AssetImage(
-            '${currentLevel.themeSet.name}/${currentLevel.themeSet.name}_${value}_anim_$j.png'));
+            'assets/$COLOR_MODE/${currentLevel.themeSet.name}/${currentLevel.themeSet.name}_${value}_anim_$j.png'));
       }
 
       var tile = AnimatedMemoryTile(

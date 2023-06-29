@@ -4,6 +4,7 @@ import 'package:memoryfun/src/memory/theme_set.dart';
 import 'package:memoryfun/src/same_image/simple_memory_tile.dart';
 
 import '../memory/memory_tile.dart';
+import '../start/env.dart';
 
 class ImageMapper {
   static final provider = Provider<ImageMapper>((ref) => ImageMapper());
@@ -29,16 +30,20 @@ class ImageMapper {
     }
 
     if (isLowerPart) {
-      return AssetImage('${themeSet.name}/${themeSet.name}_l_$pairValue.png');
+      return AssetImage(
+          'assets/$COLOR_MODE/${themeSet.name}/${themeSet.name}_l_$pairValue.png');
     }
 
-    return AssetImage('${themeSet.name}/${themeSet.name}_$pairValue.png');
+    return AssetImage(
+        'assets/$COLOR_MODE/${themeSet.name}/${themeSet.name}_$pairValue.png');
   }
 
   AssetImage _backgroundImage(ThemeSet themeSet, bool isLowerPart) {
     if (isLowerPart) {
-      return AssetImage('${themeSet.name}/${themeSet.name}_l_background.png');
+      return AssetImage(
+          'assets/$COLOR_MODE/${themeSet.name}/${themeSet.name}_l_background.png');
     }
-    return AssetImage('${themeSet.name}/${themeSet.name}_background.png');
+    return AssetImage(
+        'assets/$COLOR_MODE/${themeSet.name}/${themeSet.name}_background.png');
   }
 }
