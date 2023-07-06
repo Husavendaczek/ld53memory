@@ -48,5 +48,6 @@ flutter:
     - assets/color/farmMud/
     - assets/mono/
     - assets/mono/food/
+    - assets/mono/mail/
     - assets/mono/other/
     - assets/mono/jungle/
