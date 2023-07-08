@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
 
 import '../components/my_button.dart';
-import 'env.dart';
+import 'app_colors.dart';
 
 @RoutePage()
 class StartPage extends ConsumerWidget {
@@ -17,11 +17,12 @@ class StartPage extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Flexible(
+            Flexible(
               child: Padding(
-                padding: EdgeInsets.only(bottom: 32.0),
+                padding: const EdgeInsets.only(bottom: 32.0),
                 child: Image(
-                  image: AssetImage('assets/$COLOR_MODE/other/icon.png'),
+                  image: AssetImage(
+                      'assets/${ref.watch(ColorMode.provider).colorStyle.name}/other/icon.png'),
                 ),
               ),
             ),

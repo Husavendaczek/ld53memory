@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/start/env.dart';
 
 class AppColors {
@@ -8,4 +9,27 @@ class AppColors {
   static Color buttonBackgroundColor =
       COLOR_MODE == 'color' ? Colors.amber : Colors.black;
   static Color errorColor = COLOR_MODE == 'color' ? Colors.red : Colors.black;
+}
+
+class ColorMode {
+  ColorStyle colorStyle;
+
+  ColorMode({this.colorStyle = ColorStyle.color});
+
+  static final provider = Provider<ColorMode>((ref) {
+    return ColorMode(colorStyle: ColorStyle.color);
+  });
+
+  void switchColorStyle() {
+    if (colorStyle == ColorStyle.color) {
+      colorStyle = ColorStyle.mono;
+    } else {
+      colorStyle = ColorStyle.color;
+    }
+  }
+}
+
+enum ColorStyle {
+  color,
+  mono,
 }

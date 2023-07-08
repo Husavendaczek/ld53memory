@@ -4,10 +4,17 @@ import 'package:memoryfun/src/memory/theme_set.dart';
 import 'package:memoryfun/src/same_image/simple_memory_tile.dart';
 
 import '../memory/memory_tile.dart';
-import '../start/env.dart';
+import '../start/app_colors.dart';
 
 class ImageMapper {
-  static final provider = Provider<ImageMapper>((ref) => ImageMapper());
+  final ColorMode colorMode;
+
+  const ImageMapper({required this.colorMode});
+
+  static final provider = Provider<ImageMapper>((ref) => ImageMapper(
+          colorMode: ref.watch(
+        ColorMode.provider,
+      )));
 
   AssetImage getImage(SimpleMemoryTile simpleMemoryTile, ThemeSet themeSet) {
     return _map(
@@ -31,19 +38,19 @@ class ImageMapper {
 
     if (isLowerPart) {
       return AssetImage(
-          'assets/$COLOR_MODE/${themeSet.name}/${themeSet.name}_l_$pairValue.png');
+          'assets/${colorMode.colorStyle.name}/${themeSet.name}/${themeSet.name}_l_$pairValue.png');
     }
 
     return AssetImage(
-        'assets/$COLOR_MODE/${themeSet.name}/${themeSet.name}_$pairValue.png');
+        'assets/${colorMode.colorStyle.name}/${themeSet.name}/${themeSet.name}_$pairValue.png');
   }
 
   AssetImage _backgroundImage(ThemeSet themeSet, bool isLowerPart) {
     if (isLowerPart) {
       return AssetImage(
-          'assets/$COLOR_MODE/${themeSet.name}/${themeSet.name}_l_background.png');
+          'assets/${colorMode.colorStyle.name}/${themeSet.name}/${themeSet.name}_l_background.png');
     }
     return AssetImage(
-        'assets/$COLOR_MODE/${themeSet.name}/${themeSet.name}_background.png');
+        'assets/${colorMode.colorStyle.name}/${themeSet.name}/${themeSet.name}_background.png');
   }
 }

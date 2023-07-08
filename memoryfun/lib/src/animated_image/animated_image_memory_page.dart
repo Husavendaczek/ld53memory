@@ -7,7 +7,6 @@ import '../components/my_button.dart';
 import '../level_overview/level_done.dart';
 import '../memory/level_info.dart';
 import '../memory/memory_grid_view.dart';
-import '../same_image/simple_memory_tile.dart';
 import 'animated_memory_bloc.dart';
 import 'animated_memory_tile_component.dart';
 

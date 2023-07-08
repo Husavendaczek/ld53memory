@@ -6,14 +6,22 @@ import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/level_overview/levels.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
 import 'package:memoryfun/src/start/app_colors.dart';
-import 'package:memoryfun/src/start/env.dart';
+
+import '../components/my_button.dart';
 
 @RoutePage()
-class LevelOverviewPage extends ConsumerWidget {
+class LevelOverviewPage extends ConsumerStatefulWidget {
   const LevelOverviewPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<LevelOverviewPage> createState() => _LevelOverviewPageState();
+}
+
+class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
+  int value = 0;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Column(
@@ -29,6 +37,16 @@ class LevelOverviewPage extends ConsumerWidget {
                   color: AppColors.textColor,
                 ),
               ),
+            ),
+            TextButton(
+              onPressed: () {
+                ref.read(ColorMode.provider).switchColorStyle();
+                setState(() {
+                  value = 1;
+                });
+              },
+              child:
+                  const NormalButtonStyle(text: 'Switch style', fontSize: 16.0),
             ),
             GridView.count(
               shrinkWrap: true,
@@ -83,7 +101,7 @@ class LevelOverviewPage extends ConsumerWidget {
         clipBehavior: Clip.antiAlias,
         child: Image(
             image: AssetImage(
-                'assets/$COLOR_MODE/${themeSet.name}/${themeSet.name}_thumbnail.png')),
+                'assets/${ref.watch(ColorMode.provider).colorStyle.name}/${themeSet.name}/${themeSet.name}_thumbnail.png')),
       ),
     ).animate().fadeIn(
           duration: 600.ms,

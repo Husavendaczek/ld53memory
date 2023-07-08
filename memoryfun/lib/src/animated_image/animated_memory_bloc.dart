@@ -12,7 +12,7 @@ import '../memory/game_type.dart';
 import '../memory/level_info.dart';
 import '../memory/theme_set.dart';
 import '../same_image/simple_memory_tile.dart';
-import '../start/env.dart';
+import '../start/app_colors.dart';
 import 'animated_memory_tile.dart';
 
 part 'animated_memory_bloc.freezed.dart';
@@ -45,12 +45,14 @@ class AnimatedMemoryBloc
       imageMapper: ref.watch(ImageMapper.provider),
       appRouter: ref.watch(appRouterProvider),
       soundPlayer: ref.watch(SoundPlayer.provider),
+      colorMode: ref.watch(ColorMode.provider),
     );
   });
 
   final ImageMapper imageMapper;
   final AppRouter appRouter;
   final SoundPlayer soundPlayer;
+  final ColorMode colorMode;
 
   List<AnimatedMemoryTile> memoryTiles = [];
   int matchesWon = 0;
@@ -68,6 +70,7 @@ class AnimatedMemoryBloc
     required this.imageMapper,
     required this.appRouter,
     required this.soundPlayer,
+    required this.colorMode,
   }) : super(const AnimatedMemoryState.initial()) {
     on<_InitGame>(_initGame);
     on<_HandleTap>(_handleTap);
@@ -95,7 +98,7 @@ class AnimatedMemoryBloc
       List<AssetImage> animatedImages = [];
       for (int j = 0; j < 7; j++) {
         animatedImages.add(AssetImage(
-            'assets/$COLOR_MODE/${currentLevel.themeSet.name}/${currentLevel.themeSet.name}_${value}_anim_$j.png'));
+            'assets/${colorMode.colorStyle.name}/${currentLevel.themeSet.name}/${currentLevel.themeSet.name}_${value}_anim_$j.png'));
       }
 
       var tile = AnimatedMemoryTile(
