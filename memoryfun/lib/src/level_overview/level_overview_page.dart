@@ -75,7 +75,8 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
   Widget _thumbnail(WidgetRef ref, ThemeSet themeSet) {
     return InkWell(
       borderRadius: const BorderRadius.all(Radius.circular(8)),
-      onTap: (themeSet == ThemeSet.babies || themeSet == ThemeSet.farmComplex)
+      onTap: (themeSet == ThemeSet.babiesComplex ||
+              themeSet == ThemeSet.farmComplex)
           ? () {
               ref.read(appRouterProvider).push(
                     MemoryRoute(
