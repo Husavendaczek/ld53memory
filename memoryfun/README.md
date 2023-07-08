@@ -17,3 +17,7 @@
 optional:
 * Add a song to sounds
 * Add switch case for theme to sound_player.dart
+
+## Make a release
+* Android: `flutter build apk` or `flutter build appbundle`
+* iOS: build with XCode in release mode
