@@ -49,7 +49,9 @@ flutter:
     - assets/mono/
     - assets/mono/food/
     - assets/mono/mail/
+    - assets/mono/babiesComplex/
     - assets/mono/other/
     - assets/mono/jungle/
     - assets/mono/club/
     - assets/mono/farm/
+    - assets/mono/farmComplex/

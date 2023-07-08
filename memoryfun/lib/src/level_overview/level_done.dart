@@ -27,7 +27,7 @@ class LevelDone extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 32.0),
             child: const Text(
-              'You delivered everything!',
+              'You did it!',
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
