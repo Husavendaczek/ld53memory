@@ -20,4 +20,4 @@ optional:
 
 ## Make a release
 * Android: `flutter build apk` or `flutter build appbundle`
-* iOS: build with XCode in release mode
+* iOS: Run `flutter build ipa` -> result is in `build/ios/archive/`. Then open build/ios/archive/MyApp.xcarchive in Xcode.
