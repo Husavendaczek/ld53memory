@@ -17,7 +17,7 @@ class ColorMode {
   ColorMode({this.colorStyle = ColorStyle.color});
 
   static final provider = Provider<ColorMode>((ref) {
-    return ColorMode(colorStyle: ColorStyle.color);
+    return ColorMode();
   });
 
   void switchColorStyle() {
@@ -32,4 +32,18 @@ class ColorMode {
 enum ColorStyle {
   color,
   mono,
+}
+
+class MemoryGridRowSize {
+  int rowSize;
+
+  MemoryGridRowSize({this.rowSize = 3});
+
+  static final provider = Provider<MemoryGridRowSize>((ref) {
+    return MemoryGridRowSize();
+  });
+
+  void setRowSize(int size) {
+    rowSize = size;
+  }
 }

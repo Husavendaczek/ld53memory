@@ -48,6 +48,22 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
               child:
                   const NormalButtonStyle(text: 'Switch style', fontSize: 16.0),
             ),
+            Text(
+              'Number of rows of a memory grid',
+              style: TextStyle(
+                fontSize: 16.0,
+                color: AppColors.textColor,
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _numberButton(3),
+                _numberButton(4),
+                _numberButton(5),
+                _numberButton(6),
+              ],
+            ),
             GridView.count(
               shrinkWrap: true,
               crossAxisCount: 3,
@@ -108,5 +124,14 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
           duration: 600.ms,
           curve: Curves.easeIn,
         );
+  }
+
+  Widget _numberButton(int size) {
+    return TextButton(
+      onPressed: () {
+        ref.read(MemoryGridRowSize.provider).setRowSize(size);
+      },
+      child: NormalButtonStyle(text: '$size', fontSize: 16.0),
+    );
   }
 }

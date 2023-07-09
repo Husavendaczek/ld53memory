@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../start/app_colors.dart';
+
 class SplitMemoryGridView extends ConsumerWidget {
   final List<Widget> upperTiles;
   final List<Widget> lowerTiles;
@@ -18,27 +20,27 @@ class SplitMemoryGridView extends ConsumerWidget {
         children: [
           GridView.count(
             shrinkWrap: true,
-            crossAxisCount: 3,
+            crossAxisCount: ref.watch(MemoryGridRowSize.provider).rowSize,
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
             childAspectRatio: 1,
             padding: const EdgeInsets.all(8),
             children: upperTiles,
           ),
-          lowerGrid(),
+          lowerGrid(ref),
         ],
       ),
     );
   }
 
-  Widget lowerGrid() {
+  Widget lowerGrid(WidgetRef ref) {
     if (lowerTiles.isEmpty) return Container();
 
     return Padding(
       padding: const EdgeInsets.only(top: 32),
       child: GridView.count(
         shrinkWrap: true,
-        crossAxisCount: 3,
+        crossAxisCount: ref.watch(MemoryGridRowSize.provider).rowSize,
         mainAxisSpacing: 8,
         crossAxisSpacing: 8,
         childAspectRatio: 1,
