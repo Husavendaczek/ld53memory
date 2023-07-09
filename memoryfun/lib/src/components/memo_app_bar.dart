@@ -15,8 +15,7 @@ class MemoAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+    return SafeArea(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -26,9 +25,9 @@ class MemoAppBar extends ConsumerWidget implements PreferredSizeWidget {
             child: const NormalIconBtn(icon: Icons.home),
           ),
           Text(
-            'Memory fun',
+            'Memory FUN',
             style: TextStyle(
-              fontSize: 22,
+              fontSize: 18,
               fontWeight: FontWeight.bold,
               color: AppColors.textColor,
             ),
