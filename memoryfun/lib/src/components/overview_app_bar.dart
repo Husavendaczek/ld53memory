@@ -5,23 +5,13 @@ import 'package:memoryfun/src/start/app_colors.dart';
 import '../helper/app_router.dart';
 import 'normal_icon_btn.dart';
 
-class MemoAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  final Function()? onRestart;
-
-  const MemoAppBar({
-    required this.onRestart,
-    super.key,
-  });
+class OverviewAppBar extends ConsumerWidget implements PreferredSizeWidget {
+  const OverviewAppBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
       child: AppBar(
-        leading: TextButton(
-          onPressed: () =>
-              ref.read(appRouterProvider).push(const LevelOverviewRoute()),
-          child: const NormalIconBtn(icon: Icons.home),
-        ),
         title: Text(
           'Memory FUN',
           style: TextStyle(
@@ -31,11 +21,11 @@ class MemoAppBar extends ConsumerWidget implements PreferredSizeWidget {
           ),
         ),
         actions: [
-          if (onRestart != null)
-            TextButton(
-              onPressed: onRestart,
-              child: const NormalIconBtn(icon: Icons.restart_alt),
-            ),
+          TextButton(
+            onPressed: () =>
+                ref.read(appRouterProvider).push(const SettingsRoute()),
+            child: const NormalIconBtn(icon: Icons.settings),
+          ),
         ],
         backgroundColor: Colors.white,
       ),

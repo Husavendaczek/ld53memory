@@ -7,6 +7,7 @@ import 'package:memoryfun/src/end/won_page.dart';
 import 'package:memoryfun/src/level_overview/level_overview_page.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:flutter/material.dart';
+import 'package:memoryfun/src/settings/settings_page.dart';
 
 import '../start/start_page.dart';
 
@@ -18,6 +19,7 @@ class AppRouter extends _$AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(page: StartRoute.page, initial: true),
         AutoRoute(page: LevelOverviewRoute.page),
+        AutoRoute(page: SettingsRoute.page),
         AutoRoute(page: MemoryRoute.page),
         AutoRoute(page: SimpleMemoryRoute.page),
         AutoRoute(page: AnimatedImageMemoryRoute.page),

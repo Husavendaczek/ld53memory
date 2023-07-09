@@ -2,12 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoryfun/src/components/overview_app_bar.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/level_overview/levels.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
 import 'package:memoryfun/src/start/app_colors.dart';
-
-import '../components/my_button.dart';
 
 @RoutePage()
 class LevelOverviewPage extends ConsumerStatefulWidget {
@@ -18,52 +17,14 @@ class LevelOverviewPage extends ConsumerStatefulWidget {
 }
 
 class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
-  int value = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const OverviewAppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 28.0),
-              child: Text(
-                'Memory FUN',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.textColor,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                ref.read(ColorMode.provider).switchColorStyle();
-                setState(() {
-                  value = 1;
-                });
-              },
-              child:
-                  const NormalButtonStyle(text: 'Switch style', fontSize: 16.0),
-            ),
-            Text(
-              'Number of rows of a memory grid',
-              style: TextStyle(
-                fontSize: 16.0,
-                color: AppColors.textColor,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _numberButton(3),
-                _numberButton(4),
-                _numberButton(5),
-                _numberButton(6),
-              ],
-            ),
             GridView.count(
               shrinkWrap: true,
               crossAxisCount: 3,
@@ -124,22 +85,5 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
           duration: 600.ms,
           curve: Curves.easeIn,
         );
-  }
-
-  Widget _numberButton(int size) {
-    var isSelected = ref.read(MemoryGridRowSize.provider).rowSize == size;
-
-    return TextButton(
-      onPressed: () {
-        ref.read(MemoryGridRowSize.provider).setRowSize(size);
-      },
-      child: NormalButtonStyle(
-        text: '$size',
-        fontSize: 16.0,
-        backgroundColor: isSelected
-            ? ref.watch(AppColors.provider).selectedButtonBackgroundColor
-            : null,
-      ),
-    );
   }
 }
