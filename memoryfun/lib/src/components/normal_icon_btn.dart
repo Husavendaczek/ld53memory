@@ -15,7 +15,7 @@ class NormalIconBtn extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(8)),
-        color: AppColors.buttonBackgroundColor,
+        color: ref.watch(AppColors.provider).buttonBackgroundColor,
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),

@@ -127,11 +127,19 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
   }
 
   Widget _numberButton(int size) {
+    var isSelected = ref.read(MemoryGridRowSize.provider).rowSize == size;
+
     return TextButton(
       onPressed: () {
         ref.read(MemoryGridRowSize.provider).setRowSize(size);
       },
-      child: NormalButtonStyle(text: '$size', fontSize: 16.0),
+      child: NormalButtonStyle(
+        text: '$size',
+        fontSize: 16.0,
+        backgroundColor: isSelected
+            ? ref.watch(AppColors.provider).selectedButtonBackgroundColor
+            : null,
+      ),
     );
   }
 }

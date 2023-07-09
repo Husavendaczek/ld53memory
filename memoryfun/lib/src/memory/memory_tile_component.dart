@@ -39,7 +39,7 @@ class MemoryTileComponent extends ConsumerWidget {
       initTile = Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: AppColors.errorColor,
+            color: ref.watch(AppColors.provider).errorColor,
             width: 2,
           ),
           borderRadius: const BorderRadius.all(Radius.circular(8)),

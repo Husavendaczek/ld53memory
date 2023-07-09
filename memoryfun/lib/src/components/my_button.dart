@@ -5,10 +5,12 @@ import 'package:memoryfun/src/start/app_colors.dart';
 class NormalButtonStyle extends ConsumerWidget {
   final String text;
   final double fontSize;
+  final Color? backgroundColor;
 
   const NormalButtonStyle({
     required this.text,
     required this.fontSize,
+    this.backgroundColor,
     super.key,
   });
 
@@ -17,7 +19,8 @@ class NormalButtonStyle extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(8)),
-        color: AppColors.buttonBackgroundColor,
+        color: backgroundColor ??
+            ref.watch(AppColors.provider).buttonBackgroundColor,
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
