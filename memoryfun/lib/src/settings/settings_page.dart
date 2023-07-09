@@ -51,6 +51,12 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
               _numberButton(ref, 6),
             ],
           ),
+          TextButton(
+              onPressed: () => showLicensePage(context: context),
+              child: const NormalButtonStyle(
+                text: 'Licenses',
+                fontSize: 16.0,
+              )),
         ],
       ),
     );
