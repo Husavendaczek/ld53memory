@@ -20,6 +20,7 @@ abstract class AppTheme {
               displayColor: AppColors.text,
             ),
         focusColor: AppColors.error,
+        cardColor: AppColors.selectedBtnBackground,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             backgroundColor: AppColors.btnBackground,
@@ -44,6 +45,7 @@ abstract class AppTheme {
               displayColor: AppColors.textMono,
             ),
         focusColor: AppColors.errorMono,
+        cardColor: AppColors.selectedBtnBackgroundMono,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             backgroundColor: AppColors.btnBackgroundMono,
@@ -68,6 +70,7 @@ abstract class AppTheme {
               displayColor: AppColors.textDark,
             ),
         focusColor: AppColors.errorDark,
+        cardColor: AppColors.selectedBtnBackgroundDark,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             backgroundColor: AppColors.btnBackgroundDark,
@@ -92,6 +95,7 @@ abstract class AppTheme {
               displayColor: AppColors.textDarkMono,
             ),
         focusColor: AppColors.errorDarkMono,
+        cardColor: AppColors.selectedBtnBackgroundDarkMono,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             backgroundColor: AppColors.btnBackgroundDarkMono,

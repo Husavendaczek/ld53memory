@@ -17,5 +17,6 @@ class NormalButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) => TextButton(
         onPressed: () => onTap(),
         child: Text(text),
+        style: TextButton.styleFrom(backgroundColor: backgroundColor),
       );
 }

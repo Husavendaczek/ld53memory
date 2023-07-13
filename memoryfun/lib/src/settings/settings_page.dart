@@ -44,10 +44,10 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _numberButton(ref, 3),
-              _numberButton(ref, 4),
-              _numberButton(ref, 5),
-              _numberButton(ref, 6),
+              _numberButton(ref, context, 3),
+              _numberButton(ref, context, 4),
+              _numberButton(ref, context, 5),
+              _numberButton(ref, context, 6),
             ],
           ),
           NormalButton(
@@ -57,7 +57,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     );
   }
 
-  Widget _numberButton(WidgetRef ref, int size) {
+  Widget _numberButton(WidgetRef ref, BuildContext context, int size) {
     var isSelected = ref.read(MemoryGridRowSize.provider).rowSize == size;
 
     return NormalButton(
@@ -68,9 +68,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           value = 1;
         });
       },
-      // TODO backgroundColor: isSelected
-      //     ? ref.watch(AppColors.provider).selectedButtonBackgroundColor
-      //     : null,
+      backgroundColor: isSelected ? Theme.of(context).cardColor : null,
     );
   }
 }
