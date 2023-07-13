@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/memo_app_bar.dart';
-import '../components/my_button.dart';
+import '../components/normal_button.dart';
 import '../start/app_colors.dart';
 
 @RoutePage()
@@ -25,21 +25,20 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
       ),
       body: Column(
         children: [
-          TextButton(
-            onPressed: () {
+          NormalButton(
+            text: 'Switch style',
+            onTap: () {
               ref.read(ColorMode.provider).switchColorStyle();
               setState(() {
                 value = 1;
               });
             },
-            child:
-                const NormalButtonStyle(text: 'Switch style', fontSize: 16.0),
           ),
           Text(
             'Number of rows of a memory grid',
             style: TextStyle(
               fontSize: 16.0,
-              color: AppColors.textColor,
+              color: AppColors.text,
             ),
           ),
           Row(
@@ -51,12 +50,8 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
               _numberButton(ref, 6),
             ],
           ),
-          TextButton(
-              onPressed: () => showLicensePage(context: context),
-              child: const NormalButtonStyle(
-                text: 'Licenses',
-                fontSize: 16.0,
-              )),
+          NormalButton(
+              text: 'Licenses', onTap: () => showLicensePage(context: context)),
         ],
       ),
     );
@@ -65,20 +60,17 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
   Widget _numberButton(WidgetRef ref, int size) {
     var isSelected = ref.read(MemoryGridRowSize.provider).rowSize == size;
 
-    return TextButton(
-      onPressed: () {
+    return NormalButton(
+      text: '$size',
+      onTap: () {
         ref.read(MemoryGridRowSize.provider).setRowSize(size);
         setState(() {
           value = 1;
         });
       },
-      child: NormalButtonStyle(
-        text: '$size',
-        fontSize: 16.0,
-        backgroundColor: isSelected
-            ? ref.watch(AppColors.provider).selectedButtonBackgroundColor
-            : null,
-      ),
+      // TODO backgroundColor: isSelected
+      //     ? ref.watch(AppColors.provider).selectedButtonBackgroundColor
+      //     : null,
     );
   }
 }

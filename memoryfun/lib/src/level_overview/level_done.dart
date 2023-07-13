@@ -6,7 +6,7 @@ import 'package:memoryfun/src/memory/game_type.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:memoryfun/src/start/app_colors.dart';
 
-import '../components/my_button.dart';
+import '../components/normal_button.dart';
 import '../helper/app_router.dart';
 
 class LevelDone extends ConsumerWidget {
@@ -20,7 +20,7 @@ class LevelDone extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      color: AppColors.textColor,
+      color: AppColors.text,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -54,15 +54,15 @@ class LevelDone extends ConsumerWidget {
           ButtonBar(
             alignment: MainAxisAlignment.center,
             children: [
-              TextButton(
-                onPressed: () => ref
+              NormalButton(
+                text: 'Level overview',
+                onTap: () => ref
                     .read(appRouterProvider)
-                    .push(const LevelOverviewRoute()),
-                child: const NormalButtonStyle(
-                    text: 'Level overview', fontSize: 16),
+                    .push(LevelOverviewRoute(value: 0)),
               ),
-              TextButton(
-                onPressed: () {
+              NormalButton(
+                text: 'Next Level',
+                onTap: () {
                   PageRouteInfo route;
                   switch (nextLevel.gameType) {
                     case GameType.sameImage:
@@ -78,8 +78,6 @@ class LevelDone extends ConsumerWidget {
                         route,
                       );
                 },
-                child:
-                    const NormalButtonStyle(text: 'Next Level', fontSize: 16),
               ),
             ],
           )

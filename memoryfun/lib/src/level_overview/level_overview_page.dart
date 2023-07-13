@@ -10,13 +10,27 @@ import 'package:memoryfun/src/start/app_colors.dart';
 
 @RoutePage()
 class LevelOverviewPage extends ConsumerStatefulWidget {
-  const LevelOverviewPage({super.key});
+  final int value;
+  const LevelOverviewPage({
+    this.value = 0,
+    super.key,
+  });
 
   @override
   ConsumerState<LevelOverviewPage> createState() => _LevelOverviewPageState();
 }
 
 class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
+  int myValue = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      myValue = widget.value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

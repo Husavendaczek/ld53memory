@@ -5,7 +5,7 @@ import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:memoryfun/src/memory/memory_tile_component.dart';
 
 import '../components/memo_app_bar.dart';
-import '../components/my_button.dart';
+import '../components/normal_button.dart';
 import '../level_overview/level_done.dart';
 import '../memory/memory_grid_view.dart';
 import 'simple_memory_bloc.dart';
@@ -51,12 +51,11 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text('loading'),
-                TextButton(
-                  onPressed: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
+                NormalButton(
+                  text: 'Restart game',
+                  onTap: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
                         SimpleMemoryEvent.initGame(widget.levelInfo),
                       ),
-                  child: const NormalButtonStyle(
-                      text: 'Restart game', fontSize: 18.0),
                 ),
               ],
             ),

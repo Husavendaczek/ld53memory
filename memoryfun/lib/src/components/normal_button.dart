@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class NormalIconBtn extends ConsumerWidget {
-  final IconData icon;
+class NormalButton extends ConsumerWidget {
+  final String text;
   final Function() onTap;
+  final Color? backgroundColor;
 
-  const NormalIconBtn({
-    required this.icon,
+  const NormalButton({
+    required this.text,
     required this.onTap,
+    this.backgroundColor,
     super.key,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => TextButton(
         onPressed: () => onTap(),
-        child: Icon(
-          icon,
-        ),
+        child: Text(text),
       );
 }

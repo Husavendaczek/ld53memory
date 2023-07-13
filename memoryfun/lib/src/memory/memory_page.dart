@@ -9,7 +9,7 @@ import 'package:memoryfun/src/memory/memory_tile_component.dart';
 import 'package:memoryfun/src/split_memory/split_memory_grid_view.dart';
 import 'package:memoryfun/src/split_memory/split_memory_set.dart';
 
-import '../components/my_button.dart';
+import '../components/normal_button.dart';
 import 'memory_tile.dart';
 
 @RoutePage()
@@ -51,14 +51,11 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text('loading'),
-                TextButton(
-                  onPressed: () => ref.read(MemoryBloc.provider.bloc).add(
+                NormalButton(
+                  text: 'Restart game',
+                  onTap: () => ref.read(MemoryBloc.provider.bloc).add(
                         MemoryEvent.initGame(widget.levelInfo),
                       ),
-                  child: const NormalButtonStyle(
-                    text: 'Restart game',
-                    fontSize: 18.0,
-                  ),
                 ),
               ],
             ),

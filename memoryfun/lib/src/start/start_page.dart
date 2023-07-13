@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
 
-import '../components/my_button.dart';
+import '../components/normal_button.dart';
 import 'app_colors.dart';
 
 @RoutePage()
@@ -26,11 +26,11 @@ class StartPage extends ConsumerWidget {
                 ),
               ),
             ),
-            TextButton(
-              onPressed: () =>
-                  ref.read(appRouterProvider).push(const LevelOverviewRoute()),
-              child:
-                  const NormalButtonStyle(text: 'Start game', fontSize: 18.0),
+            NormalButton(
+              text: 'Start game',
+              onTap: () => ref
+                  .read(appRouterProvider)
+                  .push(LevelOverviewRoute(value: 0)),
             ),
           ],
         ),

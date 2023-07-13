@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/animated_image/animated_memory_tile.dart';
 import '../components/memo_app_bar.dart';
-import '../components/my_button.dart';
+import '../components/normal_button.dart';
 import '../level_overview/level_done.dart';
 import '../memory/level_info.dart';
 import '../memory/memory_grid_view.dart';
@@ -51,13 +51,11 @@ class _AnimatedImageMemoryPageState
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text('loading'),
-                TextButton(
-                  onPressed: () =>
-                      ref.read(AnimatedMemoryBloc.provider.bloc).add(
-                            AnimatedMemoryEvent.initGame(widget.levelInfo),
-                          ),
-                  child: const NormalButtonStyle(
-                      text: 'Restart game', fontSize: 18.0),
+                NormalButton(
+                  text: 'Restart game',
+                  onTap: () => ref.read(AnimatedMemoryBloc.provider.bloc).add(
+                        AnimatedMemoryEvent.initGame(widget.levelInfo),
+                      ),
                 ),
               ],
             ),

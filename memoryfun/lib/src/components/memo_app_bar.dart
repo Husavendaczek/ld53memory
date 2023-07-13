@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/start/app_colors.dart';
 
 import '../helper/app_router.dart';
 import 'normal_icon_btn.dart';
@@ -17,27 +16,20 @@ class MemoAppBar extends ConsumerWidget implements PreferredSizeWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
       child: AppBar(
-        leading: TextButton(
-          onPressed: () =>
-              ref.read(appRouterProvider).push(const LevelOverviewRoute()),
-          child: const NormalIconBtn(icon: Icons.home),
+        leading: NormalIconBtn(
+          icon: Icons.home,
+          onTap: () => ref
+              .read(appRouterProvider)
+              .navigate(LevelOverviewRoute(value: 10)),
         ),
-        title: Text(
-          'Memory FUN',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: AppColors.textColor,
-          ),
-        ),
+        title: const Text('Memory FUN'),
         actions: [
           if (onRestart != null)
-            TextButton(
-              onPressed: onRestart,
-              child: const NormalIconBtn(icon: Icons.restart_alt),
+            NormalIconBtn(
+              icon: Icons.restart_alt,
+              onTap: () => onRestart,
             ),
         ],
-        backgroundColor: Colors.white,
       ),
     );
   }

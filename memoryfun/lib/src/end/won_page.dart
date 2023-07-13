@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/memory/game_type.dart';
 import 'package:memoryfun/src/start/app_colors.dart';
 
-import '../components/my_button.dart';
+import '../components/normal_button.dart';
 import '../helper/app_router.dart';
 import '../memory/level_info.dart';
 import '../memory/theme_set.dart';
@@ -101,13 +101,14 @@ class WonPage extends ConsumerWidget {
               'Thanks for playing my game.',
               style: TextStyle(
                 fontSize: 16,
-                color: AppColors.textColor,
+                color: AppColors.text,
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 48.0),
-              child: TextButton(
-                onPressed: () => ref.read(appRouterProvider).push(
+              child: NormalButton(
+                text: 'Play again',
+                onTap: () => ref.read(appRouterProvider).push(
                       SimpleMemoryRoute(
                         levelInfo: const LevelInfo(
                             gameSize: 12,
@@ -115,8 +116,6 @@ class WonPage extends ConsumerWidget {
                             gameType: GameType.sameImage),
                       ),
                     ),
-                child:
-                    const NormalButtonStyle(text: 'Play again', fontSize: 18.0),
               ),
             )
           ],
