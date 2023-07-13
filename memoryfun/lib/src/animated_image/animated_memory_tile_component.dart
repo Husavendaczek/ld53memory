@@ -83,10 +83,7 @@ class _AnimatedMemoryTileComponentState
           borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
         clipBehavior: Clip.antiAlias,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image(image: widget.animatedImages.first, fit: BoxFit.cover),
-        ),
+        child: Image(image: widget.animatedImages.first, fit: BoxFit.cover),
       ).animate().shake();
     }
 
