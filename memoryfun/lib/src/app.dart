@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
+import 'package:memoryfun/src/start/app_colors.dart';
 import 'package:memoryfun/src/styling/app_theme.dart';
 
 class MyApp extends ConsumerStatefulWidget {
@@ -13,6 +14,10 @@ class MyApp extends ConsumerStatefulWidget {
 class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
+    ref
+        .read(ColorMode.provider)
+        .setColorStyle(MediaQuery.highContrastOf(context));
+
     return MaterialApp.router(
       routerDelegate: ref.watch(appRouterProvider).delegate(),
       routeInformationParser: ref.watch(appRouterProvider).defaultRouteParser(),

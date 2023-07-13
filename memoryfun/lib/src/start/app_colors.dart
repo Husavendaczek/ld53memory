@@ -56,6 +56,10 @@ class ColorMode {
       colorStyle = ColorStyle.color;
     }
   }
+
+  void setColorStyle(bool highContrast) {
+    colorStyle = highContrast ? ColorStyle.mono : ColorStyle.color;
+  }
 }
 
 enum ColorStyle {
