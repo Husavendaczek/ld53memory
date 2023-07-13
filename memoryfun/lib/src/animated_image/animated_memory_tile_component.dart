@@ -77,7 +77,7 @@ class _AnimatedMemoryTileComponentState
       initTile = Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: ref.watch(AppColors.provider).errorColor,
+            color: AppColors.error, // TODO
             width: 2,
           ),
           borderRadius: const BorderRadius.all(Radius.circular(8)),
