@@ -19,70 +19,48 @@ class LevelDone extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      color: AppColors.text,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 32.0),
-            child: const Text(
-              'You did it!',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
-            )
-                .animate(
-              onPlay: (controller) => controller.repeat(),
-            )
-                .shimmer(
-              duration: 700.ms,
-              colors: [
-                Colors.yellow,
-                Colors.orange,
-                Colors.red,
-                Colors.purple,
-                Colors.blue,
-                Colors.green,
-                Colors.blue,
-                Colors.purple,
-                Colors.red,
-              ],
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 32.0),
+          child: const Text(
+            'You did it!',
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
             ),
-          ),
-          ButtonBar(
-            alignment: MainAxisAlignment.center,
-            children: [
-              NormalButton(
-                text: 'Level overview',
-                onTap: () => ref
-                    .read(appRouterProvider)
-                    .push(LevelOverviewRoute(value: 0)),
-              ),
-              NormalButton(
-                text: 'Next Level',
-                onTap: () {
-                  PageRouteInfo route;
-                  switch (nextLevel.gameType) {
-                    case GameType.sameImage:
-                      route = SimpleMemoryRoute(levelInfo: nextLevel);
-                      break;
-                    case GameType.differentImage:
-                      route = MemoryRoute(levelInfo: nextLevel);
-                      break;
-                    default:
-                      route = SimpleMemoryRoute(levelInfo: nextLevel);
-                  }
-                  ref.read(appRouterProvider).push(
-                        route,
-                      );
-                },
-              ),
-            ],
           )
-        ],
-      ),
+              .animate(
+            onPlay: (controller) => controller.repeat(),
+          )
+              .shimmer(
+            duration: 700.ms,
+            colors: [
+              Colors.yellow,
+              Colors.orange,
+              Colors.red,
+              Colors.purple,
+              Colors.blue,
+              Colors.green,
+              Colors.blue,
+              Colors.purple,
+              Colors.red,
+            ],
+          ),
+        ),
+        ButtonBar(
+          alignment: MainAxisAlignment.center,
+          children: [
+            NormalButton(
+              text: 'Level overview',
+              onTap: () => ref
+                  .read(appRouterProvider)
+                  .push(LevelOverviewRoute(value: 0)),
+            ),
+          ],
+        )
+      ],
     );
   }
 }
