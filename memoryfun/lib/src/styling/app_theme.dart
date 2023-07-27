@@ -23,8 +23,8 @@ abstract class AppTheme {
         cardColor: AppColors.selectedBtnBackground,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            backgroundColor: AppColors.btnBackground,
-            foregroundColor: AppColors.btnText,
+            backgroundColor: null,
+            foregroundColor: AppColors.text,
           ),
         ),
       );
@@ -48,8 +48,8 @@ abstract class AppTheme {
         cardColor: AppColors.selectedBtnBackgroundMono,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            backgroundColor: AppColors.btnBackgroundMono,
-            foregroundColor: AppColors.btnTextMono,
+            backgroundColor: null,
+            foregroundColor: AppColors.textMono,
           ),
         ),
       );
@@ -73,8 +73,8 @@ abstract class AppTheme {
         cardColor: AppColors.selectedBtnBackgroundDark,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            backgroundColor: AppColors.btnBackgroundDark,
-            foregroundColor: AppColors.btnTextDark,
+            backgroundColor: null,
+            foregroundColor: AppColors.textDark,
           ),
         ),
       );
@@ -98,8 +98,8 @@ abstract class AppTheme {
         cardColor: AppColors.selectedBtnBackgroundDarkMono,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            backgroundColor: AppColors.btnBackgroundDarkMono,
-            foregroundColor: AppColors.btnTextDarkMono,
+            backgroundColor: null,
+            foregroundColor: AppColors.textDarkMono,
           ),
         ),
       );
