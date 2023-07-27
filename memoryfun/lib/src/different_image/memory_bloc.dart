@@ -31,7 +31,6 @@ class MemoryState with _$MemoryState {
   const factory MemoryState.loadingResult() = _LoadingResult;
   const factory MemoryState.matchResult(SplitMemorySet memorySet) =
       _MatchResult;
-  const factory MemoryState.nextLevel(LevelInfo nextLevel) = _NextLevel;
 }
 
 class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
@@ -244,11 +243,19 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
       } else {
         soundPlayer.playWinLevel();
 
-        hideTiles = [];
-        splitMemorySet = SplitMemorySet(upperTiles: [], lowerTiles: []);
         currentLevel = levels[level + 1];
 
-        emit(MemoryState.nextLevel(levels[level + 1]));
+        Future.delayed(
+          const Duration(seconds: 1),
+          () {
+            hideTiles = [];
+            splitMemorySet = SplitMemorySet(upperTiles: [], lowerTiles: []);
+
+            return appRouter.push(LevelDoneRoute(nextLevel: levels[level + 1]));
+          },
+        );
+
+        emit(MemoryState.matchResult(splitMemorySet));
       }
     } else {
       soundPlayer.playCorrectMatch();

@@ -30,7 +30,6 @@ class SimpleMemoryState with _$SimpleMemoryState {
   const factory SimpleMemoryState.loadingResult() = _LoadingResult;
   const factory SimpleMemoryState.matchResult(
       List<SimpleMemoryTile> memorySet) = _MatchResult;
-  const factory SimpleMemoryState.nextLevel(LevelInfo nextLevel) = _NextLevel;
 }
 
 class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
@@ -175,14 +174,22 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
       } else {
         soundPlayer.playWinLevel();
 
-        firstIndex = null;
-        firstPairValue = null;
-        hideTiles = [];
-        memoryTiles = [];
-        matchesWon = 0;
         currentLevel = levels[level + 1];
 
-        emit(SimpleMemoryState.nextLevel(levels[level + 1]));
+        Future.delayed(
+          const Duration(seconds: 1),
+          () {
+            firstIndex = null;
+            firstPairValue = null;
+            hideTiles = [];
+            memoryTiles = [];
+            matchesWon = 0;
+
+            return appRouter.push(LevelDoneRoute(nextLevel: levels[level + 1]));
+          },
+        );
+
+        emit(SimpleMemoryState.matchResult(memoryTiles));
       }
     } else {
       soundPlayer.playCorrectMatch();

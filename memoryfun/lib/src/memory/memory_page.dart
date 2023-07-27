@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/components/memo_app_bar.dart';
-import 'package:memoryfun/src/level_overview/level_done.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:memoryfun/src/different_image/memory_bloc.dart';
 import 'package:memoryfun/src/memory/memory_tile_component.dart';
@@ -46,7 +45,6 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
       body: ref.watch(MemoryBloc.provider).maybeWhen(
             initialized: (memorySet) => _gridView(memorySet, true),
             matchResult: (memorySet) => _gridView(memorySet, false),
-            nextLevel: (nextLevel) => LevelDone(nextLevel: nextLevel),
             orElse: () => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

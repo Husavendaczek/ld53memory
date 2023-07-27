@@ -6,7 +6,6 @@ import 'package:memoryfun/src/memory/memory_tile_component.dart';
 
 import '../components/memo_app_bar.dart';
 import '../components/normal_button.dart';
-import '../level_overview/level_done.dart';
 import '../memory/memory_grid_view.dart';
 import 'simple_memory_bloc.dart';
 import 'simple_memory_tile.dart';
@@ -46,7 +45,6 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
       body: ref.watch(SimpleMemoryBloc.provider).maybeWhen(
             initialized: (memorySet) => _gridView(memorySet, true),
             matchResult: (memorySet) => _gridView(memorySet, false),
-            nextLevel: (nextLevel) => LevelDone(nextLevel: nextLevel),
             orElse: () => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

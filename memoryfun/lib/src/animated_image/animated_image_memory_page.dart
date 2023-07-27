@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/animated_image/animated_memory_tile.dart';
 import '../components/memo_app_bar.dart';
 import '../components/normal_button.dart';
-import '../level_overview/level_done.dart';
 import '../memory/level_info.dart';
 import '../memory/memory_grid_view.dart';
 import 'animated_memory_bloc.dart';
@@ -46,7 +45,6 @@ class _AnimatedImageMemoryPageState
       body: ref.watch(AnimatedMemoryBloc.provider).maybeWhen(
             initialized: (memorySet) => _gridView(memorySet, true),
             matchResult: (memorySet) => _gridView(memorySet, false),
-            nextLevel: (nextLevel) => LevelDone(nextLevel: nextLevel),
             orElse: () => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

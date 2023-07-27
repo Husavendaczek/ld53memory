@@ -33,7 +33,6 @@ class AnimatedMemoryState with _$AnimatedMemoryState {
   const factory AnimatedMemoryState.loadingResult() = _LoadingResult;
   const factory AnimatedMemoryState.matchResult(
       List<AnimatedMemoryTile> memorySet) = _MatchResult;
-  const factory AnimatedMemoryState.nextLevel(LevelInfo nextLevel) = _NextLevel;
 }
 
 class AnimatedMemoryBloc
@@ -188,14 +187,22 @@ class AnimatedMemoryBloc
       } else {
         soundPlayer.playWinLevel();
 
-        firstIndex = null;
-        firstPairValue = null;
-        hideTiles = [];
-        memoryTiles = [];
-        matchesWon = 0;
         currentLevel = levels[level + 1];
 
-        emit(AnimatedMemoryState.nextLevel(levels[level + 1]));
+        Future.delayed(
+          const Duration(seconds: 2),
+          () {
+            firstIndex = null;
+            firstPairValue = null;
+            hideTiles = [];
+            memoryTiles = [];
+            matchesWon = 0;
+
+            return appRouter.push(LevelDoneRoute(nextLevel: levels[level + 1]));
+          },
+        );
+
+        emit(AnimatedMemoryState.matchResult(memoryTiles));
       }
     } else {
       soundPlayer.playCorrectMatch();

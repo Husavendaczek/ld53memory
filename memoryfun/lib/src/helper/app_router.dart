@@ -5,6 +5,7 @@ import 'package:memoryfun/src/memory/memory_page.dart';
 import 'package:memoryfun/src/same_image/simple_memory_page.dart';
 import 'package:memoryfun/src/end/won_page.dart';
 import 'package:memoryfun/src/level_overview/level_overview_page.dart';
+import 'package:memoryfun/src/level_overview/level_done_page.dart';
 import 'package:memoryfun/src/memory/level_info.dart';
 import 'package:flutter/material.dart';
 import 'package:memoryfun/src/settings/settings_page.dart';
@@ -23,6 +24,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: MemoryRoute.page),
         AutoRoute(page: SimpleMemoryRoute.page),
         AutoRoute(page: AnimatedImageMemoryRoute.page),
+        AutoRoute(page: LevelDoneRoute.page),
         AutoRoute(page: WonRoute.page),
       ];
 }
