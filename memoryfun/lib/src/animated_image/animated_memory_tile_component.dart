@@ -30,12 +30,14 @@ class _AnimatedMemoryTileComponentState
     extends ConsumerState<AnimatedMemoryTileComponent> {
   @override
   Widget build(BuildContext context) {
-    var initTile = Container(
-      child: _getImage(),
+    var initTile = Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: _getImage().animate(),
     ).animate();
 
     if (widget.isCorrect) {
-      initTile = Container(
+      initTile = Padding(
+        padding: const EdgeInsets.all(4.0),
         child: _getImage(),
       )
           .animate()
@@ -74,21 +76,32 @@ class _AnimatedMemoryTileComponentState
     }
 
     if (widget.hasError) {
-      initTile = Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Theme.of(context).focusColor,
-            width: 2,
+      initTile = Padding(
+        padding: const EdgeInsets.all(0),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Theme.of(context).focusColor,
+              width: 2,
+            ),
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
           ),
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: Image(image: widget.animatedImages.first, fit: BoxFit.cover),
-      ).animate().shake();
+          clipBehavior: Clip.antiAlias,
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Image(image: widget.animatedImages.first, fit: BoxFit.cover),
+          ),
+        ).animate().shake(),
+      ).animate();
     }
 
     return InkWell(
       onTap: () => widget.visible && widget.isCorrect ? {} : widget.onTap(),
+      customBorder: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(8),
+        ),
+      ),
       child: initTile,
     )
         .animate()

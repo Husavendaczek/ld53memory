@@ -21,36 +21,53 @@ class MemoryTileComponent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var initTile = Material(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      clipBehavior: Clip.antiAlias,
-      child: Image(image: image, fit: BoxFit.cover),
-    ).animate();
-
-    if (isCorrect) {
-      initTile = Material(
+    var initTile = Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Material(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         clipBehavior: Clip.antiAlias,
         child: Image(image: image, fit: BoxFit.cover),
-      ).animate().shimmer();
+      ).animate(),
+    );
+
+    if (isCorrect) {
+      initTile = Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Material(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          clipBehavior: Clip.antiAlias,
+          child: Image(image: image, fit: BoxFit.cover),
+        ).animate().shimmer(),
+      );
     }
 
     if (hasError) {
-      initTile = Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Theme.of(context).focusColor,
-            width: 2,
+      initTile = Padding(
+        padding: const EdgeInsets.all(0.0),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Theme.of(context).focusColor,
+              width: 2,
+            ),
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
           ),
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: Image(image: image, fit: BoxFit.cover),
-      ).animate().shake();
+          clipBehavior: Clip.antiAlias,
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Image(image: image, fit: BoxFit.cover),
+          ),
+        ).animate().shake(),
+      );
     }
 
     return InkWell(
       onTap: () => visible && isCorrect ? {} : onTap(),
+      customBorder: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(8),
+        ),
+      ),
       child: initTile,
     )
         .animate()
