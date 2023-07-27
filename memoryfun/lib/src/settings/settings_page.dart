@@ -25,15 +25,6 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
       ),
       body: Column(
         children: [
-          NormalButton(
-            text: 'Switch style to colored or monochrome',
-            onTap: () {
-              ref.read(ColorMode.provider).switchColorStyle();
-              setState(() {
-                value = 1;
-              });
-            },
-          ),
           Text(
             'Number of rows of a memory grid',
             style: TextStyle(
