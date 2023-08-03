@@ -20,4 +20,6 @@ optional:
 
 ## Make a release
 * Android: `flutter build apk` or `flutter build appbundle`
-* iOS: Run `flutter build ipa` -> result is in `build/ios/archive/`. Then open build/ios/archive/MyApp.xcarchive in Xcode.
+* iOS: Run `flutter build ipa` -> result is in `build/ios/archive/`.
+ Then open build/ios/archive/MyApp.xcarchive in Xcode or open project in Xcode go to Product -> Archive. 
+ Validate the app and distribute it.
