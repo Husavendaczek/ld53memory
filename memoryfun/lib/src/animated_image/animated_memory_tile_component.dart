@@ -89,7 +89,13 @@ class _AnimatedMemoryTileComponentState
           clipBehavior: Clip.antiAlias,
           child: Padding(
             padding: const EdgeInsets.all(4.0),
-            child: Image(image: widget.animatedImages.first, fit: BoxFit.cover),
+            child: Material(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              clipBehavior: Clip.antiAlias,
+              child:
+                  Image(image: widget.animatedImages.first, fit: BoxFit.cover),
+            ),
           ),
         ).animate().shake(),
       ).animate();
@@ -121,12 +127,15 @@ class _AnimatedMemoryTileComponentState
         ),
       );
 
-  Material _getAnimatedImage(int index) => Material(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        clipBehavior: Clip.antiAlias,
-        child: Image(
-          image: widget.animatedImages[index],
-          fit: BoxFit.cover,
+  Padding _getAnimatedImage(int index) => Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Material(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          clipBehavior: Clip.antiAlias,
+          child: Image(
+            image: widget.animatedImages[index],
+            fit: BoxFit.cover,
+          ),
         ),
       );
 }

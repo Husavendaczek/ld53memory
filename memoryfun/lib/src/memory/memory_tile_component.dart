@@ -55,7 +55,12 @@ class MemoryTileComponent extends ConsumerWidget {
           clipBehavior: Clip.antiAlias,
           child: Padding(
             padding: const EdgeInsets.all(4.0),
-            child: Image(image: image, fit: BoxFit.cover),
+            child: Material(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              clipBehavior: Clip.antiAlias,
+              child: Image(image: image, fit: BoxFit.cover),
+            ),
           ),
         ).animate().shake(),
       );
