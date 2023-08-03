@@ -12,6 +12,10 @@ class StartPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
+    final fileName = isDarkMode ? "thumbnail_dark" : "thumbnail";
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -22,7 +26,8 @@ class StartPage extends ConsumerWidget {
                 padding: const EdgeInsets.only(bottom: 32.0),
                 child: Image(
                   image: AssetImage(
-                      'assets/${ref.watch(ColorMode.provider).colorStyle.name}/other/icon.png'),
+                    'assets/${ref.watch(ColorMode.provider).colorStyle.name}/other/$fileName.png',
+                  ),
                 ),
               ),
             ),
