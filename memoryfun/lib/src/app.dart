@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/start/app_colors.dart';
-import 'package:memoryfun/src/styling/app_theme.dart';
 
 class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
@@ -23,11 +22,11 @@ class _MyAppState extends ConsumerState<MyApp> {
       routeInformationParser: ref.watch(appRouterProvider).defaultRouteParser(),
       onGenerateTitle: (context) => 'Memory Fun',
       color: Colors.black,
-      theme: AppTheme.lightTheme(context),
-      darkTheme: AppTheme.darkTheme(context),
-      themeMode: ThemeMode.system,
-      highContrastTheme: AppTheme.lightMonoTheme(context),
-      highContrastDarkTheme: AppTheme.darkMonoTheme(context),
+      theme: ref.watch(ColorMode.provider).lightTheme(context),
+      darkTheme: ref.watch(ColorMode.provider).darkTheme(context),
+      themeMode: ref.watch(ColorMode.provider).myThemeMode,
+      highContrastTheme: ref.watch(ColorMode.provider).lightTheme(context),
+      highContrastDarkTheme: ref.watch(ColorMode.provider).darkTheme(context),
     );
   }
 }

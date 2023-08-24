@@ -42,6 +42,15 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
             ],
           ),
           NormalButton(
+            text: 'Switch style to colored or monochrome',
+            onTap: () {
+              ref.read(ColorMode.provider).switchColorStyle();
+              setState(() {
+                value = 1;
+              });
+            },
+          ),
+          NormalButton(
               text: 'Licenses', onTap: () => showLicensePage(context: context)),
         ],
       ),
