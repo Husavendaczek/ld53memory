@@ -1,14 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/components/memo_app_bar.dart';
+import 'package:memoryfun/src/components/app_bar/memo_app_bar.dart';
 import 'package:memoryfun/src/levels/level_info.dart';
 import 'package:memoryfun/src/different_image/memory_bloc.dart';
 import 'package:memoryfun/src/memory/memory_tile_component.dart';
 import 'package:memoryfun/src/split_memory/split_memory_grid_view.dart';
 import 'package:memoryfun/src/split_memory/split_memory_set.dart';
 
-import '../components/normal_button.dart';
+import '../components/buttons/normal_button.dart';
 import 'memory_tile.dart';
 
 @RoutePage()
@@ -37,7 +37,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MemoAppBar(
+      appBar: MemoryAppBar(
         onRestart: () => ref.read(MemoryBloc.provider.bloc).add(
               MemoryEvent.initGame(widget.levelInfo),
             ),

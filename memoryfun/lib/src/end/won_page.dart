@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/game_type/game_type.dart';
 import 'package:memoryfun/src/theme/app_colors.dart';
 
-import '../components/normal_button.dart';
+import '../components/buttons/normal_button.dart';
 import '../utils/app_router.dart';
 import '../levels/level_info.dart';
 import '../game_type/theme_set.dart';

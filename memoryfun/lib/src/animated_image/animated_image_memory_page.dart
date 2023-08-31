@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/animated_image/animated_memory_tile.dart';
-import '../components/memo_app_bar.dart';
-import '../components/normal_button.dart';
+import '../components/app_bar/memo_app_bar.dart';
+import '../components/buttons/normal_button.dart';
 import '../levels/level_info.dart';
 import '../memory/memory_grid_view.dart';
 import 'animated_memory_bloc.dart';
@@ -37,7 +37,7 @@ class _AnimatedImageMemoryPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MemoAppBar(
+      appBar: MemoryAppBar(
         onRestart: () => ref.read(AnimatedMemoryBloc.provider.bloc).add(
               AnimatedMemoryEvent.initGame(widget.levelInfo),
             ),

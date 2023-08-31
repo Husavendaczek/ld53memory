@@ -4,8 +4,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/levels/level_info.dart';
 
-import '../components/memo_app_bar.dart';
-import '../components/normal_button.dart';
+import '../components/app_bar/memo_app_bar.dart';
+import '../components/buttons/normal_button.dart';
 import '../utils/app_router.dart';
 
 @RoutePage()
@@ -20,7 +20,7 @@ class LevelDonePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: const MemoAppBar(onRestart: null),
+      appBar: const MemoryAppBar(onRestart: null),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/utils/app_router.dart';
 import 'package:memoryfun/src/theme/app_color_mode.dart';
 
-import '../components/normal_button.dart';
+import '../components/buttons/normal_button.dart';
 
 @RoutePage()
 class StartPage extends ConsumerWidget {

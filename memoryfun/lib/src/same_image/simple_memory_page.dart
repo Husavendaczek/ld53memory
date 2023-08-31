@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/levels/level_info.dart';
 import 'package:memoryfun/src/memory/memory_tile_component.dart';
 
-import '../components/memo_app_bar.dart';
-import '../components/normal_button.dart';
+import '../components/app_bar/memo_app_bar.dart';
+import '../components/buttons/normal_button.dart';
 import '../memory/memory_grid_view.dart';
 import 'simple_memory_bloc.dart';
 import 'simple_memory_tile.dart';
@@ -37,7 +37,7 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MemoAppBar(
+      appBar: MemoryAppBar(
         onRestart: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
               SimpleMemoryEvent.initGame(widget.levelInfo),
             ),
