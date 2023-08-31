@@ -2,8 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoryfun/src/game_type/game_type.dart';
 import '../components/app_bar/overview_app_bar.dart';
 import '../utils/app_router.dart';
+import 'level_info.dart';
 import 'levels.dart';
 import '../game_type/theme_set.dart';
 import '../theme/app_color_mode.dart';
@@ -55,45 +57,67 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
   List<Widget> tiles(WidgetRef ref) {
     var themeTiles = <Widget>[];
 
-    for (var themeSet in ThemeSet.values) {
-      themeTiles.add(_thumbnail(ref, themeSet));
+    for (var levelInfo in levels) {
+      themeTiles.add(_thumbnail(ref, levelInfo));
     }
     return themeTiles;
   }
 
-  Widget _thumbnail(WidgetRef ref, ThemeSet themeSet) => InkWell(
-        borderRadius: const BorderRadius.all(Radius.circular(8)),
-        onTap: (themeSet == ThemeSet.babiesComplex ||
-                themeSet == ThemeSet.farmComplex)
-            ? () {
-                ref.read(appRouterProvider).push(
-                      DifferentImageMemoryRoute(
-                        levelInfo: levels[themeSet.index],
-                      ),
-                    );
-              }
-            : (themeSet == ThemeSet.club)
-                ? () => ref.read(appRouterProvider).push(
-                      AnimatedImageMemoryRoute(
-                        levelInfo: levels[themeSet.index],
-                      ),
-                    )
-                : () => ref.read(appRouterProvider).push(
-                      SameImageMemoryRoute(
-                        levelInfo: levels[themeSet.index],
-                      ),
-                    ),
-        child: Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: Image(
-              image: AssetImage(
-                  'assets/${ref.watch(AppColorMode.provider).appColorStyle.name}/${themeSet.name}/${themeSet.name}_thumbnail.png')),
+  Widget _thumbnail(WidgetRef ref, LevelInfo levelInfo) {
+    var themeSet = levelInfo.themeSet;
+
+    return InkWell(
+      borderRadius: const BorderRadius.all(Radius.circular(8)),
+      onTap: _selectLevel(levelInfo.gameType, themeSet),
+      child: Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
-      ).animate().fadeIn(
-            duration: 600.ms,
-            curve: Curves.easeIn,
-          );
+        clipBehavior: Clip.antiAlias,
+        child: Image(
+          image: AssetImage(
+              'assets/${ref.watch(AppColorMode.provider).appColorStyle.name}/${themeSet.name}/${themeSet.name}_thumbnail.png'),
+        ),
+      ),
+    ).animate().fadeIn(
+          duration: 600.ms,
+          curve: Curves.easeIn,
+        );
+  }
+
+  Function()? _selectLevel(GameType gameType, ThemeSet themeSet) {
+    Function()? onTap;
+    switch (gameType) {
+      case GameType.sameImage:
+        onTap = () => ref.read(appRouterProvider).push(
+              SameImageMemoryRoute(
+                levelInfo: levels[themeSet.index],
+              ),
+            );
+        break;
+      case GameType.differentImage:
+        onTap = () {
+          ref.read(appRouterProvider).push(
+                DifferentImageMemoryRoute(
+                  levelInfo: levels[themeSet.index],
+                ),
+              );
+        };
+        break;
+      case GameType.animatedImage:
+        onTap = () => ref.read(appRouterProvider).push(
+              AnimatedImageMemoryRoute(
+                levelInfo: levels[themeSet.index],
+              ),
+            );
+        break;
+      default:
+        onTap = () => ref.read(appRouterProvider).push(
+              SameImageMemoryRoute(
+                levelInfo: levels[themeSet.index],
+              ),
+            );
+    }
+    return onTap;
+  }
 }

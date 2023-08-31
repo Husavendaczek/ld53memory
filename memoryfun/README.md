@@ -17,26 +17,7 @@ optional:
  Then open build/ios/archive/MyApp.xcarchive in Xcode or open project in Xcode go to Product -> Archive. 
  Validate the app and distribute it.
 
-
-
-
- memory_types
- - same image (gleiches bild)
- - animated image (gleiches bild + animiert)
- - different image (2 verschiedene bilder) -> split memory
- - same text
- - different text
- - text and image
-
-theme
- - app_color_mode
- - app_color_style
- - app_colors
-
-levels
- - levels
- - level_overview
-
+TODOS
 sound
  - sound_player
  - TODO bloc with events plays the right thing and stops other stuff

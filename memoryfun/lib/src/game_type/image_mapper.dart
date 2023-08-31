@@ -16,7 +16,8 @@ class ImageMapper {
       )));
 
   AssetImage getImage(MemoryTile memoryTile, ThemeSet themeSet) {
-    return _map(memoryTile.isVisible, memoryTile.pairValue, false, themeSet);
+    return _map(memoryTile.isVisible, memoryTile.pairValue,
+        memoryTile.isLowerPart, themeSet);
   }
 
   AssetImage hideComplexImage(ThemeSet themeSet, bool isLowerPart) {
