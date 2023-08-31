@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/start/app_colors.dart';
 
+import 'app_color_style.dart';
+
 class AppColorMode {
   ThemeMode myThemeMode;
   AppColorStyle appColorStyle;

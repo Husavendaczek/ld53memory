@@ -139,8 +139,3 @@ class AppColors {
 
   AppColors({required this.appColorMode});
 }
-
-enum AppColorStyle {
-  color,
-  mono,
-}
