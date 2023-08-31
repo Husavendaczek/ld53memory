@@ -7,7 +7,7 @@ import '../../../../levels/level_info.dart';
 import '../../../../components/grid/single_memory_grid_view.dart';
 import '../bloc/animated_memory_bloc.dart';
 import '../models/animated_memory_tile.dart';
-import '../../../../components/memory_card/animated_card.dart';
+import '../../../../components/memory_image_cards/animated_card.dart';
 
 @RoutePage()
 class AnimatedImageMemoryPage extends ConsumerStatefulWidget {

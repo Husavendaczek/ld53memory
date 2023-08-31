@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/components/memory_card/memory_card_error.dart';
+import 'package:memoryfun/src/components/memory_image_cards/memory_card_error.dart';
 import 'package:memoryfun/src/memory_types/same/animated_image/models/animated_memory_tile.dart';
 
 import 'tapable_card.dart';
