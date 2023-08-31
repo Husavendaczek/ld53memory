@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/levels/level_info.dart';
-import 'package:memoryfun/src/memory/memory_tile_component.dart';
+import 'package:memoryfun/src/components/memory_card/memory_card.dart';
 
 import '../components/app_bar/memo_app_bar.dart';
 import '../components/buttons/normal_button.dart';
@@ -70,7 +70,7 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
     List<Widget> tiles = [];
     for (var tile in memorySet) {
       tiles.add(
-        MemoryTileComponent(
+        MemoryCard(
           visible: tile.visible,
           hasError: tile.hasError,
           isCorrect: tile.isCorrect,

@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MemoryTileComponent extends ConsumerWidget {
+import 'tapable_card.dart';
+
+class MemoryCard extends ConsumerWidget {
   final bool visible;
   final bool hasError;
   final bool isCorrect;
   final AssetImage image;
   final Function() onTap;
 
-  const MemoryTileComponent({
+  const MemoryCard({
     required this.visible,
     required this.hasError,
     required this.isCorrect,
@@ -65,20 +67,9 @@ class MemoryTileComponent extends ConsumerWidget {
       );
     }
 
-    return InkWell(
-      onTap: () => visible && isCorrect ? {} : onTap(),
-      customBorder: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(8),
-        ),
-      ),
-      child: initTile,
-    )
-        .animate()
-        .fadeIn(
-          duration: 600.ms,
-          curve: Curves.easeIn,
-        )
-        .blurXY(begin: 1, end: 0, duration: 600.ms, delay: 300.ms);
+    return TapableCard(
+      card: initTile,
+      onTap: () => visible && isCorrect ? null : onTap(),
+    );
   }
 }

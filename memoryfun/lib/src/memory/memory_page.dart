@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/components/app_bar/memo_app_bar.dart';
 import 'package:memoryfun/src/levels/level_info.dart';
 import 'package:memoryfun/src/different_image/memory_bloc.dart';
-import 'package:memoryfun/src/memory/memory_tile_component.dart';
+import 'package:memoryfun/src/components/memory_card/memory_card.dart';
 import 'package:memoryfun/src/split_memory/split_memory_grid_view.dart';
 import 'package:memoryfun/src/split_memory/split_memory_set.dart';
 
@@ -71,7 +71,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
     List<Widget> tiles = [];
     for (var tile in memorySet) {
       tiles.add(
-        MemoryTileComponent(
+        MemoryCard(
           visible: tile.visible,
           hasError: tile.hasError,
           isCorrect: tile.isCorrect,

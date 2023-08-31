@@ -3,6 +3,7 @@
         "audioplayers",
         "memoryfun",
         "riverbloc",
-        "riverpod"
+        "riverpod",
+        "Tapable"
     ]
 }
