@@ -1,13 +1,13 @@
 import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:memoryfun/src/helper/app_router.dart';
-import 'package:memoryfun/src/helper/image_mapper.dart';
-import 'package:memoryfun/src/helper/sound_player.dart';
-import 'package:memoryfun/src/memory/game_type.dart';
+import 'package:memoryfun/src/utils/app_router.dart';
+import 'package:memoryfun/src/game_type/image_mapper.dart';
+import 'package:memoryfun/src/sound/sound_player.dart';
+import 'package:memoryfun/src/game_type/game_type.dart';
 import 'package:memoryfun/src/levels/level_info.dart';
 import 'package:memoryfun/src/memory/memory_tile.dart';
-import 'package:memoryfun/src/memory/theme_set.dart';
+import 'package:memoryfun/src/game_type/theme_set.dart';
 import 'package:memoryfun/src/split_memory/tile_to_hide.dart';
 import 'package:riverbloc/riverbloc.dart';
 

@@ -2,13 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/memory/game_type.dart';
+import 'package:memoryfun/src/game_type/game_type.dart';
 import 'package:memoryfun/src/theme/app_colors.dart';
 
 import '../components/normal_button.dart';
-import '../helper/app_router.dart';
+import '../utils/app_router.dart';
 import '../levels/level_info.dart';
-import '../memory/theme_set.dart';
+import '../game_type/theme_set.dart';
 
 @RoutePage()
 class WonPage extends ConsumerWidget {

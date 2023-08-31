@@ -6,7 +6,7 @@ import 'package:memoryfun/src/levels/level_info.dart';
 
 import '../components/memo_app_bar.dart';
 import '../components/normal_button.dart';
-import '../helper/app_router.dart';
+import '../utils/app_router.dart';
 
 @RoutePage()
 class LevelDonePage extends ConsumerWidget {

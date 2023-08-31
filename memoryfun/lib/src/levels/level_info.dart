@@ -1,5 +1,5 @@
-import 'package:memoryfun/src/memory/game_type.dart';
-import 'package:memoryfun/src/memory/theme_set.dart';
+import 'package:memoryfun/src/game_type/game_type.dart';
+import 'package:memoryfun/src/game_type/theme_set.dart';
 
 class LevelInfo {
   final int gameSize;

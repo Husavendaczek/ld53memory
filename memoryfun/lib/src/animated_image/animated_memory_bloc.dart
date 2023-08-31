@@ -5,13 +5,13 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:memoryfun/src/theme/app_color_mode.dart';
 import 'package:riverbloc/riverbloc.dart';
 
-import '../helper/app_router.dart';
-import '../helper/image_mapper.dart';
-import '../helper/sound_player.dart';
+import '../utils/app_router.dart';
+import '../game_type/image_mapper.dart';
+import '../sound/sound_player.dart';
 import '../levels/levels.dart';
-import '../memory/game_type.dart';
+import '../game_type/game_type.dart';
 import '../levels/level_info.dart';
-import '../memory/theme_set.dart';
+import '../game_type/theme_set.dart';
 import '../same_image/simple_memory_tile.dart';
 import 'animated_memory_tile.dart';
 

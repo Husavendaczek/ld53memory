@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/memory/theme_set.dart';
+import 'package:memoryfun/src/game_type/theme_set.dart';
 import 'package:memoryfun/src/same_image/simple_memory_tile.dart';
 import 'package:memoryfun/src/theme/app_color_mode.dart';
 
@@ -53,4 +53,6 @@ class ImageMapper {
     return AssetImage(
         'assets/${appColorMode.appColorStyle.name}/${themeSet.name}/${themeSet.name}_background.png');
   }
+
+  //TODO function for assetname
 }
