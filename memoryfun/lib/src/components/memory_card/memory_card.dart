@@ -32,7 +32,8 @@ class MemoryCard extends ConsumerWidget {
 
     return TapableCard(
       card: memoryCard,
-      onTap: () => memoryTile.visible && memoryTile.isCorrect ? null : onTap(),
+      onTap: () =>
+          memoryTile.isVisible && memoryTile.isCorrect ? null : onTap(),
     );
   }
 }

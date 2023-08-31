@@ -4,7 +4,7 @@ class SimpleMemoryTile {
   final int index;
   final int pairValue;
   AssetImage? image;
-  bool visible;
+  bool isVisible;
   bool hasError;
   bool isCorrect;
 
@@ -12,7 +12,7 @@ class SimpleMemoryTile {
     required this.index,
     required this.pairValue,
     this.image,
-    this.visible = false,
+    this.isVisible = false,
     this.hasError = false,
     this.isCorrect = false,
   });

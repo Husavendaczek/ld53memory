@@ -5,7 +5,7 @@ class MemoryTile {
   final int pairValue;
   final bool isLowerPart;
   AssetImage? image;
-  bool visible;
+  bool isVisible;
   bool hasError;
   bool isCorrect;
 
@@ -14,7 +14,7 @@ class MemoryTile {
     required this.pairValue,
     this.image,
     this.isLowerPart = false,
-    this.visible = false,
+    this.isVisible = false,
     this.hasError = false,
     this.isCorrect = false,
   });

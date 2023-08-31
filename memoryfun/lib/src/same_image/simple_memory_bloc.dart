@@ -91,7 +91,7 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
       var tile = SimpleMemoryTile(
         index: i,
         pairValue: value,
-        visible: false,
+        isVisible: false,
       );
       tile.image = imageMapper.getImage(tile, currentLevel.themeSet);
 
@@ -123,7 +123,7 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
         _setTileVisibility(
             hideTileIndex,
             SimpleMemoryTile(
-                index: index, pairValue: event.pairValue, visible: false));
+                index: index, pairValue: event.pairValue, isVisible: false));
         memoryTiles[hideTileIndex].hasError = false;
       }
 
@@ -132,7 +132,7 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
     _setTileVisibility(
         index,
         SimpleMemoryTile(
-            index: index, pairValue: event.pairValue, visible: true));
+            index: index, pairValue: event.pairValue, isVisible: true));
 
     if (firstIndex != null) {
       if (firstIndex == event.tileIndex) {
@@ -153,8 +153,8 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
   }
 
   void _handleCorrectMatch(int index, int oldIndex) {
-    memoryTiles[index].visible = true;
-    memoryTiles[oldIndex].visible = true;
+    memoryTiles[index].isVisible = true;
+    memoryTiles[oldIndex].isVisible = true;
     memoryTiles[index].isCorrect = true;
     memoryTiles[oldIndex].isCorrect = true;
 
@@ -200,8 +200,8 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
   void _handleWrongMatch(int index, int oldIndex) {
     soundPlayer.playWrongMatch();
 
-    memoryTiles[index].visible = false;
-    memoryTiles[oldIndex].visible = false;
+    memoryTiles[index].isVisible = false;
+    memoryTiles[oldIndex].isVisible = false;
     memoryTiles[index].hasError = true;
     memoryTiles[oldIndex].hasError = true;
 

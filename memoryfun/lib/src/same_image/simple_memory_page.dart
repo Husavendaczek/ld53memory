@@ -74,7 +74,7 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
         index: tile.index,
         pairValue: tile.pairValue,
         image: tile.image,
-        visible: tile.visible,
+        isVisible: tile.isVisible,
         hasError: tile.hasError,
         isCorrect: tile.isCorrect,
       );

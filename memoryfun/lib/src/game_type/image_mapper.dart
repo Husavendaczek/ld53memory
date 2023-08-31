@@ -17,12 +17,12 @@ class ImageMapper {
       )));
 
   AssetImage getImage(SimpleMemoryTile simpleMemoryTile, ThemeSet themeSet) {
-    return _map(
-        simpleMemoryTile.visible, simpleMemoryTile.pairValue, false, themeSet);
+    return _map(simpleMemoryTile.isVisible, simpleMemoryTile.pairValue, false,
+        themeSet);
   }
 
   AssetImage getComplexImage(MemoryTile memoryTile, ThemeSet themeSet) {
-    return _map(memoryTile.visible, memoryTile.pairValue,
+    return _map(memoryTile.isVisible, memoryTile.pairValue,
         memoryTile.isLowerPart, themeSet);
   }
 

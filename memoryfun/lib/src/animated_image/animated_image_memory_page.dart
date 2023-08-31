@@ -71,7 +71,7 @@ class _AnimatedImageMemoryPageState
     for (var tile in memorySet) {
       tiles.add(
         AnimatedMemoryTileComponent(
-          visible: tile.visible,
+          visible: tile.isVisible,
           hasError: tile.hasError,
           isCorrect: tile.isCorrect,
           image: tile.image!,

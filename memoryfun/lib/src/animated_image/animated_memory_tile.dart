@@ -9,7 +9,7 @@ class AnimatedMemoryTile extends SimpleMemoryTile {
     required super.index,
     required super.pairValue,
     super.image,
-    super.visible = false,
+    super.isVisible = false,
     super.hasError = false,
     super.isCorrect = false,
   });

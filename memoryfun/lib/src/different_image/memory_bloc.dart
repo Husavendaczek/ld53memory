@@ -101,7 +101,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
         index: i,
         pairValue: value,
         isLowerPart: i < matchesLeft,
-        visible: false,
+        isVisible: false,
       );
       tile.image = imageMapper.getComplexImage(tile, currentLevel.themeSet);
 
@@ -150,7 +150,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
         index: currentIndex,
         pairValue: event.memoryTile.pairValue,
         isLowerPart: event.memoryTile.isLowerPart,
-        visible: true,
+        isVisible: true,
       ),
     );
 
@@ -291,14 +291,14 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
 
   void _setVisibility(int currentIndex, bool isLowerPart, bool visible) {
     if (isLowerPart) {
-      splitMemorySet.lowerTiles[currentIndex].visible = visible;
+      splitMemorySet.lowerTiles[currentIndex].isVisible = visible;
       if (firstMemoryTile != null) {
-        splitMemorySet.lowerTiles[firstMemoryTile!.index].visible = visible;
+        splitMemorySet.lowerTiles[firstMemoryTile!.index].isVisible = visible;
       }
     } else {
-      splitMemorySet.upperTiles[currentIndex].visible = visible;
+      splitMemorySet.upperTiles[currentIndex].isVisible = visible;
       if (firstMemoryTile != null) {
-        splitMemorySet.upperTiles[firstMemoryTile!.index].visible = visible;
+        splitMemorySet.upperTiles[firstMemoryTile!.index].isVisible = visible;
       }
     }
   }
