@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
-import 'package:memoryfun/src/start/app_colors.dart';
+import 'package:memoryfun/src/start/app_color_mode.dart';
 
 class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});

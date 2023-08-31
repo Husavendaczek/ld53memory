@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:memoryfun/src/start/app_color_mode.dart';
 import 'package:riverbloc/riverbloc.dart';
 
 import '../helper/app_router.dart';
@@ -12,7 +13,6 @@ import '../memory/game_type.dart';
 import '../memory/level_info.dart';
 import '../memory/theme_set.dart';
 import '../same_image/simple_memory_tile.dart';
-import '../start/app_colors.dart';
 import 'animated_memory_tile.dart';
 
 part 'animated_memory_bloc.freezed.dart';

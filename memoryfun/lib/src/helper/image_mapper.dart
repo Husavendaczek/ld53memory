@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
 import 'package:memoryfun/src/same_image/simple_memory_tile.dart';
+import 'package:memoryfun/src/start/app_color_mode.dart';
 
 import '../memory/memory_tile.dart';
-import '../start/app_colors.dart';
 
 class ImageMapper {
   final AppColorMode appColorMode;

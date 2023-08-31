@@ -6,7 +6,7 @@ import 'package:memoryfun/src/components/overview_app_bar.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/level_overview/levels.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
-import 'package:memoryfun/src/start/app_colors.dart';
+import 'package:memoryfun/src/start/app_color_mode.dart';
 
 @RoutePage()
 class LevelOverviewPage extends ConsumerStatefulWidget {
