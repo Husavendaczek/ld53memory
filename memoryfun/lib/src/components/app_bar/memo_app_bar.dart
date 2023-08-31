@@ -27,7 +27,7 @@ class MemoryAppBar extends ConsumerWidget implements PreferredSizeWidget {
           if (onRestart != null)
             NormalIconBtn(
               icon: Icons.restart_alt,
-              onTap: () => onRestart,
+              onTap: () => onRestart!(),
             ),
         ],
       ),
