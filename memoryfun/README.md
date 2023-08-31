@@ -21,9 +21,12 @@ optional:
 
 
  memory_types
- - same (gleiches bild)
+ - same image (gleiches bild)
  - animated (gleiches bild + animiert)
- - different (2 verschiedene bilder) -> split memory
+ - different image (2 verschiedene bilder) -> split memory
+ - same text
+ - different text
+ - text and image
 
 theme
  - app_color_mode

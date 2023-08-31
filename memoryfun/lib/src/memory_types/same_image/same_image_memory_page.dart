@@ -5,16 +5,16 @@ import 'package:memoryfun/src/levels/level_info.dart';
 import 'package:memoryfun/src/components/memory_card/memory_card.dart';
 import 'package:memoryfun/src/memory/memory_tile.dart';
 
-import '../components/app_bar/memo_app_bar.dart';
-import '../components/buttons/normal_button.dart';
-import '../memory/memory_grid_view.dart';
-import 'simple_memory_bloc.dart';
+import '../../components/app_bar/memo_app_bar.dart';
+import '../../components/buttons/normal_button.dart';
+import '../../memory/memory_grid_view.dart';
+import 'same_image_bloc.dart';
 
 @RoutePage()
-class SimpleMemoryPage extends ConsumerStatefulWidget {
+class SameImageMemoryPage extends ConsumerStatefulWidget {
   final LevelInfo levelInfo;
 
-  const SimpleMemoryPage({
+  const SameImageMemoryPage({
     required this.levelInfo,
     super.key,
   });
@@ -24,13 +24,13 @@ class SimpleMemoryPage extends ConsumerStatefulWidget {
       _SimpleMemoryPageState();
 }
 
-class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
+class _SimpleMemoryPageState extends ConsumerState<SameImageMemoryPage> {
   @override
   void initState() {
     super.initState();
 
-    ref.read(SimpleMemoryBloc.provider.bloc).add(
-          SimpleMemoryEvent.initGame(widget.levelInfo),
+    ref.read(SameImageBloc.provider.bloc).add(
+          SameImageEvent.initGame(widget.levelInfo),
         );
   }
 
@@ -38,11 +38,11 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MemoryAppBar(
-        onRestart: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
-              SimpleMemoryEvent.initGame(widget.levelInfo),
+        onRestart: () => ref.read(SameImageBloc.provider.bloc).add(
+              SameImageEvent.initGame(widget.levelInfo),
             ),
       ),
-      body: ref.watch(SimpleMemoryBloc.provider).maybeWhen(
+      body: ref.watch(SameImageBloc.provider).maybeWhen(
             initialized: (memorySet) => _gridView(memorySet, true),
             matchResult: (memorySet) => _gridView(memorySet, false),
             orElse: () => Column(
@@ -51,8 +51,8 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
                 const Text('loading'),
                 NormalButton(
                   text: 'Restart game',
-                  onTap: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
-                        SimpleMemoryEvent.initGame(widget.levelInfo),
+                  onTap: () => ref.read(SameImageBloc.provider.bloc).add(
+                        SameImageEvent.initGame(widget.levelInfo),
                       ),
                 ),
               ],
@@ -79,8 +79,8 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
       tiles.add(
         MemoryCard(
           memoryTile: memoryTile,
-          onTap: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
-                SimpleMemoryEvent.handleTap(tile.index, tile.pairValue),
+          onTap: () => ref.read(SameImageBloc.provider.bloc).add(
+                SameImageEvent.handleTap(tile.index, tile.pairValue),
               ),
         ),
       );

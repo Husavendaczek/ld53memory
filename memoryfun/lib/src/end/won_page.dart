@@ -109,7 +109,7 @@ class WonPage extends ConsumerWidget {
                 child: NormalButton(
                   text: 'Play again',
                   onTap: () => ref.read(appRouterProvider).push(
-                        SimpleMemoryRoute(
+                        SameImageMemoryRoute(
                           levelInfo: const LevelInfo(
                               gameSize: 12,
                               themeSet: ThemeSet.food,

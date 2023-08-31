@@ -79,7 +79,7 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
                       ),
                     )
                 : () => ref.read(appRouterProvider).push(
-                      SimpleMemoryRoute(
+                      SameImageMemoryRoute(
                         levelInfo: levels[themeSet.index],
                       ),
                     ),

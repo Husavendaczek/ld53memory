@@ -8,36 +8,36 @@ import 'package:memoryfun/src/levels/level_info.dart';
 import 'package:memoryfun/src/game_type/theme_set.dart';
 import 'package:riverbloc/riverbloc.dart';
 
-import '../levels/levels.dart';
-import '../game_type/game_type.dart';
-import '../memory/memory_tile.dart';
+import '../../memory/memory_tile.dart';
+import '../../levels/levels.dart';
+import '../../game_type/game_type.dart';
 
-part 'simple_memory_bloc.freezed.dart';
+part 'same_image_bloc.freezed.dart';
 
 @freezed
-class SimpleMemoryEvent with _$SimpleMemoryEvent {
-  const factory SimpleMemoryEvent.initGame(LevelInfo levelInfo) = _InitGame;
-  const factory SimpleMemoryEvent.handleTap(int tileIndex, int pairValue) =
+class SameImageEvent with _$SameImageEvent {
+  const factory SameImageEvent.initGame(LevelInfo levelInfo) = _InitGame;
+  const factory SameImageEvent.handleTap(int tileIndex, int pairValue) =
       _HandleTap;
 }
 
 @freezed
-class SimpleMemoryState with _$SimpleMemoryState {
-  const factory SimpleMemoryState.initial() = _Initial;
-  const factory SimpleMemoryState.loading() = _Loading;
-  const factory SimpleMemoryState.initialized(List<MemoryTile> memorySet) =
+class SameImageState with _$SameImageState {
+  const factory SameImageState.initial() = _Initial;
+  const factory SameImageState.loading() = _Loading;
+  const factory SameImageState.initialized(List<MemoryTile> memorySet) =
       _Initialized;
-  const factory SimpleMemoryState.loadingResult() = _LoadingResult;
-  const factory SimpleMemoryState.matchResult(List<MemoryTile> memorySet) =
+  const factory SameImageState.loadingResult() = _LoadingResult;
+  const factory SameImageState.matchResult(List<MemoryTile> memorySet) =
       _MatchResult;
 }
 
-class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
+class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
   static final provider =
-      BlocProvider.autoDispose<SimpleMemoryBloc, SimpleMemoryState>((ref) {
+      BlocProvider.autoDispose<SameImageBloc, SameImageState>((ref) {
     ref.onDispose(() => ref.bloc.close());
 
-    return SimpleMemoryBloc(
+    return SameImageBloc(
       imageMapper: ref.watch(ImageMapper.provider),
       appRouter: ref.watch(appRouterProvider),
       soundPlayer: ref.watch(SoundPlayer.provider),
@@ -60,17 +60,17 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
   int? firstPairValue;
   List<int> hideTiles = [];
 
-  SimpleMemoryBloc({
+  SameImageBloc({
     required this.imageMapper,
     required this.appRouter,
     required this.soundPlayer,
-  }) : super(const SimpleMemoryState.initial()) {
+  }) : super(const SameImageState.initial()) {
     on<_InitGame>(_initGame);
     on<_HandleTap>(_handleTap);
   }
 
-  Future _initGame(_InitGame event, Emitter<SimpleMemoryState> emit) async {
-    emit(const SimpleMemoryState.loading());
+  Future _initGame(_InitGame event, Emitter<SameImageState> emit) async {
+    emit(const SameImageState.loading());
     soundPlayer.playMusic(event.levelInfo.themeSet);
 
     _resetGame();
@@ -98,7 +98,7 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
       memoryTiles.add(tile);
     }
 
-    emit(SimpleMemoryState.initialized(memoryTiles));
+    emit(SameImageState.initialized(memoryTiles));
   }
 
   void _resetGame() {
@@ -111,9 +111,9 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
 
   Future _handleTap(
     _HandleTap event,
-    Emitter<SimpleMemoryState> emit,
+    Emitter<SameImageState> emit,
   ) async {
-    emit(const SimpleMemoryState.loadingResult());
+    emit(const SameImageState.loadingResult());
     soundPlayer.playTap();
 
     var index = event.tileIndex;
@@ -134,7 +134,7 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
 
     if (firstIndex != null) {
       if (firstIndex == event.tileIndex) {
-        emit(SimpleMemoryState.matchResult(memoryTiles));
+        emit(SameImageState.matchResult(memoryTiles));
         return;
       } else {
         if (firstPairValue == event.pairValue) {
@@ -146,7 +146,7 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
     } else {
       firstIndex = event.tileIndex;
       firstPairValue = event.pairValue;
-      emit(SimpleMemoryState.matchResult(memoryTiles));
+      emit(SameImageState.matchResult(memoryTiles));
     }
   }
 
@@ -187,11 +187,11 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
           },
         );
 
-        emit(SimpleMemoryState.matchResult(memoryTiles));
+        emit(SameImageState.matchResult(memoryTiles));
       }
     } else {
       soundPlayer.playCorrectMatch();
-      emit(SimpleMemoryState.matchResult(memoryTiles));
+      emit(SameImageState.matchResult(memoryTiles));
     }
   }
 
@@ -208,7 +208,7 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
 
     firstIndex = null;
     firstPairValue = null;
-    emit(SimpleMemoryState.matchResult(memoryTiles));
+    emit(SameImageState.matchResult(memoryTiles));
   }
 
   void _setTileVisibility(int index, MemoryTile memoryTile) {
