@@ -135,22 +135,22 @@ class AppColors {
         ),
       );
 
-  ColorMode colorMode;
+  AppColorMode appColorMode;
 
-  AppColors({required this.colorMode});
+  AppColors({required this.appColorMode});
 }
 
-class ColorMode {
+class AppColorMode {
   ThemeMode myThemeMode;
-  ColorStyle colorStyle;
+  AppColorStyle appColorStyle;
 
-  ColorMode({
+  AppColorMode({
     this.myThemeMode = ThemeMode.system,
-    this.colorStyle = ColorStyle.color,
+    this.appColorStyle = AppColorStyle.color,
   });
 
-  static final provider = Provider<ColorMode>((ref) {
-    return ColorMode();
+  static final provider = Provider<AppColorMode>((ref) {
+    return AppColorMode();
   });
 
   void setThemeMode(ThemeMode themeMode) {
@@ -158,31 +158,31 @@ class ColorMode {
   }
 
   void switchColorStyle() {
-    if (colorStyle == ColorStyle.color) {
-      colorStyle = ColorStyle.mono;
+    if (appColorStyle == AppColorStyle.color) {
+      appColorStyle = AppColorStyle.mono;
     } else {
-      colorStyle = ColorStyle.color;
+      appColorStyle = AppColorStyle.color;
     }
   }
 
   void setColorStyle(bool highContrast) {
-    colorStyle = highContrast ? ColorStyle.mono : ColorStyle.color;
+    appColorStyle = highContrast ? AppColorStyle.mono : AppColorStyle.color;
   }
 
   ThemeData lightTheme(BuildContext context) {
-    return colorStyle == ColorStyle.color
+    return appColorStyle == AppColorStyle.color
         ? AppColors.lightTheme(context)
         : AppColors.lightMonoTheme(context);
   }
 
   ThemeData darkTheme(BuildContext context) {
-    return colorStyle == ColorStyle.color
+    return appColorStyle == AppColorStyle.color
         ? AppColors.darkTheme(context)
         : AppColors.darkMonoTheme(context);
   }
 }
 
-enum ColorStyle {
+enum AppColorStyle {
   color,
   mono,
 }

@@ -44,14 +44,14 @@ class AnimatedMemoryBloc
       imageMapper: ref.watch(ImageMapper.provider),
       appRouter: ref.watch(appRouterProvider),
       soundPlayer: ref.watch(SoundPlayer.provider),
-      colorMode: ref.watch(ColorMode.provider),
+      appColorMode: ref.watch(AppColorMode.provider),
     );
   });
 
   final ImageMapper imageMapper;
   final AppRouter appRouter;
   final SoundPlayer soundPlayer;
-  final ColorMode colorMode;
+  final AppColorMode appColorMode;
 
   List<AnimatedMemoryTile> memoryTiles = [];
   int matchesWon = 0;
@@ -69,7 +69,7 @@ class AnimatedMemoryBloc
     required this.imageMapper,
     required this.appRouter,
     required this.soundPlayer,
-    required this.colorMode,
+    required this.appColorMode,
   }) : super(const AnimatedMemoryState.initial()) {
     on<_InitGame>(_initGame);
     on<_HandleTap>(_handleTap);
@@ -97,7 +97,7 @@ class AnimatedMemoryBloc
       List<AssetImage> animatedImages = [];
       for (int j = 0; j < 7; j++) {
         animatedImages.add(AssetImage(
-            'assets/${colorMode.colorStyle.name}/${currentLevel.themeSet.name}/${currentLevel.themeSet.name}_${value}_anim_$j.png'));
+            'assets/${appColorMode.appColorStyle.name}/${currentLevel.themeSet.name}/${currentLevel.themeSet.name}_${value}_anim_$j.png'));
       }
 
       var tile = AnimatedMemoryTile(

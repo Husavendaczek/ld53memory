@@ -44,7 +44,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           NormalButton(
             text: 'Switch style to colored or monochrome',
             onTap: () {
-              ref.read(ColorMode.provider).switchColorStyle();
+              ref.read(AppColorMode.provider).switchColorStyle();
               setState(() {
                 value = 1;
               });

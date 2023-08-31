@@ -93,7 +93,7 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
         clipBehavior: Clip.antiAlias,
         child: Image(
             image: AssetImage(
-                'assets/${ref.watch(ColorMode.provider).colorStyle.name}/${themeSet.name}/${themeSet.name}_thumbnail.png')),
+                'assets/${ref.watch(AppColorMode.provider).appColorStyle.name}/${themeSet.name}/${themeSet.name}_thumbnail.png')),
       ),
     ).animate().fadeIn(
           duration: 600.ms,
