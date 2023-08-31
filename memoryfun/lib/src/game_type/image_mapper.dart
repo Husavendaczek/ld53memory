@@ -19,12 +19,6 @@ class ImageMapper {
     return _map(memoryTile.isVisible, memoryTile.pairValue, false, themeSet);
   }
 
-//TODO remove
-  AssetImage getComplexImage(MemoryTile memoryTile, ThemeSet themeSet) {
-    return _map(memoryTile.isVisible, memoryTile.pairValue,
-        memoryTile.isLowerPart, themeSet);
-  }
-
   AssetImage hideComplexImage(ThemeSet themeSet, bool isLowerPart) {
     return _backgroundImage(themeSet, isLowerPart);
   }
@@ -36,22 +30,20 @@ class ImageMapper {
     }
 
     if (isLowerPart) {
-      return AssetImage(
-          'assets/${appColorMode.appColorStyle.name}/${themeSet.name}/${themeSet.name}_l_$pairValue.png');
+      return AssetImage('${_colorPath(themeSet)}_l_$pairValue.png');
     }
 
-    return AssetImage(
-        'assets/${appColorMode.appColorStyle.name}/${themeSet.name}/${themeSet.name}_$pairValue.png');
+    return AssetImage('${_colorPath(themeSet)}_$pairValue.png');
   }
 
   AssetImage _backgroundImage(ThemeSet themeSet, bool isLowerPart) {
     if (isLowerPart) {
-      return AssetImage(
-          'assets/${appColorMode.appColorStyle.name}/${themeSet.name}/${themeSet.name}_l_background.png');
+      return AssetImage('${_colorPath(themeSet)}_l_background.png');
     }
-    return AssetImage(
-        'assets/${appColorMode.appColorStyle.name}/${themeSet.name}/${themeSet.name}_background.png');
+    return AssetImage('${_colorPath(themeSet)}_background.png');
   }
 
-  //TODO function for assetname
+  String _colorPath(ThemeSet themeSet) {
+    return 'assets/${appColorMode.appColorStyle.name}/${themeSet.name}/${themeSet.name}';
+  }
 }

@@ -103,7 +103,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
         isLowerPart: i < matchesLeft,
         isVisible: false,
       );
-      tile.image = imageMapper.getComplexImage(tile, currentLevel.themeSet);
+      tile.image = imageMapper.getImage(tile, currentLevel.themeSet);
 
       if (tile.isLowerPart) {
         splitMemorySet.lowerTiles.add(tile);
@@ -322,7 +322,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
   }
 
   void _setTileImage(int index, MemoryTile memoryTile) {
-    var image = imageMapper.getComplexImage(
+    var image = imageMapper.getImage(
       memoryTile,
       currentLevel.themeSet,
     );
