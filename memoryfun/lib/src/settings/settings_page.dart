@@ -6,6 +6,7 @@ import 'package:memoryfun/src/start/app_color_mode.dart';
 import '../components/memo_app_bar.dart';
 import '../components/normal_button.dart';
 import '../start/app_colors.dart';
+import '../start/memory_grid_row_size.dart';
 
 @RoutePage()
 class SettingsPage extends ConsumerStatefulWidget {

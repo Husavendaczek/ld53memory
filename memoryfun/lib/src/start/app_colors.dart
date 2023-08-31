@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/start/app_color_mode.dart';
 
 class AppColors {
@@ -144,18 +143,4 @@ class AppColors {
 enum AppColorStyle {
   color,
   mono,
-}
-
-class MemoryGridRowSize {
-  int rowSize;
-
-  MemoryGridRowSize({this.rowSize = 4});
-
-  static final provider = Provider<MemoryGridRowSize>((ref) {
-    return MemoryGridRowSize();
-  });
-
-  void setRowSize(int size) {
-    rowSize = size;
-  }
 }
