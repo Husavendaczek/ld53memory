@@ -22,7 +22,7 @@ optional:
 
  memory_types
  - same image (gleiches bild)
- - animated (gleiches bild + animiert)
+ - animated image (gleiches bild + animiert)
  - different image (2 verschiedene bilder) -> split memory
  - same text
  - different text

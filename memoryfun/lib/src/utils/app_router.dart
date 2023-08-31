@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/animated_image/animated_image_memory_page.dart';
+import 'package:memoryfun/src/memory_types/same/animated_image/animated_image_memory_page.dart';
 import 'package:memoryfun/src/memory_types/different/different_image/different_image_memory_page.dart';
 import 'package:memoryfun/src/memory_types/same_image/same_image_memory_page.dart';
 import 'package:memoryfun/src/end/won_page.dart';
