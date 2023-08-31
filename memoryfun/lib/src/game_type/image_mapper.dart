@@ -10,19 +10,36 @@ class ImageMapper {
 
   const ImageMapper({required this.appColorMode});
 
-  static final provider = Provider<ImageMapper>((ref) => ImageMapper(
-          appColorMode: ref.watch(
+  static final provider = Provider<ImageMapper>(
+    (ref) => ImageMapper(
+      appColorMode: ref.watch(
         AppColorMode.provider,
-      )));
+      ),
+    ),
+  );
 
-  AssetImage getImage(MemoryTile memoryTile, ThemeSet themeSet) {
-    return _map(memoryTile.isVisible, memoryTile.pairValue,
-        memoryTile.isLowerPart, themeSet);
+  AssetImage getImage(MemoryTile memoryTile, ThemeSet themeSet) => _map(
+        memoryTile.isVisible,
+        memoryTile.pairValue,
+        memoryTile.isLowerPart,
+        themeSet,
+      );
+
+  List<AssetImage> animatedImages(ThemeSet themeSet, int value) {
+    var themeSetName = themeSet.name;
+
+    List<AssetImage> animatedImages = [];
+    for (int j = 0; j < 7; j++) {
+      animatedImages.add(
+        AssetImage(
+            'assets/${appColorMode.appColorStyle.name}/$themeSetName/${themeSetName}_${value}_anim_$j.png'),
+      );
+    }
+    return animatedImages;
   }
 
-  AssetImage hideComplexImage(ThemeSet themeSet, bool isLowerPart) {
-    return _backgroundImage(themeSet, isLowerPart);
-  }
+  AssetImage hideComplexImage(ThemeSet themeSet, bool isLowerPart) =>
+      _backgroundImage(themeSet, isLowerPart);
 
   AssetImage _map(
       bool visible, int pairValue, bool isLowerPart, ThemeSet themeSet) {
@@ -45,6 +62,7 @@ class ImageMapper {
   }
 
   String _colorPath(ThemeSet themeSet) {
-    return 'assets/${appColorMode.appColorStyle.name}/${themeSet.name}/${themeSet.name}';
+    var themeSetName = themeSet.name;
+    return 'assets/${appColorMode.appColorStyle.name}/$themeSetName/$themeSetName';
   }
 }

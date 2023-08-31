@@ -5,7 +5,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverbloc/riverbloc.dart';
 
 import '../../../models/memory_tile.dart';
-import '../../../../theme/app_color_mode.dart';
 import '../../../../utils/app_router.dart';
 import '../../../../game_type/image_mapper.dart';
 import '../../../../sound/sound_player.dart';
@@ -44,14 +43,12 @@ class AnimatedMemoryBloc
       imageMapper: ref.watch(ImageMapper.provider),
       appRouter: ref.watch(appRouterProvider),
       soundPlayer: ref.watch(SoundPlayer.provider),
-      appColorMode: ref.watch(AppColorMode.provider),
     );
   });
 
   final ImageMapper imageMapper;
   final AppRouter appRouter;
   final SoundPlayer soundPlayer;
-  final AppColorMode appColorMode;
 
   List<AnimatedMemoryTile> memoryTiles = [];
   int matchesWon = 0;
@@ -69,7 +66,6 @@ class AnimatedMemoryBloc
     required this.imageMapper,
     required this.appRouter,
     required this.soundPlayer,
-    required this.appColorMode,
   }) : super(const AnimatedMemoryState.initial()) {
     on<_InitGame>(_initGame);
     on<_HandleTap>(_handleTap);
@@ -94,11 +90,8 @@ class AnimatedMemoryBloc
       var value = pairValues[randomIndex];
       pairValues.removeAt(randomIndex);
 
-      List<AssetImage> animatedImages = [];
-      for (int j = 0; j < 7; j++) {
-        animatedImages.add(AssetImage(
-            'assets/${appColorMode.appColorStyle.name}/${currentLevel.themeSet.name}/${currentLevel.themeSet.name}_${value}_anim_$j.png'));
-      }
+      List<AssetImage> animatedImages =
+          imageMapper.animatedImages(currentLevel.themeSet, value);
 
       var tile = AnimatedMemoryTile(
         index: i,
