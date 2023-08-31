@@ -14,24 +14,22 @@ class SplitMemoryGridView extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          GridView.count(
-            shrinkWrap: true,
-            crossAxisCount: ref.watch(MemoryGridRowSize.provider).rowSize,
-            mainAxisSpacing: 4,
-            crossAxisSpacing: 4,
-            childAspectRatio: 1,
-            padding: const EdgeInsets.all(4),
-            children: upperTiles,
-          ),
-          lowerGrid(ref),
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context, WidgetRef ref) => SingleChildScrollView(
+        child: Column(
+          children: [
+            GridView.count(
+              shrinkWrap: true,
+              crossAxisCount: ref.watch(MemoryGridRowSize.provider).rowSize,
+              mainAxisSpacing: 4,
+              crossAxisSpacing: 4,
+              childAspectRatio: 1,
+              padding: const EdgeInsets.all(4),
+              children: upperTiles,
+            ),
+            lowerGrid(ref),
+          ],
+        ),
+      );
 
   Widget lowerGrid(WidgetRef ref) {
     if (lowerTiles.isEmpty) return Container();

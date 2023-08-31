@@ -35,31 +35,29 @@ class _AnimatedImageMemoryPageState
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MemoryAppBar(
-        onRestart: () => ref.read(AnimatedMemoryBloc.provider.bloc).add(
-              AnimatedMemoryEvent.initGame(widget.levelInfo),
+  Widget build(BuildContext context) => Scaffold(
+        appBar: MemoryAppBar(
+          onRestart: () => ref.read(AnimatedMemoryBloc.provider.bloc).add(
+                AnimatedMemoryEvent.initGame(widget.levelInfo),
+              ),
+        ),
+        body: ref.watch(AnimatedMemoryBloc.provider).maybeWhen(
+              initialized: (memorySet) => _gridView(memorySet, true),
+              matchResult: (memorySet) => _gridView(memorySet, false),
+              orElse: () => Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('loading'),
+                  NormalButton(
+                    text: 'Restart game',
+                    onTap: () => ref.read(AnimatedMemoryBloc.provider.bloc).add(
+                          AnimatedMemoryEvent.initGame(widget.levelInfo),
+                        ),
+                  ),
+                ],
+              ),
             ),
-      ),
-      body: ref.watch(AnimatedMemoryBloc.provider).maybeWhen(
-            initialized: (memorySet) => _gridView(memorySet, true),
-            matchResult: (memorySet) => _gridView(memorySet, false),
-            orElse: () => Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('loading'),
-                NormalButton(
-                  text: 'Restart game',
-                  onTap: () => ref.read(AnimatedMemoryBloc.provider.bloc).add(
-                        AnimatedMemoryEvent.initGame(widget.levelInfo),
-                      ),
-                ),
-              ],
-            ),
-          ),
-    );
-  }
+      );
 
   Widget _gridView(List<AnimatedMemoryTile> memorySet, bool fadeIn) =>
       MemoryGridView(

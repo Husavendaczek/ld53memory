@@ -13,26 +13,24 @@ class MemoryAppBar extends ConsumerWidget implements PreferredSizeWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return SafeArea(
-      child: AppBar(
-        leading: NormalIconBtn(
-          icon: Icons.home,
-          onTap: () => ref
-              .read(appRouterProvider)
-              .navigate(LevelOverviewRoute(value: 10)),
+  Widget build(BuildContext context, WidgetRef ref) => SafeArea(
+        child: AppBar(
+          leading: NormalIconBtn(
+            icon: Icons.home,
+            onTap: () => ref
+                .read(appRouterProvider)
+                .navigate(LevelOverviewRoute(value: 10)),
+          ),
+          title: const Text('Memory FUN'),
+          actions: [
+            if (onRestart != null)
+              NormalIconBtn(
+                icon: Icons.restart_alt,
+                onTap: () => onRestart!(),
+              ),
+          ],
         ),
-        title: const Text('Memory FUN'),
-        actions: [
-          if (onRestart != null)
-            NormalIconBtn(
-              icon: Icons.restart_alt,
-              onTap: () => onRestart!(),
-            ),
-        ],
-      ),
-    );
-  }
+      );
 
   @override
   Size get preferredSize => const Size.fromHeight(60);

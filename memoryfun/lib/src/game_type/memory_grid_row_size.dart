@@ -5,9 +5,9 @@ class MemoryGridRowSize {
 
   MemoryGridRowSize({this.rowSize = 4});
 
-  static final provider = Provider<MemoryGridRowSize>((ref) {
-    return MemoryGridRowSize();
-  });
+  static final provider = Provider<MemoryGridRowSize>(
+    (ref) => MemoryGridRowSize(),
+  );
 
   void setRowSize(int size) {
     rowSize = size;

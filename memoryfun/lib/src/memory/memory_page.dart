@@ -35,31 +35,29 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MemoryAppBar(
-        onRestart: () => ref.read(MemoryBloc.provider.bloc).add(
-              MemoryEvent.initGame(widget.levelInfo),
+  Widget build(BuildContext context) => Scaffold(
+        appBar: MemoryAppBar(
+          onRestart: () => ref.read(MemoryBloc.provider.bloc).add(
+                MemoryEvent.initGame(widget.levelInfo),
+              ),
+        ),
+        body: ref.watch(MemoryBloc.provider).maybeWhen(
+              initialized: (memorySet) => _gridView(memorySet, true),
+              matchResult: (memorySet) => _gridView(memorySet, false),
+              orElse: () => Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('loading'),
+                  NormalButton(
+                    text: 'Restart game',
+                    onTap: () => ref.read(MemoryBloc.provider.bloc).add(
+                          MemoryEvent.initGame(widget.levelInfo),
+                        ),
+                  ),
+                ],
+              ),
             ),
-      ),
-      body: ref.watch(MemoryBloc.provider).maybeWhen(
-            initialized: (memorySet) => _gridView(memorySet, true),
-            matchResult: (memorySet) => _gridView(memorySet, false),
-            orElse: () => Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('loading'),
-                NormalButton(
-                  text: 'Restart game',
-                  onTap: () => ref.read(MemoryBloc.provider.bloc).add(
-                        MemoryEvent.initGame(widget.levelInfo),
-                      ),
-                ),
-              ],
-            ),
-          ),
-    );
-  }
+      );
 
   Widget _gridView(SplitMemorySet splitMemorySet, bool fadeIn) =>
       SplitMemoryGridView(

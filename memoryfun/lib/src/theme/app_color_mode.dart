@@ -13,9 +13,7 @@ class AppColorMode {
     this.appColorStyle = AppColorStyle.color,
   });
 
-  static final provider = Provider<AppColorMode>((ref) {
-    return AppColorMode();
-  });
+  static final provider = Provider<AppColorMode>((ref) => AppColorMode());
 
   void setThemeMode(ThemeMode themeMode) {
     myThemeMode = themeMode;
@@ -33,15 +31,13 @@ class AppColorMode {
     appColorStyle = highContrast ? AppColorStyle.mono : AppColorStyle.color;
   }
 
-  ThemeData lightTheme(BuildContext context) {
-    return appColorStyle == AppColorStyle.color
-        ? AppColors.lightTheme(context)
-        : AppColors.lightMonoTheme(context);
-  }
+  ThemeData lightTheme(BuildContext context) =>
+      appColorStyle == AppColorStyle.color
+          ? AppColors.lightTheme(context)
+          : AppColors.lightMonoTheme(context);
 
-  ThemeData darkTheme(BuildContext context) {
-    return appColorStyle == AppColorStyle.color
-        ? AppColors.darkTheme(context)
-        : AppColors.darkMonoTheme(context);
-  }
+  ThemeData darkTheme(BuildContext context) =>
+      appColorStyle == AppColorStyle.color
+          ? AppColors.darkTheme(context)
+          : AppColors.darkMonoTheme(context);
 }
