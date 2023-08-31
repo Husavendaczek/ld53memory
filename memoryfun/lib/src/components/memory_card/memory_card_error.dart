@@ -4,11 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MemoryCardError extends ConsumerWidget {
   final AssetImage image;
-  final Function() onTap;
 
   const MemoryCardError({
     required this.image,
-    required this.onTap,
     super.key,
   });
 

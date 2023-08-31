@@ -7,7 +7,7 @@ import '../../../../levels/level_info.dart';
 import '../../../../components/grid/single_memory_grid_view.dart';
 import '../bloc/animated_memory_bloc.dart';
 import '../models/animated_memory_tile.dart';
-import '../../../../components/memory_card/animated_memory_tile_component.dart';
+import '../../../../components/memory_card/animated_card.dart';
 
 @RoutePage()
 class AnimatedImageMemoryPage extends ConsumerStatefulWidget {
@@ -68,12 +68,8 @@ class _AnimatedImageMemoryPageState
     List<Widget> tiles = [];
     for (var tile in memorySet) {
       tiles.add(
-        AnimatedMemoryTileComponent(
-          visible: tile.isVisible,
-          hasError: tile.hasError,
-          isCorrect: tile.isCorrect,
-          image: tile.image!,
-          animatedImages: tile.animationImages,
+        AnimatedCard(
+          animatedMemoryTile: tile,
           onTap: () => ref.read(AnimatedMemoryBloc.provider.bloc).add(
                 AnimatedMemoryEvent.handleTap(tile.index, tile.pairValue),
               ),

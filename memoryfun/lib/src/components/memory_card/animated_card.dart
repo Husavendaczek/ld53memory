@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoryfun/src/components/memory_card/memory_card_error.dart';
+import 'package:memoryfun/src/memory_types/same/animated_image/models/animated_memory_tile.dart';
 
-//TODO rename
-class AnimatedMemoryTileComponent extends ConsumerStatefulWidget {
-  final bool visible;
-  final bool hasError;
-  final bool isCorrect;
-  final AssetImage image;
-  final List<AssetImage> animatedImages;
+import 'tapable_card.dart';
+
+class AnimatedCard extends ConsumerStatefulWidget {
+  final AnimatedMemoryTile animatedMemoryTile;
   final Function() onTap;
 
-  const AnimatedMemoryTileComponent({
-    required this.visible,
-    required this.hasError,
-    required this.isCorrect,
-    required this.image,
-    required this.animatedImages,
+  const AnimatedCard({
+    required this.animatedMemoryTile,
     required this.onTap,
     super.key,
   });
@@ -26,18 +21,16 @@ class AnimatedMemoryTileComponent extends ConsumerStatefulWidget {
       _AnimatedMemoryTileComponentState();
 }
 
-class _AnimatedMemoryTileComponentState
-    extends ConsumerState<AnimatedMemoryTileComponent> {
+class _AnimatedMemoryTileComponentState extends ConsumerState<AnimatedCard> {
   @override
   Widget build(BuildContext context) {
-    //TODO can use the cards too?
-    var initTile = Padding(
+    Widget animatedCard = Padding(
       padding: const EdgeInsets.all(4.0),
       child: _getImage().animate(),
     ).animate();
 
-    if (widget.isCorrect) {
-      initTile = Padding(
+    if (widget.animatedMemoryTile.isCorrect) {
+      animatedCard = Padding(
         padding: const EdgeInsets.all(4.0),
         child: _getImage(),
       )
@@ -76,54 +69,25 @@ class _AnimatedMemoryTileComponentState
           );
     }
 
-    if (widget.hasError) {
-      initTile = Padding(
-        padding: const EdgeInsets.all(0),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Theme.of(context).focusColor,
-              width: 2,
-            ),
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Material(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              clipBehavior: Clip.antiAlias,
-              child:
-                  Image(image: widget.animatedImages.first, fit: BoxFit.cover),
-            ),
-          ),
-        ).animate().shake(),
-      ).animate();
+    if (widget.animatedMemoryTile.hasError) {
+      animatedCard = MemoryCardError(
+          image: widget.animatedMemoryTile.animationImages.first);
     }
 
-    return InkWell(
-      onTap: () => widget.visible && widget.isCorrect ? {} : widget.onTap(),
-      customBorder: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(8),
-        ),
-      ),
-      child: initTile,
-    )
-        .animate()
-        .fadeIn(
-          duration: 600.ms,
-          curve: Curves.easeIn,
-        )
-        .blurXY(begin: 1, end: 0, duration: 600.ms, delay: 300.ms);
+    return TapableCard(
+      card: animatedCard,
+      onTap: () => widget.animatedMemoryTile.isVisible &&
+              widget.animatedMemoryTile.isCorrect
+          ? null
+          : widget.onTap(),
+    );
   }
 
   Material _getImage() => Material(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         clipBehavior: Clip.antiAlias,
         child: Image(
-          image: widget.image,
+          image: widget.animatedMemoryTile.image!,
           fit: BoxFit.cover,
         ),
       );
@@ -134,7 +98,7 @@ class _AnimatedMemoryTileComponentState
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           clipBehavior: Clip.antiAlias,
           child: Image(
-            image: widget.animatedImages[index],
+            image: widget.animatedMemoryTile.animationImages[index],
             fit: BoxFit.cover,
           ),
         ),

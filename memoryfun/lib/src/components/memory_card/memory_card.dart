@@ -27,7 +27,7 @@ class MemoryCard extends ConsumerWidget {
     }
 
     if (memoryTile.hasError) {
-      memoryCard = MemoryCardError(image: image, onTap: onTap);
+      memoryCard = MemoryCardError(image: image);
     }
 
     return TapableCard(
