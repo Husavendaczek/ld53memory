@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:memoryfun/src/start/app_color_mode.dart';
+import 'package:memoryfun/src/theme/app_color_mode.dart';
 
 class AppColors {
   static Color text = Colors.black;

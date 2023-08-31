@@ -1,11 +1,11 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/start/app_color_mode.dart';
+import 'package:memoryfun/src/theme/app_color_mode.dart';
 
 import '../components/memo_app_bar.dart';
 import '../components/normal_button.dart';
-import '../start/app_colors.dart';
+import '../theme/app_colors.dart';
 import '../start/memory_grid_row_size.dart';
 
 @RoutePage()

@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:memoryfun/src/start/app_color_mode.dart';
+import 'package:memoryfun/src/theme/app_color_mode.dart';
 import 'package:riverbloc/riverbloc.dart';
 
 import '../helper/app_router.dart';

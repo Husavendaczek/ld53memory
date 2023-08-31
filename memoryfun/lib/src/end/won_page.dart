@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/memory/game_type.dart';
-import 'package:memoryfun/src/start/app_colors.dart';
+import 'package:memoryfun/src/theme/app_colors.dart';
 
 import '../components/normal_button.dart';
 import '../helper/app_router.dart';
