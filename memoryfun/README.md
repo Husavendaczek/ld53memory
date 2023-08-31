@@ -16,3 +16,24 @@ optional:
 * iOS: Run `flutter build ipa` -> result is in `build/ios/archive/`.
  Then open build/ios/archive/MyApp.xcarchive in Xcode or open project in Xcode go to Product -> Archive. 
  Validate the app and distribute it.
+
+
+
+
+ memory_types
+ - same (gleiches bild)
+ - animated (gleiches bild + animiert)
+ - different (2 verschiedene bilder) -> split memory
+
+theme
+ - app_color_mode
+ - app_color_style
+ - app_colors
+
+levels
+ - levels
+ - level_overview
+
+sound
+ - sound_player
+ - TODO bloc with events plays the right thing and stops other stuff

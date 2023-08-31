@@ -14,6 +14,7 @@ import '../game_type/theme_set.dart';
 class WonPage extends ConsumerWidget {
   const WonPage({super.key});
 
+//TODO without animation for monochrome
   @override
   Widget build(BuildContext context, WidgetRef ref) => Scaffold(
         body: Center(

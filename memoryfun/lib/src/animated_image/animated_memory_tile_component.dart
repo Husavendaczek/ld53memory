@@ -30,6 +30,7 @@ class _AnimatedMemoryTileComponentState
     extends ConsumerState<AnimatedMemoryTileComponent> {
   @override
   Widget build(BuildContext context) {
+    //TODO can use the cards too?
     var initTile = Padding(
       padding: const EdgeInsets.all(4.0),
       child: _getImage().animate(),
