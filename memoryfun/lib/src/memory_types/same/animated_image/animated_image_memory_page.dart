@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../components/app_bar/memo_app_bar.dart';
 import '../../../components/buttons/normal_button.dart';
 import '../../../levels/level_info.dart';
-import '../../../memory/memory_grid_view.dart';
+import '../../../components/grid/single_memory_grid_view.dart';
 import 'animated_memory_bloc.dart';
 import 'animated_memory_tile.dart';
 import 'animated_memory_tile_component.dart';
@@ -60,7 +60,7 @@ class _AnimatedImageMemoryPageState
       );
 
   Widget _gridView(List<AnimatedMemoryTile> memorySet, bool fadeIn) =>
-      MemoryGridView(
+      SingleMemoryGridView(
         tiles: _tiles(memorySet, fadeIn),
       );
 

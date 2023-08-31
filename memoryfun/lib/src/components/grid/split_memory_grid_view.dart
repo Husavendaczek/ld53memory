@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../game_type/memory_grid_row_size.dart';
+import '../../game_type/memory_grid_row_size.dart';
 
 class SplitMemoryGridView extends ConsumerWidget {
   final List<Widget> upperTiles;

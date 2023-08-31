@@ -6,7 +6,7 @@ import '../../../components/app_bar/memo_app_bar.dart';
 import '../../../components/buttons/normal_button.dart';
 import '../../../components/memory_card/memory_card.dart';
 import '../../../levels/level_info.dart';
-import '../../../memory/memory_grid_view.dart';
+import '../../../components/grid/single_memory_grid_view.dart';
 import '../../../memory/memory_tile.dart';
 import 'same_image_bloc.dart';
 
@@ -61,7 +61,8 @@ class _SimpleMemoryPageState extends ConsumerState<SameImageMemoryPage> {
     );
   }
 
-  Widget _gridView(List<MemoryTile> memorySet, bool fadeIn) => MemoryGridView(
+  Widget _gridView(List<MemoryTile> memorySet, bool fadeIn) =>
+      SingleMemoryGridView(
         tiles: _tiles(memorySet, fadeIn),
       );
 

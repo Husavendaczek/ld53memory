@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../split_memory/split_memory_grid_view.dart';
+import 'split_memory_grid_view.dart';
 
-class MemoryGridView extends ConsumerWidget {
+class SingleMemoryGridView extends ConsumerWidget {
   final List<Widget> tiles;
 
-  const MemoryGridView({
+  const SingleMemoryGridView({
     required this.tiles,
     super.key,
   });
