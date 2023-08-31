@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../components/app_bar/memo_app_bar.dart';
-import '../../../components/buttons/normal_button.dart';
-import '../../../levels/level_info.dart';
-import '../../../components/grid/single_memory_grid_view.dart';
-import 'animated_memory_bloc.dart';
-import 'animated_memory_tile.dart';
-import 'animated_memory_tile_component.dart';
+import '../../../../components/app_bar/memo_app_bar.dart';
+import '../../../../components/buttons/normal_button.dart';
+import '../../../../levels/level_info.dart';
+import '../../../../components/grid/single_memory_grid_view.dart';
+import '../bloc/animated_memory_bloc.dart';
+import '../models/animated_memory_tile.dart';
+import '../../../../components/memory_card/animated_memory_tile_component.dart';
 
 @RoutePage()
 class AnimatedImageMemoryPage extends ConsumerStatefulWidget {

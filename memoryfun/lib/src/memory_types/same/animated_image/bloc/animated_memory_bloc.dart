@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverbloc/riverbloc.dart';
 
-import '../../../memory/memory_tile.dart';
-import '../../../theme/app_color_mode.dart';
-import '../../../utils/app_router.dart';
-import '../../../game_type/image_mapper.dart';
-import '../../../sound/sound_player.dart';
-import '../../../levels/levels.dart';
-import '../../../game_type/game_type.dart';
-import '../../../levels/level_info.dart';
-import '../../../game_type/theme_set.dart';
-import 'animated_memory_tile.dart';
+import '../../../../memory/memory_tile.dart';
+import '../../../../theme/app_color_mode.dart';
+import '../../../../utils/app_router.dart';
+import '../../../../game_type/image_mapper.dart';
+import '../../../../sound/sound_player.dart';
+import '../../../../levels/levels.dart';
+import '../../../../game_type/game_type.dart';
+import '../../../../levels/level_info.dart';
+import '../../../../game_type/theme_set.dart';
+import '../models/animated_memory_tile.dart';
 
 part 'animated_memory_bloc.freezed.dart';
 
