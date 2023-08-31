@@ -1,44 +1,46 @@
 import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:memoryfun/src/utils/app_router.dart';
-import 'package:memoryfun/src/game_type/image_mapper.dart';
-import 'package:memoryfun/src/sound/sound_player.dart';
-import 'package:memoryfun/src/game_type/game_type.dart';
-import 'package:memoryfun/src/levels/level_info.dart';
-import 'package:memoryfun/src/memory/memory_tile.dart';
-import 'package:memoryfun/src/game_type/theme_set.dart';
-import 'package:memoryfun/src/split_memory/tile_to_hide.dart';
 import 'package:riverbloc/riverbloc.dart';
 
-import '../levels/levels.dart';
-import '../split_memory/split_memory_set.dart';
+import '../../../game_type/game_type.dart';
+import '../../../game_type/image_mapper.dart';
+import '../../../game_type/theme_set.dart';
+import '../../../levels/level_info.dart';
+import '../../../levels/levels.dart';
+import '../../../memory/memory_tile.dart';
+import '../../../sound/sound_player.dart';
+import '../../../split_memory/split_memory_set.dart';
+import '../../../split_memory/tile_to_hide.dart';
+import '../../../utils/app_router.dart';
 
-part 'memory_bloc.freezed.dart';
+part 'different_image_bloc.freezed.dart';
 
 @freezed
-class MemoryEvent with _$MemoryEvent {
-  const factory MemoryEvent.initGame(LevelInfo levelInfo) = _InitGame;
-  const factory MemoryEvent.handleTap(MemoryTile memoryTile) = _HandleTap;
+class DifferentImageEvent with _$DifferentImageEvent {
+  const factory DifferentImageEvent.initGame(LevelInfo levelInfo) = _InitGame;
+  const factory DifferentImageEvent.handleTap(MemoryTile memoryTile) =
+      _HandleTap;
 }
 
 @freezed
-class MemoryState with _$MemoryState {
-  const factory MemoryState.initial() = _Initial;
-  const factory MemoryState.loading() = _Loading;
-  const factory MemoryState.initialized(SplitMemorySet memorySet) =
+class DifferentImageState with _$DifferentImageState {
+  const factory DifferentImageState.initial() = _Initial;
+  const factory DifferentImageState.loading() = _Loading;
+  const factory DifferentImageState.initialized(SplitMemorySet memorySet) =
       _Initialized;
-  const factory MemoryState.loadingResult() = _LoadingResult;
-  const factory MemoryState.matchResult(SplitMemorySet memorySet) =
+  const factory DifferentImageState.loadingResult() = _LoadingResult;
+  const factory DifferentImageState.matchResult(SplitMemorySet memorySet) =
       _MatchResult;
 }
 
-class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
+class DifferentImageBloc
+    extends Bloc<DifferentImageEvent, DifferentImageState> {
   static final provider =
-      BlocProvider.autoDispose<MemoryBloc, MemoryState>((ref) {
+      BlocProvider.autoDispose<DifferentImageBloc, DifferentImageState>((ref) {
     ref.onDispose(() => ref.bloc.close());
 
-    return MemoryBloc(
+    return DifferentImageBloc(
       imageMapper: ref.watch(ImageMapper.provider),
       appRouter: ref.watch(appRouterProvider),
       soundPlayer: ref.watch(SoundPlayer.provider),
@@ -62,17 +64,17 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
   MemoryTile? firstMemoryTile;
   List<TileToHide> hideTiles = [];
 
-  MemoryBloc({
+  DifferentImageBloc({
     required this.imageMapper,
     required this.appRouter,
     required this.soundPlayer,
-  }) : super(const MemoryState.initial()) {
+  }) : super(const DifferentImageState.initial()) {
     on<_InitGame>(_initGame);
     on<_HandleTap>(_handleTap);
   }
 
-  Future _initGame(_InitGame event, Emitter<MemoryState> emit) async {
-    emit(const MemoryState.loading());
+  Future _initGame(_InitGame event, Emitter<DifferentImageState> emit) async {
+    emit(const DifferentImageState.loading());
     soundPlayer.playMusic(event.levelInfo.themeSet);
 
     _resetGame();
@@ -112,7 +114,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
       }
     }
 
-    emit(MemoryState.initialized(splitMemorySet));
+    emit(DifferentImageState.initialized(splitMemorySet));
   }
 
   void _resetGame() {
@@ -132,11 +134,11 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
 
   Future _handleTap(
     _HandleTap event,
-    Emitter<MemoryState> emit,
+    Emitter<DifferentImageState> emit,
   ) async {
-    emit(const MemoryState.loadingResult());
+    emit(const DifferentImageState.loadingResult());
     if (_prohibitTapInSameArea(event.memoryTile)) {
-      return emit(MemoryState.initialized(splitMemorySet));
+      return emit(DifferentImageState.initialized(splitMemorySet));
     }
 
     soundPlayer.playTap();
@@ -160,7 +162,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
         event.memoryTile.pairValue,
         event.memoryTile.isLowerPart,
       );
-      return emit(MemoryState.matchResult(splitMemorySet));
+      return emit(DifferentImageState.matchResult(splitMemorySet));
     } else {
       _handleSecondTap(
         currentIndex,
@@ -255,11 +257,11 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
           },
         );
 
-        emit(MemoryState.matchResult(splitMemorySet));
+        emit(DifferentImageState.matchResult(splitMemorySet));
       }
     } else {
       soundPlayer.playCorrectMatch();
-      emit(MemoryState.matchResult(splitMemorySet));
+      emit(DifferentImageState.matchResult(splitMemorySet));
     }
   }
 
@@ -286,7 +288,7 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
         isLowerPart: firstMemoryTile!.isLowerPart));
 
     firstMemoryTile = null;
-    emit(MemoryState.matchResult(splitMemorySet));
+    emit(DifferentImageState.matchResult(splitMemorySet));
   }
 
   void _setVisibility(int currentIndex, bool isLowerPart, bool visible) {

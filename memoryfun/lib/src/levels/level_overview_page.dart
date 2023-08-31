@@ -67,7 +67,7 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
                 themeSet == ThemeSet.farmComplex)
             ? () {
                 ref.read(appRouterProvider).push(
-                      MemoryRoute(
+                      DifferentImageMemoryRoute(
                         levelInfo: levels[themeSet.index],
                       ),
                     );

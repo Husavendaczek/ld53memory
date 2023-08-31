@@ -1,21 +1,21 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/components/app_bar/memo_app_bar.dart';
-import 'package:memoryfun/src/levels/level_info.dart';
-import 'package:memoryfun/src/different_image/memory_bloc.dart';
-import 'package:memoryfun/src/components/memory_card/memory_card.dart';
-import 'package:memoryfun/src/split_memory/split_memory_grid_view.dart';
-import 'package:memoryfun/src/split_memory/split_memory_set.dart';
 
-import '../components/buttons/normal_button.dart';
-import 'memory_tile.dart';
+import '../../../components/app_bar/memo_app_bar.dart';
+import '../../../components/buttons/normal_button.dart';
+import '../../../components/memory_card/memory_card.dart';
+import '../../../levels/level_info.dart';
+import '../../../memory/memory_tile.dart';
+import '../../../split_memory/split_memory_grid_view.dart';
+import '../../../split_memory/split_memory_set.dart';
+import 'different_image_bloc.dart';
 
 @RoutePage()
-class MemoryPage extends ConsumerStatefulWidget {
+class DifferentImageMemoryPage extends ConsumerStatefulWidget {
   final LevelInfo levelInfo;
 
-  const MemoryPage({
+  const DifferentImageMemoryPage({
     required this.levelInfo,
     super.key,
   });
@@ -24,24 +24,24 @@ class MemoryPage extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _MemoryPageState();
 }
 
-class _MemoryPageState extends ConsumerState<MemoryPage> {
+class _MemoryPageState extends ConsumerState<DifferentImageMemoryPage> {
   @override
   void initState() {
     super.initState();
 
-    ref.read(MemoryBloc.provider.bloc).add(
-          MemoryEvent.initGame(widget.levelInfo),
+    ref.read(DifferentImageBloc.provider.bloc).add(
+          DifferentImageEvent.initGame(widget.levelInfo),
         );
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: MemoryAppBar(
-          onRestart: () => ref.read(MemoryBloc.provider.bloc).add(
-                MemoryEvent.initGame(widget.levelInfo),
+          onRestart: () => ref.read(DifferentImageBloc.provider.bloc).add(
+                DifferentImageEvent.initGame(widget.levelInfo),
               ),
         ),
-        body: ref.watch(MemoryBloc.provider).maybeWhen(
+        body: ref.watch(DifferentImageBloc.provider).maybeWhen(
               initialized: (memorySet) => _gridView(memorySet, true),
               matchResult: (memorySet) => _gridView(memorySet, false),
               orElse: () => Column(
@@ -50,8 +50,8 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
                   const Text('loading'),
                   NormalButton(
                     text: 'Restart game',
-                    onTap: () => ref.read(MemoryBloc.provider.bloc).add(
-                          MemoryEvent.initGame(widget.levelInfo),
+                    onTap: () => ref.read(DifferentImageBloc.provider.bloc).add(
+                          DifferentImageEvent.initGame(widget.levelInfo),
                         ),
                   ),
                 ],
@@ -71,8 +71,8 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
       tiles.add(
         MemoryCard(
           memoryTile: tile,
-          onTap: () => ref.read(MemoryBloc.provider.bloc).add(
-                MemoryEvent.handleTap(tile),
+          onTap: () => ref.read(DifferentImageBloc.provider.bloc).add(
+                DifferentImageEvent.handleTap(tile),
               ),
         ),
       );

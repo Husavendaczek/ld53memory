@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/animated_image/animated_image_memory_page.dart';
-import 'package:memoryfun/src/memory/memory_page.dart';
+import 'package:memoryfun/src/memory_types/different/different_image/different_image_memory_page.dart';
 import 'package:memoryfun/src/memory_types/same_image/same_image_memory_page.dart';
 import 'package:memoryfun/src/end/won_page.dart';
 import 'package:memoryfun/src/levels/level_overview_page.dart';
@@ -21,7 +21,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: StartRoute.page, initial: true),
         AutoRoute(page: LevelOverviewRoute.page),
         AutoRoute(page: SettingsRoute.page),
-        AutoRoute(page: MemoryRoute.page),
+        AutoRoute(page: DifferentImageMemoryRoute.page),
         AutoRoute(page: SameImageMemoryRoute.page),
         AutoRoute(page: AnimatedImageMemoryRoute.page),
         AutoRoute(page: LevelDoneRoute.page),
