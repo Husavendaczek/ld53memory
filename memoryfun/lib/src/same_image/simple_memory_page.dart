@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/levels/level_info.dart';
 import 'package:memoryfun/src/components/memory_card/memory_card.dart';
+import 'package:memoryfun/src/memory/memory_tile.dart';
 
 import '../components/app_bar/memo_app_bar.dart';
 import '../components/buttons/normal_button.dart';
@@ -69,12 +70,17 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
   List<Widget> _tiles(List<SimpleMemoryTile> memorySet, bool fadeIn) {
     List<Widget> tiles = [];
     for (var tile in memorySet) {
+      var memoryTile = MemoryTile(
+        index: tile.index,
+        pairValue: tile.pairValue,
+        image: tile.image,
+        visible: tile.visible,
+        hasError: tile.hasError,
+        isCorrect: tile.isCorrect,
+      );
       tiles.add(
         MemoryCard(
-          visible: tile.visible,
-          hasError: tile.hasError,
-          isCorrect: tile.isCorrect,
-          image: tile.image!,
+          memoryTile: memoryTile,
           onTap: () => ref.read(SimpleMemoryBloc.provider.bloc).add(
                 SimpleMemoryEvent.handleTap(tile.index, tile.pairValue),
               ),

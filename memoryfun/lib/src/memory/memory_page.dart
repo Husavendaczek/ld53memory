@@ -72,10 +72,7 @@ class _MemoryPageState extends ConsumerState<MemoryPage> {
     for (var tile in memorySet) {
       tiles.add(
         MemoryCard(
-          visible: tile.visible,
-          hasError: tile.hasError,
-          isCorrect: tile.isCorrect,
-          image: tile.image!,
+          memoryTile: tile,
           onTap: () => ref.read(MemoryBloc.provider.bloc).add(
                 MemoryEvent.handleTap(tile),
               ),

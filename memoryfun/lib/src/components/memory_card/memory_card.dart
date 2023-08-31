@@ -1,75 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoryfun/src/components/memory_card/memory_card_background.dart';
+import 'package:memoryfun/src/components/memory_card/memory_card_error.dart';
+import 'package:memoryfun/src/components/memory_card/memory_card_visible.dart';
 
+import '../../memory/memory_tile.dart';
 import 'tapable_card.dart';
 
 class MemoryCard extends ConsumerWidget {
-  final bool visible;
-  final bool hasError;
-  final bool isCorrect;
-  final AssetImage image;
+  final MemoryTile memoryTile;
   final Function() onTap;
 
   const MemoryCard({
-    required this.visible,
-    required this.hasError,
-    required this.isCorrect,
-    required this.image,
+    required this.memoryTile,
     required this.onTap,
     super.key,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var initTile = Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Material(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        clipBehavior: Clip.antiAlias,
-        child: Image(image: image, fit: BoxFit.cover),
-      ).animate(),
-    );
+    var image = memoryTile.image!;
+    Widget memoryCard = MemoryCardBackground(image: image, onTap: onTap);
 
-    if (isCorrect) {
-      initTile = Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: Material(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          clipBehavior: Clip.antiAlias,
-          child: Image(image: image, fit: BoxFit.cover),
-        ).animate().shimmer(),
-      );
+    if (memoryTile.isCorrect) {
+      memoryCard = MemoryCardVisible(image: image);
     }
 
-    if (hasError) {
-      initTile = Padding(
-        padding: const EdgeInsets.all(0.0),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Theme.of(context).focusColor,
-              width: 2,
-            ),
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Material(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              clipBehavior: Clip.antiAlias,
-              child: Image(image: image, fit: BoxFit.cover),
-            ),
-          ),
-        ).animate().shake(),
-      );
+    if (memoryTile.hasError) {
+      memoryCard = MemoryCardError(image: image, onTap: onTap);
     }
 
     return TapableCard(
-      card: initTile,
-      onTap: () => visible && isCorrect ? null : onTap(),
+      card: memoryCard,
+      onTap: () => memoryTile.visible && memoryTile.isCorrect ? null : onTap(),
     );
   }
 }

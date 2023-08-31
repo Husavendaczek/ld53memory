@@ -12,8 +12,8 @@ class MemoryTile {
   MemoryTile({
     required this.index,
     required this.pairValue,
-    required this.isLowerPart,
     this.image,
+    this.isLowerPart = false,
     this.visible = false,
     this.hasError = false,
     this.isCorrect = false,
