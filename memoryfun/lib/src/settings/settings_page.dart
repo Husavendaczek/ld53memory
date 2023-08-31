@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/app_bar/memo_app_bar.dart';
 import '../components/buttons/normal_button.dart';
-import '../theme/app_color_mode.dart';
-import '../theme/app_colors.dart';
+import '../utils/theme/app_color_mode.dart';
+import '../utils/theme/app_colors.dart';
 import '../game_type/memory_grid_row_size.dart';
 
 @RoutePage()

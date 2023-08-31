@@ -4,11 +4,11 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/game_type/game_type.dart';
 import '../components/app_bar/overview_app_bar.dart';
-import '../utils/app_router.dart';
+import '../utils/routing/app_router.dart';
 import 'level_info.dart';
 import 'levels.dart';
 import '../game_type/theme_set.dart';
-import '../theme/app_color_mode.dart';
+import '../utils/theme/app_color_mode.dart';
 
 @RoutePage()
 class LevelOverviewPage extends ConsumerStatefulWidget {

@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../utils/app_router.dart';
-import '../theme/app_color_mode.dart';
+import '../utils/routing/app_router.dart';
+import '../utils/theme/app_color_mode.dart';
 import '../components/buttons/normal_button.dart';
 
 @RoutePage()

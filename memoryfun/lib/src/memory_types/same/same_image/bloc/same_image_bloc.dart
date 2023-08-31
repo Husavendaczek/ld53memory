@@ -10,7 +10,7 @@ import '../../../models/memory_tile.dart';
 import '../../../../levels/levels.dart';
 import '../../../../game_type/game_type.dart';
 import '../../../../sound/sound_player.dart';
-import '../../../../utils/app_router.dart';
+import '../../../../utils/routing/app_router.dart';
 
 part 'same_image_bloc.freezed.dart';
 

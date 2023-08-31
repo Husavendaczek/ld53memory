@@ -12,7 +12,7 @@ import '../../../models/memory_tile.dart';
 import '../../../../sound/sound_player.dart';
 import '../models/split_memory_set.dart';
 import '../models/tile_to_hide.dart';
-import '../../../../utils/app_router.dart';
+import '../../../../utils/routing/app_router.dart';
 
 part 'different_image_bloc.freezed.dart';
 

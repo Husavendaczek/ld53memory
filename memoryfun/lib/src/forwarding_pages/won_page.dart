@@ -5,10 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/buttons/normal_button.dart';
 import '../game_type/game_type.dart';
-import '../theme/app_color_mode.dart';
-import '../theme/app_color_style.dart';
-import '../theme/app_colors.dart';
-import '../utils/app_router.dart';
+import '../utils/theme/app_color_mode.dart';
+import '../utils/theme/app_color_style.dart';
+import '../utils/theme/app_colors.dart';
+import '../utils/routing/app_router.dart';
 import '../levels/level_info.dart';
 import '../game_type/theme_set.dart';
 

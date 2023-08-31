@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../utils/app_router.dart';
+import '../../utils/routing/app_router.dart';
 import '../buttons/normal_icon_btn.dart';
 
 class MemoryAppBar extends ConsumerWidget implements PreferredSizeWidget {

@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverbloc/riverbloc.dart';
 
 import '../../../models/memory_tile.dart';
-import '../../../../utils/app_router.dart';
+import '../../../../utils/routing/app_router.dart';
 import '../../../../game_type/image_mapper.dart';
 import '../../../../sound/sound_player.dart';
 import '../../../../levels/levels.dart';

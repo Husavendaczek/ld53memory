@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../components/app_bar/memo_app_bar.dart';
 import '../components/buttons/normal_button.dart';
 import '../levels/level_info.dart';
-import '../utils/app_router.dart';
+import '../utils/routing/app_router.dart';
 
 @RoutePage()
 class LevelDonePage extends ConsumerWidget {

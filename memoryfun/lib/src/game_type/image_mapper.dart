@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../memory_types/models/memory_tile.dart';
-import '../theme/app_color_mode.dart';
+import '../utils/theme/app_color_mode.dart';
 import 'theme_set.dart';
 
 class ImageMapper {
