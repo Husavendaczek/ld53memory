@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverbloc/riverbloc.dart';
 
-import '../../../../memory/memory_tile.dart';
+import '../../../models/memory_tile.dart';
 import '../../../../theme/app_color_mode.dart';
 import '../../../../utils/app_router.dart';
 import '../../../../game_type/image_mapper.dart';

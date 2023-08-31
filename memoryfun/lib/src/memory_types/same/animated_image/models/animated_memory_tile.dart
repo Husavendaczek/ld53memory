@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../memory/memory_tile.dart';
+import '../../../models/memory_tile.dart';
 
 class AnimatedMemoryTile extends MemoryTile {
   final List<AssetImage> animationImages;

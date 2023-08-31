@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../memory/memory_tile.dart';
+import '../../memory_types/models/memory_tile.dart';
 import 'memory_card_background.dart';
 import 'memory_card_error.dart';
 import 'memory_card_visible.dart';

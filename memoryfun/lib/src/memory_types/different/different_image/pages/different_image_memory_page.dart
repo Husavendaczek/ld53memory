@@ -6,7 +6,7 @@ import '../../../../components/app_bar/memo_app_bar.dart';
 import '../../../../components/buttons/normal_button.dart';
 import '../../../../components/memory_card/memory_card.dart';
 import '../../../../levels/level_info.dart';
-import '../../../../memory/memory_tile.dart';
+import '../../../models/memory_tile.dart';
 import '../../../../components/grid/split_memory_grid_view.dart';
 import '../models/split_memory_set.dart';
 import '../bloc/different_image_bloc.dart';

@@ -8,7 +8,7 @@ import '../../../../game_type/image_mapper.dart';
 import '../../../../game_type/theme_set.dart';
 import '../../../../levels/level_info.dart';
 import '../../../../levels/levels.dart';
-import '../../../../memory/memory_tile.dart';
+import '../../../models/memory_tile.dart';
 import '../../../../sound/sound_player.dart';
 import '../models/split_memory_set.dart';
 import '../models/tile_to_hide.dart';
