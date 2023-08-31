@@ -3,16 +3,16 @@ import 'dart:math';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverbloc/riverbloc.dart';
 
-import '../../../game_type/game_type.dart';
-import '../../../game_type/image_mapper.dart';
-import '../../../game_type/theme_set.dart';
-import '../../../levels/level_info.dart';
-import '../../../levels/levels.dart';
-import '../../../memory/memory_tile.dart';
-import '../../../sound/sound_player.dart';
-import '../../../split_memory/split_memory_set.dart';
-import '../../../split_memory/tile_to_hide.dart';
-import '../../../utils/app_router.dart';
+import '../../../../game_type/game_type.dart';
+import '../../../../game_type/image_mapper.dart';
+import '../../../../game_type/theme_set.dart';
+import '../../../../levels/level_info.dart';
+import '../../../../levels/levels.dart';
+import '../../../../memory/memory_tile.dart';
+import '../../../../sound/sound_player.dart';
+import '../models/split_memory_set.dart';
+import '../models/tile_to_hide.dart';
+import '../../../../utils/app_router.dart';
 
 part 'different_image_bloc.freezed.dart';
 

@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import '../memory_types/same/animated_image/animated_image_memory_page.dart';
-import '../memory_types/different/different_image/different_image_memory_page.dart';
+import '../memory_types/different/different_image/pages/different_image_memory_page.dart';
 import '../memory_types/same/same_image/same_image_memory_page.dart';
 import '../end/won_page.dart';
 import '../levels/level_overview_page.dart';
