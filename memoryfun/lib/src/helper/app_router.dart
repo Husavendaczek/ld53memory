@@ -4,9 +4,9 @@ import 'package:memoryfun/src/animated_image/animated_image_memory_page.dart';
 import 'package:memoryfun/src/memory/memory_page.dart';
 import 'package:memoryfun/src/same_image/simple_memory_page.dart';
 import 'package:memoryfun/src/end/won_page.dart';
-import 'package:memoryfun/src/level_overview/level_overview_page.dart';
+import 'package:memoryfun/src/levels/level_overview_page.dart';
 import 'package:memoryfun/src/level_overview/level_done_page.dart';
-import 'package:memoryfun/src/memory/level_info.dart';
+import 'package:memoryfun/src/levels/level_info.dart';
 import 'package:flutter/material.dart';
 import 'package:memoryfun/src/settings/settings_page.dart';
 

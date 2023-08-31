@@ -4,7 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/components/overview_app_bar.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
-import 'package:memoryfun/src/level_overview/levels.dart';
+import 'package:memoryfun/src/levels/levels.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
 import 'package:memoryfun/src/theme/app_color_mode.dart';
 

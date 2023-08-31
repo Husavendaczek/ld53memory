@@ -7,7 +7,7 @@ import 'package:memoryfun/src/theme/app_colors.dart';
 
 import '../components/normal_button.dart';
 import '../helper/app_router.dart';
-import '../memory/level_info.dart';
+import '../levels/level_info.dart';
 import '../memory/theme_set.dart';
 
 @RoutePage()

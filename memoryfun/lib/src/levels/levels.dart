@@ -1,6 +1,6 @@
 import 'package:memoryfun/src/memory/game_type.dart';
 
-import '../memory/level_info.dart';
+import 'level_info.dart';
 import '../memory/theme_set.dart';
 
 List<LevelInfo> levels = const [

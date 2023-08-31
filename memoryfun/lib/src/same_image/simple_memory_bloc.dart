@@ -4,11 +4,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:memoryfun/src/helper/app_router.dart';
 import 'package:memoryfun/src/helper/image_mapper.dart';
 import 'package:memoryfun/src/helper/sound_player.dart';
-import 'package:memoryfun/src/memory/level_info.dart';
+import 'package:memoryfun/src/levels/level_info.dart';
 import 'package:memoryfun/src/memory/theme_set.dart';
 import 'package:riverbloc/riverbloc.dart';
 
-import '../level_overview/levels.dart';
+import '../levels/levels.dart';
 import '../memory/game_type.dart';
 import 'simple_memory_tile.dart';
 

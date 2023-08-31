@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/animated_image/animated_memory_tile.dart';
 import '../components/memo_app_bar.dart';
 import '../components/normal_button.dart';
-import '../memory/level_info.dart';
+import '../levels/level_info.dart';
 import '../memory/memory_grid_view.dart';
 import 'animated_memory_bloc.dart';
 import 'animated_memory_tile_component.dart';
