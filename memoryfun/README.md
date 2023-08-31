@@ -1,12 +1,5 @@
 # memoryfun
 
-## How to start the app
-* Two different modes are available: color and monochrome.
-* Start app with colors:
-`flutter run --dart-define=COLOR_MODE=color`
-* Start app without colors:
-`flutter run --dart-define=COLOR_MODE=mono`
-
 ## How to add a new theme
 * Add theme name to theme_set.dart
 * Add level to levels.dart
