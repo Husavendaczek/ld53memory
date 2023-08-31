@@ -2,11 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/components/app_bar/overview_app_bar.dart';
-import 'package:memoryfun/src/utils/app_router.dart';
-import 'package:memoryfun/src/levels/levels.dart';
-import 'package:memoryfun/src/game_type/theme_set.dart';
-import 'package:memoryfun/src/theme/app_color_mode.dart';
+import '../components/app_bar/overview_app_bar.dart';
+import '../utils/app_router.dart';
+import 'levels.dart';
+import '../game_type/theme_set.dart';
+import '../theme/app_color_mode.dart';
 
 @RoutePage()
 class LevelOverviewPage extends ConsumerStatefulWidget {

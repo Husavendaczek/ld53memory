@@ -1,15 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/memory_types/same/animated_image/animated_image_memory_page.dart';
-import 'package:memoryfun/src/memory_types/different/different_image/different_image_memory_page.dart';
-import 'package:memoryfun/src/memory_types/same_image/same_image_memory_page.dart';
-import 'package:memoryfun/src/end/won_page.dart';
-import 'package:memoryfun/src/levels/level_overview_page.dart';
-import 'package:memoryfun/src/end/level_done_page.dart';
-import 'package:memoryfun/src/levels/level_info.dart';
 import 'package:flutter/material.dart';
-import 'package:memoryfun/src/settings/settings_page.dart';
-
+import '../memory_types/same/animated_image/animated_image_memory_page.dart';
+import '../memory_types/different/different_image/different_image_memory_page.dart';
+import '../memory_types/same_image/same_image_memory_page.dart';
+import '../end/won_page.dart';
+import '../levels/level_overview_page.dart';
+import '../end/level_done_page.dart';
+import '../levels/level_info.dart';
+import '../settings/settings_page.dart';
 import '../start/start_page.dart';
 
 part 'app_router.gr.dart';

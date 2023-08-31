@@ -2,7 +2,8 @@ import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/game_type/theme_set.dart';
+
+import '../game_type/theme_set.dart';
 
 class SoundPlayer {
   final AudioPlayer musicPlayer;

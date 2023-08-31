@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/split_memory/split_memory_grid_view.dart';
+
+import '../split_memory/split_memory_grid_view.dart';
 
 class MemoryGridView extends ConsumerWidget {
   final List<Widget> tiles;

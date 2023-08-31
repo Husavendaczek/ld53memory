@@ -1,10 +1,10 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/theme/app_color_mode.dart';
 
 import '../components/app_bar/memo_app_bar.dart';
 import '../components/buttons/normal_button.dart';
+import '../theme/app_color_mode.dart';
 import '../theme/app_colors.dart';
 import '../game_type/memory_grid_row_size.dart';
 

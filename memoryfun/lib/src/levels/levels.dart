@@ -1,5 +1,4 @@
-import 'package:memoryfun/src/game_type/game_type.dart';
-
+import '../game_type/game_type.dart';
 import 'level_info.dart';
 import '../game_type/theme_set.dart';
 

@@ -2,10 +2,10 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/levels/level_info.dart';
 
 import '../components/app_bar/memo_app_bar.dart';
 import '../components/buttons/normal_button.dart';
+import '../levels/level_info.dart';
 import '../utils/app_router.dart';
 
 @RoutePage()

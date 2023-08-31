@@ -1,4 +1,4 @@
-import 'package:memoryfun/src/memory/memory_tile.dart';
+import '../memory/memory_tile.dart';
 
 class SplitMemorySet {
   final List<MemoryTile> upperTiles;

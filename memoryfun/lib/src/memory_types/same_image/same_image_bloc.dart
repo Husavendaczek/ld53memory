@@ -1,16 +1,16 @@
 import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:memoryfun/src/utils/app_router.dart';
-import 'package:memoryfun/src/game_type/image_mapper.dart';
-import 'package:memoryfun/src/sound/sound_player.dart';
-import 'package:memoryfun/src/levels/level_info.dart';
-import 'package:memoryfun/src/game_type/theme_set.dart';
 import 'package:riverbloc/riverbloc.dart';
 
+import '../../game_type/image_mapper.dart';
+import '../../game_type/theme_set.dart';
+import '../../levels/level_info.dart';
 import '../../memory/memory_tile.dart';
 import '../../levels/levels.dart';
 import '../../game_type/game_type.dart';
+import '../../sound/sound_player.dart';
+import '../../utils/app_router.dart';
 
 part 'same_image_bloc.freezed.dart';
 

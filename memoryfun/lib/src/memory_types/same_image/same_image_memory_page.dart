@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/levels/level_info.dart';
-import 'package:memoryfun/src/components/memory_card/memory_card.dart';
-import 'package:memoryfun/src/memory/memory_tile.dart';
 
 import '../../components/app_bar/memo_app_bar.dart';
 import '../../components/buttons/normal_button.dart';
+import '../../components/memory_card/memory_card.dart';
+import '../../levels/level_info.dart';
 import '../../memory/memory_grid_view.dart';
+import '../../memory/memory_tile.dart';
 import 'same_image_bloc.dart';
 
 @RoutePage()

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/components/memory_card/memory_card_background.dart';
-import 'package:memoryfun/src/components/memory_card/memory_card_error.dart';
-import 'package:memoryfun/src/components/memory_card/memory_card_visible.dart';
 
 import '../../memory/memory_tile.dart';
+import 'memory_card_background.dart';
+import 'memory_card_error.dart';
+import 'memory_card_visible.dart';
 import 'tapable_card.dart';
 
 class MemoryCard extends ConsumerWidget {
