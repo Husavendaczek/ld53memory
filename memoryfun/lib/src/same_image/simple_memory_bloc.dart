@@ -10,7 +10,7 @@ import 'package:riverbloc/riverbloc.dart';
 
 import '../levels/levels.dart';
 import '../game_type/game_type.dart';
-import 'simple_memory_tile.dart';
+import '../memory/memory_tile.dart';
 
 part 'simple_memory_bloc.freezed.dart';
 
@@ -25,11 +25,11 @@ class SimpleMemoryEvent with _$SimpleMemoryEvent {
 class SimpleMemoryState with _$SimpleMemoryState {
   const factory SimpleMemoryState.initial() = _Initial;
   const factory SimpleMemoryState.loading() = _Loading;
-  const factory SimpleMemoryState.initialized(
-      List<SimpleMemoryTile> memorySet) = _Initialized;
+  const factory SimpleMemoryState.initialized(List<MemoryTile> memorySet) =
+      _Initialized;
   const factory SimpleMemoryState.loadingResult() = _LoadingResult;
-  const factory SimpleMemoryState.matchResult(
-      List<SimpleMemoryTile> memorySet) = _MatchResult;
+  const factory SimpleMemoryState.matchResult(List<MemoryTile> memorySet) =
+      _MatchResult;
 }
 
 class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
@@ -48,7 +48,7 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
   final AppRouter appRouter;
   final SoundPlayer soundPlayer;
 
-  List<SimpleMemoryTile> memoryTiles = [];
+  List<MemoryTile> memoryTiles = [];
   int matchesWon = 0;
   int matchesLeft = 100;
   LevelInfo currentLevel = const LevelInfo(
@@ -88,7 +88,7 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
       var value = pairValues[randomIndex];
       pairValues.removeAt(randomIndex);
 
-      var tile = SimpleMemoryTile(
+      var tile = MemoryTile(
         index: i,
         pairValue: value,
         isVisible: false,
@@ -122,17 +122,15 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
       for (var hideTileIndex in hideTiles) {
         _setTileVisibility(
             hideTileIndex,
-            SimpleMemoryTile(
+            MemoryTile(
                 index: index, pairValue: event.pairValue, isVisible: false));
         memoryTiles[hideTileIndex].hasError = false;
       }
 
       hideTiles = [];
     }
-    _setTileVisibility(
-        index,
-        SimpleMemoryTile(
-            index: index, pairValue: event.pairValue, isVisible: true));
+    _setTileVisibility(index,
+        MemoryTile(index: index, pairValue: event.pairValue, isVisible: true));
 
     if (firstIndex != null) {
       if (firstIndex == event.tileIndex) {
@@ -213,7 +211,7 @@ class SimpleMemoryBloc extends Bloc<SimpleMemoryEvent, SimpleMemoryState> {
     emit(SimpleMemoryState.matchResult(memoryTiles));
   }
 
-  void _setTileVisibility(int index, SimpleMemoryTile memoryTile) {
+  void _setTileVisibility(int index, MemoryTile memoryTile) {
     memoryTiles[index].image = imageMapper.getImage(
       memoryTile,
       currentLevel.themeSet,

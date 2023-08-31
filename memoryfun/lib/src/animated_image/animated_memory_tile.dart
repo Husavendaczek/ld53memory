@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:memoryfun/src/same_image/simple_memory_tile.dart';
 
-class AnimatedMemoryTile extends SimpleMemoryTile {
+import '../memory/memory_tile.dart';
+
+class AnimatedMemoryTile extends MemoryTile {
   final List<AssetImage> animationImages;
 
   AnimatedMemoryTile({
@@ -12,5 +13,6 @@ class AnimatedMemoryTile extends SimpleMemoryTile {
     super.isVisible = false,
     super.hasError = false,
     super.isCorrect = false,
+    super.isLowerPart = false,
   });
 }

@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:memoryfun/src/theme/app_color_mode.dart';
 import 'package:riverbloc/riverbloc.dart';
 
+import '../memory/memory_tile.dart';
 import '../utils/app_router.dart';
 import '../game_type/image_mapper.dart';
 import '../sound/sound_player.dart';
@@ -12,7 +13,6 @@ import '../levels/levels.dart';
 import '../game_type/game_type.dart';
 import '../levels/level_info.dart';
 import '../game_type/theme_set.dart';
-import '../same_image/simple_memory_tile.dart';
 import 'animated_memory_tile.dart';
 
 part 'animated_memory_bloc.freezed.dart';
@@ -103,7 +103,7 @@ class AnimatedMemoryBloc
       var tile = AnimatedMemoryTile(
         index: i,
         pairValue: value,
-        visible: false,
+        isVisible: false,
         animationImages: animatedImages,
       );
       tile.image = imageMapper.getImage(tile, currentLevel.themeSet);
@@ -135,17 +135,15 @@ class AnimatedMemoryBloc
       for (var hideTileIndex in hideTiles) {
         _setTileVisibility(
             hideTileIndex,
-            SimpleMemoryTile(
+            MemoryTile(
                 index: index, pairValue: event.pairValue, isVisible: false));
         memoryTiles[hideTileIndex].hasError = false;
       }
 
       hideTiles = [];
     }
-    _setTileVisibility(
-        index,
-        SimpleMemoryTile(
-            index: index, pairValue: event.pairValue, isVisible: true));
+    _setTileVisibility(index,
+        MemoryTile(index: index, pairValue: event.pairValue, isVisible: true));
 
     if (firstIndex != null) {
       if (firstIndex == event.tileIndex) {
@@ -226,7 +224,7 @@ class AnimatedMemoryBloc
     emit(AnimatedMemoryState.matchResult(memoryTiles));
   }
 
-  void _setTileVisibility(int index, SimpleMemoryTile memoryTile) {
+  void _setTileVisibility(int index, MemoryTile memoryTile) {
     memoryTiles[index].image = imageMapper.getImage(
       memoryTile,
       currentLevel.themeSet,

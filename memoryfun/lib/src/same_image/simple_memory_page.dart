@@ -9,7 +9,6 @@ import '../components/app_bar/memo_app_bar.dart';
 import '../components/buttons/normal_button.dart';
 import '../memory/memory_grid_view.dart';
 import 'simple_memory_bloc.dart';
-import 'simple_memory_tile.dart';
 
 @RoutePage()
 class SimpleMemoryPage extends ConsumerStatefulWidget {
@@ -62,12 +61,11 @@ class _SimpleMemoryPageState extends ConsumerState<SimpleMemoryPage> {
     );
   }
 
-  Widget _gridView(List<SimpleMemoryTile> memorySet, bool fadeIn) =>
-      MemoryGridView(
+  Widget _gridView(List<MemoryTile> memorySet, bool fadeIn) => MemoryGridView(
         tiles: _tiles(memorySet, fadeIn),
       );
 
-  List<Widget> _tiles(List<SimpleMemoryTile> memorySet, bool fadeIn) {
+  List<Widget> _tiles(List<MemoryTile> memorySet, bool fadeIn) {
     List<Widget> tiles = [];
     for (var tile in memorySet) {
       var memoryTile = MemoryTile(
