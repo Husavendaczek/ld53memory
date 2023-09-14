@@ -4,6 +4,7 @@ class MemoryTile {
   final int index;
   final int pairValue;
   final bool isLowerPart;
+  final double angle;
   AssetImage? image;
   bool isVisible;
   bool hasError;
@@ -12,6 +13,7 @@ class MemoryTile {
   MemoryTile({
     required this.index,
     required this.pairValue,
+    required this.angle,
     this.image,
     this.isLowerPart = false,
     this.isVisible = false,

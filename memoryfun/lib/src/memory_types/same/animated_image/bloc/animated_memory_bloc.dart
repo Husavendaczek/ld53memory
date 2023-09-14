@@ -93,9 +93,12 @@ class AnimatedMemoryBloc
       List<AssetImage> animatedImages =
           imageMapper.animatedImages(currentLevel.themeSet, value);
 
+      var randomAngle = Random().nextDouble() * 5.2;
+
       var tile = AnimatedMemoryTile(
         index: i,
         pairValue: value,
+        angle: randomAngle,
         isVisible: false,
         animationImages: animatedImages,
       );
@@ -124,19 +127,33 @@ class AnimatedMemoryBloc
 
     var index = event.tileIndex;
 
+    var randomAngle = Random().nextDouble() * 5.2;
+
     if (hideTiles.isNotEmpty) {
       for (var hideTileIndex in hideTiles) {
         _setTileVisibility(
-            hideTileIndex,
-            MemoryTile(
-                index: index, pairValue: event.pairValue, isVisible: false));
+          hideTileIndex,
+          MemoryTile(
+            index: index,
+            pairValue: event.pairValue,
+            angle: randomAngle,
+            isVisible: false,
+          ),
+        );
         memoryTiles[hideTileIndex].hasError = false;
       }
 
       hideTiles = [];
     }
-    _setTileVisibility(index,
-        MemoryTile(index: index, pairValue: event.pairValue, isVisible: true));
+    _setTileVisibility(
+      index,
+      MemoryTile(
+        index: index,
+        pairValue: event.pairValue,
+        angle: randomAngle,
+        isVisible: true,
+      ),
+    );
 
     if (firstIndex != null) {
       if (firstIndex == event.tileIndex) {

@@ -99,9 +99,11 @@ class DifferentImageBloc
       var value = pairValues[randomIndex];
       pairValues.removeAt(randomIndex);
 
+      var randomAngle = Random().nextDouble() * 5.2;
       var tile = MemoryTile(
         index: i,
         pairValue: value,
+        angle: randomAngle,
         isLowerPart: i < matchesLeft,
         isVisible: false,
       );
@@ -146,11 +148,15 @@ class DifferentImageBloc
     var currentIndex = _currentIndex(event.memoryTile);
 
     _hidePreviousTiles();
+
+    var randomAngle = Random().nextDouble() * 5.2;
+
     _setTileImage(
       currentIndex,
       MemoryTile(
         index: currentIndex,
         pairValue: event.memoryTile.pairValue,
+        angle: randomAngle,
         isLowerPart: event.memoryTile.isLowerPart,
         isVisible: true,
       ),
@@ -160,6 +166,7 @@ class DifferentImageBloc
       _handleFirstTap(
         currentIndex,
         event.memoryTile.pairValue,
+        randomAngle,
         event.memoryTile.isLowerPart,
       );
       return emit(DifferentImageState.matchResult(splitMemorySet));
@@ -197,10 +204,12 @@ class DifferentImageBloc
     }
   }
 
-  void _handleFirstTap(int currentIndex, int pairValue, bool isLowerPart) {
+  void _handleFirstTap(
+      int currentIndex, int pairValue, double angle, bool isLowerPart) {
     firstMemoryTile = MemoryTile(
       index: currentIndex,
       pairValue: pairValue,
+      angle: angle,
       isLowerPart: isLowerPart,
     );
 

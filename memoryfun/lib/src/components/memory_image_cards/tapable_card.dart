@@ -4,10 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TapableCard extends ConsumerWidget {
   final Widget card;
+  final double rotationAngle;
   final Function() onTap;
 
   const TapableCard({
     required this.card,
+    required this.rotationAngle,
     required this.onTap,
     super.key,
   });

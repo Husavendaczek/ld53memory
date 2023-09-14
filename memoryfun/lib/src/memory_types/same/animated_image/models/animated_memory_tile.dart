@@ -9,6 +9,7 @@ class AnimatedMemoryTile extends MemoryTile {
     required this.animationImages,
     required super.index,
     required super.pairValue,
+    required super.angle,
     super.image,
     super.isVisible = false,
     super.hasError = false,

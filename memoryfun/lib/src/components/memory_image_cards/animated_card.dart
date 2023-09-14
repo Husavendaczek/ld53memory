@@ -76,6 +76,7 @@ class _AnimatedMemoryTileComponentState extends ConsumerState<AnimatedCard> {
 
     return TapableCard(
       card: animatedCard,
+      rotationAngle: widget.animatedMemoryTile.angle,
       onTap: () => widget.animatedMemoryTile.isVisible &&
               widget.animatedMemoryTile.isCorrect
           ? null

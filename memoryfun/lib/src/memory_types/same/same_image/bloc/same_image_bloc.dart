@@ -88,9 +88,12 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
       var value = pairValues[randomIndex];
       pairValues.removeAt(randomIndex);
 
+      var randomAngle = Random().nextDouble() * 5.2;
+
       var tile = MemoryTile(
         index: i,
         pairValue: value,
+        angle: randomAngle,
         isVisible: false,
       );
       tile.image = imageMapper.getImage(tile, currentLevel.themeSet);
@@ -118,19 +121,33 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
 
     var index = event.tileIndex;
 
+    var randomAngle = Random().nextDouble() * 5.2;
+
     if (hideTiles.isNotEmpty) {
       for (var hideTileIndex in hideTiles) {
         _setTileVisibility(
-            hideTileIndex,
-            MemoryTile(
-                index: index, pairValue: event.pairValue, isVisible: false));
+          hideTileIndex,
+          MemoryTile(
+            index: index,
+            pairValue: event.pairValue,
+            angle: randomAngle,
+            isVisible: false,
+          ),
+        );
         memoryTiles[hideTileIndex].hasError = false;
       }
 
       hideTiles = [];
     }
-    _setTileVisibility(index,
-        MemoryTile(index: index, pairValue: event.pairValue, isVisible: true));
+    _setTileVisibility(
+      index,
+      MemoryTile(
+        index: index,
+        pairValue: event.pairValue,
+        angle: randomAngle,
+        isVisible: true,
+      ),
+    );
 
     if (firstIndex != null) {
       if (firstIndex == event.tileIndex) {
