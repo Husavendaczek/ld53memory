@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:memoryfun/src/utils/calculating/randomizer.dart';
 import 'package:riverbloc/riverbloc.dart';
 
 import '../../../../game_type/game_type.dart';
@@ -44,12 +45,14 @@ class DifferentImageBloc
       imageMapper: ref.watch(ImageMapper.provider),
       appRouter: ref.watch(appRouterProvider),
       soundPlayer: ref.watch(SoundPlayer.provider),
+      randomizer: ref.watch(Randomizer.provider),
     );
   });
 
   final ImageMapper imageMapper;
   final AppRouter appRouter;
   final SoundPlayer soundPlayer;
+  final Randomizer randomizer;
 
   SplitMemorySet splitMemorySet = SplitMemorySet(
     upperTiles: [],
@@ -68,6 +71,7 @@ class DifferentImageBloc
     required this.imageMapper,
     required this.appRouter,
     required this.soundPlayer,
+    required this.randomizer,
   }) : super(const DifferentImageState.initial()) {
     on<_InitGame>(_initGame);
     on<_HandleTap>(_handleTap);
@@ -99,11 +103,10 @@ class DifferentImageBloc
       var value = pairValues[randomIndex];
       pairValues.removeAt(randomIndex);
 
-      var randomAngle = Random().nextDouble() * 5.2;
       var tile = MemoryTile(
         index: i,
         pairValue: value,
-        angle: randomAngle,
+        angle: randomizer.randomTileAngle(),
         isLowerPart: i < matchesLeft,
         isVisible: false,
       );
@@ -149,7 +152,7 @@ class DifferentImageBloc
 
     _hidePreviousTiles();
 
-    var randomAngle = Random().nextDouble() * 5.2;
+    var randomAngle = randomizer.randomTileAngle();
 
     _setTileImage(
       currentIndex,

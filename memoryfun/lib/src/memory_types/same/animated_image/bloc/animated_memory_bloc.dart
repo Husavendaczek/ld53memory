@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:memoryfun/src/utils/calculating/randomizer.dart';
 import 'package:riverbloc/riverbloc.dart';
 
 import '../../../models/memory_tile.dart';
@@ -43,12 +44,14 @@ class AnimatedMemoryBloc
       imageMapper: ref.watch(ImageMapper.provider),
       appRouter: ref.watch(appRouterProvider),
       soundPlayer: ref.watch(SoundPlayer.provider),
+      randomizer: ref.watch(Randomizer.provider),
     );
   });
 
   final ImageMapper imageMapper;
   final AppRouter appRouter;
   final SoundPlayer soundPlayer;
+  final Randomizer randomizer;
 
   List<AnimatedMemoryTile> memoryTiles = [];
   int matchesWon = 0;
@@ -66,6 +69,7 @@ class AnimatedMemoryBloc
     required this.imageMapper,
     required this.appRouter,
     required this.soundPlayer,
+    required this.randomizer,
   }) : super(const AnimatedMemoryState.initial()) {
     on<_InitGame>(_initGame);
     on<_HandleTap>(_handleTap);
@@ -93,12 +97,10 @@ class AnimatedMemoryBloc
       List<AssetImage> animatedImages =
           imageMapper.animatedImages(currentLevel.themeSet, value);
 
-      var randomAngle = Random().nextDouble() * 5.2;
-
       var tile = AnimatedMemoryTile(
         index: i,
         pairValue: value,
-        angle: randomAngle,
+        angle: randomizer.randomTileAngle(),
         isVisible: false,
         animationImages: animatedImages,
       );
@@ -127,7 +129,7 @@ class AnimatedMemoryBloc
 
     var index = event.tileIndex;
 
-    var randomAngle = Random().nextDouble() * 5.2;
+    var randomAngle = randomizer.randomTileAngle();
 
     if (hideTiles.isNotEmpty) {
       for (var hideTileIndex in hideTiles) {

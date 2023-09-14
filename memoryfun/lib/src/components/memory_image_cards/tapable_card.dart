@@ -22,7 +22,11 @@ class TapableCard extends ConsumerWidget {
             Radius.circular(8),
           ),
         ),
-        child: card,
+        child: Transform(
+          alignment: Alignment.center,
+          transform: Matrix4.rotationZ(rotationAngle),
+          child: card,
+        ),
       )
           .animate()
           .fadeIn(

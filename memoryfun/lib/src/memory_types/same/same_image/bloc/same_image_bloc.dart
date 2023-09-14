@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:memoryfun/src/utils/calculating/randomizer.dart';
 import 'package:riverbloc/riverbloc.dart';
 
 import '../../../../game_type/image_mapper.dart';
@@ -38,15 +39,16 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
     ref.onDispose(() => ref.bloc.close());
 
     return SameImageBloc(
-      imageMapper: ref.watch(ImageMapper.provider),
-      appRouter: ref.watch(appRouterProvider),
-      soundPlayer: ref.watch(SoundPlayer.provider),
-    );
+        imageMapper: ref.watch(ImageMapper.provider),
+        appRouter: ref.watch(appRouterProvider),
+        soundPlayer: ref.watch(SoundPlayer.provider),
+        randomizer: ref.watch(Randomizer.provider));
   });
 
   final ImageMapper imageMapper;
   final AppRouter appRouter;
   final SoundPlayer soundPlayer;
+  final Randomizer randomizer;
 
   List<MemoryTile> memoryTiles = [];
   int matchesWon = 0;
@@ -64,6 +66,7 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
     required this.imageMapper,
     required this.appRouter,
     required this.soundPlayer,
+    required this.randomizer,
   }) : super(const SameImageState.initial()) {
     on<_InitGame>(_initGame);
     on<_HandleTap>(_handleTap);
@@ -88,12 +91,10 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
       var value = pairValues[randomIndex];
       pairValues.removeAt(randomIndex);
 
-      var randomAngle = Random().nextDouble() * 5.2;
-
       var tile = MemoryTile(
         index: i,
         pairValue: value,
-        angle: randomAngle,
+        angle: randomizer.randomTileAngle(),
         isVisible: false,
       );
       tile.image = imageMapper.getImage(tile, currentLevel.themeSet);
@@ -121,7 +122,7 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
 
     var index = event.tileIndex;
 
-    var randomAngle = Random().nextDouble() * 5.2;
+    var randomAngle = randomizer.randomTileAngle();
 
     if (hideTiles.isNotEmpty) {
       for (var hideTileIndex in hideTiles) {
