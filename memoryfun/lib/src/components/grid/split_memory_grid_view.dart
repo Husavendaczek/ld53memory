@@ -17,18 +17,20 @@ class SplitMemoryGridView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) => SingleChildScrollView(
         child: Column(
           children: [
-            GridView.count(
-              shrinkWrap: true,
-              crossAxisCount: ref.watch(MemoryGridRowSize.provider).rowSize,
-              mainAxisSpacing: 4,
-              crossAxisSpacing: 4,
-              childAspectRatio: 1,
-              padding: const EdgeInsets.all(4),
-              children: upperTiles,
-            ),
+            grid(ref, upperTiles),
             lowerGrid(ref),
           ],
         ),
+      );
+
+  Widget grid(WidgetRef ref, List<Widget> tiles) => GridView.count(
+        shrinkWrap: true,
+        crossAxisCount: ref.watch(MemoryGridRowSize.provider).rowSize,
+        mainAxisSpacing: 4,
+        crossAxisSpacing: 4,
+        childAspectRatio: 1,
+        padding: const EdgeInsets.all(8),
+        children: tiles,
       );
 
   Widget lowerGrid(WidgetRef ref) {
@@ -36,15 +38,7 @@ class SplitMemoryGridView extends ConsumerWidget {
 
     return Padding(
       padding: const EdgeInsets.only(top: 32),
-      child: GridView.count(
-        shrinkWrap: true,
-        crossAxisCount: ref.watch(MemoryGridRowSize.provider).rowSize,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        childAspectRatio: 1,
-        padding: const EdgeInsets.all(8),
-        children: lowerTiles,
-      ),
+      child: grid(ref, lowerTiles),
     );
   }
 }

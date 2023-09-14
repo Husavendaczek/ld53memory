@@ -15,23 +15,25 @@ class TapableCard extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => InkWell(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Transform(
+      alignment: Alignment.center,
+      transform: Matrix4.rotationZ(rotationAngle),
+      child: InkWell(
         onTap: onTap,
         customBorder: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(8),
           ),
         ),
-        child: Transform(
-          alignment: Alignment.center,
-          transform: Matrix4.rotationZ(rotationAngle),
-          child: card,
-        ),
+        child: card,
       )
           .animate()
           .fadeIn(
             duration: 600.ms,
             curve: Curves.easeIn,
           )
-          .blurXY(begin: 1, end: 0, duration: 600.ms, delay: 300.ms);
+          .blurXY(begin: 1, end: 0, duration: 600.ms, delay: 300.ms),
+    );
+  }
 }
