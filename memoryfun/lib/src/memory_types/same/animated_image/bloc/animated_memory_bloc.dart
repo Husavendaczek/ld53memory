@@ -152,7 +152,7 @@ class AnimatedMemoryBloc
       MemoryTile(
         index: index,
         pairValue: event.pairValue,
-        angle: randomAngle,
+        angle: 0,
         isVisible: true,
       ),
     );
@@ -241,5 +241,6 @@ class AnimatedMemoryBloc
       memoryTile,
       currentLevel.themeSet,
     );
+    memoryTiles[index].angle = memoryTile.angle;
   }
 }

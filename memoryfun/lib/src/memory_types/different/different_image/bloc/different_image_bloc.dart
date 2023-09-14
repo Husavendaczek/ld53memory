@@ -159,7 +159,7 @@ class DifferentImageBloc
       MemoryTile(
         index: currentIndex,
         pairValue: event.memoryTile.pairValue,
-        angle: randomAngle,
+        angle: 0,
         isLowerPart: event.memoryTile.isLowerPart,
         isVisible: true,
       ),
@@ -343,8 +343,10 @@ class DifferentImageBloc
 
     if (memoryTile.isLowerPart) {
       splitMemorySet.lowerTiles[index].image = image;
+      splitMemorySet.lowerTiles[index].angle = memoryTile.angle;
     } else {
       splitMemorySet.upperTiles[index].image = image;
+      splitMemorySet.upperTiles[index].angle = memoryTile.angle;
     }
   }
 

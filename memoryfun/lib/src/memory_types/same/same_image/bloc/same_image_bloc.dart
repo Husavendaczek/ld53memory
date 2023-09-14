@@ -136,6 +136,7 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
           ),
         );
         memoryTiles[hideTileIndex].hasError = false;
+        memoryTiles[hideTileIndex].angle = randomAngle;
       }
 
       hideTiles = [];
@@ -145,7 +146,7 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
       MemoryTile(
         index: index,
         pairValue: event.pairValue,
-        angle: randomAngle,
+        angle: 0,
         isVisible: true,
       ),
     );
@@ -234,5 +235,6 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
       memoryTile,
       currentLevel.themeSet,
     );
+    memoryTiles[index].angle = memoryTile.angle;
   }
 }

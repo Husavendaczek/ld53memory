@@ -4,7 +4,7 @@ class MemoryTile {
   final int index;
   final int pairValue;
   final bool isLowerPart;
-  final double angle;
+  double angle;
   AssetImage? image;
   bool isVisible;
   bool hasError;
