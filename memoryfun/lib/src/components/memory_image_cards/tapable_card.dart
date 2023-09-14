@@ -16,7 +16,7 @@ class TapableCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Transform(
+    var transform = Transform(
       alignment: Alignment.center,
       transform: Matrix4.rotationZ(rotationAngle),
       child: InkWell(
@@ -34,6 +34,11 @@ class TapableCard extends ConsumerWidget {
             curve: Curves.easeIn,
           )
           .blurXY(begin: 1, end: 0, duration: 600.ms, delay: 300.ms),
+    );
+
+    return Transform.translate(
+      offset: Offset(rotationAngle * 10, rotationAngle * 20),
+      child: transform,
     );
   }
 }
