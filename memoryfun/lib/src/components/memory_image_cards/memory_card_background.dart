@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MemoryCardBackground extends ConsumerWidget {
@@ -21,5 +22,5 @@ class MemoryCardBackground extends ConsumerWidget {
           clipBehavior: Clip.antiAlias,
           child: Image(image: image, fit: BoxFit.cover),
         ),
-      );
+      ).animate().flipH();
 }

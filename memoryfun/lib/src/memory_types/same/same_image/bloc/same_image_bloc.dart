@@ -217,7 +217,7 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
   void _handleWrongMatch(int index, int oldIndex) {
     soundPlayer.playWrongMatch();
 
-    memoryTiles[index].isVisible = false;
+    memoryTiles[index].isVisible = true;
     memoryTiles[oldIndex].isVisible = false;
     memoryTiles[index].hasError = true;
     memoryTiles[oldIndex].hasError = true;
@@ -236,5 +236,6 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
       currentLevel.themeSet,
     );
     memoryTiles[index].angle = memoryTile.angle;
+    memoryTiles[index].isVisible = memoryTile.isVisible;
   }
 }

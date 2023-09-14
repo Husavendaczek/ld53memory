@@ -5,11 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class TapableCard extends ConsumerWidget {
   final Widget card;
   final double rotationAngle;
+  final bool shouldFlip;
   final Function() onTap;
 
   const TapableCard({
     required this.card,
     required this.rotationAngle,
+    required this.shouldFlip,
     required this.onTap,
     super.key,
   });
@@ -26,7 +28,7 @@ class TapableCard extends ConsumerWidget {
             Radius.circular(8),
           ),
         ),
-        child: card,
+        child: shouldFlip ? card.animate().flipH() : card,
       )
           .animate()
           .fadeIn(

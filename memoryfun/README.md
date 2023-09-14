@@ -21,3 +21,4 @@ TODOS
 sound
  - sound_player
  - TODO bloc with events plays the right thing and stops other stuff
+ - flips twice on first tap

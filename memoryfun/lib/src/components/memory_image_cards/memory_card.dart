@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../memory_types/models/memory_tile.dart';
@@ -33,6 +34,7 @@ class MemoryCard extends ConsumerWidget {
     return TapableCard(
       card: memoryCard,
       rotationAngle: memoryTile.angle,
+      shouldFlip: memoryTile.isVisible,
       onTap: () =>
           memoryTile.isVisible && memoryTile.isCorrect ? null : onTap(),
     );
