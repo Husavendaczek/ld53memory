@@ -9,7 +9,6 @@ import '../../../../game_type/image_mapper.dart';
 import '../../../../game_type/theme_set.dart';
 import '../../../../levels/level_finisher.dart';
 import '../../../../levels/level_info.dart';
-import '../../../../levels/levels.dart';
 import '../../../models/memory_tile.dart';
 import '../../../../sound/sounds.dart';
 import '../models/split_memory_set.dart';
@@ -233,12 +232,6 @@ class DifferentImageBloc
   }
 
   void _handleCorrectMatch(int currentIndex, bool isLowerPart) {
-    _setVisibility(
-      currentIndex,
-      isLowerPart,
-      true,
-    );
-
     _setError(currentIndex, isLowerPart, false);
     _setError(firstMemoryTile!.index, firstMemoryTile!.isLowerPart, false);
 

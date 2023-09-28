@@ -67,9 +67,11 @@ class GameMoves {
     if (_firstIndex == null) {
       _firstIndex = index;
       _firstPairValue = pairValue;
+
       return MatchResult.firstTap;
     } else {
       var oldIndex = _firstIndex!;
+
       if (index == oldIndex) {
         // same tile was tapped twice
         return MatchResult.sameTile;
