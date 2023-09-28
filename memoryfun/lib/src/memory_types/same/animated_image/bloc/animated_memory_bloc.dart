@@ -5,7 +5,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:memoryfun/src/utils/calculating/randomizer.dart';
 import 'package:riverbloc/riverbloc.dart';
 
-import '../../../models/memory_tile.dart';
+import '../../../game_moves.dart';
+import '../../../match_result.dart';
 import '../../../../utils/routing/app_router.dart';
 import '../../../../game_type/image_mapper.dart';
 import '../../../../sound/sounds.dart';
@@ -43,6 +44,7 @@ class AnimatedMemoryBloc
     return AnimatedMemoryBloc(
       imageMapper: ref.watch(ImageMapper.provider),
       appRouter: ref.watch(appRouterProvider),
+      gameMoves: ref.watch(GameMoves.provider),
       soundPlayer: ref.watch(Sounds.provider),
       randomizer: ref.watch(Randomizer.provider),
     );
@@ -50,6 +52,7 @@ class AnimatedMemoryBloc
 
   final ImageMapper imageMapper;
   final AppRouter appRouter;
+  final GameMoves gameMoves;
   final Sounds soundPlayer;
   final Randomizer randomizer;
 
@@ -68,6 +71,7 @@ class AnimatedMemoryBloc
   AnimatedMemoryBloc({
     required this.imageMapper,
     required this.appRouter,
+    required this.gameMoves,
     required this.soundPlayer,
     required this.randomizer,
   }) : super(const AnimatedMemoryState.initial()) {
@@ -113,9 +117,8 @@ class AnimatedMemoryBloc
   }
 
   void _resetGame() {
-    firstIndex = null;
-    firstPairValue = null;
-    hideTiles = [];
+    gameMoves.resetGame();
+
     memoryTiles = [];
     matchesWon = 0;
   }
@@ -125,59 +128,25 @@ class AnimatedMemoryBloc
     Emitter<AnimatedMemoryState> emit,
   ) async {
     emit(const AnimatedMemoryState.loadingResult());
-    soundPlayer.playTap();
 
-    var index = event.tileIndex;
-
-    var randomAngle = randomizer.randomTileAngle();
-
-    if (hideTiles.isNotEmpty) {
-      for (var hideTileIndex in hideTiles) {
-        _setTileVisibility(
-          hideTileIndex,
-          MemoryTile(
-            index: index,
-            pairValue: event.pairValue,
-            angle: randomAngle,
-            isVisible: false,
-          ),
-        );
-        memoryTiles[hideTileIndex].hasError = false;
-      }
-
-      hideTiles = [];
-    }
-    _setTileVisibility(
-      index,
-      MemoryTile(
-        index: index,
-        pairValue: event.pairValue,
-        angle: 0,
-        isVisible: true,
-      ),
+    var matchResult = gameMoves.handleTap(
+      currentLevel.themeSet,
+      memoryTiles,
+      event.tileIndex,
+      event.pairValue,
     );
 
-    if (firstIndex != null) {
-      if (firstIndex == event.tileIndex) {
+    switch (matchResult) {
+      case MatchResult.correctMatch:
+        _handleCorrectMatch();
+        break;
+      default:
         emit(AnimatedMemoryState.matchResult(memoryTiles));
-        return;
-      } else {
-        if (firstPairValue == event.pairValue) {
-          _handleCorrectMatch(index, firstIndex!);
-        } else {
-          _handleWrongMatch(index, firstIndex!);
-        }
-      }
-    } else {
-      firstIndex = event.tileIndex;
-      firstPairValue = event.pairValue;
-      emit(AnimatedMemoryState.matchResult(memoryTiles));
+        break;
     }
   }
 
-  void _handleCorrectMatch(int index, int oldIndex) {
-    _setError(index, oldIndex, false);
-
+  void _handleCorrectMatch() {
     matchesWon++;
     matchesLeft = matchesLeft - 1;
 
@@ -196,11 +165,7 @@ class AnimatedMemoryBloc
         Future.delayed(
           const Duration(seconds: 2),
           () {
-            firstIndex = null;
-            firstPairValue = null;
-            hideTiles = [];
-            memoryTiles = [];
-            matchesWon = 0;
+            _resetGame();
 
             return appRouter.push(LevelDoneRoute(nextLevel: levels[level + 1]));
           },
@@ -212,38 +177,5 @@ class AnimatedMemoryBloc
       soundPlayer.playCorrectMatch();
       emit(AnimatedMemoryState.matchResult(memoryTiles));
     }
-  }
-
-  void _handleWrongMatch(int index, int oldIndex) {
-    soundPlayer.playWrongMatch();
-
-    _setError(index, oldIndex, true);
-
-    hideTiles.add(index);
-    hideTiles.add(oldIndex);
-
-    emit(AnimatedMemoryState.matchResult(memoryTiles));
-  }
-
-  void _setError(int index, int oldIndex, bool hasError) {
-    memoryTiles[index].isVisible = !hasError;
-    memoryTiles[oldIndex].isVisible = !hasError;
-
-    memoryTiles[index].hasError = hasError;
-    memoryTiles[oldIndex].hasError = hasError;
-
-    memoryTiles[index].isCorrect = !hasError;
-    memoryTiles[oldIndex].isCorrect = !hasError;
-
-    firstIndex = null;
-    firstPairValue = null;
-  }
-
-  void _setTileVisibility(int index, MemoryTile memoryTile) {
-    memoryTiles[index].image = imageMapper.getImage(
-      memoryTile,
-      currentLevel.themeSet,
-    );
-    memoryTiles[index].angle = memoryTile.angle;
   }
 }
