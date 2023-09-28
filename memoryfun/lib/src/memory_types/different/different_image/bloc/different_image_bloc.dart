@@ -10,7 +10,7 @@ import '../../../../game_type/theme_set.dart';
 import '../../../../levels/level_info.dart';
 import '../../../../levels/levels.dart';
 import '../../../models/memory_tile.dart';
-import '../../../../sound/sound_player.dart';
+import '../../../../sound/sounds.dart';
 import '../models/split_memory_set.dart';
 import '../models/tile_to_hide.dart';
 import '../../../../utils/routing/app_router.dart';
@@ -44,14 +44,14 @@ class DifferentImageBloc
     return DifferentImageBloc(
       imageMapper: ref.watch(ImageMapper.provider),
       appRouter: ref.watch(appRouterProvider),
-      soundPlayer: ref.watch(SoundPlayer.provider),
+      soundPlayer: ref.watch(Sounds.provider),
       randomizer: ref.watch(Randomizer.provider),
     );
   });
 
   final ImageMapper imageMapper;
   final AppRouter appRouter;
-  final SoundPlayer soundPlayer;
+  final Sounds soundPlayer;
   final Randomizer randomizer;
 
   SplitMemorySet splitMemorySet = SplitMemorySet(

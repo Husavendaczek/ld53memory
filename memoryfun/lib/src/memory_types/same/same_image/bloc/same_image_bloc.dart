@@ -10,7 +10,7 @@ import '../../../../levels/level_info.dart';
 import '../../../models/memory_tile.dart';
 import '../../../../levels/levels.dart';
 import '../../../../game_type/game_type.dart';
-import '../../../../sound/sound_player.dart';
+import '../../../../sound/sounds.dart';
 import '../../../../utils/routing/app_router.dart';
 
 part 'same_image_bloc.freezed.dart';
@@ -41,13 +41,13 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
     return SameImageBloc(
         imageMapper: ref.watch(ImageMapper.provider),
         appRouter: ref.watch(appRouterProvider),
-        soundPlayer: ref.watch(SoundPlayer.provider),
+        soundPlayer: ref.watch(Sounds.provider),
         randomizer: ref.watch(Randomizer.provider));
   });
 
   final ImageMapper imageMapper;
   final AppRouter appRouter;
-  final SoundPlayer soundPlayer;
+  final Sounds soundPlayer;
   final Randomizer randomizer;
 
   List<MemoryTile> memoryTiles = [];

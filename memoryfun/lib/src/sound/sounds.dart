@@ -5,13 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../game_type/theme_set.dart';
 
-class SoundPlayer {
+class Sounds {
   final AudioPlayer musicPlayer;
 
-  const SoundPlayer({required this.musicPlayer});
+  const Sounds({required this.musicPlayer});
 
-  static final provider = Provider<SoundPlayer>(
-    (ref) => SoundPlayer(
+  static final provider = Provider<Sounds>(
+    (ref) => Sounds(
       musicPlayer: AudioPlayer(playerId: 'musicPlayer'),
     ),
   );
