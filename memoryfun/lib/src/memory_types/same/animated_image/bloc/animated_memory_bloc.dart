@@ -176,13 +176,7 @@ class AnimatedMemoryBloc
   }
 
   void _handleCorrectMatch(int index, int oldIndex) {
-    memoryTiles[index].isVisible = true;
-    memoryTiles[oldIndex].isVisible = true;
-    memoryTiles[index].isCorrect = true;
-    memoryTiles[oldIndex].isCorrect = true;
-
-    firstIndex = null;
-    firstPairValue = null;
+    _setError(index, oldIndex, false);
 
     matchesWon++;
     matchesLeft = matchesLeft - 1;
@@ -223,17 +217,26 @@ class AnimatedMemoryBloc
   void _handleWrongMatch(int index, int oldIndex) {
     soundPlayer.playWrongMatch();
 
-    memoryTiles[index].isVisible = false;
-    memoryTiles[oldIndex].isVisible = false;
-    memoryTiles[index].hasError = true;
-    memoryTiles[oldIndex].hasError = true;
+    _setError(index, oldIndex, true);
 
     hideTiles.add(index);
     hideTiles.add(oldIndex);
 
+    emit(AnimatedMemoryState.matchResult(memoryTiles));
+  }
+
+  void _setError(int index, int oldIndex, bool hasError) {
+    memoryTiles[index].isVisible = !hasError;
+    memoryTiles[oldIndex].isVisible = !hasError;
+
+    memoryTiles[index].hasError = hasError;
+    memoryTiles[oldIndex].hasError = hasError;
+
+    memoryTiles[index].isCorrect = !hasError;
+    memoryTiles[oldIndex].isCorrect = !hasError;
+
     firstIndex = null;
     firstPairValue = null;
-    emit(AnimatedMemoryState.matchResult(memoryTiles));
   }
 
   void _setTileVisibility(int index, MemoryTile memoryTile) {

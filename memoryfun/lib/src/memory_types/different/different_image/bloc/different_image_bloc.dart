@@ -240,8 +240,8 @@ class DifferentImageBloc
       true,
     );
 
-    _setCorrect(currentIndex, isLowerPart);
-    _setCorrect(firstMemoryTile!.index, firstMemoryTile!.isLowerPart);
+    _setError(currentIndex, isLowerPart, false);
+    _setError(firstMemoryTile!.index, firstMemoryTile!.isLowerPart, false);
 
     firstMemoryTile = null;
 
@@ -320,18 +320,10 @@ class DifferentImageBloc
   void _setError(int index, bool isLowerPart, bool hasError) {
     if (isLowerPart) {
       splitMemorySet.lowerTiles[index].hasError = hasError;
+      splitMemorySet.lowerTiles[index].isCorrect = !hasError;
     } else {
       splitMemorySet.upperTiles[index].hasError = hasError;
-    }
-  }
-
-  void _setCorrect(int index, bool isLowerPart) {
-    if (isLowerPart) {
-      splitMemorySet.lowerTiles[index].isCorrect = true;
-      splitMemorySet.lowerTiles[index].hasError = false;
-    } else {
-      splitMemorySet.upperTiles[index].isCorrect = true;
-      splitMemorySet.upperTiles[index].hasError = false;
+      splitMemorySet.upperTiles[index].isCorrect = !hasError;
     }
   }
 
