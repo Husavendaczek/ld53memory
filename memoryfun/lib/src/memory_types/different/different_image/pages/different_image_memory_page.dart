@@ -6,6 +6,7 @@ import '../../../../components/app_bar/memo_app_bar.dart';
 import '../../../../components/buttons/normal_button.dart';
 import '../../../../components/memory_image_cards/memory_card.dart';
 import '../../../../levels/level_info.dart';
+import '../../../../sound/sounds.dart';
 import '../../../models/memory_tile.dart';
 import '../../../../components/grid/split_memory_grid_view.dart';
 import '../models/split_memory_set.dart';
@@ -32,6 +33,7 @@ class _MemoryPageState extends ConsumerState<DifferentImageMemoryPage> {
     ref.read(DifferentImageBloc.provider.bloc).add(
           DifferentImageEvent.initGame(widget.levelInfo),
         );
+    ref.read(Sounds.provider).playMusic(widget.levelInfo.themeSet);
   }
 
   @override

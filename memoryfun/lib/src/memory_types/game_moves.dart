@@ -79,8 +79,6 @@ class GameMoves {
 
       // correct match
       if (pairValue == _firstPairValue) {
-        soundPlayer.playCorrectMatch();
-
         matchResult = MatchResult.correctMatch;
 
         _setError(index, false);

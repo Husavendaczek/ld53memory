@@ -7,13 +7,13 @@ import 'package:riverbloc/riverbloc.dart';
 import '../../../../game_type/game_type.dart';
 import '../../../../game_type/image_mapper.dart';
 import '../../../../game_type/theme_set.dart';
+import '../../../../levels/level_finisher.dart';
 import '../../../../levels/level_info.dart';
 import '../../../../levels/levels.dart';
 import '../../../models/memory_tile.dart';
 import '../../../../sound/sounds.dart';
 import '../models/split_memory_set.dart';
 import '../models/tile_to_hide.dart';
-import '../../../../utils/routing/app_router.dart';
 
 part 'different_image_bloc.freezed.dart';
 
@@ -43,14 +43,14 @@ class DifferentImageBloc
 
     return DifferentImageBloc(
       imageMapper: ref.watch(ImageMapper.provider),
-      appRouter: ref.watch(appRouterProvider),
+      levelFinisher: ref.watch(LevelFinisher.provider),
       soundPlayer: ref.watch(Sounds.provider),
       randomizer: ref.watch(Randomizer.provider),
     );
   });
 
   final ImageMapper imageMapper;
-  final AppRouter appRouter;
+  final LevelFinisher levelFinisher;
   final Sounds soundPlayer;
   final Randomizer randomizer;
 
@@ -69,7 +69,7 @@ class DifferentImageBloc
 
   DifferentImageBloc({
     required this.imageMapper,
-    required this.appRouter,
+    required this.levelFinisher,
     required this.soundPlayer,
     required this.randomizer,
   }) : super(const DifferentImageState.initial()) {
@@ -79,7 +79,6 @@ class DifferentImageBloc
 
   Future _initGame(_InitGame event, Emitter<DifferentImageState> emit) async {
     emit(const DifferentImageState.loading());
-    soundPlayer.playMusic(event.levelInfo.themeSet);
 
     _resetGame();
     matchesLeft = event.levelInfo.getMatches();
@@ -247,34 +246,19 @@ class DifferentImageBloc
 
     matchesLeft = matchesLeft - 1;
 
-    if (matchesLeft == 0) {
-      var level =
-          levels.indexWhere((lvl) => lvl.themeSet == currentLevel.themeSet);
-      if (level == levels.length - 1) {
-        soundPlayer.playWinGame();
+    var isFinished =
+        levelFinisher.goToNextLevelOrFinish(currentLevel.themeSet, matchesLeft);
 
-        appRouter.push(const WonRoute());
-      } else {
-        soundPlayer.playWinLevel();
-
-        currentLevel = levels[level + 1];
-
-        Future.delayed(
-          const Duration(seconds: 1),
-          () {
-            hideTiles = [];
-            splitMemorySet = SplitMemorySet(upperTiles: [], lowerTiles: []);
-
-            return appRouter.push(LevelDoneRoute(nextLevel: levels[level + 1]));
-          },
-        );
-
-        emit(DifferentImageState.matchResult(splitMemorySet));
-      }
-    } else {
-      soundPlayer.playCorrectMatch();
-      emit(DifferentImageState.matchResult(splitMemorySet));
+    if (isFinished) {
+      Future.delayed(
+        const Duration(seconds: 1),
+        () {
+          _resetGame();
+        },
+      );
     }
+
+    emit(DifferentImageState.matchResult(splitMemorySet));
   }
 
   void _handleWrongMatch(int currentIndex, bool isLowerPart) {

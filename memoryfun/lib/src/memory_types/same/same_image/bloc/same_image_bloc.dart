@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:memoryfun/src/levels/level_finisher.dart';
 import 'package:memoryfun/src/memory_types/game_moves.dart';
 import 'package:memoryfun/src/memory_types/match_result.dart';
 import 'package:memoryfun/src/utils/calculating/randomizer.dart';
@@ -10,10 +11,7 @@ import '../../../../game_type/image_mapper.dart';
 import '../../../../game_type/theme_set.dart';
 import '../../../../levels/level_info.dart';
 import '../../../models/memory_tile.dart';
-import '../../../../levels/levels.dart';
 import '../../../../game_type/game_type.dart';
-import '../../../../sound/sounds.dart';
-import '../../../../utils/routing/app_router.dart';
 
 part 'same_image_bloc.freezed.dart';
 
@@ -42,16 +40,14 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
 
     return SameImageBloc(
         imageMapper: ref.watch(ImageMapper.provider),
-        appRouter: ref.watch(appRouterProvider),
         gameMoves: ref.watch(GameMoves.provider),
-        soundPlayer: ref.watch(Sounds.provider),
+        levelFinisher: ref.watch(LevelFinisher.provider),
         randomizer: ref.watch(Randomizer.provider));
   });
 
   final ImageMapper imageMapper;
-  final AppRouter appRouter;
   final GameMoves gameMoves;
-  final Sounds soundPlayer;
+  final LevelFinisher levelFinisher;
   final Randomizer randomizer;
 
   List<MemoryTile> memoryTiles = [];
@@ -65,9 +61,8 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
 
   SameImageBloc({
     required this.imageMapper,
-    required this.appRouter,
     required this.gameMoves,
-    required this.soundPlayer,
+    required this.levelFinisher,
     required this.randomizer,
   }) : super(const SameImageState.initial()) {
     on<_InitGame>(_initGame);
@@ -76,7 +71,6 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
 
   Future _initGame(_InitGame event, Emitter<SameImageState> emit) async {
     emit(const SameImageState.loading());
-    soundPlayer.playMusic(event.levelInfo.themeSet);
 
     _resetGame();
     matchesLeft = event.levelInfo.getMatches();
@@ -141,32 +135,18 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
     matchesWon++;
     matchesLeft = matchesLeft - 1;
 
-    if (matchesLeft == 0) {
-      var level =
-          levels.indexWhere((lvl) => lvl.themeSet == currentLevel.themeSet);
-      if (level == levels.length - 1) {
-        soundPlayer.playWinGame();
+    var isFinished =
+        levelFinisher.goToNextLevelOrFinish(currentLevel.themeSet, matchesLeft);
 
-        appRouter.push(const WonRoute());
-      } else {
-        soundPlayer.playWinLevel();
-
-        currentLevel = levels[level + 1];
-
-        Future.delayed(
-          const Duration(seconds: 1),
-          () {
-            _resetGame();
-
-            return appRouter.push(LevelDoneRoute(nextLevel: levels[level + 1]));
-          },
-        );
-
-        emit(SameImageState.matchResult(memoryTiles));
-      }
-    } else {
-      soundPlayer.playCorrectMatch();
-      emit(SameImageState.matchResult(memoryTiles));
+    if (isFinished) {
+      Future.delayed(
+        const Duration(seconds: 1),
+        () {
+          _resetGame();
+        },
+      );
     }
+
+    emit(SameImageState.matchResult(memoryTiles));
   }
 }

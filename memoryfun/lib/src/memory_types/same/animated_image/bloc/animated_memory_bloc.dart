@@ -5,12 +5,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:memoryfun/src/utils/calculating/randomizer.dart';
 import 'package:riverbloc/riverbloc.dart';
 
+import '../../../../levels/level_finisher.dart';
 import '../../../game_moves.dart';
 import '../../../match_result.dart';
-import '../../../../utils/routing/app_router.dart';
 import '../../../../game_type/image_mapper.dart';
-import '../../../../sound/sounds.dart';
-import '../../../../levels/levels.dart';
 import '../../../../game_type/game_type.dart';
 import '../../../../levels/level_info.dart';
 import '../../../../game_type/theme_set.dart';
@@ -43,17 +41,15 @@ class AnimatedMemoryBloc
     ref.onDispose(() => ref.bloc.close());
     return AnimatedMemoryBloc(
       imageMapper: ref.watch(ImageMapper.provider),
-      appRouter: ref.watch(appRouterProvider),
       gameMoves: ref.watch(GameMoves.provider),
-      soundPlayer: ref.watch(Sounds.provider),
+      levelFinisher: ref.watch(LevelFinisher.provider),
       randomizer: ref.watch(Randomizer.provider),
     );
   });
 
   final ImageMapper imageMapper;
-  final AppRouter appRouter;
   final GameMoves gameMoves;
-  final Sounds soundPlayer;
+  final LevelFinisher levelFinisher;
   final Randomizer randomizer;
 
   List<AnimatedMemoryTile> memoryTiles = [];
@@ -70,9 +66,8 @@ class AnimatedMemoryBloc
 
   AnimatedMemoryBloc({
     required this.imageMapper,
-    required this.appRouter,
     required this.gameMoves,
-    required this.soundPlayer,
+    required this.levelFinisher,
     required this.randomizer,
   }) : super(const AnimatedMemoryState.initial()) {
     on<_InitGame>(_initGame);
@@ -81,7 +76,6 @@ class AnimatedMemoryBloc
 
   Future _initGame(_InitGame event, Emitter<AnimatedMemoryState> emit) async {
     emit(const AnimatedMemoryState.loading());
-    soundPlayer.playMusic(event.levelInfo.themeSet);
 
     _resetGame();
     matchesLeft = event.levelInfo.getMatches();
@@ -150,32 +144,18 @@ class AnimatedMemoryBloc
     matchesWon++;
     matchesLeft = matchesLeft - 1;
 
-    if (matchesLeft == 0) {
-      var level =
-          levels.indexWhere((lvl) => lvl.themeSet == currentLevel.themeSet);
-      if (level == levels.length - 1) {
-        soundPlayer.playWinGame();
+    var isFinished =
+        levelFinisher.goToNextLevelOrFinish(currentLevel.themeSet, matchesLeft);
 
-        appRouter.push(const WonRoute());
-      } else {
-        soundPlayer.playWinLevel();
-
-        currentLevel = levels[level + 1];
-
-        Future.delayed(
-          const Duration(seconds: 2),
-          () {
-            _resetGame();
-
-            return appRouter.push(LevelDoneRoute(nextLevel: levels[level + 1]));
-          },
-        );
-
-        emit(AnimatedMemoryState.matchResult(memoryTiles));
-      }
-    } else {
-      soundPlayer.playCorrectMatch();
-      emit(AnimatedMemoryState.matchResult(memoryTiles));
+    if (isFinished) {
+      Future.delayed(
+        const Duration(seconds: 1),
+        () {
+          _resetGame();
+        },
+      );
     }
+
+    emit(AnimatedMemoryState.matchResult(memoryTiles));
   }
 }
