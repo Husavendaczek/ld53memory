@@ -7,7 +7,7 @@ import '../../../../components/buttons/normal_button.dart';
 import '../../../../components/memory_image_cards/memory_card.dart';
 import '../../../../levels/level_info.dart';
 import '../../../../sound/sounds.dart';
-import '../../../models/memory_tile.dart';
+import '../../../models/image_memory_tile.dart';
 import '../../../../components/grid/split_memory_grid_view.dart';
 import '../models/split_memory_set.dart';
 import '../bloc/different_image_bloc.dart';
@@ -67,7 +67,7 @@ class _MemoryPageState extends ConsumerState<DifferentImageMemoryPage> {
         lowerTiles: _tiles(splitMemorySet.lowerTiles, fadeIn),
       );
 
-  List<Widget> _tiles(List<MemoryTile> memorySet, bool fadeIn) {
+  List<Widget> _tiles(List<ImageMemoryTile> memorySet, bool fadeIn) {
     List<Widget> tiles = [];
     for (var tile in memorySet) {
       tiles.add(

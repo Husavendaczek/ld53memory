@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../memory_types/models/memory_tile.dart';
+import '../../memory_types/models/image_memory_tile.dart';
 import 'memory_card_background.dart';
 import 'memory_card_error.dart';
 import 'memory_card_visible.dart';
 import 'tapable_card.dart';
 
 class MemoryCard extends ConsumerWidget {
-  final MemoryTile memoryTile;
+  final ImageMemoryTile memoryTile;
   final Function() onTap;
 
   const MemoryCard({

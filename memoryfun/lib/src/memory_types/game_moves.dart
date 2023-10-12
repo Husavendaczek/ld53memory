@@ -5,6 +5,7 @@ import 'package:riverpod/riverpod.dart';
 import '../game_type/image_mapper.dart';
 import '../sound/sounds.dart';
 import '../utils/calculating/randomizer.dart';
+import 'models/image_memory_tile.dart';
 import 'models/memory_tile.dart';
 
 class GameMoves {
@@ -13,7 +14,7 @@ class GameMoves {
   final Randomizer randomizer;
 
   late ThemeSet _themeSet;
-  List<MemoryTile> _memoryTiles = [];
+  List<ImageMemoryTile> _memoryTiles = [];
   List<int> _hideTiles = [];
   int? _firstIndex;
   int? _firstPairValue;
@@ -42,7 +43,7 @@ class GameMoves {
 
   MatchResult handleTap(
     ThemeSet themeSet,
-    List<MemoryTile> memoryTiles,
+    List<ImageMemoryTile> memoryTiles,
     int index,
     int pairValue,
   ) {
@@ -55,7 +56,7 @@ class GameMoves {
 
     _setTileVisibilityAndAngle(
       index,
-      MemoryTile(
+      ImageMemoryTile(
         index: index,
         pairValue: pairValue,
         angle: 0,
@@ -111,7 +112,7 @@ class GameMoves {
       for (var hideTileIndex in _hideTiles) {
         _setTileVisibilityAndAngle(
           hideTileIndex,
-          MemoryTile(
+          ImageMemoryTile(
             index: 0,
             pairValue: pairValue,
             angle: randomAngle,
@@ -144,7 +145,7 @@ class GameMoves {
 
   void _setTileVisibilityAndAngle(
     int index,
-    MemoryTile memoryTile,
+    ImageMemoryTile memoryTile,
   ) {
     _memoryTiles[index].image = imageMapper.getImage(
       memoryTile,

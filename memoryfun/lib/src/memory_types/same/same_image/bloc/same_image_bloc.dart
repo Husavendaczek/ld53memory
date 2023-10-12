@@ -10,7 +10,7 @@ import 'package:riverbloc/riverbloc.dart';
 import '../../../../game_type/image_mapper.dart';
 import '../../../../game_type/theme_set.dart';
 import '../../../../levels/level_info.dart';
-import '../../../models/memory_tile.dart';
+import '../../../models/image_memory_tile.dart';
 import '../../../../game_type/game_type.dart';
 
 part 'same_image_bloc.freezed.dart';
@@ -26,10 +26,10 @@ class SameImageEvent with _$SameImageEvent {
 class SameImageState with _$SameImageState {
   const factory SameImageState.initial() = _Initial;
   const factory SameImageState.loading() = _Loading;
-  const factory SameImageState.initialized(List<MemoryTile> memorySet) =
+  const factory SameImageState.initialized(List<ImageMemoryTile> memorySet) =
       _Initialized;
   const factory SameImageState.loadingResult() = _LoadingResult;
-  const factory SameImageState.matchResult(List<MemoryTile> memorySet) =
+  const factory SameImageState.matchResult(List<ImageMemoryTile> memorySet) =
       _MatchResult;
 }
 
@@ -50,7 +50,7 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
   final LevelFinisher levelFinisher;
   final Randomizer randomizer;
 
-  List<MemoryTile> memoryTiles = [];
+  List<ImageMemoryTile> memoryTiles = [];
   int matchesWon = 0;
   int matchesLeft = 100;
   LevelInfo currentLevel = const LevelInfo(
@@ -87,7 +87,7 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
       var value = pairValues[randomIndex];
       pairValues.removeAt(randomIndex);
 
-      var tile = MemoryTile(
+      var tile = ImageMemoryTile(
         index: i,
         pairValue: value,
         angle: randomizer.randomTileAngle(),

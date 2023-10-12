@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,7 +8,7 @@ import '../../../../components/buttons/normal_button.dart';
 import '../../../../components/memory_image_cards/memory_card.dart';
 import '../../../../levels/level_info.dart';
 import '../../../../components/grid/single_memory_grid_view.dart';
-import '../../../models/memory_tile.dart';
+import '../../../models/image_memory_tile.dart';
 import '../bloc/same_image_bloc.dart';
 
 @RoutePage()
@@ -65,15 +63,15 @@ class _SimpleMemoryPageState extends ConsumerState<SameImageMemoryPage> {
     );
   }
 
-  Widget _gridView(List<MemoryTile> memorySet, bool fadeIn) =>
+  Widget _gridView(List<ImageMemoryTile> memorySet, bool fadeIn) =>
       SingleMemoryGridView(
         tiles: _tiles(memorySet, fadeIn),
       );
 
-  List<Widget> _tiles(List<MemoryTile> memorySet, bool fadeIn) {
+  List<Widget> _tiles(List<ImageMemoryTile> memorySet, bool fadeIn) {
     List<Widget> tiles = [];
     for (var tile in memorySet) {
-      var memoryTile = MemoryTile(
+      var memoryTile = ImageMemoryTile(
         index: tile.index,
         pairValue: tile.pairValue,
         angle: tile.angle,

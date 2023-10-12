@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/image_memory_tile.dart';
+import 'memory_tile.dart';
 
-class AnimatedMemoryTile extends ImageMemoryTile {
-  final List<AssetImage> animationImages;
+class ImageMemoryTile extends MemoryTile {
+  AssetImage? image;
 
-  AnimatedMemoryTile({
-    required this.animationImages,
+  ImageMemoryTile({
     required super.index,
     required super.pairValue,
     required super.angle,
@@ -14,6 +13,6 @@ class AnimatedMemoryTile extends ImageMemoryTile {
     super.hasError = false,
     super.isCorrect = false,
     super.isLowerPart = false,
-    super.image,
+    this.image,
   });
 }

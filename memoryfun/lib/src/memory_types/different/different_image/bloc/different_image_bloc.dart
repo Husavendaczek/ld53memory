@@ -9,6 +9,7 @@ import '../../../../game_type/image_mapper.dart';
 import '../../../../game_type/theme_set.dart';
 import '../../../../levels/level_finisher.dart';
 import '../../../../levels/level_info.dart';
+import '../../../models/image_memory_tile.dart';
 import '../../../models/memory_tile.dart';
 import '../../../../sound/sounds.dart';
 import '../models/split_memory_set.dart';
@@ -101,7 +102,7 @@ class DifferentImageBloc
       var value = pairValues[randomIndex];
       pairValues.removeAt(randomIndex);
 
-      var tile = MemoryTile(
+      var tile = ImageMemoryTile(
         index: i,
         pairValue: value,
         angle: randomizer.randomTileAngle(),
@@ -154,7 +155,7 @@ class DifferentImageBloc
 
     _setTileImage(
       currentIndex,
-      MemoryTile(
+      ImageMemoryTile(
         index: currentIndex,
         pairValue: event.memoryTile.pairValue,
         angle: 0,
@@ -304,7 +305,7 @@ class DifferentImageBloc
     }
   }
 
-  void _setTileImage(int index, MemoryTile memoryTile) {
+  void _setTileImage(int index, ImageMemoryTile memoryTile) {
     var image = imageMapper.getImage(
       memoryTile,
       currentLevel.themeSet,
