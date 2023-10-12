@@ -46,6 +46,7 @@ flutter:
     - assets/color/farm/
     - assets/color/farmComplex/
     - assets/color/farmMud/
+    - assets/color/numbers/
     - assets/mono/
     - assets/mono/food/
     - assets/mono/mail/
@@ -57,3 +58,4 @@ flutter:
     - assets/mono/farm/
     - assets/mono/farmComplex/
     - assets/mono/farmMud/
+    - assets/mono/numbers/
