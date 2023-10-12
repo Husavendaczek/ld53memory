@@ -5,4 +5,6 @@ enum GameType {
   differentText,
   textAndImage,
   animatedImage,
+  sameNumber,
+  differentNumber,
 }
