@@ -1,37 +1,37 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/sound/sounds.dart';
 
 import '../../../../components/app_bar/memo_app_bar.dart';
 import '../../../../components/buttons/normal_button.dart';
-import '../../../../components/memory_cards/image_cards/memory_card.dart';
-import '../../../../levels/level_info.dart';
 import '../../../../components/grid/single_memory_grid_view.dart';
-import '../../../models/image_memory_tile.dart';
-import '../bloc/same_image_bloc.dart';
+import '../../../../components/memory_cards/number_cards/number_memory_card.dart';
+import '../../../../levels/level_info.dart';
+import '../../../../sound/sounds.dart';
+import '../../../models/number_memory_tile.dart';
+import '../bloc/same_number_bloc.dart';
 
 @RoutePage()
-class SameImageMemoryPage extends ConsumerStatefulWidget {
+class SameNumberMemoryPage extends ConsumerStatefulWidget {
   final LevelInfo levelInfo;
 
-  const SameImageMemoryPage({
+  const SameNumberMemoryPage({
     required this.levelInfo,
     super.key,
   });
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _SimpleMemoryPageState();
+      _SameNumberMemoryPageState();
 }
 
-class _SimpleMemoryPageState extends ConsumerState<SameImageMemoryPage> {
+class _SameNumberMemoryPageState extends ConsumerState<SameNumberMemoryPage> {
   @override
   void initState() {
     super.initState();
 
-    ref.read(SameImageBloc.provider.bloc).add(
-          SameImageEvent.initGame(widget.levelInfo),
+    ref.read(SameNumberBloc.provider.bloc).add(
+          SameNumberEvent.initGame(widget.levelInfo),
         );
     ref.read(Sounds.provider).playMusic(widget.levelInfo.themeSet);
   }
@@ -39,11 +39,11 @@ class _SimpleMemoryPageState extends ConsumerState<SameImageMemoryPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: MemoryAppBar(
-          onRestart: () => ref.read(SameImageBloc.provider.bloc).add(
-                SameImageEvent.initGame(widget.levelInfo),
+          onRestart: () => ref.read(SameNumberBloc.provider.bloc).add(
+                SameNumberEvent.initGame(widget.levelInfo),
               ),
         ),
-        body: ref.watch(SameImageBloc.provider).maybeWhen(
+        body: ref.watch(SameNumberBloc.provider).maybeWhen(
               initialized: (memorySet) => _gridView(memorySet, true),
               matchResult: (memorySet) => _gridView(memorySet, false),
               orElse: () => Column(
@@ -52,8 +52,8 @@ class _SimpleMemoryPageState extends ConsumerState<SameImageMemoryPage> {
                   const Text('loading'),
                   NormalButton(
                     text: 'Restart game',
-                    onTap: () => ref.read(SameImageBloc.provider.bloc).add(
-                          SameImageEvent.initGame(widget.levelInfo),
+                    onTap: () => ref.read(SameNumberBloc.provider.bloc).add(
+                          SameNumberEvent.initGame(widget.levelInfo),
                         ),
                   ),
                 ],
@@ -61,28 +61,27 @@ class _SimpleMemoryPageState extends ConsumerState<SameImageMemoryPage> {
             ),
       );
 
-  Widget _gridView(List<ImageMemoryTile> memorySet, bool fadeIn) =>
+  Widget _gridView(List<NumberMemoryTile> memorySet, bool fadeIn) =>
       SingleMemoryGridView(
         tiles: _tiles(memorySet, fadeIn),
       );
 
-  List<Widget> _tiles(List<ImageMemoryTile> memorySet, bool fadeIn) {
+  List<Widget> _tiles(List<NumberMemoryTile> memorySet, bool fadeIn) {
     List<Widget> tiles = [];
     for (var tile in memorySet) {
-      var memoryTile = ImageMemoryTile(
+      var memoryTile = NumberMemoryTile(
         index: tile.index,
-        pairValue: tile.pairValue,
+        number: tile.number,
         angle: tile.angle,
-        image: tile.image,
         isVisible: tile.isVisible,
         hasError: tile.hasError,
         isCorrect: tile.isCorrect,
       );
       tiles.add(
-        MemoryCard(
+        NumberMemoryCard(
           memoryTile: memoryTile,
-          onTap: () => ref.read(SameImageBloc.provider.bloc).add(
-                SameImageEvent.handleTap(tile.index, tile.pairValue),
+          onTap: () => ref.read(SameNumberBloc.provider.bloc).add(
+                SameNumberEvent.handleTap(tile.index, tile.number),
               ),
         ),
       );
