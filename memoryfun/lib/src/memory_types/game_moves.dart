@@ -6,7 +6,6 @@ import '../game_type/image_mapper.dart';
 import '../sound/sounds.dart';
 import '../utils/calculating/randomizer.dart';
 import 'models/image_memory_tile.dart';
-import 'models/memory_tile.dart';
 
 class GameMoves {
   final ImageMapper imageMapper;

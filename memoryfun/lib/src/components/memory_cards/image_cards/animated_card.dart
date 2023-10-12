@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/components/memory_image_cards/memory_card_error.dart';
+import 'package:memoryfun/src/components/memory_cards/image_cards/memory_card_error.dart';
 import 'package:memoryfun/src/memory_types/same/animated_image/models/animated_memory_tile.dart';
 
 import 'tapable_card.dart';
@@ -71,7 +71,11 @@ class _AnimatedMemoryTileComponentState extends ConsumerState<AnimatedCard> {
 
     if (widget.animatedMemoryTile.hasError) {
       animatedCard = MemoryCardError(
-          image: widget.animatedMemoryTile.animationImages.first);
+        widget: Image(
+          image: widget.animatedMemoryTile.animationImages.first,
+          fit: BoxFit.cover,
+        ),
+      );
     }
 
     return TapableCard(

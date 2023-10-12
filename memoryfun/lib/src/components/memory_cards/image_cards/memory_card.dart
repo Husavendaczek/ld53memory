@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../memory_types/models/image_memory_tile.dart';
+import '../../../memory_types/models/image_memory_tile.dart';
 import 'memory_card_background.dart';
 import 'memory_card_error.dart';
 import 'memory_card_visible.dart';
@@ -23,11 +23,15 @@ class MemoryCard extends ConsumerWidget {
     Widget memoryCard = MemoryCardBackground(image: image, onTap: onTap);
 
     if (memoryTile.isCorrect) {
-      memoryCard = MemoryCardVisible(image: image);
+      memoryCard = MemoryCardVisible(
+        widget: Image(image: image, fit: BoxFit.cover),
+      );
     }
 
     if (memoryTile.hasError) {
-      memoryCard = MemoryCardError(image: image);
+      memoryCard = MemoryCardError(
+        widget: Image(image: image, fit: BoxFit.cover),
+      );
     }
 
     return TapableCard(

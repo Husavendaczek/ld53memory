@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../components/app_bar/memo_app_bar.dart';
 import '../../../../components/buttons/normal_button.dart';
-import '../../../../components/memory_image_cards/memory_card.dart';
+import '../../../../components/memory_cards/image_cards/memory_card.dart';
 import '../../../../levels/level_info.dart';
 import '../../../../sound/sounds.dart';
 import '../../../models/image_memory_tile.dart';

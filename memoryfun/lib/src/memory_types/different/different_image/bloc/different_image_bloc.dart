@@ -10,7 +10,6 @@ import '../../../../game_type/theme_set.dart';
 import '../../../../levels/level_finisher.dart';
 import '../../../../levels/level_info.dart';
 import '../../../models/image_memory_tile.dart';
-import '../../../models/memory_tile.dart';
 import '../../../../sound/sounds.dart';
 import '../models/split_memory_set.dart';
 import '../models/tile_to_hide.dart';
@@ -20,7 +19,7 @@ part 'different_image_bloc.freezed.dart';
 @freezed
 class DifferentImageEvent with _$DifferentImageEvent {
   const factory DifferentImageEvent.initGame(LevelInfo levelInfo) = _InitGame;
-  const factory DifferentImageEvent.handleTap(MemoryTile memoryTile) =
+  const factory DifferentImageEvent.handleTap(ImageMemoryTile memoryTile) =
       _HandleTap;
 }
 
@@ -64,7 +63,7 @@ class DifferentImageBloc
     themeSet: ThemeSet.food,
     gameType: GameType.sameImage,
   );
-  MemoryTile? firstMemoryTile;
+  ImageMemoryTile? firstMemoryTile;
   List<TileToHide> hideTiles = [];
 
   DifferentImageBloc({
@@ -130,7 +129,7 @@ class DifferentImageBloc
     );
   }
 
-  bool _prohibitTapInSameArea(MemoryTile currentMemoryTile) {
+  bool _prohibitTapInSameArea(ImageMemoryTile currentMemoryTile) {
     if (firstMemoryTile == null) return false;
 
     return firstMemoryTile!.isLowerPart == currentMemoryTile.isLowerPart;
@@ -180,7 +179,7 @@ class DifferentImageBloc
     }
   }
 
-  int _currentIndex(MemoryTile memoryTile) {
+  int _currentIndex(ImageMemoryTile memoryTile) {
     var index = 0;
     if (memoryTile.isLowerPart) {
       index = splitMemorySet.lowerTiles
@@ -208,7 +207,7 @@ class DifferentImageBloc
 
   void _handleFirstTap(
       int currentIndex, int pairValue, double angle, bool isLowerPart) {
-    firstMemoryTile = MemoryTile(
+    firstMemoryTile = ImageMemoryTile(
       index: currentIndex,
       pairValue: pairValue,
       angle: angle,
@@ -218,7 +217,7 @@ class DifferentImageBloc
     _setVisibility(currentIndex, isLowerPart, true);
   }
 
-  void _handleSecondTap(int currentIndex, MemoryTile memoryTile) {
+  void _handleSecondTap(int currentIndex, ImageMemoryTile memoryTile) {
     if (firstMemoryTile!.pairValue == memoryTile.pairValue) {
       _handleCorrectMatch(
         currentIndex,
