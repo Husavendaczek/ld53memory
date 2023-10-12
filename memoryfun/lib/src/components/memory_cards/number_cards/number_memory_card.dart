@@ -20,13 +20,26 @@ class NumberMemoryCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var text = Text('${memoryTile.number}');
+    var text = Text(
+      '${memoryTile.number}',
+      style: const TextStyle(
+        fontSize: 72,
+        fontWeight: FontWeight.bold,
+      ),
+      textAlign: TextAlign.center,
+    );
+
+    var backgroundImage = Image(
+      image: AssetImage(
+        'assets/${ref.watch(AppColorMode.provider).appColorStyle.name}/other/default_background.png',
+      ),
+      fit: BoxFit.cover,
+    );
 
     Widget memoryCard = MemoryCardBackground(
-        image: AssetImage(
-          'assets/${ref.watch(AppColorMode.provider).appColorStyle.name}/other/default_background.png',
-        ),
-        onTap: onTap);
+      widget: memoryTile.isVisible ? text : backgroundImage,
+      onTap: onTap,
+    );
 
     if (memoryTile.isCorrect) {
       memoryCard = MemoryCardVisible(

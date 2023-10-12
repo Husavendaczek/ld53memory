@@ -19,7 +19,7 @@ optional:
 
 TODOS
  - flips twice on first tap
- - add calculations (e.g. pair is 2+3 and 5 or 8-2 and 3+3)
+ - add calculations (e.g. pair is 2+3 and 5 or 8-2 and 3+3) with Enum for operations (plus, minus)
  - two players
     - on one phone
     - play against ki

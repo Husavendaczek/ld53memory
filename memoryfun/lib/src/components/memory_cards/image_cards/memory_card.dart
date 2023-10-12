@@ -20,7 +20,10 @@ class MemoryCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var image = memoryTile.image!;
-    Widget memoryCard = MemoryCardBackground(image: image, onTap: onTap);
+    Widget memoryCard = MemoryCardBackground(
+      widget: Image(image: image, fit: BoxFit.cover),
+      onTap: onTap,
+    );
 
     if (memoryTile.isCorrect) {
       memoryCard = MemoryCardVisible(

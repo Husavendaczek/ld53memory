@@ -8,7 +8,9 @@ import '../../../../game_type/game_type.dart';
 import '../../../../game_type/theme_set.dart';
 import '../../../../levels/level_finisher.dart';
 import '../../../../levels/level_info.dart';
+import '../../../match_result.dart';
 import '../../../models/number_memory_tile.dart';
+import '../../game_moves_numbers.dart';
 
 part 'same_number_bloc.freezed.dart';
 
@@ -35,11 +37,13 @@ class SameNumberBloc extends Bloc<SameNumberEvent, SameNumberState> {
       BlocProvider.autoDispose<SameNumberBloc, SameNumberState>((ref) {
     return SameNumberBloc(
       randomizer: ref.watch(Randomizer.provider),
+      gameMovesNumbers: ref.watch(GameMovesNumbers.provider),
       levelFinisher: ref.watch(LevelFinisher.provider),
     );
   });
 
   final Randomizer randomizer;
+  final GameMovesNumbers gameMovesNumbers;
   final LevelFinisher levelFinisher;
 
   List<NumberMemoryTile> memoryTiles = [];
@@ -53,6 +57,7 @@ class SameNumberBloc extends Bloc<SameNumberEvent, SameNumberState> {
 
   SameNumberBloc({
     required this.randomizer,
+    required this.gameMovesNumbers,
     required this.levelFinisher,
   }) : super(const SameNumberState.initial()) {
     on<_InitGame>(_initGame);
@@ -69,6 +74,10 @@ class SameNumberBloc extends Bloc<SameNumberEvent, SameNumberState> {
     var randomNumbers = [];
     for (int i = 0; i < matchesLeft; i++) {
       var randomNumber = Random().nextInt(100);
+      if (randomNumbers.contains(randomNumber)) {
+        i--;
+        continue;
+      }
       randomNumbers.add(randomNumber);
       randomNumbers.add(randomNumber);
     }
@@ -86,6 +95,7 @@ class SameNumberBloc extends Bloc<SameNumberEvent, SameNumberState> {
       );
 
       memoryTiles.add(tile);
+      print(tile.number);
     }
 
     emit(SameNumberState.initialized(memoryTiles));
@@ -98,5 +108,39 @@ class SameNumberBloc extends Bloc<SameNumberEvent, SameNumberState> {
 
   Future _handleTap(_HandleTap event, Emitter<SameNumberState> emit) async {
     emit(const SameNumberState.loading());
+
+    var matchResult = gameMovesNumbers.handleTap(
+      memoryTiles,
+      event.tileIndex,
+      event.number,
+    );
+
+    switch (matchResult) {
+      case MatchResult.correctMatch:
+        _handleCorrectMatch();
+        break;
+      default:
+        emit(SameNumberState.matchResult(memoryTiles));
+        break;
+    }
+  }
+
+  void _handleCorrectMatch() {
+    matchesWon++;
+    matchesLeft = matchesLeft - 1;
+
+    var isFinished =
+        levelFinisher.goToNextLevelOrFinish(currentLevel.themeSet, matchesLeft);
+
+    if (isFinished) {
+      Future.delayed(
+        const Duration(seconds: 1),
+        () {
+          _resetGame();
+        },
+      );
+    }
+
+    emit(SameNumberState.matchResult(memoryTiles));
   }
 }
