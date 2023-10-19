@@ -1,17 +1,17 @@
 import 'package:memoryfun/src/memory_types/match_result.dart';
+import 'package:memoryfun/src/memory_types/models/memory_tile.dart';
 import 'package:riverpod/riverpod.dart';
 
 import '../../game_type/image_mapper.dart';
 import '../../sound/sounds.dart';
 import '../../utils/calculating/randomizer.dart';
-import '../models/number_memory_tile.dart';
 
 class GameMovesNumbers {
   final ImageMapper imageMapper;
   final Sounds soundPlayer;
   final Randomizer randomizer;
 
-  List<NumberMemoryTile> _memoryTiles = [];
+  List<MemoryTile> _memoryTiles = [];
   List<int> _hideTiles = [];
   int? _firstIndex;
   int? _firstNumber;
@@ -38,26 +38,14 @@ class GameMovesNumbers {
     _firstNumber = null;
   }
 
-  MatchResult handleTap(
-    List<NumberMemoryTile> memoryTiles,
-    int index,
-    int number,
-  ) {
+  MatchResult handleTap(List<MemoryTile> memoryTiles, int index, int number) {
     _memoryTiles = memoryTiles;
 
     soundPlayer.playTap();
 
-    _hideOtherTiles(number);
+    _hideOtherTiles();
 
-    _setTileVisibilityAndAngle(
-      index,
-      NumberMemoryTile(
-        index: index,
-        number: number,
-        angle: 0,
-        isVisible: true,
-      ),
-    );
+    _setTileVisibilityAndAngle(index, 0, true);
 
     // first tap
     if (_firstIndex == null) {
@@ -98,21 +86,15 @@ class GameMovesNumbers {
     }
   }
 
-  void _hideOtherTiles(
-    int number,
-  ) {
+  void _hideOtherTiles() {
     if (_hideTiles.isNotEmpty) {
       var randomAngle = randomizer.randomTileAngle();
 
       for (var hideTileIndex in _hideTiles) {
         _setTileVisibilityAndAngle(
           hideTileIndex,
-          NumberMemoryTile(
-            index: 0,
-            number: number,
-            angle: randomAngle,
-            isVisible: false,
-          ),
+          randomAngle,
+          false,
         );
         _memoryTiles[hideTileIndex].hasError = false;
         _memoryTiles[hideTileIndex].angle = randomAngle;
@@ -138,11 +120,8 @@ class GameMovesNumbers {
     _firstNumber = null;
   }
 
-  void _setTileVisibilityAndAngle(
-    int index,
-    NumberMemoryTile memoryTile,
-  ) {
-    _memoryTiles[index].angle = memoryTile.angle;
-    _memoryTiles[index].isVisible = memoryTile.isVisible;
+  void _setTileVisibilityAndAngle(int index, double angle, bool isVisible) {
+    _memoryTiles[index].angle = angle;
+    _memoryTiles[index].isVisible = isVisible;
   }
 }
