@@ -23,7 +23,7 @@ class NumberMemoryCard extends ConsumerWidget {
     var text = Text(
       '${memoryTile.number}',
       style: const TextStyle(
-        fontSize: 72,
+        fontSize: 62,
         fontWeight: FontWeight.bold,
       ),
       textAlign: TextAlign.center,
