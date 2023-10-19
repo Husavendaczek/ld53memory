@@ -69,18 +69,9 @@ class _SimpleMemoryPageState extends ConsumerState<SameImageMemoryPage> {
   List<Widget> _tiles(List<ImageMemoryTile> memorySet, bool fadeIn) {
     List<Widget> tiles = [];
     for (var tile in memorySet) {
-      var memoryTile = ImageMemoryTile(
-        index: tile.index,
-        pairValue: tile.pairValue,
-        angle: tile.angle,
-        image: tile.image,
-        isVisible: tile.isVisible,
-        hasError: tile.hasError,
-        isCorrect: tile.isCorrect,
-      );
       tiles.add(
         MemoryCard(
-          memoryTile: memoryTile,
+          memoryTile: tile,
           onTap: () => ref.read(SameImageBloc.provider.bloc).add(
                 SameImageEvent.handleTap(tile.index, tile.pairValue),
               ),

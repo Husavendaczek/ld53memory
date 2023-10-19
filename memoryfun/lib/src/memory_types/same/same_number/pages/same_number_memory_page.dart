@@ -69,17 +69,9 @@ class _SameNumberMemoryPageState extends ConsumerState<SameNumberMemoryPage> {
   List<Widget> _tiles(List<NumberMemoryTile> memorySet, bool fadeIn) {
     List<Widget> tiles = [];
     for (var tile in memorySet) {
-      var memoryTile = NumberMemoryTile(
-        index: tile.index,
-        number: tile.number,
-        angle: tile.angle,
-        isVisible: tile.isVisible,
-        hasError: tile.hasError,
-        isCorrect: tile.isCorrect,
-      );
       tiles.add(
         NumberMemoryCard(
-          memoryTile: memoryTile,
+          memoryTile: tile,
           onTap: () => ref.read(SameNumberBloc.provider.bloc).add(
                 SameNumberEvent.handleTap(tile.index, tile.number),
               ),
