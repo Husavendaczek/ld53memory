@@ -91,7 +91,6 @@ class SameNumberBloc extends Bloc<SameNumberEvent, SameNumberState> {
         index: i,
         number: randomNumber,
         angle: randomizer.randomTileAngle(),
-        isVisible: false,
       );
 
       memoryTiles.add(tile);
