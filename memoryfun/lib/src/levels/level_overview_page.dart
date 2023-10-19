@@ -118,6 +118,13 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
               ),
             );
         break;
+      case GameType.differentNumber:
+        onTap = () => ref.read(appRouterProvider).push(
+              CalculatingNumbersMemoryRoute(
+                levelInfo: levels[themeSet.index],
+              ),
+            );
+        break;
       default:
         onTap = () => ref.read(appRouterProvider).push(
               SameImageMemoryRoute(

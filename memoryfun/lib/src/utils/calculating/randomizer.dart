@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoryfun/src/memory_types/different/calculating_numbers/models/operation.dart';
 
 class Randomizer {
   static final provider = Provider<Randomizer>((ref) {
@@ -17,6 +18,11 @@ class Randomizer {
 
     return randomAngle;
   }
+
+  Operation randomOperation() =>
+      randomOutOf(1) == 0 ? Operation.addition : Operation.subtraction;
+
+  bool randomBool() => randomOutOf(1) == 0;
 
   int randomOutOf(int value) => Random().nextInt(value);
 
