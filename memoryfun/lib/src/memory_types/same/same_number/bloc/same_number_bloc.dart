@@ -76,10 +76,10 @@ class SameNumberBloc extends Bloc<SameNumberEvent, SameNumberState> {
       var randomNumber = randomizer.randomOutOfHundred();
       if (randomNumbers.contains(randomNumber)) {
         i--;
-        continue;
+      } else {
+        randomNumbers.add(randomNumber);
+        randomNumbers.add(randomNumber);
       }
-      randomNumbers.add(randomNumber);
-      randomNumbers.add(randomNumber);
     }
 
     for (int i = 0; i < event.levelInfo.gameSize; i++) {
