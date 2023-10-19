@@ -73,7 +73,7 @@ class SameNumberBloc extends Bloc<SameNumberEvent, SameNumberState> {
 
     var randomNumbers = [];
     for (int i = 0; i < matchesLeft; i++) {
-      var randomNumber = Random().nextInt(100);
+      var randomNumber = randomizer.randomOutOfHundred();
       if (randomNumbers.contains(randomNumber)) {
         i--;
         continue;
@@ -83,7 +83,7 @@ class SameNumberBloc extends Bloc<SameNumberEvent, SameNumberState> {
     }
 
     for (int i = 0; i < event.levelInfo.gameSize; i++) {
-      var randomIndex = Random().nextInt(randomNumbers.length);
+      var randomIndex = randomizer.randomOutOf(randomNumbers.length);
       var randomNumber = randomNumbers[randomIndex];
       randomNumbers.removeAt(randomIndex);
 
@@ -95,19 +95,19 @@ class SameNumberBloc extends Bloc<SameNumberEvent, SameNumberState> {
       );
 
       memoryTiles.add(tile);
-      print(tile.number);
     }
 
     emit(SameNumberState.initialized(memoryTiles));
   }
 
   void _resetGame() {
+    gameMovesNumbers.resetGame();
     memoryTiles = [];
     matchesWon = 0;
   }
 
   Future _handleTap(_HandleTap event, Emitter<SameNumberState> emit) async {
-    emit(const SameNumberState.loading());
+    emit(const SameNumberState.loadingResult());
 
     var matchResult = gameMovesNumbers.handleTap(
       memoryTiles,

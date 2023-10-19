@@ -17,4 +17,10 @@ class Randomizer {
 
     return randomAngle;
   }
+
+  int randomOutOf(int value) => Random().nextInt(value);
+
+  int randomOutOfTen() => randomOutOf(10);
+
+  int randomOutOfHundred() => randomOutOf(100);
 }

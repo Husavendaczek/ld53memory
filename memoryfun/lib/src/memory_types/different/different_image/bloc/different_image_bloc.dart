@@ -97,7 +97,7 @@ class DifferentImageBloc
         }
       }
 
-      var randomIndex = Random().nextInt(pairValues.length);
+      var randomIndex = randomizer.randomOutOf(pairValues.length);
       var value = pairValues[randomIndex];
       pairValues.removeAt(randomIndex);
 

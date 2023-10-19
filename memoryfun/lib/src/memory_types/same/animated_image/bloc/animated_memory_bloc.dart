@@ -88,7 +88,7 @@ class AnimatedMemoryBloc
     }
 
     for (int i = 0; i < event.levelInfo.gameSize; i++) {
-      var randomIndex = Random().nextInt(pairValues.length);
+      var randomIndex = randomizer.randomOutOf(pairValues.length);
       var value = pairValues[randomIndex];
       pairValues.removeAt(randomIndex);
 
