@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:memoryfun/src/levels/level_finisher.dart';
 import 'package:memoryfun/src/memory_types/game_moves.dart';
