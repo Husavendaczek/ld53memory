@@ -22,7 +22,7 @@ TODOS
  - add calculations (e.g. pair is 2+3 and 5 or 8-2 and 3+3) with Enum for operations (plus, minus)
    - shuffle pairs
    - adjust font size
-   - check why subtraction is not shown
+ - add only colors
  - two players
     - on one phone
     - play against ki
