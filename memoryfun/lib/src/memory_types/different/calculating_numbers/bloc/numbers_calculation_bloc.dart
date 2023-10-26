@@ -52,6 +52,7 @@ class NumbersCalculationBloc
   List<CalculationMemoryTile> memoryTiles = [];
   int matchesWon = 0;
   int matchesLeft = 100;
+  List<int> indices = [];
   LevelInfo currentLevel = const LevelInfo(
     gameSize: 12,
     themeSet: ThemeSet.differentNumbers,
@@ -78,6 +79,10 @@ class NumbersCalculationBloc
     var resultNumbers = [];
 
     for (int i = 0; i < event.levelInfo.gameSize; i++) {
+      indices.add(i);
+    }
+
+    for (int i = 0; i < event.levelInfo.gameSize; i++) {
       var randomFirstNumber = randomizer.randomOutOfTen();
       var randomSecondNumber = randomizer.randomOutOfTen();
       var operation = randomizer.randomOperation();
@@ -88,23 +93,25 @@ class NumbersCalculationBloc
         operation,
       );
 
-      var tile = CalculationMemoryTile(
-        index: i,
-        firstNumber: randomFirstNumber,
-        secondNumber: randomSecondNumber,
-        resultNumber: resultNumber,
-        angle: randomizer.randomTileAngle(),
-        showsText: false,
-      );
-
       if (resultNumbers.contains(resultNumber.number)) {
         i--;
       } else {
         resultNumbers.add(resultNumber.number);
+
+        var tileIndex = _index();
+        var tile = CalculationMemoryTile(
+          index: tileIndex,
+          firstNumber: randomFirstNumber,
+          secondNumber: randomSecondNumber,
+          resultNumber: resultNumber,
+          angle: randomizer.randomTileAngle(),
+          showsText: false,
+        );
         memoryTiles.add(tile);
 
+        var tilePartnerIndex = _index();
         var tilePartner = CalculationMemoryTile(
-          index: i + 1,
+          index: tilePartnerIndex,
           firstNumber: randomFirstNumber,
           secondNumber: randomSecondNumber,
           resultNumber: resultNumber,
@@ -117,7 +124,18 @@ class NumbersCalculationBloc
       }
     }
 
+    memoryTiles.sort(
+      (a, b) => a.index.compareTo(b.index),
+    );
+
     emit(NumbersCalculationState.initialized(memoryTiles));
+  }
+
+  int _index() {
+    var randomIndex = randomizer.randomOutOf(indices.length);
+    var index = indices[randomIndex];
+    indices.removeAt(randomIndex);
+    return index;
   }
 
   ResultNumber calculateResult(int a, int b, Operation operation) {
@@ -136,6 +154,7 @@ class NumbersCalculationBloc
   void _resetGame() {
     gameMovesNumbers.resetGame();
     memoryTiles = [];
+    indices = [];
     matchesWon = 0;
   }
 
