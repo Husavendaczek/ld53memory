@@ -20,9 +20,7 @@ class Randomizer {
   }
 
   Operation randomOperation() =>
-      randomOutOf(1) == 0 ? Operation.addition : Operation.subtraction;
-
-  bool randomBool() => randomOutOf(1) == 0;
+      randomOutOf(2) == 0 ? Operation.addition : Operation.subtraction;
 
   int randomOutOf(int value) => Random().nextInt(value);
 
