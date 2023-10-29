@@ -12,6 +12,11 @@ class AppColors {
   static Color backgroundDark = const Color.fromARGB(255, 41, 41, 41);
   static Color backgroundDarkMono = Colors.black;
 
+  static Color tileBackground = Colors.black;
+  static Color tileBackgroundMono = tileBackground;
+  static Color tileBackgroundDark = Colors.white;
+  static Color tileBackgroundDarkMono = tileBackgroundDark;
+
   static Color btnText = Colors.white;
   static Color btnTextMono = Colors.white;
   static Color btnTextDark = Colors.black;
@@ -51,7 +56,8 @@ class AppColors {
               displayColor: AppColors.text,
             ),
         focusColor: AppColors.error,
-        cardColor: AppColors.selectedBtnBackground,
+        cardColor: AppColors.tileBackground,
+        canvasColor: AppColors.selectedBtnBackground,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             backgroundColor: null,
@@ -76,7 +82,8 @@ class AppColors {
               displayColor: AppColors.textMono,
             ),
         focusColor: AppColors.errorMono,
-        cardColor: AppColors.selectedBtnBackgroundMono,
+        cardColor: AppColors.tileBackgroundMono,
+        canvasColor: AppColors.selectedBtnBackgroundMono,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             backgroundColor: null,
@@ -101,7 +108,8 @@ class AppColors {
               displayColor: AppColors.textDark,
             ),
         focusColor: AppColors.errorDark,
-        cardColor: AppColors.selectedBtnBackgroundDark,
+        cardColor: AppColors.tileBackgroundDark,
+        canvasColor: AppColors.selectedBtnBackgroundDark,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             backgroundColor: null,
@@ -126,7 +134,8 @@ class AppColors {
               displayColor: AppColors.textDarkMono,
             ),
         focusColor: AppColors.errorDarkMono,
-        cardColor: AppColors.selectedBtnBackgroundDarkMono,
+        cardColor: AppColors.tileBackgroundDarkMono,
+        canvasColor: AppColors.selectedBtnBackgroundDarkMono,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             backgroundColor: null,

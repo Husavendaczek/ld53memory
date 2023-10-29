@@ -70,7 +70,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           value = 1;
         });
       },
-      backgroundColor: isSelected ? Theme.of(context).cardColor : null,
+      backgroundColor: isSelected ? Theme.of(context).canvasColor : null,
     );
   }
 }
