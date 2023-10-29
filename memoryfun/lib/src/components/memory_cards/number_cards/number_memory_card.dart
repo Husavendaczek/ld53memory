@@ -20,13 +20,15 @@ class NumberMemoryCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var text = Text(
-      '${memoryTile.number}',
-      style: const TextStyle(
-        fontSize: 48,
-        fontWeight: FontWeight.bold,
+    var text = Center(
+      child: Text(
+        '${memoryTile.number}',
+        style: const TextStyle(
+          fontSize: 38,
+          fontWeight: FontWeight.bold,
+        ),
+        textAlign: TextAlign.center,
       ),
-      textAlign: TextAlign.center,
     );
 
     var backgroundImage = Image(
