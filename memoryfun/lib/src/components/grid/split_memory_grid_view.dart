@@ -26,6 +26,7 @@ class SplitMemoryGridView extends ConsumerWidget {
   Widget grid(WidgetRef ref, List<Widget> tiles) => Padding(
         padding: const EdgeInsets.only(top: 20),
         child: GridView.count(
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           crossAxisCount: ref.watch(MemoryGridRowSize.provider).rowSize,
           mainAxisSpacing: 15,
