@@ -48,6 +48,7 @@ flutter:
     - assets/color/farmMud/
     - assets/color/numbers/
     - assets/color/differentNumbers/
+    - assets/color/onlyColors/
     - assets/mono/
     - assets/mono/food/
     - assets/mono/mail/
@@ -61,3 +62,4 @@ flutter:
     - assets/mono/farmMud/
     - assets/mono/numbers/
     - assets/mono/differentNumbers/
+    - assets/mono/onlyColors/
