@@ -10,7 +10,7 @@ import '../../../../game_type/theme_set.dart';
 import '../../../../levels/level_finisher.dart';
 import '../../../../levels/level_info.dart';
 import '../../../match_result.dart';
-import '../../../same/game_moves_numbers.dart';
+import '../../../same/same_number/services/game_moves_numbers.dart';
 
 part 'numbers_calculation_bloc.freezed.dart';
 

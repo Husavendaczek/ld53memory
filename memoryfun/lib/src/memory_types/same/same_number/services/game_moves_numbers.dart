@@ -2,12 +2,10 @@ import 'package:memoryfun/src/memory_types/match_result.dart';
 import 'package:memoryfun/src/memory_types/models/memory_tile.dart';
 import 'package:riverpod/riverpod.dart';
 
-import '../../game_type/image_mapper.dart';
-import '../../sound/sounds.dart';
-import '../../utils/calculating/randomizer.dart';
+import '../../../../sound/sounds.dart';
+import '../../../../utils/calculating/randomizer.dart';
 
 class GameMovesNumbers {
-  final ImageMapper imageMapper;
   final Sounds soundPlayer;
   final Randomizer randomizer;
 
@@ -18,14 +16,12 @@ class GameMovesNumbers {
 
   static final provider = Provider<GameMovesNumbers>((ref) {
     return GameMovesNumbers(
-      imageMapper: ref.watch(ImageMapper.provider),
       soundPlayer: ref.watch(Sounds.provider),
       randomizer: ref.watch(Randomizer.provider),
     );
   });
 
   GameMovesNumbers({
-    required this.imageMapper,
     required this.soundPlayer,
     required this.randomizer,
   });

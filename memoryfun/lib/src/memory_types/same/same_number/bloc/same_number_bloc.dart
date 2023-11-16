@@ -8,7 +8,7 @@ import '../../../../levels/level_finisher.dart';
 import '../../../../levels/level_info.dart';
 import '../../../match_result.dart';
 import '../../../models/number_memory_tile.dart';
-import '../../game_moves_numbers.dart';
+import '../services/game_moves_numbers.dart';
 
 part 'same_number_bloc.freezed.dart';
 
