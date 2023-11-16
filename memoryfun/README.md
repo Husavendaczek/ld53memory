@@ -27,3 +27,4 @@ TODOS
     - on one phone
     - play against ki
  - more themes
+ - add languages

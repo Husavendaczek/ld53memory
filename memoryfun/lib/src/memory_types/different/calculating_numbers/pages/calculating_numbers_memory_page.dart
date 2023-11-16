@@ -90,7 +90,6 @@ class _CalculatingNumbersMemoryPageState
             isCorrect: tile.isCorrect,
           ),
           onTap: () {
-            print('tapped on ${tile.index}');
             ref.read(NumbersCalculationBloc.provider.bloc).add(
                   NumbersCalculationEvent.handleTap(
                     tile.index,
@@ -110,7 +109,6 @@ class _CalculatingNumbersMemoryPageState
             isCorrect: tile.isCorrect,
           ),
           onTap: () {
-            print('tapped on ${tile.index}');
             ref.read(NumbersCalculationBloc.provider.bloc).add(
                   NumbersCalculationEvent.handleTap(
                     tile.index,

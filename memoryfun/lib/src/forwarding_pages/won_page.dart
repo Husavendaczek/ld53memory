@@ -7,7 +7,6 @@ import '../components/buttons/normal_button.dart';
 import '../game_type/game_type.dart';
 import '../utils/theme/app_color_mode.dart';
 import '../utils/theme/app_color_style.dart';
-import '../utils/theme/app_colors.dart';
 import '../utils/routing/app_router.dart';
 import '../levels/level_info.dart';
 import '../game_type/theme_set.dart';
@@ -19,14 +18,14 @@ class WonPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var monochromeText = const Text(
-      'CONGRATULATIONS!',
+      'GLÜCKWUNSCH!',
       style: TextStyle(
         fontSize: 26,
         fontWeight: FontWeight.bold,
       ),
     );
     var coloredText = const Text(
-      'CONGRATULATIONS!',
+      'GLÜCKWUNSCH!',
       style: TextStyle(
         fontSize: 26,
         fontWeight: FontWeight.bold,
@@ -95,7 +94,7 @@ class WonPage extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 32.0),
               child: const Text(
-                'You have won!',
+                'Geschafft!',
                 style: TextStyle(fontSize: 20),
               )
                   .animate(
@@ -110,17 +109,10 @@ class WonPage extends ConsumerWidget {
                     ),
                   ),
             ),
-            Text(
-              'Thanks for playing my game.',
-              style: TextStyle(
-                fontSize: 16,
-                color: AppColors.text,
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.only(top: 48.0),
               child: NormalButton(
-                text: 'Play again',
+                text: 'Neues Memory spielen',
                 onTap: () => ref.read(appRouterProvider).push(
                       SameImageMemoryRoute(
                         levelInfo: const LevelInfo(
@@ -139,7 +131,7 @@ class WonPage extends ConsumerWidget {
   }
 
   Text _myText(Color a, Color b, double value) => Text(
-        'You have won!',
+        'Geschafft!',
         style: TextStyle(fontSize: 20, color: Color.lerp(a, b, value)),
       );
 }
