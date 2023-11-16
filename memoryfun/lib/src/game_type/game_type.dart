@@ -7,4 +7,5 @@ enum GameType {
   animatedImage,
   sameNumber,
   differentNumber,
+  onlyColors,
 }

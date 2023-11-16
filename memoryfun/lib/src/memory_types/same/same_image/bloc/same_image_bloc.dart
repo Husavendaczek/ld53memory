@@ -74,11 +74,13 @@ class SameImageBloc extends Bloc<SameImageEvent, SameImageState> {
     matchesLeft = event.levelInfo.getMatches();
     currentLevel = event.levelInfo;
 
+//TODO extract pair values creator
     var pairValues = [];
     for (int i = 0; i < matchesLeft; i++) {
       pairValues.add(i);
       pairValues.add(i);
     }
+// till here
 
     for (int i = 0; i < event.levelInfo.gameSize; i++) {
       var randomIndex = randomizer.randomOutOf(pairValues.length);

@@ -10,4 +10,5 @@ enum ThemeSet {
   club,
   numbers,
   differentNumbers,
+  onlyColors,
 }
