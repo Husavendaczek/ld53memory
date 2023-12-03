@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/memory_types/different/calculating_numbers/models/operation.dart';
+import 'package:memoryfun/src/memory_types/same/colors/models/card_color.dart';
 
 class Randomizer {
   static final provider = Provider<Randomizer>((ref) {
@@ -20,31 +21,46 @@ class Randomizer {
     return randomAngle;
   }
 
-  Color randomColor() {
-    var thecolors = [
-      Colors.red,
-      Colors.amber,
-      Colors.black,
-      Colors.blue,
-      Colors.green,
-      Colors.grey,
-      Colors.orange,
-      Colors.pink,
-      Colors.yellow,
-      Colors.purple,
-      Colors.lightBlue,
-      Colors.deepOrangeAccent,
-      Colors.lime,
-      Colors.teal,
-      Colors.cyanAccent,
-      Colors.brown,
-      Colors.indigo,
-      Colors.redAccent,
-    ];
+  List<CardColor> randomColor(int colorAmount) {
+    final List<CardColor> cardColors = [];
 
-    var index = randomOutOf(thecolors.length - 1);
-    return thecolors[index];
-  } //TODO
+    for (int i = 0; i < colorAmount; i++) {
+      var hue = randomOutOf(360).toDouble();
+      var saturation = 0.5;
+      var lightness = 0.5;
+
+      var isUniqueHue = true;
+
+      for (var cardColor in cardColors) {
+        var distance = (cardColor.hue - hue).abs();
+        if (distance <= 25 || distance >= 335) {
+          i--;
+          isUniqueHue = false;
+          break;
+        }
+        if (distance <= 35 || distance >= 325) {
+          lightness = Random().nextDouble();
+          break;
+        }
+      }
+
+      if (isUniqueHue) {
+        var colorToAdd = CardColor(
+          color: HSLColor.fromAHSL(
+            1,
+            hue,
+            saturation,
+            lightness,
+          ).toColor(),
+          hue: hue,
+        );
+
+        cardColors.add(colorToAdd);
+        cardColors.add(colorToAdd);
+      }
+    }
+    return cardColors;
+  }
 
   Operation randomOperation() =>
       randomOutOf(2) == 0 ? Operation.addition : Operation.subtraction;

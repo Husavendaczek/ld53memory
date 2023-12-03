@@ -59,7 +59,7 @@ List<LevelInfo> levels = const [
     gameType: GameType.differentNumber,
   ),
   LevelInfo(
-    gameSize: 28,
+    gameSize: 20,
     themeSet: ThemeSet.onlyColors,
     gameType: GameType.onlyColors,
   ),

@@ -67,16 +67,7 @@ class SameColorBloc extends Bloc<SameColorEvent, SameColorState> {
     matchesLeft = event.levelInfo.getMatches();
     themeSet = event.levelInfo.themeSet;
 
-    var randomColors = [];
-    for (int i = 0; i < matchesLeft; i++) {
-      var randomColor = randomizer.randomColor();
-      if (randomColors.contains(randomColor)) {
-        i--;
-      } else {
-        randomColors.add(randomColor);
-        randomColors.add(randomColor);
-      }
-    }
+    var randomColors = randomizer.randomColor(matchesLeft);
 
     for (int i = 0; i < event.levelInfo.gameSize; i++) {
       var randomIndex = randomizer.randomOutOf(randomColors.length);
@@ -86,7 +77,7 @@ class SameColorBloc extends Bloc<SameColorEvent, SameColorState> {
       var tile = ColorMemoryTile(
         index: i,
         angle: randomizer.randomTileAngle(),
-        color: randomColor,
+        color: randomColor.color,
       );
 
       memoryTiles.add(tile);
