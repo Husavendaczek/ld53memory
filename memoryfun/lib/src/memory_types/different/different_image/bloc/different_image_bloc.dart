@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:memoryfun/src/sound/sound_player.dart';
 import 'package:memoryfun/src/utils/calculating/randomizer.dart';
 import 'package:riverbloc/riverbloc.dart';
 
@@ -8,7 +9,6 @@ import '../../../../game_type/theme_set.dart';
 import '../../../../levels/level_finisher.dart';
 import '../../../../levels/level_info.dart';
 import '../../../models/image_memory_tile.dart';
-import '../../../../sound/sounds.dart';
 import '../models/split_memory_set.dart';
 import '../models/tile_to_hide.dart';
 
@@ -41,14 +41,14 @@ class DifferentImageBloc
     return DifferentImageBloc(
       imageMapper: ref.watch(ImageMapper.provider),
       levelFinisher: ref.watch(LevelFinisher.provider),
-      soundPlayer: ref.watch(Sounds.provider),
+      soundPlayer: ref.watch(SoundPlayer.provider),
       randomizer: ref.watch(Randomizer.provider),
     );
   });
 
   final ImageMapper imageMapper;
   final LevelFinisher levelFinisher;
-  final Sounds soundPlayer;
+  final SoundPlayer soundPlayer;
   final Randomizer randomizer;
 
   SplitMemorySet splitMemorySet = SplitMemorySet(

@@ -1,12 +1,12 @@
 import 'package:memoryfun/src/memory_types/match_result.dart';
 import 'package:memoryfun/src/memory_types/models/memory_tile.dart';
+import 'package:memoryfun/src/sound/sound_player.dart';
 import 'package:riverpod/riverpod.dart';
 
-import '../../../../sound/sounds.dart';
 import '../../../../utils/calculating/randomizer.dart';
 
 class GameMovesNumbers {
-  final Sounds soundPlayer;
+  final SoundPlayer soundPlayer;
   final Randomizer randomizer;
 
   List<MemoryTile> _memoryTiles = [];
@@ -16,7 +16,7 @@ class GameMovesNumbers {
 
   static final provider = Provider<GameMovesNumbers>((ref) {
     return GameMovesNumbers(
-      soundPlayer: ref.watch(Sounds.provider),
+      soundPlayer: ref.watch(SoundPlayer.provider),
       randomizer: ref.watch(Randomizer.provider),
     );
   });

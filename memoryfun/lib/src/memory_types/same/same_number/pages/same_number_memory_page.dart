@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoryfun/src/sound/sound_player.dart';
 
 import '../../../../components/app_bar/memo_app_bar.dart';
 import '../../../../components/buttons/normal_button.dart';
 import '../../../../components/grid/single_memory_grid_view.dart';
 import '../../../../components/memory_cards/number_cards/number_memory_card.dart';
 import '../../../../levels/level_info.dart';
-import '../../../../sound/sounds.dart';
 import '../../../models/number_memory_tile.dart';
 import '../bloc/same_number_bloc.dart';
 
@@ -33,7 +33,7 @@ class _SameNumberMemoryPageState extends ConsumerState<SameNumberMemoryPage> {
     ref.read(SameNumberBloc.provider.bloc).add(
           SameNumberEvent.initGame(widget.levelInfo),
         );
-    ref.read(Sounds.provider).playMusic(widget.levelInfo.themeSet);
+    ref.read(SoundPlayer.provider).playMusic(widget.levelInfo.themeSet);
   }
 
   @override

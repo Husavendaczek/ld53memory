@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:memoryfun/src/memory_types/match_result.dart';
 import 'package:memoryfun/src/memory_types/models/memory_tile.dart';
+import 'package:memoryfun/src/sound/sound_player.dart';
 import 'package:riverpod/riverpod.dart';
 
-import '../../../../sound/sounds.dart';
 import '../../../../utils/calculating/randomizer.dart';
 
 class GameMovesColors {
-  final Sounds soundPlayer;
+  final SoundPlayer soundPlayer;
   final Randomizer randomizer;
 
   List<MemoryTile> _memoryTiles = [];
@@ -17,7 +17,7 @@ class GameMovesColors {
 
   static final provider = Provider<GameMovesColors>((ref) {
     return GameMovesColors(
-      soundPlayer: ref.watch(Sounds.provider),
+      soundPlayer: ref.watch(SoundPlayer.provider),
       randomizer: ref.watch(Randomizer.provider),
     );
   });

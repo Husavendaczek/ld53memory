@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/components/memory_cards/text_cards/text_memory_card.dart';
 import 'package:memoryfun/src/levels/level_info.dart';
 import 'package:memoryfun/src/memory_types/different/calculating_numbers/bloc/numbers_calculation_bloc.dart';
+import 'package:memoryfun/src/sound/sound_player.dart';
 
 import '../../../../components/app_bar/memo_app_bar.dart';
 import '../../../../components/buttons/normal_button.dart';
 import '../../../../components/grid/single_memory_grid_view.dart';
 import '../../../../components/memory_cards/number_cards/number_memory_card.dart';
-import '../../../../sound/sounds.dart';
 import '../../../models/number_memory_tile.dart';
 import '../../../models/text_memory_tile.dart';
 import '../models/calculation_memory_tile.dart';
@@ -38,7 +38,7 @@ class _CalculatingNumbersMemoryPageState
         .read(NumbersCalculationBloc.provider.bloc)
         .add(NumbersCalculationEvent.initGame(widget.levelInfo));
 
-    ref.read(Sounds.provider).playMusic(widget.levelInfo.themeSet);
+    ref.read(SoundPlayer.provider).playMusic(widget.levelInfo.themeSet);
   }
 
   @override

@@ -1,18 +1,18 @@
+import 'package:memoryfun/src/sound/sound_player.dart';
 import 'package:riverpod/riverpod.dart';
 
 import '../game_type/theme_set.dart';
-import '../sound/sounds.dart';
 import '../utils/routing/app_router.dart';
 import 'levels.dart';
 
 class LevelFinisher {
   final AppRouter appRouter;
-  final Sounds soundPlayer;
+  final SoundPlayer soundPlayer;
 
   static final provider = Provider<LevelFinisher>((ref) {
     return LevelFinisher(
       appRouter: ref.watch(appRouterProvider),
-      soundPlayer: ref.watch(Sounds.provider),
+      soundPlayer: ref.watch(SoundPlayer.provider),
     );
   });
 

@@ -95,4 +95,8 @@ class Sounds {
         musicPlayer.play(AssetSource('sounds/allemeineentchen.mp3'));
     }
   }
+
+  void stopMusic() {
+    musicPlayer.stop();
+  }
 }

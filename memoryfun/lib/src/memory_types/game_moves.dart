@@ -1,15 +1,15 @@
 import 'package:memoryfun/src/game_type/theme_set.dart';
 import 'package:memoryfun/src/memory_types/match_result.dart';
+import 'package:memoryfun/src/sound/sound_player.dart';
 import 'package:riverpod/riverpod.dart';
 
 import '../game_type/image_mapper.dart';
-import '../sound/sounds.dart';
 import '../utils/calculating/randomizer.dart';
 import 'models/image_memory_tile.dart';
 
 class GameMoves {
   final ImageMapper imageMapper;
-  final Sounds soundPlayer;
+  final SoundPlayer soundPlayer;
   final Randomizer randomizer;
 
   late ThemeSet _themeSet;
@@ -21,7 +21,7 @@ class GameMoves {
   static final provider = Provider<GameMoves>((ref) {
     return GameMoves(
       imageMapper: ref.watch(ImageMapper.provider),
-      soundPlayer: ref.watch(Sounds.provider),
+      soundPlayer: ref.watch(SoundPlayer.provider),
       randomizer: ref.watch(Randomizer.provider),
     );
   });

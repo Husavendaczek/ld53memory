@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/sound/sounds.dart';
+import 'package:memoryfun/src/sound/sound_player.dart';
 
 import '../../../../components/app_bar/memo_app_bar.dart';
 import '../../../../components/buttons/normal_button.dart';
@@ -33,7 +33,7 @@ class _SimpleMemoryPageState extends ConsumerState<SameImageMemoryPage> {
     ref.read(SameImageBloc.provider.bloc).add(
           SameImageEvent.initGame(widget.levelInfo),
         );
-    ref.read(Sounds.provider).playMusic(widget.levelInfo.themeSet);
+    ref.read(SoundPlayer.provider).playMusic(widget.levelInfo.themeSet);
   }
 
   @override
