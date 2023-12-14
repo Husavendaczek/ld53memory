@@ -52,8 +52,7 @@ class AppColors {
           ),
         ),
         textTheme: Theme.of(context).textTheme.apply(
-              bodyColor: AppColors.background,
-              displayColor: AppColors.text,
+              bodyColor: AppColors.text,
             ),
         focusColor: AppColors.error,
         cardColor: AppColors.tileBackground,
@@ -78,8 +77,7 @@ class AppColors {
           ),
         ),
         textTheme: Theme.of(context).textTheme.apply(
-              bodyColor: AppColors.backgroundMono,
-              displayColor: AppColors.textMono,
+              bodyColor: AppColors.textMono,
             ),
         focusColor: AppColors.errorMono,
         cardColor: AppColors.tileBackgroundMono,
@@ -104,8 +102,7 @@ class AppColors {
           ),
         ),
         textTheme: Theme.of(context).textTheme.apply(
-              bodyColor: AppColors.backgroundDark,
-              displayColor: AppColors.textDark,
+              bodyColor: AppColors.textDark,
             ),
         focusColor: AppColors.errorDark,
         cardColor: AppColors.tileBackgroundDark,
@@ -130,8 +127,7 @@ class AppColors {
           ),
         ),
         textTheme: Theme.of(context).textTheme.apply(
-              bodyColor: AppColors.backgroundDarkMono,
-              displayColor: AppColors.textDarkMono,
+              bodyColor: AppColors.textDarkMono,
             ),
         focusColor: AppColors.errorDarkMono,
         cardColor: AppColors.tileBackgroundDarkMono,
