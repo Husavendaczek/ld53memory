@@ -11,4 +11,5 @@ enum ThemeSet {
   numbers,
   differentNumbers,
   onlyColors,
+  christmas,
 }
