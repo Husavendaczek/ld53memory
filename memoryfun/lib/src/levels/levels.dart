@@ -68,4 +68,14 @@ List<LevelInfo> levels = const [
     themeSet: ThemeSet.christmas,
     gameType: GameType.sameImage,
   ),
+  LevelInfo(
+    gameSize: 12,
+    themeSet: ThemeSet.emotions,
+    gameType: GameType.sameImage,
+  ),
+  LevelInfo(
+    gameSize: 12,
+    themeSet: ThemeSet.emotions,
+    gameType: GameType.textAndImage,
+  ),
 ];
