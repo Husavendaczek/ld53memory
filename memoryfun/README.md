@@ -25,3 +25,5 @@ TODOS
     - play against ki
  - more themes
  - add languages
+ - set volume of music
+ - show all levels in level overview or show game type specific categories

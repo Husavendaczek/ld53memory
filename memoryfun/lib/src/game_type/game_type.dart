@@ -1,4 +1,5 @@
 enum GameType {
+  noSelection,
   sameImage,
   differentImage,
   sameText,

@@ -34,7 +34,7 @@ class StartPage extends ConsumerWidget {
               text: 'Start game',
               onTap: () => ref
                   .read(appRouterProvider)
-                  .push(LevelOverviewRoute(value: 0)),
+                  .push(const GameTypeOverviewRoute()),
             ),
           ],
         ),

@@ -13,8 +13,10 @@ import '../utils/theme/app_color_mode.dart';
 @RoutePage()
 class LevelOverviewPage extends ConsumerStatefulWidget {
   final int value;
+  final GameType gameType;
   const LevelOverviewPage({
     this.value = 0,
+    this.gameType = GameType.noSelection,
     super.key,
   });
 
@@ -57,7 +59,20 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
   List<Widget> tiles(WidgetRef ref) {
     var themeTiles = <Widget>[];
 
-    for (var levelInfo in levels) {
+    List<LevelInfo> selectedLevels = levels;
+    if (widget.gameType == GameType.noSelection) {
+      selectedLevels = levels
+          .where((element) => element.gameType != GameType.noSelection)
+          .toList();
+    } else {
+      selectedLevels = levels
+          .where((element) =>
+              element.gameType == widget.gameType &&
+              element.gameType != GameType.noSelection)
+          .toList();
+    }
+
+    for (var levelInfo in selectedLevels) {
       themeTiles.add(_thumbnail(ref, levelInfo));
     }
     return themeTiles;
