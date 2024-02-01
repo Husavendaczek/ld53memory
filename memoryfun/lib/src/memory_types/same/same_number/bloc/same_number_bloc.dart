@@ -33,6 +33,8 @@ class SameNumberState with _$SameNumberState {
 class SameNumberBloc extends Bloc<SameNumberEvent, SameNumberState> {
   static final provider =
       BlocProvider.autoDispose<SameNumberBloc, SameNumberState>((ref) {
+    ref.onDispose(() => ref.bloc.close());
+
     return SameNumberBloc(
       randomizer: ref.watch(Randomizer.provider),
       gameMovesNumbers: ref.watch(GameMovesNumbers.provider),

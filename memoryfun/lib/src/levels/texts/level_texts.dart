@@ -1,0 +1,20 @@
+List<List<String>> levelTexts = [
+  [
+    'hello',
+    'nice',
+    'sun',
+    'fun',
+    'bye',
+    'peace',
+    'earth',
+    'summer',
+  ],
+  [
+    'Wut',
+    'Freude',
+    'Trauer',
+    'Angst',
+    'Überraschung',
+    'Ekel',
+  ],
+];

@@ -75,7 +75,7 @@ List<LevelInfo> levels = const [
   ),
   LevelInfo(
     gameSize: 12,
-    themeSet: ThemeSet.emotions,
+    themeSet: ThemeSet.emotionsText,
     gameType: GameType.textAndImage,
   ),
 ];

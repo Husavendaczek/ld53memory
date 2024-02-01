@@ -103,6 +103,7 @@ class _CalculatingNumbersMemoryPageState
           memoryTile: TextMemoryTile(
             text: tile.resultNumber.text,
             index: tile.index,
+            pairValue: tile.index,
             angle: tile.angle,
             isVisible: tile.isVisible,
             hasError: tile.hasError,

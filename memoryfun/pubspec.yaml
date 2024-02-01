@@ -51,6 +51,7 @@ flutter:
     - assets/color/onlyColors/
     - assets/color/christmas/
     - assets/color/emotions/
+    - assets/color/emotionsText/
     - assets/color/gameTypeThumbnails/
     - assets/mono/
     - assets/mono/food/
@@ -68,4 +69,5 @@ flutter:
     - assets/mono/onlyColors/
     - assets/mono/christmas/
     - assets/mono/emotions/
+    - assets/mono/emotionsText/
     - assets/mono/gameTypeThumbnails/
