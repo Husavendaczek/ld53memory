@@ -14,4 +14,5 @@ enum ThemeSet {
   christmas,
   emotions,
   emotionsText,
+  texts,
 }

@@ -47,6 +47,7 @@ flutter:
     - assets/color/farmComplex/
     - assets/color/farmMud/
     - assets/color/numbers/
+    - assets/color/texts/
     - assets/color/differentNumbers/
     - assets/color/onlyColors/
     - assets/color/christmas/
@@ -65,6 +66,7 @@ flutter:
     - assets/mono/farmComplex/
     - assets/mono/farmMud/
     - assets/mono/numbers/
+    - assets/mono/texts/
     - assets/mono/differentNumbers/
     - assets/mono/onlyColors/
     - assets/mono/christmas/

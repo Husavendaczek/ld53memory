@@ -93,7 +93,7 @@ class _TextImageMemoryPageState extends ConsumerState<TextImageMemoryPage> {
           memoryTile: TextMemoryTile(
             text: tile.text,
             index: tile.index,
-            pairValue: tile.index,
+            pairValue: tile.pairValue,
             angle: tile.angle,
             isVisible: tile.isVisible,
             hasError: tile.hasError,

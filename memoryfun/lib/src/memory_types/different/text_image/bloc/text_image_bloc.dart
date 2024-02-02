@@ -128,18 +128,6 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
       }
     }
 
-    print('upper tiles are');
-    for (var myTile in imageTextMemorySet.upperTiles) {
-      print(
-          'index ${myTile.index} - pair value ${myTile.pairValue} - is lower part ${myTile.isLowerPart} - is visible ${myTile.isVisible}');
-    }
-
-    print('lower tiles are');
-    for (var myTile in imageTextMemorySet.lowerTiles) {
-      print(
-          'index ${myTile.index} - pair value ${myTile.pairValue} - text ${myTile.text} - is visible ${myTile.isVisible}');
-    }
-
     emit(TextImageState.initialized(imageTextMemorySet));
   }
 
@@ -173,8 +161,6 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
     soundPlayer.playTap();
 
     var currentIndex = _currentImageIndex(event.memoryTile);
-    print(
-        'selected upper tile ${event.memoryTile.index} with current index $currentIndex');
 
     _hidePreviousTiles();
 
@@ -192,8 +178,6 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
     );
 
     if (firstTextMemoryTile == null) {
-      print(
-          'first tap in upper part on index $currentIndex with pairValue ${event.memoryTile.pairValue}');
       _handleFirstImageTap(
         currentIndex,
         event.memoryTile.pairValue,
@@ -202,8 +186,6 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
       );
       return emit(TextImageState.matchResult(imageTextMemorySet));
     } else {
-      print(
-          'handle second tap in upper part on index $currentIndex with pairValue ${event.memoryTile.pairValue}');
       _handleSecondTap(
         currentIndex,
         event.memoryTile,
@@ -213,11 +195,8 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
 
   void _hidePreviousTiles() {
     if (hideTiles.isNotEmpty) {
-      print('tiles to hide ${hideTiles.length}');
       for (var hideTile in hideTiles) {
         var isLowerPart = hideTile.isLowerPart;
-        print(
-            'hide tile with index ${hideTile.index} in lower part: $isLowerPart');
 
         _setHideImage(hideTile.index, isLowerPart);
         _setError(hideTile.index, isLowerPart, false);
@@ -241,13 +220,11 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
 
   void _handleSecondTap(int currentIndex, ImageMemoryTile memoryTile) {
     if (firstTextMemoryTile!.pairValue == memoryTile.pairValue) {
-      print('second tap was in upper part and correct');
       _handleCorrectMatch(
         currentIndex,
         false,
       );
     } else {
-      print('second tap was in upper part and wrong');
       _handleWrongMatch(
         currentIndex,
         false,
@@ -346,7 +323,7 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
   void _setError(int index, bool isLowerPart, bool hasError) {
     if (isLowerPart) {
       imageTextMemorySet.lowerTiles[index].hasError = hasError;
-      imageTextMemorySet.lowerTiles[index].isCorrect = !hasError;
+      imageTextMemorySet.lowerTiles[index].isCorrect = false;
     } else {
       imageTextMemorySet.upperTiles[index].hasError = hasError;
       imageTextMemorySet.upperTiles[index].isCorrect = !hasError;
@@ -368,7 +345,6 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
         imageMapper.hideComplexImage(currentLevel.themeSet, isLowerPart);
 
     if (isLowerPart) {
-      // imageTextMemorySet.lowerTiles[index].image = image;
       imageTextMemorySet.lowerTiles[index].isVisible = false;
       imageTextMemorySet.lowerTiles[index].hasError = false;
       imageTextMemorySet.lowerTiles[index].isCorrect = false;
@@ -391,8 +367,6 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
     soundPlayer.playTap();
 
     var currentIndex = _currentTextIndex(event.memoryTile);
-    print(
-        'selected lower tile ${event.memoryTile.index} with current index $currentIndex');
 
     _hidePreviousTiles();
 
@@ -401,8 +375,6 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
     _resetTextAngle(currentIndex);
 
     if (firstImageMemoryTile == null) {
-      print(
-          'first tap in lower part on index $currentIndex with pairValue ${event.memoryTile.pairValue}');
       _handleFirstTextTap(
         currentIndex,
         randomAngle,
@@ -411,8 +383,6 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
       );
       return emit(TextImageState.matchResult(imageTextMemorySet));
     } else {
-      print(
-          'second tap in lower part on index $currentIndex with pairValue ${event.memoryTile.pairValue}');
       _handleSecondTextTap(
         currentIndex,
         event.memoryTile,
@@ -467,15 +437,12 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
   }
 
   void _handleSecondTextTap(int currentIndex, TextMemoryTile memoryTile) {
-    print('handle second tap in lower part');
     if (firstImageMemoryTile!.pairValue == memoryTile.pairValue) {
-      print('second tap was in lower part and correct');
       _handleCorrectMatch(
         currentIndex,
         true,
       );
     } else {
-      print('second tap was in lower part and wrong');
       _handleWrongMatch(
         currentIndex,
         true,

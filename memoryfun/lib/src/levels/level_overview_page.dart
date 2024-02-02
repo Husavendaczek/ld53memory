@@ -147,6 +147,13 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
               ),
             );
         break;
+      case GameType.sameText:
+        onTap = () => ref.read(appRouterProvider).push(
+              SameTextMemoryRoute(
+                levelInfo: levels[themeSet.index],
+              ),
+            );
+        break;
       case GameType.textAndImage:
         onTap = () => ref.read(appRouterProvider).push(
               TextImageMemoryRoute(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../memory_types/same/animated_image/pages/animated_image_memory_page.dart';
 import '../../memory_types/same/same_image/pages/same_image_memory_page.dart';
 import '../../memory_types/same/same_number/pages/same_number_memory_page.dart';
+import '../../memory_types/same/same_text/pages/same_text_memory_page.dart';
 import '../../memory_types/same/colors/pages/same_color_memory_page.dart';
 import '../../memory_types/different/calculating_numbers/pages/calculating_numbers_memory_page.dart';
 import '../../memory_types/different/different_image/pages/different_image_memory_page.dart';
@@ -32,6 +33,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: SameImageMemoryRoute.page),
         AutoRoute(page: AnimatedImageMemoryRoute.page),
         AutoRoute(page: SameNumberMemoryRoute.page),
+        AutoRoute(page: SameTextMemoryRoute.page),
         AutoRoute(page: CalculatingNumbersMemoryRoute.page),
         AutoRoute(page: SameColorMemoryRoute.page),
         AutoRoute(page: LevelDoneRoute.page),
