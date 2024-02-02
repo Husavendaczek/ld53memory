@@ -75,6 +75,10 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
     for (var levelInfo in selectedLevels) {
       themeTiles.add(_thumbnail(ref, levelInfo));
     }
+
+    if (themeTiles.isEmpty) {
+      return [const Text('Für diese Kategorie gibt es noch keine Spiele.')];
+    }
     return themeTiles;
   }
 

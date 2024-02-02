@@ -6,8 +6,6 @@ import 'package:memoryfun/src/components/app_bar/overview_app_bar.dart';
 import 'package:memoryfun/src/game_type/game_type.dart';
 import 'package:memoryfun/src/utils/routing/app_router.dart';
 
-import '../levels/level_info.dart';
-import '../levels/levels.dart';
 import '../utils/theme/app_color_mode.dart';
 
 @RoutePage()

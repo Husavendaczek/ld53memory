@@ -19,14 +19,12 @@ optional:
 
 TODOS
  - flips twice on first tap
- - add only colors
  - two players
     - on one phone
     - play against ki
  - more themes
  - add languages
  - set volume of music
- - add text and image matches
  - simplify GameMovesNumbers and GameMovesTexts
  - why is the wrong match animated with a shimmer?
  - is there a way to shuffle between two different types in one area? (no need to seperate locally?)
