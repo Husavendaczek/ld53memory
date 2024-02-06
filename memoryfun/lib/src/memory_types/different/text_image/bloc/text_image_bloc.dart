@@ -108,7 +108,9 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
       if (isLowerPart) {
         var tile = TextMemoryTile(
           index: i,
-          text: levelTexts[1][value],
+          text: currentLevel.themeSet == ThemeSet.emotionsText
+              ? levelTexts[1][value]
+              : levelTexts[2][value],
           pairValue: value,
           angle: randomizer.randomTileAngle(),
           isVisible: false,
