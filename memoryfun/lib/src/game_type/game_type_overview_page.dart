@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/components/app_bar/overview_app_bar.dart';
 import 'package:memoryfun/src/game_type/game_type.dart';
+import 'package:memoryfun/src/game_type/game_types_to_hide.dart';
 import 'package:memoryfun/src/utils/routing/app_router.dart';
 
 import '../utils/theme/app_color_mode.dart';
@@ -32,7 +33,7 @@ class GameTypeOverviewPage extends ConsumerWidget {
     var themeTiles = <Widget>[];
 
     var gameTypes =
-        GameType.values.where((element) => element != GameType.noSelection);
+        GameType.values.where((element) => !blackList.contains(element));
 
     for (var gameType in gameTypes) {
       themeTiles.add(_thumbnail(ref, gameType));
