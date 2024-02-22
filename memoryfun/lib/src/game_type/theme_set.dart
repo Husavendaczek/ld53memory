@@ -16,4 +16,5 @@ enum ThemeSet {
   emotionsText,
   texts,
   farmAnimalsText,
+  farmAnimals,
 }

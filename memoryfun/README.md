@@ -28,4 +28,3 @@ TODOS
  - simplify GameMovesNumbers and GameMovesTexts
  - why is the wrong match animated with a shimmer?
  - is there a way to shuffle between two different types in one area? (no need to seperate locally?)
- - set with farm animals:  rooster (simplistic rooster standing on a meadow with the style in a childrens book)
