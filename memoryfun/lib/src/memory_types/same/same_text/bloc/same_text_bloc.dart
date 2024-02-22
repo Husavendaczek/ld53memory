@@ -72,7 +72,12 @@ class SameTextBloc extends Bloc<SameTextEvent, SameTextState> {
     matchesLeft = event.levelInfo.getMatches();
     currentLevel = event.levelInfo;
 
-    var allTexts = levelTexts.first + levelTexts.first;
+    var allTexts = levelTexts[currentLevel.themeSet];
+    if (allTexts == null) {
+      allTexts = [];
+    } else {
+      allTexts = levelTexts[currentLevel.themeSet]! + allTexts;
+    }
 
     for (int i = 0; i < event.levelInfo.gameSize; i++) {
       var randomIndex = randomizer.randomOutOf(allTexts.length);

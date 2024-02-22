@@ -1,5 +1,7 @@
-List<List<String>> levelTexts = [
-  [
+import 'package:memoryfun/src/game_type/theme_set.dart';
+
+Map<ThemeSet, List<String>> levelTexts = {
+  ThemeSet.texts: [
     'hello',
     'nice',
     'sun',
@@ -9,7 +11,7 @@ List<List<String>> levelTexts = [
     'earth',
     'summer',
   ],
-  [
+  ThemeSet.emotionsText: [
     'Wut',
     'Freude',
     'Trauer',
@@ -17,7 +19,7 @@ List<List<String>> levelTexts = [
     'Überraschung',
     'Ekel',
   ],
-  [
+  ThemeSet.farmAnimalsText: [
     'Hahn',
     'Kuh',
     'Huhn',
@@ -33,4 +35,4 @@ List<List<String>> levelTexts = [
     'Ente',
     'Hase',
   ],
-];
+};
