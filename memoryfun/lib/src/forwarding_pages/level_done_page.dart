@@ -57,7 +57,7 @@ class LevelDonePage extends ConsumerWidget {
                   text: 'Level overview',
                   onTap: () => ref
                       .read(appRouterProvider)
-                      .navigate(LevelOverviewRoute(value: 10)),
+                      .navigate(const GameTypeOverviewRoute()),
                 ),
               ],
             )

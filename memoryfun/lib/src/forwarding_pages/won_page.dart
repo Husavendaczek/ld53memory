@@ -4,12 +4,9 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/buttons/normal_button.dart';
-import '../game_type/game_type.dart';
 import '../utils/theme/app_color_mode.dart';
 import '../utils/theme/app_color_style.dart';
 import '../utils/routing/app_router.dart';
-import '../levels/level_info.dart';
-import '../game_type/theme_set.dart';
 
 @RoutePage()
 class WonPage extends ConsumerWidget {
@@ -113,15 +110,9 @@ class WonPage extends ConsumerWidget {
               padding: const EdgeInsets.only(top: 48.0),
               child: NormalButton(
                 text: 'Neues Memory spielen',
-                onTap: () => ref.read(appRouterProvider).push(
-                      SameImageMemoryRoute(
-                        levelInfo: const LevelInfo(
-                          gameSize: 12,
-                          themeSet: ThemeSet.food,
-                          gameType: GameType.sameImage,
-                        ),
-                      ),
-                    ),
+                onTap: () => ref
+                    .read(appRouterProvider)
+                    .push(const GameTypeOverviewRoute()),
               ),
             )
           ],

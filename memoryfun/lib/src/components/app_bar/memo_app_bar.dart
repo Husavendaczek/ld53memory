@@ -19,7 +19,7 @@ class MemoryAppBar extends ConsumerWidget implements PreferredSizeWidget {
             icon: Icons.home,
             onTap: () => ref
                 .read(appRouterProvider)
-                .navigate(LevelOverviewRoute(value: 10)),
+                .navigate(const GameTypeOverviewRoute()),
           ),
           title: const Text('Memory FUN'),
           actions: [
