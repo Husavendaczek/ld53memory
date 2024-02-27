@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'utils/routing/app_router.dart';
 import 'utils/theme/app_color_mode.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
@@ -34,6 +36,14 @@ class _MyAppState extends ConsumerState<MyApp> {
       highContrastTheme: ref.watch(AppColorMode.provider).lightTheme(context),
       highContrastDarkTheme:
           ref.watch(AppColorMode.provider).darkTheme(context),
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('de'),
+      ],
     );
   }
 }

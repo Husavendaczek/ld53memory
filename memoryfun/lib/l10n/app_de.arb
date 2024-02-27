@@ -1,0 +1,14 @@
+{
+    "start_game": "Spiel starten",
+    "level_overview": "Level Übersicht",
+    "congratulations": "GLÜCKWUNSCH!",
+    "did_it": "Geschafft!",
+    "new_game": "Neues Memory spielen!",
+    "settings_title": "Einstellungen",
+    "settings_music": "Musik",
+    "settings_music_ref": "Musik und Sound Effects sind selbst eingespielt.",
+    "settings_sound": "Sound Effects",
+    "settings_card_amount": "Wie viele Karten sollen in einer Zeile angezeigt werden?",
+    "settings_licenses": "Lizenen",
+    "settings_switch_color_style": "Farbe oder schwarz weiß wählen"
+}

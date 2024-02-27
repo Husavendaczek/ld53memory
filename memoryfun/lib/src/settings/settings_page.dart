@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/components/buttons/normal_icon_btn.dart';
 import 'package:memoryfun/src/sound/sound_player.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/app_bar/memo_app_bar.dart';
 import '../components/buttons/normal_button.dart';
@@ -46,9 +47,9 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Musik',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context)!.settings_music,
+                      style: const TextStyle(
                         fontSize: 16.0,
                       ),
                     ),
@@ -69,9 +70,9 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Sound Effects',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context)!.settings_sound,
+                      style: const TextStyle(
                         fontSize: 16.0,
                       ),
                     ),
@@ -90,9 +91,9 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                   ],
                 ),
               ),
-              const Text(
-                'Wie viele Karten sollen in einer Zeile angezeigt werden?',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context)!.settings_card_amount,
+                style: const TextStyle(
                   fontSize: 16.0,
                 ),
               ),
@@ -107,7 +108,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
               ),
               //TODO add switch for light and dark mode
               NormalButton(
-                text: 'Switch style to colored or monochrome',
+                text: AppLocalizations.of(context)!.settings_switch_color_style,
                 onTap: () {
                   ref.read(AppColorMode.provider).switchColorStyle();
                   setState(() {
@@ -116,8 +117,10 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                 },
               ),
               NormalButton(
-                  text: 'Licenses',
-                  onTap: () => showLicensePage(context: context)),
+                text: AppLocalizations.of(context)!.settings_licenses,
+                onTap: () => showLicensePage(context: context),
+              ),
+              Text(AppLocalizations.of(context)!.settings_music_ref)
             ],
           ),
         ),

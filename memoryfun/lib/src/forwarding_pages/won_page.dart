@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/buttons/normal_button.dart';
 import '../utils/theme/app_color_mode.dart';
@@ -14,16 +15,16 @@ class WonPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var monochromeText = const Text(
-      'GLÜCKWUNSCH!',
-      style: TextStyle(
+    var monochromeText = Text(
+      AppLocalizations.of(context)!.congratulations,
+      style: const TextStyle(
         fontSize: 26,
         fontWeight: FontWeight.bold,
       ),
     );
-    var coloredText = const Text(
-      'GLÜCKWUNSCH!',
-      style: TextStyle(
+    var coloredText = Text(
+      AppLocalizations.of(context)!.congratulations,
+      style: const TextStyle(
         fontSize: 26,
         fontWeight: FontWeight.bold,
       ),
@@ -90,9 +91,9 @@ class WonPage extends ConsumerWidget {
                 : monochromeText,
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 32.0),
-              child: const Text(
-                'Geschafft!',
-                style: TextStyle(fontSize: 20),
+              child: Text(
+                AppLocalizations.of(context)!.did_it,
+                style: const TextStyle(fontSize: 20),
               )
                   .animate(
                     onPlay: (controller) => controller.repeat(),
@@ -100,6 +101,7 @@ class WonPage extends ConsumerWidget {
                   .custom(
                     duration: 300.ms,
                     builder: (context, value, child) => _myText(
+                      context,
                       const Color.fromARGB(255, 255, 223, 234),
                       Colors.purple,
                       value,
@@ -109,7 +111,7 @@ class WonPage extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(top: 48.0),
               child: NormalButton(
-                text: 'Neues Memory spielen',
+                text: AppLocalizations.of(context)!.new_game,
                 onTap: () => ref
                     .read(appRouterProvider)
                     .push(const GameTypeOverviewRoute()),
@@ -121,8 +123,8 @@ class WonPage extends ConsumerWidget {
     );
   }
 
-  Text _myText(Color a, Color b, double value) => Text(
-        'Geschafft!',
+  Text _myText(BuildContext context, Color a, Color b, double value) => Text(
+        AppLocalizations.of(context)!.did_it,
         style: TextStyle(fontSize: 20, color: Color.lerp(a, b, value)),
       );
 }

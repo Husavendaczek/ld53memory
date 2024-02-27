@@ -2,6 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/app_bar/memo_app_bar.dart';
 import '../components/buttons/normal_button.dart';
@@ -25,9 +26,9 @@ class LevelDonePage extends ConsumerWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 32.0),
-              child: const Text(
-                'You did it!',
-                style: TextStyle(
+              child: Text(
+                AppLocalizations.of(context)!.did_it,
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
@@ -54,7 +55,7 @@ class LevelDonePage extends ConsumerWidget {
               alignment: MainAxisAlignment.center,
               children: [
                 NormalButton(
-                  text: 'Level overview',
+                  text: AppLocalizations.of(context)!.level_overview,
                   onTap: () => ref
                       .read(appRouterProvider)
                       .navigate(const GameTypeOverviewRoute()),

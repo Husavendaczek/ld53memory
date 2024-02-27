@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../utils/routing/app_router.dart';
 import '../utils/theme/app_color_mode.dart';
 import '../components/buttons/normal_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class StartPage extends ConsumerWidget {
@@ -31,7 +32,7 @@ class StartPage extends ConsumerWidget {
               ),
             ),
             NormalButton(
-              text: 'Start game',
+              text: AppLocalizations.of(context)!.start_game,
               onTap: () => ref
                   .read(appRouterProvider)
                   .push(const GameTypeOverviewRoute()),

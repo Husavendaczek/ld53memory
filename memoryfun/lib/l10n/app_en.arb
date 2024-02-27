@@ -1,0 +1,14 @@
+{
+    "start_game": "Start game",
+    "level_overview": "Level overview",
+    "congratulations": "CONGRATULATIONS!",
+    "did_it": "You did it!",
+    "new_game": "Play new memory game!",
+    "settings_title": "Settings",
+    "settings_music": "Music",
+    "settings_music_ref": "Music and Sound Effects are self-recorded.",
+    "settings_sound": "Sound Effects",
+    "settings_card_amount": "How many cards should be displayed in one line?",
+    "settings_licenses": "Licenses",
+    "settings_switch_color_style": "Switch style to colored or monochrome"
+}

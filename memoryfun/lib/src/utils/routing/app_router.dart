@@ -17,6 +17,7 @@ import '../../forwarding_pages/level_done_page.dart';
 import '../../levels/level_info.dart';
 import '../../settings/settings_page.dart';
 import '../../forwarding_pages/start_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 part 'app_router.gr.dart';
 
