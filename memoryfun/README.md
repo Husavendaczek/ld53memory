@@ -23,7 +23,6 @@ TODOS
     - on one phone
     - play against ki
  - more themes
- - add languages
  - set volume of music
  - simplify GameMovesNumbers and GameMovesTexts
  - why is the wrong match animated with a shimmer?

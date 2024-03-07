@@ -40,6 +40,7 @@ flutter:
     - assets/
     - assets/sounds/
     - assets/color/
+    - assets/color/abstract/
     - assets/color/food/
     - assets/color/mail/
     - assets/color/babies/
@@ -61,6 +62,7 @@ flutter:
     - assets/color/farmAnimals/
     - assets/color/gameTypeThumbnails/
     - assets/mono/
+    - assets/mono/abstract/
     - assets/mono/food/
     - assets/mono/mail/
     - assets/mono/babies/

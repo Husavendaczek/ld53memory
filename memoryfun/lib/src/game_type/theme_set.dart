@@ -17,4 +17,5 @@ enum ThemeSet {
   texts,
   farmAnimalsText,
   farmAnimals,
+  abstract,
 }
