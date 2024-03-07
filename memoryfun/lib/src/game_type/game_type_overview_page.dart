@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/components/app_bar/overview_app_bar.dart';
 import 'package:memoryfun/src/game_type/game_type.dart';
 import 'package:memoryfun/src/game_type/game_types_to_hide.dart';
+import 'package:memoryfun/src/memory_types/type_icon/memory_type_state.dart';
 import 'package:memoryfun/src/utils/routing/app_router.dart';
 
 import '../utils/theme/app_color_mode.dart';
@@ -43,9 +44,12 @@ class GameTypeOverviewPage extends ConsumerWidget {
 
   Widget _thumbnail(WidgetRef ref, GameType gameType) => InkWell(
         borderRadius: const BorderRadius.all(Radius.circular(8)),
-        onTap: () => ref.read(appRouterProvider).push(
-              LevelOverviewRoute(value: 0, gameType: gameType),
-            ),
+        onTap: () {
+          ref.read(appRouterProvider).push(
+                LevelOverviewRoute(value: 0, gameType: gameType),
+              );
+          ref.read(MemoryTypeState.provider).setGameType(gameType);
+        },
         child: Container(
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(8)),
