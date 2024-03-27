@@ -27,3 +27,4 @@ TODOS
  - simplify GameMovesNumbers and GameMovesTexts
  - why is the wrong match animated with a shimmer?
  - is there a way to shuffle between two different types in one area? (no need to seperate locally?)
+ - add 2 more animals to farm animals texts

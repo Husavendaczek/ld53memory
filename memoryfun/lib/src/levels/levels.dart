@@ -84,7 +84,7 @@ List<LevelInfo> levels = const [
     gameType: GameType.sameText,
   ),
   LevelInfo(
-    gameSize: 28,
+    gameSize: 24,
     themeSet: ThemeSet.farmAnimalsText,
     gameType: GameType.textAndImage,
   ),

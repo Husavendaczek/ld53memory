@@ -97,6 +97,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  auto_hyphenating_text:
+    dependency: "direct dev"
+    description:
+      name: auto_hyphenating_text
+      sha256: "6afdad0d257109445d2ed8147f8bccf703f27a035454a892b702894793aa04cf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.3"
   auto_route:
     dependency: "direct main"
     description:
@@ -453,6 +461,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  hyphenator_impure:
+    dependency: transitive
+    description:
+      name: hyphenator_impure
+      sha256: d943b55c01f90fd794beab853645efa9f816619feca0b4a784529e1a5dffa5fd
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.3"
   image:
     dependency: transitive
     description:
