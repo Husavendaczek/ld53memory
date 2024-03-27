@@ -40,12 +40,14 @@ class SameTextBloc extends Bloc<SameTextEvent, SameTextState> {
       randomizer: ref.watch(Randomizer.provider),
       gameMovesTexts: ref.watch(GameMovesTexts.provider),
       levelFinisher: ref.watch(LevelFinisher.provider),
+      levelTexts: ref.watch(LevelTexts.provider),
     );
   });
 
   final Randomizer randomizer;
   final GameMovesTexts gameMovesTexts;
   final LevelFinisher levelFinisher;
+  final LevelTexts levelTexts;
 
   List<TextMemoryTile> memoryTiles = [];
   int matchesWon = 0;
@@ -60,6 +62,7 @@ class SameTextBloc extends Bloc<SameTextEvent, SameTextState> {
     required this.randomizer,
     required this.gameMovesTexts,
     required this.levelFinisher,
+    required this.levelTexts,
   }) : super(const SameTextState.initial()) {
     on<_InitGame>(_initGame);
     on<_HandleTap>(_handleTap);
@@ -72,12 +75,8 @@ class SameTextBloc extends Bloc<SameTextEvent, SameTextState> {
     matchesLeft = event.levelInfo.getMatches();
     currentLevel = event.levelInfo;
 
-    var allTexts = levelTexts[currentLevel.themeSet];
-    if (allTexts == null) {
-      allTexts = [];
-    } else {
-      allTexts = levelTexts[currentLevel.themeSet]! + allTexts;
-    }
+    var allTexts = levelTexts.textOfTheme(currentLevel.themeSet);
+    allTexts = levelTexts.textOfTheme(currentLevel.themeSet) + allTexts;
 
     for (int i = 0; i < event.levelInfo.gameSize; i++) {
       var randomIndex = randomizer.randomOutOf(allTexts.length);

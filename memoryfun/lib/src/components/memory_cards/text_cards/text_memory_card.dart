@@ -27,7 +27,7 @@ class TextMemoryCard extends ConsumerWidget {
           memoryTile.text,
           style: TextStyle(
             color: Theme.of(context).scaffoldBackgroundColor,
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
           textAlign: TextAlign.center,

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../levels/texts/level_texts.dart';
 import '../utils/routing/app_router.dart';
 import '../utils/theme/app_color_mode.dart';
 import '../components/buttons/normal_button.dart';
@@ -15,6 +16,8 @@ class StartPage extends ConsumerWidget {
     final isDarkMode =
         MediaQuery.of(context).platformBrightness == Brightness.dark;
     final fileName = isDarkMode ? "thumbnail_dark" : "thumbnail";
+
+    ref.read(LevelTexts.provider).initLocale(Localizations.localeOf(context));
 
     return Scaffold(
       body: Center(

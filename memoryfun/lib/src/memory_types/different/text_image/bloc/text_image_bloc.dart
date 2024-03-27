@@ -45,6 +45,7 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
       levelFinisher: ref.watch(LevelFinisher.provider),
       soundPlayer: ref.watch(SoundPlayer.provider),
       randomizer: ref.watch(Randomizer.provider),
+      levelTexts: ref.watch(LevelTexts.provider),
     );
   });
 
@@ -52,6 +53,7 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
   final LevelFinisher levelFinisher;
   final SoundPlayer soundPlayer;
   final Randomizer randomizer;
+  final LevelTexts levelTexts;
 
   ImageTextMemorySet imageTextMemorySet = ImageTextMemorySet(
     upperTiles: [],
@@ -72,6 +74,7 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
     required this.levelFinisher,
     required this.soundPlayer,
     required this.randomizer,
+    required this.levelTexts,
   }) : super(const TextImageState.initial()) {
     on<_InitGame>(_initGame);
     on<_HandleImageTap>(_handleImageTap);
@@ -105,8 +108,8 @@ class TextImageBloc extends Bloc<TextImageEvent, TextImageState> {
 
       var isLowerPart = i < matchesLeft;
 
-      var text = levelTexts[currentLevel.themeSet]?[value];
-      text ??= '';
+      var theMap = levelTexts.textOfTheme(currentLevel.themeSet);
+      var text = theMap[value];
 
       if (isLowerPart) {
         var tile = TextMemoryTile(

@@ -36,25 +36,27 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: const OverviewAppBar(),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GridView.count(
-                shrinkWrap: true,
-                crossAxisCount: 3,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-                childAspectRatio: 1,
-                padding: const EdgeInsets.all(8),
-                children: tiles(ref),
-              ),
-            ],
-          ),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: const OverviewAppBar(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GridView.count(
+              shrinkWrap: true,
+              crossAxisCount: 3,
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              childAspectRatio: 1,
+              padding: const EdgeInsets.all(8),
+              children: tiles(ref),
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 
   List<Widget> tiles(WidgetRef ref) {
     var themeTiles = <Widget>[];

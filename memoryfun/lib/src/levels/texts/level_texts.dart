@@ -1,38 +1,96 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/game_type/theme_set.dart';
 
-Map<ThemeSet, List<String>> levelTexts = {
-  ThemeSet.texts: [
-    'hello',
-    'nice',
-    'sun',
-    'fun',
-    'bye',
-    'peace',
-    'earth',
-    'summer',
-  ],
-  ThemeSet.emotionsText: [
-    'Wut',
-    'Freude',
-    'Trauer',
-    'Angst',
-    'Überraschung',
-    'Ekel',
-  ],
-  ThemeSet.farmAnimalsText: [
-    'Hahn',
-    'Kuh',
-    'Huhn',
-    'Pferd',
-    'Schaf',
-    'Schwein',
-    'Truthahn',
-    'Katze',
-    'Hund',
-    'Esel',
-    'Gans',
-    'Ziege',
-    'Ente',
-    'Hase',
-  ],
-};
+class LevelTexts {
+  static final provider = Provider<LevelTexts>((ref) {
+    return LevelTexts();
+  });
+
+  static Locale currentLocale = const Locale('de');
+
+  Map<ThemeSet, List<String>> deLevelTexts = {
+    ThemeSet.texts: [
+      'Urlaub',
+      'Berge',
+      'Sonne',
+      'Spaß',
+      'Wetter',
+      'Strand',
+      'Erde',
+      'Sommer',
+    ],
+    ThemeSet.emotionsText: [
+      'Wut',
+      'Freude',
+      'Trauer',
+      'Angst',
+      'Überraschung',
+      'Ekel',
+    ],
+    ThemeSet.farmAnimalsText: [
+      'Hahn',
+      'Kuh',
+      'Huhn',
+      'Pferd',
+      'Schaf',
+      'Schwein',
+      'Truthahn',
+      'Katze',
+      'Hund',
+      'Esel',
+      'Gans',
+      'Ziege',
+      'Ente',
+      'Hase',
+    ],
+  };
+
+  Map<ThemeSet, List<String>> enLevelTexts = {
+    ThemeSet.texts: [
+      'holidays',
+      'mountains',
+      'sun',
+      'fun',
+      'weather',
+      'beach',
+      'earth',
+      'summer',
+    ],
+    ThemeSet.emotionsText: [
+      'Anger',
+      'Happiness',
+      'Sadness',
+      'Fear',
+      'Surprise',
+      'Disgust',
+    ],
+    ThemeSet.farmAnimalsText: [
+      'rooster',
+      'cow',
+      'chicken',
+      'horse',
+      'sheep',
+      'pig',
+      'turkey',
+      'cat',
+      'dog',
+      'donkey',
+      'goose',
+      'goat',
+      'duck',
+      'rabbit',
+    ],
+  };
+
+  void initLocale(Locale locale) {
+    currentLocale = locale;
+  }
+
+  List<String> textOfTheme(ThemeSet themeSet) {
+    if (currentLocale.toString().startsWith('de')) {
+      return deLevelTexts[themeSet] ?? [];
+    }
+    return enLevelTexts[themeSet] ?? [];
+  }
+}
