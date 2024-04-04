@@ -27,4 +27,10 @@ TODOS
  - simplify GameMovesNumbers and GameMovesTexts
  - why is the wrong match animated with a shimmer?
  - is there a way to shuffle between two different types in one area? (no need to seperate locally?)
- - add 2 more animals to farm animals texts
+ - more images:
+   - Musikinstrumente (Trommel, Trompete, Flöte, Gitarre, Klavier)
+   - Wilde Tiere (Giraffe, Löwe, Chamäleon, Zebra, Tiger, Panda)
+   - Haustiere (Hasen, Katze, Hund, Fisch, Schildkröte, Schlange, Hamster)
+   - Blätter von Bäumen (Ahorn, Eiche, Buche, Linde)
+   - Planeten (Saturn, Jupiter, Mars)
+   - Blumen (Tulpen, Osterglocken, Schneeglöckchen)
