@@ -34,3 +34,4 @@ TODOS
    - Blätter von Bäumen (Ahorn, Eiche, Buche, Linde)
    - Planeten (Saturn, Jupiter, Mars)
    - Blumen (Tulpen, Osterglocken, Schneeglöckchen)
+- navigate back to group of last played memory
