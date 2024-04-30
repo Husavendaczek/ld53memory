@@ -103,4 +103,9 @@ List<LevelInfo> levels = const [
     themeSet: ThemeSet.wildAnimals,
     gameType: GameType.sameImage,
   ),
+  LevelInfo(
+    gameSize: 24,
+    themeSet: ThemeSet.instruments,
+    gameType: GameType.sameImage,
+  ),
 ];
