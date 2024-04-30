@@ -42,6 +42,20 @@ class LevelTexts {
       'Ente',
       'Hase',
     ],
+    ThemeSet.mealsText: [
+      'Sushi',
+      'Müsli',
+      'Brot',
+      'Hähnchen',
+      'Pizza',
+      'Suppe',
+      'Spaghetti',
+      'Teigtaschen',
+      'Burger',
+      'Poké Bowl',
+      'Salat',
+      'Kuchen',
+    ],
   };
 
   Map<ThemeSet, List<String>> enLevelTexts = {
@@ -76,6 +90,20 @@ class LevelTexts {
       'goat',
       'duck',
       'rabbit',
+    ],
+    ThemeSet.mealsText: [
+      'sushi',
+      'cereals',
+      'bread',
+      'chicken',
+      'pizza',
+      'soup',
+      'spaghetti',
+      'dumplings',
+      'burger',
+      'poké Bowl',
+      'salad',
+      'pie',
     ],
   };
 

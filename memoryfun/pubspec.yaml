@@ -63,6 +63,8 @@ flutter:
     - assets/color/farmAnimals/
     - assets/color/gameTypeThumbnails/
     - assets/color/instruments/
+    - assets/color/meals/
+    - assets/color/mealsText/
     - assets/color/wildAnimals/
     - assets/mono/
     - assets/mono/abstract/
@@ -87,4 +89,6 @@ flutter:
     - assets/mono/farmAnimals/
     - assets/mono/gameTypeThumbnails/
     - assets/mono/instruments/
+    - assets/mono/meals/
+    - assets/mono/mealsText/
     - assets/mono/wildAnimals/

@@ -108,4 +108,14 @@ List<LevelInfo> levels = const [
     themeSet: ThemeSet.instruments,
     gameType: GameType.sameImage,
   ),
+  LevelInfo(
+    gameSize: 24,
+    themeSet: ThemeSet.meals,
+    gameType: GameType.sameImage,
+  ),
+  LevelInfo(
+    gameSize: 24,
+    themeSet: ThemeSet.mealsText,
+    gameType: GameType.textAndImage,
+  ),
 ];
