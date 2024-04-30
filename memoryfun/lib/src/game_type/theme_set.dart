@@ -20,4 +20,7 @@ enum ThemeSet {
   abstract,
   fruitShadows,
   wildAnimals,
+  instruments,
+  meals,
+  mealsText,
 }

@@ -42,55 +42,55 @@ flutter:
     - assets/sounds/
     - assets/color/
     - assets/color/abstract/
-    - assets/color/food/
-    - assets/color/mail/
     - assets/color/babies/
     - assets/color/babiesComplex/
-    - assets/color/other/
-    - assets/color/jungle/
-    - assets/color/club/
-    - assets/color/farm/
-    - assets/color/farmComplex/
-    - assets/color/farmMud/
-    - assets/color/numbers/
-    - assets/color/texts/
-    - assets/color/differentNumbers/
-    - assets/color/onlyColors/
     - assets/color/christmas/
+    - assets/color/club/
+    - assets/color/differentNumbers/
     - assets/color/emotions/
     - assets/color/emotionsText/
+    - assets/color/farm/
     - assets/color/farmAnimalsText/
     - assets/color/farmAnimals/
+    - assets/color/farmComplex/
+    - assets/color/farmMud/
+    - assets/color/food/
     - assets/color/fruitShadows/
     - assets/color/gameTypeThumbnails/
     - assets/color/instruments/
+    - assets/color/jungle/
+    - assets/color/mail/
     - assets/color/meals/
     - assets/color/mealsText/
+    - assets/color/numbers/
+    - assets/color/onlyColors/
+    - assets/color/other/
+    - assets/color/texts/
     - assets/color/wildAnimals/
     - assets/mono/
     - assets/mono/abstract/
-    - assets/mono/food/
-    - assets/mono/mail/
     - assets/mono/babies/
     - assets/mono/babiesComplex/
-    - assets/mono/other/
-    - assets/mono/jungle/
-    - assets/mono/club/
-    - assets/mono/farm/
-    - assets/mono/farmComplex/
-    - assets/mono/farmMud/
-    - assets/mono/numbers/
-    - assets/mono/texts/
-    - assets/mono/differentNumbers/
-    - assets/mono/onlyColors/
     - assets/mono/christmas/
+    - assets/mono/club/
+    - assets/mono/differentNumbers/
     - assets/mono/emotions/
     - assets/mono/emotionsText/
+    - assets/mono/farm/
     - assets/mono/farmAnimalsText/
     - assets/mono/farmAnimals/
+    - assets/mono/farmComplex/
+    - assets/mono/farmMud/
+    - assets/mono/food/
     - assets/mono/fruitShadows/
     - assets/mono/gameTypeThumbnails/
     - assets/mono/instruments/
+    - assets/mono/jungle/
+    - assets/mono/mail/
     - assets/mono/meals/
     - assets/mono/mealsText/
+    - assets/mono/numbers/
+    - assets/mono/onlyColors/
+    - assets/mono/other/
+    - assets/mono/texts/
     - assets/mono/wildAnimals/
