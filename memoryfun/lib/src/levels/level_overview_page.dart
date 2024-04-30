@@ -8,7 +8,7 @@ import '../utils/routing/app_router.dart';
 import 'level_info.dart';
 import 'levels.dart';
 import '../game_type/theme_set.dart';
-import '../utils/theme/app_color_mode.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class LevelOverviewPage extends ConsumerStatefulWidget {
@@ -79,7 +79,7 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
     }
 
     if (themeTiles.isEmpty) {
-      return [const Text('Für diese Kategorie gibt es noch keine Spiele.')];
+      return [Text(AppLocalizations.of(context)!.level_overview_no_category)];
     }
     return themeTiles;
   }

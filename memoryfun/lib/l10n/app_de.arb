@@ -2,6 +2,7 @@
     "start_game": "Spiel starten",
     "game_name": "Memory FUN",
     "level_overview": "Level Übersicht",
+    "level_overview_no_category": "Für diese Kategorie gibt es noch keine Spiele.",
     "congratulations": "GLÜCKWUNSCH!",
     "did_it": "Geschafft!",
     "new_game": "Neues Memory spielen!",
