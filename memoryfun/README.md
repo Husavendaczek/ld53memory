@@ -18,6 +18,11 @@ optional:
  Validate the app and distribute it.
 
 TODOS
+ - add privacy url
+ - add refs for image generation
+   - Image Creator https://www.bing.com/images/create/
+   - https://api.aime.info/
+   - Check for color blind people https://www.color-blindness.com/
  - flips twice on first tap
  - two players
     - on one phone
@@ -28,10 +33,15 @@ TODOS
  - why is the wrong match animated with a shimmer?
  - is there a way to shuffle between two different types in one area? (no need to seperate locally?)
  - more images:
-   - Musikinstrumente (Trommel, Trompete, Flöte, Gitarre, Klavier)
-   - Wilde Tiere (Giraffe, Löwe, Chamäleon, Zebra, Tiger, Panda)
-   - Haustiere (Hasen, Katze, Hund, Fisch, Schildkröte, Schlange, Hamster)
+   - Haustiere (Hasen, Katze, Hund, Fisch, Schildkröte, Schlange, Hamster, Chamäleon)
    - Blätter von Bäumen (Ahorn, Eiche, Buche, Linde)
    - Planeten (Saturn, Jupiter, Mars)
    - Blumen (Tulpen, Osterglocken, Schneeglöckchen)
 - navigate back to group of last played memory
+ - compare folders mono and color
+   - babiesComplex -> change for mono
+   - farm -> remove for both
+   - farmComplex -> remove for both
+   - farmMud -> change for mono
+   - more images for mail
+   - ignore only colors in mono mode

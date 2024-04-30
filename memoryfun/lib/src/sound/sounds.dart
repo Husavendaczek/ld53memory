@@ -92,7 +92,8 @@ class Sounds {
         musicPlayer.play(AssetSource('sounds/postsong.mp3'));
         break;
       default:
-        musicPlayer.play(AssetSource('sounds/allemeineentchen.mp3'));
+        //TODO add missing cases
+        musicPlayer.play(AssetSource('sounds/song2.mp3'));
     }
   }
 
