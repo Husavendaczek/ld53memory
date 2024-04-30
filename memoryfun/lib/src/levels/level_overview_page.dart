@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoryfun/src/game_type/game_type.dart';
+import 'package:memoryfun/src/game_type/image_mapper.dart';
 import '../components/app_bar/overview_app_bar.dart';
 import '../utils/routing/app_router.dart';
 import 'level_info.dart';
@@ -95,10 +96,7 @@ class _LevelOverviewPageState extends ConsumerState<LevelOverviewPage> {
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         clipBehavior: Clip.antiAlias,
-        child: Image(
-          image: AssetImage(
-              'assets/${ref.watch(AppColorMode.provider).appColorStyle.name}/${themeSet.name}/${themeSet.name}_thumbnail.png'),
-        ),
+        child: ref.read(ImageMapper.provider).thumbnail(ref, themeSet),
       ),
     ).animate().fadeIn(
           duration: 600.ms,

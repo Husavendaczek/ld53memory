@@ -18,6 +18,21 @@ class ImageMapper {
     ),
   );
 
+  Image thumbnail(WidgetRef ref, ThemeSet themeSet) {
+    return Image(
+      image: _thumbnailAssetImage(ref, themeSet, 'png'),
+      errorBuilder: (context, error, stackTrace) => Image(
+        image: _thumbnailAssetImage(ref, themeSet, 'jpg'),
+      ),
+    );
+  }
+
+  AssetImage _thumbnailAssetImage(
+          WidgetRef ref, ThemeSet themeSet, String fileType) =>
+      AssetImage(
+        'assets/${ref.watch(AppColorMode.provider).appColorStyle.name}/${themeSet.name}/${themeSet.name}_thumbnail.$fileType',
+      );
+
   AssetImage getImage(ImageMemoryTile memoryTile, ThemeSet themeSet) => _map(
         memoryTile.isVisible,
         memoryTile.pairValue,
