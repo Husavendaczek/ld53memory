@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/game_type/game_type.dart';
-
+import '../../game_type/game_type.dart';
 import '../../utils/theme/app_color_mode.dart';
 
 class MemoryTypeState {

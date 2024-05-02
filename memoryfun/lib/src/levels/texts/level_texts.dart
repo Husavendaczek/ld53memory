@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/game_type/theme_set.dart';
+import '../../game_type/theme_set.dart';
 
 class LevelTexts {
   static final provider = Provider<LevelTexts>((ref) {

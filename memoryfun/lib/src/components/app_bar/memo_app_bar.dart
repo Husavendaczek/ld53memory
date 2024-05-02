@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/memory_types/type_icon/memory_type_icon.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../memory_types/type_icon/memory_type_icon.dart';
 import '../../utils/routing/app_router.dart';
 import '../buttons/normal_icon_btn.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MemoryAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final Function()? onRestart;

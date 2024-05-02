@@ -1,4 +1,4 @@
-import 'package:memoryfun/src/memory_types/models/memory_tile.dart';
+import 'memory_tile.dart';
 
 class TextMemoryTile extends MemoryTile {
   final String text;

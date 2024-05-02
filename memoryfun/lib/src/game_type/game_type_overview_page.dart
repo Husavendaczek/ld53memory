@@ -2,11 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoryfun/src/components/app_bar/overview_app_bar.dart';
-import 'package:memoryfun/src/game_type/game_type.dart';
-import 'package:memoryfun/src/game_type/game_types_to_hide.dart';
-import 'package:memoryfun/src/memory_types/type_icon/memory_type_state.dart';
-import 'package:memoryfun/src/utils/routing/app_router.dart';
+import '../components/app_bar/overview_app_bar.dart';
+import 'game_type.dart';
+import 'game_types_to_hide.dart';
+import '../memory_types/type_icon/memory_type_state.dart';
+import '../utils/routing/app_router.dart';
 
 import '../utils/theme/app_color_mode.dart';
 
