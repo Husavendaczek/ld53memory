@@ -48,9 +48,7 @@ flutter:
     - assets/color/club/
     - assets/color/differentNumbers/
     - assets/color/emotions/
-    - assets/color/emotionsText/
     - assets/color/farm/
-    - assets/color/farmAnimalsText/
     - assets/color/farmAnimals/
     - assets/color/farmComplex/
     - assets/color/farmMud/
@@ -61,7 +59,6 @@ flutter:
     - assets/color/jungle/
     - assets/color/mail/
     - assets/color/meals/
-    - assets/color/mealsText/
     - assets/color/numbers/
     - assets/color/onlyColors/
     - assets/color/other/
@@ -75,9 +72,7 @@ flutter:
     - assets/mono/club/
     - assets/mono/differentNumbers/
     - assets/mono/emotions/
-    - assets/mono/emotionsText/
     - assets/mono/farm/
-    - assets/mono/farmAnimalsText/
     - assets/mono/farmAnimals/
     - assets/mono/farmComplex/
     - assets/mono/farmMud/
@@ -88,7 +83,6 @@ flutter:
     - assets/mono/jungle/
     - assets/mono/mail/
     - assets/mono/meals/
-    - assets/mono/mealsText/
     - assets/mono/numbers/
     - assets/mono/onlyColors/
     - assets/mono/other/

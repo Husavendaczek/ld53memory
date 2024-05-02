@@ -110,6 +110,11 @@ List<LevelInfo> levels = const [
   ),
   LevelInfo(
     gameSize: 24,
+    themeSet: ThemeSet.wildAnimalsText,
+    gameType: GameType.textAndImage,
+  ),
+  LevelInfo(
+    gameSize: 24,
     themeSet: ThemeSet.instruments,
     gameType: GameType.sameImage,
   ),

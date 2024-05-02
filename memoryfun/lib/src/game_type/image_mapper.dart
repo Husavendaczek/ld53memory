@@ -21,9 +21,9 @@ class ImageMapper {
   );
 
   Image thumbnail(WidgetRef ref, ThemeSet themeSet) {
+    _simpleThemeSetName(themeSet);
     return Image(
-      image: _getImageByFileType(
-          'assets/${ref.watch(AppColorMode.provider).appColorStyle.name}/${themeSet.name}/${themeSet.name}_thumbnail'),
+      image: _getImageByFileType('${_colorPath(themeSet)}_thumbnail'),
     );
   }
 
@@ -35,13 +35,10 @@ class ImageMapper {
       );
 
   List<AssetImage> animatedImages(ThemeSet themeSet, int value) {
-    var themeSetName = themeSet.name;
-
     List<AssetImage> animatedImages = [];
     for (int j = 0; j < 7; j++) {
       animatedImages.add(
-        AssetImage(
-            'assets/${appColorMode.appColorStyle.name}/$themeSetName/${themeSetName}_${value}_anim_$j.png'),
+        AssetImage('${_colorPath(themeSet)}_${value}_anim_$j.png'),
       );
     }
     return animatedImages;
@@ -70,7 +67,7 @@ class ImageMapper {
   }
 
   String _colorPath(ThemeSet themeSet) {
-    var themeSetName = themeSet.name;
+    var themeSetName = _simpleThemeSetName(themeSet);
     return 'assets/${appColorMode.appColorStyle.name}/$themeSetName/$themeSetName';
   }
 
@@ -79,5 +76,14 @@ class ImageMapper {
       return AssetImage('$imagePath.png');
     }
     return AssetImage('$imagePath.jpg');
+  }
+
+  String _simpleThemeSetName(ThemeSet themeSet) {
+    var themeName = themeSet.name;
+    if (themeName.endsWith('Text')) {
+      var shortname = themeName.substring(0, themeName.length - 4);
+      return shortname;
+    }
+    return themeSet.name;
   }
 }
