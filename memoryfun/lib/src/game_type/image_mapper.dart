@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,18 +22,10 @@ class ImageMapper {
 
   Image thumbnail(WidgetRef ref, ThemeSet themeSet) {
     return Image(
-      image: _thumbnailAssetImage(ref, themeSet, 'png'),
-      errorBuilder: (context, error, stackTrace) => Image(
-        image: _thumbnailAssetImage(ref, themeSet, 'jpg'),
-      ),
+      image: _getImageByFileType(
+          'assets/${ref.watch(AppColorMode.provider).appColorStyle.name}/${themeSet.name}/${themeSet.name}_thumbnail'),
     );
   }
-
-  AssetImage _thumbnailAssetImage(
-          WidgetRef ref, ThemeSet themeSet, String fileType) =>
-      AssetImage(
-        'assets/${ref.watch(AppColorMode.provider).appColorStyle.name}/${themeSet.name}/${themeSet.name}_thumbnail.$fileType',
-      );
 
   AssetImage getImage(ImageMemoryTile memoryTile, ThemeSet themeSet) => _map(
         memoryTile.isVisible,
@@ -63,21 +57,27 @@ class ImageMapper {
     }
 
     if (isLowerPart) {
-      return AssetImage('${_colorPath(themeSet)}_l_$pairValue.png');
+      return _getImageByFileType('${_colorPath(themeSet)}_l_$pairValue');
     }
-
-    return AssetImage('${_colorPath(themeSet)}_$pairValue.png');
+    return _getImageByFileType('${_colorPath(themeSet)}_$pairValue');
   }
 
   AssetImage _backgroundImage(ThemeSet themeSet, bool isLowerPart) {
     if (isLowerPart) {
-      return AssetImage('${_colorPath(themeSet)}_l_background.png');
+      return _getImageByFileType('${_colorPath(themeSet)}_l_background');
     }
-    return AssetImage('${_colorPath(themeSet)}_background.png');
+    return _getImageByFileType('${_colorPath(themeSet)}_background');
   }
 
   String _colorPath(ThemeSet themeSet) {
     var themeSetName = themeSet.name;
     return 'assets/${appColorMode.appColorStyle.name}/$themeSetName/$themeSetName';
+  }
+
+  AssetImage _getImageByFileType(String imagePath) {
+    if (File('$imagePath.png').existsSync()) {
+      return AssetImage('$imagePath.png');
+    }
+    return AssetImage('$imagePath.jpg');
   }
 }
