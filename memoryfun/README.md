@@ -23,6 +23,7 @@ TODOS
    - Image Creator https://www.bing.com/images/create/
    - https://api.aime.info/
    - Check for color blind people https://www.color-blindness.com/
+ - check license page
  - flips twice on first tap
  - two players
     - on one phone
