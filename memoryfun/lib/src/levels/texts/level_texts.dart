@@ -56,6 +56,20 @@ class LevelTexts {
       'Salat',
       'Kuchen',
     ],
+    ThemeSet.wildAnimalsText: [
+      'Löwe',
+      'Giraffe',
+      'Elefant',
+      'Zebra',
+      'Affe',
+      'Tiger',
+      'Panda',
+      'Papagei',
+      'Nilpferd',
+      'Eisbär',
+      'Gepard',
+      'Krokodil',
+    ],
   };
 
   Map<ThemeSet, List<String>> enLevelTexts = {
@@ -101,9 +115,23 @@ class LevelTexts {
       'spaghetti',
       'dumplings',
       'burger',
-      'poké Bowl',
+      'poké bowl',
       'salad',
       'pie',
+    ],
+    ThemeSet.wildAnimalsText: [
+      'lion',
+      'giraffe',
+      'elephant',
+      'zebra',
+      'monkey',
+      'tiger',
+      'panda',
+      'parrot',
+      'hippo',
+      'polar bear',
+      'cheetah',
+      'crocodile',
     ],
   };
 
